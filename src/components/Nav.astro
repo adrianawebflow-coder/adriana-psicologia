@@ -1,0 +1,174 @@
+---
+---
+<header class="nav">
+  <a href="/" class="nav-logo">Adriana<em>Psicología</em></a>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="/" class="nav-link">Inicio</a></li>
+      <li><a href="/sobre-mi" class="nav-link">Sobre mí</a></li>
+      <li><a href="/servicios" class="nav-link">Servicios</a></li>
+      <li><a href="/precio" class="nav-link">Precio</a></li>
+      <li><a href="/blog" class="nav-link">Blog</a></li>
+    </ul>
+  </nav>
+  <a href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" class="nav-cta">Contáctame</a>
+  <button class="nav-hamburger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+</header>
+
+<div class="nav-mobile" id="mobileMenu">
+  <ul>
+    <li><a href="/" class="nav-mobile-link">Inicio</a></li>
+    <li><a href="/sobre-mi" class="nav-mobile-link">Sobre mí</a></li>
+    <li><a href="/servicios" class="nav-mobile-link">Servicios</a></li>
+    <li><a href="/precio" class="nav-mobile-link">Precio</a></li>
+    <li><a href="/blog" class="nav-mobile-link">Blog</a></li>
+    <li><a href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" class="nav-mobile-cta">Contáctame →</a></li>
+  </ul>
+</div>
+
+<style>
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gutter);
+  background: rgba(253,251,248,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-bg-border);
+  transition: box-shadow var(--transition-base);
+}
+.nav.scrolled { box-shadow: var(--shadow-md); }
+
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: var(--fw-regular);
+  color: var(--color-text-primary);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+.nav-logo em { color: var(--color-accent); font-style: italic; }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  list-style: none;
+}
+.nav-link {
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  padding: var(--space-2) 0;
+  border-bottom: 1.5px solid transparent;
+  transition: color var(--transition-base), border-color var(--transition-base);
+  min-height: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+}
+.nav-link:hover { color: var(--color-text-primary); }
+
+.nav-cta {
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-inverse);
+  background: var(--color-text-primary);
+  padding: 0 var(--space-6);
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background var(--transition-base);
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--color-accent); }
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text-primary);
+  border-radius: 2px;
+}
+
+.nav-mobile {
+  display: none;
+  position: fixed;
+  top: var(--nav-height);
+  left: 0; right: 0; bottom: 0;
+  background: var(--color-bg-base);
+  z-index: 99;
+  padding: var(--space-8) var(--gutter);
+  flex-direction: column;
+  overflow-y: auto;
+}
+.nav-mobile.open { display: flex; }
+.nav-mobile ul { list-style: none; display: flex; flex-direction: column; }
+.nav-mobile-link {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-light);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-bg-border);
+  transition: color var(--transition-base);
+}
+.nav-mobile-link:hover { color: var(--color-accent); }
+.nav-mobile-cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: var(--space-8);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-medium);
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-hamburger { display: flex; }
+}
+</style>
+
+<script>
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+  nav?.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const btn = document.querySelector('.nav-hamburger');
+const menu = document.getElementById('mobileMenu');
+btn?.addEventListener('click', () => {
+  const isOpen = menu?.classList.toggle('open');
+  btn.setAttribute('aria-expanded', String(isOpen));
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+menu?.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    menu.classList.remove('open');
+    btn?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  });
+});
+</script>
