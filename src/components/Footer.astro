@@ -1,0 +1,214 @@
+---
+---
+<footer class="footer">
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">Adriana<em>Psicología</em></a>
+      <p>Psicóloga colegiada M-35913. Acompañamiento individual, de pareja y familiar. Online y presencial en Madrid.</p>
+      <div class="footer-contact">
+        <span>Adriana Esteban Labelle</span>
+        <a href="mailto:a.esteban@adrianapsicologia.com">
+          a.esteban@adrianapsicologia.com
+        </a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/psicologiadriana/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@adriana.psicologia" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.linkedin.com/in/adriana-esteban-labelle/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h5>Servicios</h5>
+      <ul>
+        <li><a href="/servicios">Terapia individual</a></li>
+        <li><a href="/servicios">Terapia de pareja</a></li>
+        <li><a href="/servicios">Terapia de familia</a></li>
+        <li><a href="/talleres">Talleres para colegios</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Sobre mí</h5>
+      <ul>
+        <li><a href="/sobre-mi">Quién soy</a></li>
+        <li><a href="/sobre-mi">Experiencia</a></li>
+        <li><a href="/sobre-mi">Colaboraciones</a></li>
+        <li><a href="/sobre-mi">Pilares</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h5>Info</h5>
+      <ul>
+        <li><a href="/precio">Precio</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/privacidad">Privacidad</a></li>
+        <li><a href="/cookies">Cookies</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2025 Adriana Psicología · Todos los derechos reservados</span>
+    <div class="footer-bottom-links">
+      <a href="/privacidad">Política de privacidad</a>
+      <a href="/cookies">Cookies</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+.footer {
+  background: var(--color-bg-dark);
+  padding: var(--space-16) var(--gutter) var(--space-8);
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-12);
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid rgba(253,251,248,0.08);
+}
+
+/* Brand */
+.footer-logo {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: var(--fw-regular);
+  color: var(--color-text-inverse);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  display: block;
+  margin-bottom: var(--space-4);
+}
+.footer-logo em {
+  color: var(--color-accent-on-dark);
+  font-style: italic;
+}
+
+.footer-brand p {
+  font-size: var(--fs-body-sm);
+  color: rgba(253,251,248,0.6);
+  line-height: var(--lh-body);
+  max-width: 28ch;
+}
+
+.footer-contact {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.footer-contact span {
+  font-size: var(--fs-body-sm);
+  color: rgba(253,251,248,0.5);
+}
+.footer-contact a {
+  font-size: var(--fs-body-sm);
+  color: rgba(253,251,248,0.5);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-base);
+}
+.footer-contact a:hover {
+  color: var(--color-text-inverse);
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+.footer-social a {
+  font-size: var(--fs-body-sm);
+  color: rgba(253,251,248,0.45);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-base);
+}
+.footer-social a:hover {
+  color: var(--color-accent-on-dark);
+}
+
+/* Columnas */
+.footer-col h5 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--color-text-inverse);
+  margin-bottom: var(--space-5);
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer-col a {
+  font-size: var(--fs-body-sm);
+  color: rgba(253,251,248,0.5);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+.footer-col a:hover {
+  color: var(--color-text-inverse);
+}
+
+/* Bottom */
+.footer-bottom {
+  max-width: var(--max-width);
+  margin: var(--space-8) auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-size: var(--fs-meta);
+  color: rgba(253,251,248,0.35);
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: var(--space-6);
+}
+.footer-bottom-links a {
+  color: rgba(253,251,248,0.35);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-base);
+}
+.footer-bottom-links a:hover {
+  color: rgba(253,251,248,0.7);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-10);
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+</style>
