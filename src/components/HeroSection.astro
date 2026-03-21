@@ -1,0 +1,194 @@
+---
+---
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Psicóloga colegiada M-35913</p>
+    <h1>
+      Ningún mar en calma<br>
+      hizo experto a un<br>
+      <em>marinero</em>
+    </h1>
+    <p class="hero-sub">
+      Si has llegado hasta aquí, significa que el cambio ya ha empezado.
+      Confío y espero que puedas encontrar en mí la ayuda que estás buscando.
+    </p>
+    
+    <a href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener" class="hero-cta">Empieza ahora</a>
+     
+  </div>
+
+  <div class="hero-image">
+    <div class="hero-placeholder">
+      <span>Foto de Adriana</span>
+    </div>
+    <div class="hero-badge">
+      <strong>+6</strong>
+      <span>años de experiencia</span>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero {
+  min-height: 100vh;
+  padding-top: var(--nav-height);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  gap: var(--space-12);
+}
+
+/* Texto */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--color-sage);
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-sage);
+}
+
+h1 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-display);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-tight);
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+h1 em {
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+.hero-sub {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-loose);
+  max-width: 46ch;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 52px;
+  padding: 0 var(--space-10);
+  background: var(--color-accent);
+  color: white;
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.03em;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: background var(--transition-base), transform var(--transition-base);
+}
+.hero-cta::after { content: '→'; }
+.hero-cta:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+/* Imagen */
+.hero-image {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 75vh;
+  max-height: 680px;
+}
+
+.hero-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--color-bg-border);
+}
+.hero-placeholder span {
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+/* Badge */
+.hero-badge {
+  position: absolute;
+  bottom: var(--space-8);
+  left: calc(-1 * var(--space-8));
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-bg-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  box-shadow: var(--shadow-lg);
+}
+.hero-badge strong {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: var(--fw-light);
+  color: var(--color-accent);
+  line-height: 1;
+  display: block;
+}
+.hero-badge span {
+  font-size: var(--fs-meta);
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: calc(var(--nav-height) + var(--space-8));
+    padding-bottom: var(--space-12);
+    gap: var(--space-10);
+  }
+
+  .hero-image {
+    height: 50vw;
+    min-height: 280px;
+    max-height: 400px;
+    order: -1;
+  }
+
+  .hero-badge {
+    left: var(--space-4);
+    bottom: var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-sub {
+    font-size: var(--fs-body);
+  }
+  .hero-image {
+    height: 60vw;
+  }
+}
+</style>

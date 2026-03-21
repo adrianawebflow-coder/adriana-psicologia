@@ -1,35 +1,8 @@
 ---
-// src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HeroSection.astro';
 ---
 
 <Layout title="Inicio">
-  <main>
-    <h1>Ningún mar en calma hizo experto a un marinero</h1>
-    <p>Si has llegado hasta aquí, significa que el cambio ya ha empezado.</p>
-  </main>
+  <HeroSection />
 </Layout>
-
-<style>
-  main {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: var(--section-pad-y) var(--gutter);
-    max-width: var(--max-width);
-    margin: 0 auto;
-  }
-
-  h1 {
-    font-size: var(--fs-display);
-    line-height: var(--lh-tight);
-    max-width: 14ch;
-    margin-bottom: var(--space-6);
-  }
-
-  p {
-    font-size: var(--fs-body-lg);
-    max-width: 48ch;
-  }
-</style>
