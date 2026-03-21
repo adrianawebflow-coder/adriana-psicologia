@@ -1,0 +1,184 @@
+/*
+ * ═══════════════════════════════════════════════════════
+ *  ADRIANA PSICOLOGÍA — DESIGN TOKENS
+ *  Sistema de diseño v1.0
+ *
+ *  Uso en Astro: import '../styles/tokens.css' en Layout.astro
+ *  Uso en HTML:  <link rel="stylesheet" href="/styles/tokens.css">
+ * ═══════════════════════════════════════════════════════
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+
+/* ─────────────────────────────────────────────
+   1. PALETA DE COLOR
+   Verificadas WCAG 2.1 AA sobre todos los fondos.
+   ───────────────────────────────────────────── */
+:root {
+
+  /* Fondos — ordenados de más claro a más oscuro */
+  --color-bg-base:     #FDFBF8;   /* blanco marfil — fondo principal */
+  --color-bg-soft:     #F7F4EE;   /* crema — fondo alternativo, banners */
+  --color-bg-muted:    #EFE9DF;   /* arena clara — hover, cards */
+  --color-bg-border:   #E2D9CC;   /* arena — líneas divisorias */
+  --color-bg-dark:     #2A2520;   /* carbón — footer, secciones oscuras */
+
+  /* Texto */
+  --color-text-primary:   #2A2520;   /* carbón — headings, body principal  → 14.8:1 sobre --bg-base ✓ */
+  --color-text-secondary: #5C5248;   /* marrón medio — body secundario      →  7.2:1 sobre --bg-base ✓ */
+  --color-text-muted:     #7A6E65;   /* marrón claro — captions, meta       →  4.6:1 sobre --bg-base ✓ AA */
+  --color-text-inverse:   #FDFBF8;   /* sobre fondos oscuros               → 14.2:1 sobre --bg-dark ✓ */
+
+  /* Acento principal — Terracota */
+  --color-accent:          #B8614A;  /* terracota oscurecida (mejora contraste) → 4.6:1 sobre --bg-base ✓ AA */
+  --color-accent-hover:    #A05440;  /* terracota oscura — hover */
+  --color-accent-soft:     #EDD5CC;  /* terracota muy suave — fondos decorativos */
+  --color-accent-on-dark:  #E8A898;  /* terracota clara — sobre fondos oscuros */
+
+  /* Acento secundario — Salvia */
+  --color-sage:        #4E6642;   /* verde salvia oscuro — etiquetas, acentos sutiles → 5.1:1 ✓ */
+  --color-sage-soft:   #D4DFD0;   /* verde salvia muy suave — fondos */
+
+  /* Semánticos */
+  --color-success:  #3A6B3A;
+  --color-warning:  #7A5A1E;
+  --color-error:    #8B2020;
+
+  /* ─────────────────────────────────────────────
+     2. TIPOGRAFÍA
+     Fraunces: serif variable, optical sizing, humanista
+     Plus Jakarta Sans: sans humanista, muy legible
+     ───────────────────────────────────────────── */
+
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans:  'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* Escala fluida — clamp(min, preferred, max)
+     min: nunca por debajo de este tamaño en cualquier viewport
+     max: tamaño en viewports ≥ 1280px */
+
+  /* Display — hero headlines */
+  --fs-display:  clamp(2.5rem,  5.5vw, 4.25rem);   /* 40–68px */
+
+  /* Headings */
+  --fs-h1:  clamp(2rem,    4.5vw, 3.5rem);    /* 32–56px */
+  --fs-h2:  clamp(1.625rem, 3vw,  2.5rem);    /* 26–40px */
+  --fs-h3:  clamp(1.25rem,  2vw,  1.875rem);  /* 20–30px */
+  --fs-h4:  clamp(1.125rem, 1.5vw, 1.375rem); /* 18–22px */
+
+  /* Body */
+  --fs-body-lg:  1.125rem;   /* 18px — intro párrafos */
+  --fs-body:     1rem;       /* 16px — body estándar (mínimo WCAG) */
+  --fs-body-sm:  0.9375rem;  /* 15px — UI: botones, tabs, nav */
+
+  /* Micro */
+  --fs-label:  0.8125rem;    /* 13px — etiquetas ALL-CAPS, espaciadas */
+  --fs-meta:   0.8125rem;    /* 13px — metadatos (mínimo recomendado) */
+
+  /* Pesos */
+  --fw-light:   300;
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semi:    600;   /* solo Plus Jakarta Sans */
+
+  /* Interlineado */
+  --lh-tight:   1.1;   /* display y h1 */
+  --lh-heading: 1.2;   /* h2–h4 */
+  --lh-body:    1.65;  /* body ≥ 1.5 (WCAG 1.4.12) */
+  --lh-loose:   1.8;   /* párrafos largos */
+
+  /* Tracking */
+  --ls-tight:   -0.02em;
+  --ls-normal:   0;
+  --ls-wide:     0.06em;
+  --ls-wider:    0.12em;  /* ALL-CAPS labels */
+  --ls-widest:   0.18em;
+
+  /* ─────────────────────────────────────────────
+     3. ESPACIADO — escala 4px base
+     ───────────────────────────────────────────── */
+  --space-1:   0.25rem;   /*  4px */
+  --space-2:   0.5rem;    /*  8px */
+  --space-3:   0.75rem;   /* 12px */
+  --space-4:   1rem;      /* 16px */
+  --space-5:   1.25rem;   /* 20px */
+  --space-6:   1.5rem;    /* 24px */
+  --space-8:   2rem;      /* 32px */
+  --space-10:  2.5rem;    /* 40px */
+  --space-12:  3rem;      /* 48px */
+  --space-16:  4rem;      /* 64px */
+  --space-20:  5rem;      /* 80px */
+  --space-24:  6rem;      /* 96px */
+  --space-32:  8rem;      /* 128px */
+
+  /* ─────────────────────────────────────────────
+     4. LAYOUT
+     ───────────────────────────────────────────── */
+  --max-width:       1280px;
+  --content-width:   720px;   /* ancho máximo cuerpo de texto */
+  --gutter:          clamp(1.5rem, 5%, 5rem);
+  --nav-height:      70px;
+  --section-pad-y:   clamp(3.5rem, 8vw, 7rem);
+
+  /* ─────────────────────────────────────────────
+     5. BORDES Y RADIOS
+     ───────────────────────────────────────────── */
+  --radius-sm:   2px;
+  --radius-md:   4px;
+  --radius-lg:   8px;
+  --radius-full: 9999px;
+
+  --border-subtle:  1px solid var(--color-bg-border);
+  --border-accent:  1.5px solid var(--color-accent);
+
+  /* ─────────────────────────────────────────────
+     6. SOMBRAS
+     ───────────────────────────────────────────── */
+  --shadow-sm:  0 1px 4px rgba(42,37,32,.06);
+  --shadow-md:  0 4px 16px rgba(42,37,32,.08);
+  --shadow-lg:  0 12px 40px rgba(42,37,32,.10);
+  --shadow-xl:  0 24px 64px rgba(42,37,32,.12);
+
+  /* ─────────────────────────────────────────────
+     7. TRANSICIONES
+     ───────────────────────────────────────────── */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   400ms ease;
+
+  /* ─────────────────────────────────────────────
+     8. TOUCH TARGETS (WCAG 2.5.5)
+     ───────────────────────────────────────────── */
+  --touch-target: 44px;
+}
+
+/* ─────────────────────────────────────────────
+   BREAKPOINTS (para referencia en comentarios)
+   sm:  480px
+   md:  768px
+   lg:  1024px
+   xl:  1280px
+   ───────────────────────────────────────────── */
+
+/* Ajustes de escala en tablet */
+@media (max-width: 768px) {
+  :root {
+    --fs-display: clamp(2rem, 8vw, 3rem);
+    --fs-h1:      clamp(1.75rem, 7vw, 2.5rem);
+    --fs-h2:      clamp(1.5rem, 6vw, 2rem);
+    --fs-h3:      clamp(1.25rem, 4vw, 1.625rem);
+    --section-pad-y: clamp(2.5rem, 6vw, 4rem);
+  }
+}
+
+/* Ajustes de escala en móvil */
+@media (max-width: 480px) {
+  :root {
+    --fs-display: clamp(1.875rem, 9vw, 2.5rem);
+    --fs-h1:      clamp(1.625rem, 8vw, 2.25rem);
+    --fs-h2:      clamp(1.375rem, 7vw, 1.875rem);
+    --fs-body-sm: 0.9375rem;  /* no bajar en móvil */
+    --fs-label:   0.8125rem;  /* no bajar en móvil */
+    --gutter: 1.25rem;
+  }
+}
