@@ -1,0 +1,190 @@
+---
+const especialidades = [
+  {
+    titulo: "Ansiedad y estrés",
+    descripcion: "Herramientas para gestionar la preocupación constante, los ataques de pánico y la tensión crónica del día a día.",
+    icono: "◎",
+  },
+  {
+    titulo: "Depresión y estado de ánimo",
+    descripcion: "Acompañamiento para salir de la apatía, recuperar la energía y volver a conectar con lo que importa.",
+    icono: "◑",
+  },
+  {
+    titulo: "Autoestima e identidad",
+    descripcion: "Trabajo profundo sobre la relación que tienes contigo misma: cómo te ves, cómo te tratas y qué límites pones.",
+    icono: "◐",
+  },
+  {
+    titulo: "Terapia de pareja",
+    descripcion: "Espacio seguro para mejorar la comunicación, resolver conflictos y decidir qué quieres para tu relación.",
+    icono: "◍",
+  },
+  {
+    titulo: "Duelo y pérdida",
+    descripcion: "Apoyo en procesos de pérdida —de personas, relaciones o etapas vitales— para transitar el dolor sin quedarse atrapada en él.",
+    icono: "◌",
+  },
+  {
+    titulo: "Trauma y EMDR",
+    descripcion: "Procesamiento de experiencias dolorosas del pasado que siguen condicionando tu presente, con terapia basada en evidencia.",
+    icono: "◉",
+  },
+];
+---
+
+<section class="especialidades">
+  <div class="especialidades-inner">
+
+    <header class="especialidades-header">
+      <p class="eyebrow">Especialidades</p>
+      <h2>¿En qué puedo <em>ayudarte</em>?</h2>
+      <p class="subtitulo">
+        Trabajo con adultos en procesos individuales y de pareja, tanto en consulta presencial en Madrid como de forma online.
+      </p>
+    </header>
+
+    <ul class="grid" role="list">
+      {especialidades.map((e) => (
+        <li class="card">
+          <span class="card-icono" aria-hidden="true">{e.icono}</span>
+          <h3>{e.titulo}</h3>
+          <p>{e.descripcion}</p>
+        </li>
+      ))}
+    </ul>
+
+  </div>
+</section>
+
+<style>
+.especialidades {
+  background: var(--color-bg-soft);
+  padding-top: var(--section-pad-y);
+  padding-bottom: var(--section-pad-y);
+}
+
+.especialidades-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+/* Header */
+.especialidades-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 52ch;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--color-sage);
+  line-height: 1;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-sage);
+  flex-shrink: 0;
+}
+
+h2 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-heading);
+  color: var(--color-text-primary);
+  letter-spacing: var(--ls-tight);
+}
+h2 em {
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+.subtitulo {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-loose);
+}
+
+/* Grid */
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+/* Card */
+.card {
+  background: var(--color-bg-base);
+  border: var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.card-icono {
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  line-height: 1;
+  display: block;
+}
+
+.card h3 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-heading);
+  color: var(--color-text-primary);
+}
+
+.card p {
+  font-size: var(--fs-body);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-body);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .card {
+    padding: var(--space-6);
+  }
+
+  .especialidades-inner {
+    gap: var(--space-10);
+  }
+}
+</style>
