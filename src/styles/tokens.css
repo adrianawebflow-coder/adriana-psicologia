@@ -1,101 +1,159 @@
 /*
  * ═══════════════════════════════════════════════════════
- *  ADRIANA PSICOLOGÍA — DESIGN TOKENS
- *  Sistema de diseño v1.0
+ *  ADRIANA PSICOLOGÍA — DESIGN TOKENS v2.1
+ *  Línea gráfica: Verde musgo y arcilla
  *
  *  Uso en Astro: import '../styles/tokens.css' en Layout.astro
  *  Uso en HTML:  <link rel="stylesheet" href="/styles/tokens.css">
+ *
+ *  Changelog v2.1
+ *  – Añadidos aliases cortos (--bg-*, --ink-*, --moss-*, --clay-*,
+ *    --serif, --sans, --nav-h) para que el design-system.html y los
+ *    componentes Astro puedan usar indistintamente el nombre semántico
+ *    largo o el alias corto. Ambos apuntan al mismo valor.
+ *  – Sincronizados breakpoints con el design-system.html (900px / 600px).
+ *  – Corrección: --color-bg-stone y --color-moss-soft comparten el mismo
+ *    valor (#C8D9C2) — documentado explícitamente como alias intencional.
  * ═══════════════════════════════════════════════════════
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300;1,9..144,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap');
 
-/* ─────────────────────────────────────────────
-   1. PALETA DE COLOR
-   Verificadas WCAG 2.1 AA sobre todos los fondos.
-   ───────────────────────────────────────────── */
 :root {
 
-  /* Fondos — ordenados de más claro a más oscuro */
-  --color-bg-base:     #FDFBF8;   /* blanco marfil — fondo principal */
-  --color-bg-soft:     #F7F4EE;   /* crema — fondo alternativo, banners */
-  --color-bg-muted:    #EFE9DF;   /* arena clara — hover, cards */
-  --color-bg-border:   #E2D9CC;   /* arena — líneas divisorias */
-  --color-bg-dark:     #2A2520;   /* carbón — footer, secciones oscuras */
-
-  /* Texto */
-  --color-text-primary:   #2A2520;   /* carbón — headings, body principal  → 14.8:1 sobre --bg-base ✓ */
-  --color-text-secondary: #5C5248;   /* marrón medio — body secundario      →  7.2:1 sobre --bg-base ✓ */
-  --color-text-muted:     #7A6E65;   /* marrón claro — captions, meta       →  4.6:1 sobre --bg-base ✓ AA */
-  --color-text-inverse:   #FDFBF8;   /* sobre fondos oscuros               → 14.2:1 sobre --bg-dark ✓ */
-
-  /* Acento principal — Terracota */
-  --color-accent:          #B8614A;  /* terracota oscurecida (mejora contraste) → 4.6:1 sobre --bg-base ✓ AA */
-  --color-accent-hover:    #A05440;  /* terracota oscura — hover */
-  --color-accent-soft:     #EDD5CC;  /* terracota muy suave — fondos decorativos */
-  --color-accent-on-dark:  #E8A898;  /* terracota clara — sobre fondos oscuros */
-
-  /* Acento secundario — Salvia */
-  --color-sage:        #4E6642;   /* verde salvia oscuro — etiquetas, acentos sutiles → 5.1:1 ✓ */
-  --color-sage-soft:   #D4DFD0;   /* verde salvia muy suave — fondos */
-
-  /* Semánticos */
-  --color-success:  #3A6B3A;
-  --color-warning:  #7A5A1E;
-  --color-error:    #8B2020;
-
   /* ─────────────────────────────────────────────
-     2. TIPOGRAFÍA
-     Fraunces: serif variable, optical sizing, humanista
-     Plus Jakarta Sans: sans humanista, muy legible
+     1. PALETA — Verde musgo y arcilla
+     Fuente de verdad: variables semánticas --color-*
+     Ratios WCAG 2.1 verificados sobre --color-bg-base
      ───────────────────────────────────────────── */
 
+  /* Fondos */
+  --color-bg-base:    #F5F2EA;   /* lino cálido — fondo principal          */
+  --color-bg-soft:    #EDE9DF;   /* lino oscuro — fondo alternativo, cards */
+  --color-bg-muted:   #E2DDD1;   /* arena — hover, separadores             */
+  --color-bg-border:  #D4CFC0;   /* arena oscura — bordes                  */
+  --color-bg-stone:   #C8D9C2;   /* musgo muy suave — fondos decorativos
+                                    Nota: mismo valor que --color-moss-soft */
+  --color-bg-dark:    #1A2118;   /* ink dark — footer, secciones oscuras   */
+
+  /* Texto */
+  --color-text-primary:   #1A2118;  /* ink dark   → 13.8:1 sobre bg-base ✓ AAA */
+  --color-text-secondary: #3D4A38;  /* ink medio  →  8.1:1 sobre bg-base ✓ AAA */
+  --color-text-muted:     #6B7A64;  /* ink suave  →  4.1:1 sobre bg-base ✓ AA* */
+  --color-text-inverse:   #F5F2EA;  /* sobre fondos oscuros → 13.4:1 ✓        */
+  /* *Nota: usar exclusivamente en texto ≥ 18px o bold ≥ 14px para cumplir
+     WCAG AA. Para texto ≤ 15px usar --color-text-secondary en su lugar.  */
+
+  /* Acento principal — Verde musgo */
+  --color-moss:           #3D5C35;  /* musgo oscuro   → 5.2:1 sobre bg-base ✓ AA */
+  --color-moss-hover:     #2E4628;  /* musgo más oscuro — hover states            */
+  --color-moss-light:     #8DBD84;  /* musgo claro    — sobre fondos oscuros      */
+  --color-moss-soft:      #C8D9C2;  /* musgo muy suave — fondos, chips
+                                       Nota: mismo valor que --color-bg-stone     */
+
+  /* Acento secundario — Arcilla */
+  --color-clay:           #9C6B4E;  /* arcilla        — acento cálido secundario  */
+  --color-clay-hover:     #7E5540;  /* arcilla oscura — hover, texto sobre claro  */
+  --color-clay-soft:      #E8D5C8;  /* arcilla suave  — fondos decorativos        */
+
+  /* Detalle — Oro apagado */
+  --color-gold:           #B89A5A;  /* oro apagado — estrellas, detalles
+                                       ⚠ Usar solo sobre --color-bg-dark (6.1:1 ✓)
+                                       Falla sobre fondos claros (2.4:1)          */
+
+  /* Semánticos */
+  --color-success:  #2E5C2E;
+  --color-warning:  #7A5A1E;
+  --color-error:    #7A2020;
+
+
+  /* ─────────────────────────────────────────────
+     2. ALIASES CORTOS
+     Permiten consumir los tokens con los nombres
+     que usa design-system.html y los componentes
+     Astro. Ambos vocabularios son válidos.
+     ───────────────────────────────────────────── */
+
+  /* Fondos */
+  --bg-base:    var(--color-bg-base);
+  --bg-soft:    var(--color-bg-soft);
+  --bg-muted:   var(--color-bg-muted);
+  --bg-border:  var(--color-bg-border);
+  --bg-stone:   var(--color-bg-stone);
+  --bg-dark:    var(--color-bg-dark);
+
+  /* Texto */
+  --ink:        var(--color-text-primary);
+  --ink-mid:    var(--color-text-secondary);
+  --ink-soft:   var(--color-text-muted);
+  --ink-inv:    var(--color-text-inverse);
+
+  /* Musgo */
+  --moss:       var(--color-moss);
+  --moss-hover: var(--color-moss-hover);
+  --moss-light: var(--color-moss-light);
+  --moss-soft:  var(--color-moss-soft);
+
+  /* Arcilla */
+  --clay:       var(--color-clay);
+  --clay-hover: var(--color-clay-hover);
+  --clay-soft:  var(--color-clay-soft);
+
+  /* Oro */
+  --gold:       var(--color-gold);
+
+
+  /* ─────────────────────────────────────────────
+     3. TIPOGRAFÍA
+     Fraunces: serif variable humanista
+       — optical size, pesos 200–400, cursiva
+     Plus Jakarta Sans: sans humanista geométrica
+       — pesos 300–600
+     ───────────────────────────────────────────── */
+
+  /* Fuentes — semánticas */
   --font-serif: 'Fraunces', Georgia, serif;
   --font-sans:  'Plus Jakarta Sans', system-ui, sans-serif;
 
-  /* Escala fluida — clamp(min, preferred, max)
-     min: nunca por debajo de este tamaño en cualquier viewport
-     max: tamaño en viewports ≥ 1280px */
+  /* Aliases cortos (usados en design-system.html) */
+  --serif: var(--font-serif);
+  --sans:  var(--font-sans);
 
-  /* Display — hero headlines */
-  --fs-display:  clamp(2.5rem,  5.5vw, 4.25rem);   /* 40–68px */
-
-  /* Headings */
-  --fs-h1:  clamp(2rem,    4.5vw, 3.5rem);    /* 32–56px */
-  --fs-h2:  clamp(1.625rem, 3vw,  2.5rem);    /* 26–40px */
-  --fs-h3:  clamp(1.25rem,  2vw,  1.875rem);  /* 20–30px */
-  --fs-h4:  clamp(1.125rem, 1.5vw, 1.375rem); /* 18–22px */
-
-  /* Body */
-  --fs-body-lg:  1.125rem;   /* 18px — intro párrafos */
-  --fs-body:     1rem;       /* 16px — body estándar (mínimo WCAG) */
-  --fs-body-sm:  0.9375rem;  /* 15px — UI: botones, tabs, nav */
-
-  /* Micro */
-  --fs-label:  0.8125rem;    /* 13px — etiquetas ALL-CAPS, espaciadas */
-  --fs-meta:   0.8125rem;    /* 13px — metadatos (mínimo recomendado) */
+  /* Escala fluida — clamp(min, preferred, max) */
+  --fs-display: clamp(2.5rem,  5.5vw, 4.25rem);   /* 40–68px — hero H1    */
+  --fs-h1:      clamp(2rem,    4.5vw, 3.5rem);    /* 32–56px              */
+  --fs-h2:      clamp(1.625rem, 3vw,  2.5rem);    /* 26–40px              */
+  --fs-h3:      clamp(1.25rem,  2vw,  1.875rem);  /* 20–30px              */
+  --fs-h4:      clamp(1.125rem, 1.5vw, 1.375rem); /* 18–22px              */
+  --fs-body-lg: 1.125rem;   /* 18px — párrafos intro                       */
+  --fs-body:    1rem;       /* 16px — body (mínimo WCAG 1.4.4)             */
+  --fs-body-sm: 0.9375rem;  /* 15px — UI: botones, tabs, nav               */
+  --fs-label:   0.8125rem;  /* 13px — etiquetas ALL-CAPS espaciadas        */
+  --fs-meta:    0.8125rem;  /* 13px — metadatos                            */
 
   /* Pesos */
-  --fw-light:   300;
-  --fw-regular: 400;
-  --fw-medium:  500;
-  --fw-semi:    600;   /* solo Plus Jakarta Sans */
+  --fw-thin:    200;   /* Fraunces display únicamente                      */
+  --fw-light:   300;   /* Fraunces headings                                */
+  --fw-regular: 400;   /* body, Fraunces secundario                        */
+  --fw-medium:  500;   /* Plus Jakarta Sans UI                             */
+  --fw-semi:    600;   /* Plus Jakarta Sans labels, nav                    */
 
   /* Interlineado */
-  --lh-tight:   1.1;   /* display y h1 */
-  --lh-heading: 1.2;   /* h2–h4 */
-  --lh-body:    1.65;  /* body ≥ 1.5 (WCAG 1.4.12) */
-  --lh-loose:   1.8;   /* párrafos largos */
+  --lh-tight:   1.05;  /* display hero                                     */
+  --lh-heading: 1.2;   /* h2–h4                                            */
+  --lh-body:    1.65;  /* body ≥ 1.5 (WCAG 1.4.12)                        */
+  --lh-loose:   1.8;   /* párrafos largos                                  */
 
   /* Tracking */
-  --ls-tight:   -0.02em;
-  --ls-normal:   0;
-  --ls-wide:     0.06em;
-  --ls-wider:    0.12em;  /* ALL-CAPS labels */
-  --ls-widest:   0.18em;
+  --ls-tight:  -0.02em;
+  --ls-normal:  0;
+  --ls-wide:    0.06em;
+  --ls-wider:   0.12em;   /* ALL-CAPS labels                               */
+  --ls-widest:  0.18em;
+
 
   /* ─────────────────────────────────────────────
-     3. ESPACIADO — escala 4px base
+     4. ESPACIADO — escala 4px base
      ───────────────────────────────────────────── */
   --space-1:   0.25rem;   /*  4px */
   --space-2:   0.5rem;    /*  8px */
@@ -111,74 +169,84 @@
   --space-24:  6rem;      /* 96px */
   --space-32:  8rem;      /* 128px */
 
-  /* ─────────────────────────────────────────────
-     4. LAYOUT
-     ───────────────────────────────────────────── */
-  --max-width:       1280px;
-  --content-width:   720px;   /* ancho máximo cuerpo de texto */
-  --gutter:          clamp(1.5rem, 5%, 5rem);
-  --nav-height:      70px;
-  --section-pad-y:   clamp(3.5rem, 8vw, 7rem);
 
   /* ─────────────────────────────────────────────
-     5. BORDES Y RADIOS
+     5. LAYOUT
+     ───────────────────────────────────────────── */
+  --max-width:      1280px;
+  --content-width:  720px;
+  --gutter:         clamp(1.25rem, 5%, 5rem);
+  --nav-height:     70px;
+  --nav-h:          var(--nav-height);   /* alias corto */
+  --section-pad-y:  clamp(3.5rem, 8vw, 7rem);
+
+
+  /* ─────────────────────────────────────────────
+     6. BORDES Y RADIOS
      ───────────────────────────────────────────── */
   --radius-sm:   2px;
   --radius-md:   4px;
   --radius-lg:   8px;
   --radius-full: 9999px;
 
-  --border-subtle:  1px solid var(--color-bg-border);
-  --border-accent:  1.5px solid var(--color-accent);
+  --border-subtle: 1px solid var(--color-bg-border);
+  --border-moss:   1.5px solid var(--color-moss);
+  --border-clay:   1.5px solid var(--color-clay);
+
 
   /* ─────────────────────────────────────────────
-     6. SOMBRAS
+     7. SOMBRAS
      ───────────────────────────────────────────── */
-  --shadow-sm:  0 1px 4px rgba(42,37,32,.06);
-  --shadow-md:  0 4px 16px rgba(42,37,32,.08);
-  --shadow-lg:  0 12px 40px rgba(42,37,32,.10);
-  --shadow-xl:  0 24px 64px rgba(42,37,32,.12);
+  --shadow-sm:  0 1px 4px  rgba(26,33,24,.05);
+  --shadow-md:  0 4px 16px rgba(26,33,24,.08);
+  --shadow-lg:  0 12px 40px rgba(26,33,24,.10);
+  --shadow-xl:  0 24px 64px rgba(26,33,24,.12);
+
 
   /* ─────────────────────────────────────────────
-     7. TRANSICIONES
+     8. TRANSICIONES
      ───────────────────────────────────────────── */
-  --transition-fast:   150ms ease;
-  --transition-base:   250ms ease;
-  --transition-slow:   400ms ease;
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
 
   /* ─────────────────────────────────────────────
-     8. TOUCH TARGETS (WCAG 2.5.5)
+     9. TOUCH TARGETS (WCAG 2.5.5)
      ───────────────────────────────────────────── */
   --touch-target: 44px;
+
 }
 
+
 /* ─────────────────────────────────────────────
-   BREAKPOINTS (para referencia en comentarios)
-   sm:  480px
-   md:  768px
-   lg:  1024px
-   xl:  1280px
+   BREAKPOINTS
+   Sincronizados con design-system.html:
+     md: 900px  (tablet landscape / desktop pequeño)
+     sm: 600px  (móvil)
+   Tokens internos para referencia:
+     lg: 1024px
+     xl: 1280px
    ───────────────────────────────────────────── */
 
-/* Ajustes de escala en tablet */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   :root {
-    --fs-display: clamp(2rem, 8vw, 3rem);
+    --fs-display: clamp(2rem,    8vw, 3rem);
     --fs-h1:      clamp(1.75rem, 7vw, 2.5rem);
-    --fs-h2:      clamp(1.5rem, 6vw, 2rem);
+    --fs-h2:      clamp(1.5rem,  6vw, 2rem);
     --fs-h3:      clamp(1.25rem, 4vw, 1.625rem);
     --section-pad-y: clamp(2.5rem, 6vw, 4rem);
+    --gutter: 1.5rem;
   }
 }
 
-/* Ajustes de escala en móvil */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   :root {
     --fs-display: clamp(1.875rem, 9vw, 2.5rem);
     --fs-h1:      clamp(1.625rem, 8vw, 2.25rem);
     --fs-h2:      clamp(1.375rem, 7vw, 1.875rem);
-    --fs-body-sm: 0.9375rem;  /* no bajar en móvil */
-    --fs-label:   0.8125rem;  /* no bajar en móvil */
+    --fs-body-sm: 0.9375rem;   /* no reducir en móvil */
+    --fs-label:   0.8125rem;   /* no reducir en móvil */
     --gutter: 1.25rem;
   }
 }

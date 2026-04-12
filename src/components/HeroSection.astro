@@ -12,19 +12,16 @@
       Si has llegado hasta aquí, significa que el cambio ya ha empezado.
       Confío y espero que puedas encontrar en mí la ayuda que estás buscando.
     </p>
-    
     <a href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener" class="hero-cta">Empieza ahora</a>
-     
   </div>
 
- <div class="hero-image">
-  <img src="/images/Hero-pic-adri-2.png" alt="Adriana Esteban Labelle, psicóloga en Madrid" class="hero-photo" />
-  <div class="hero-badge">
-    <strong>+6</strong>
-    <span>años de experiencia</span>
+  <div class="hero-image">
+    <img src="/images/Hero-pic-adri-2.png" alt="Adriana Esteban Labelle, psicóloga en Madrid" class="hero-photo" />
+    <div class="hero-badge">
+      <strong>+6</strong>
+      <span>años de experiencia</span>
+    </div>
   </div>
-</div>
-    
 </section>
 
 <style>
@@ -41,7 +38,6 @@
   gap: var(--space-12);
 }
 
-/* Texto */
 .hero-text {
   display: flex;
   flex-direction: column;
@@ -57,27 +53,28 @@
   font-weight: var(--fw-semi);
   letter-spacing: var(--ls-wider);
   text-transform: uppercase;
-  color: var(--color-sage);
+  color: var(--color-moss);
 }
 .hero-eyebrow::before {
   content: '';
   display: block;
   width: 24px;
   height: 1px;
-  background: var(--color-sage);
+  background: var(--color-moss);
 }
 
 h1 {
   font-family: var(--font-serif);
   font-size: var(--fs-display);
-  font-weight: var(--fw-light);
+  font-weight: var(--fw-thin);
   line-height: var(--lh-tight);
   color: var(--color-text-primary);
   letter-spacing: -0.02em;
 }
 h1 em {
-  color: var(--color-accent);
+  color: var(--color-moss);
   font-style: italic;
+  font-weight: var(--fw-light);
 }
 
 .hero-sub {
@@ -93,7 +90,7 @@ h1 em {
   gap: var(--space-2);
   height: 52px;
   padding: 0 var(--space-10);
-  background: var(--color-accent);
+  background: var(--color-moss);
   color: white;
   font-size: var(--fs-body-sm);
   font-weight: var(--fw-medium);
@@ -104,11 +101,10 @@ h1 em {
 }
 .hero-cta::after { content: '→'; }
 .hero-cta:hover {
-  background: var(--color-accent-hover);
+  background: var(--color-moss-hover);
   transform: translateY(-2px);
 }
 
-/* Imagen */
 .hero-image {
   position: relative;
   display: flex;
@@ -116,25 +112,18 @@ h1 em {
   justify-content: center;
   height: 75vh;
   max-height: 680px;
+  width: 100%;
+  overflow: hidden;
 }
 
-.hero-placeholder {
+.hero-photo {
   width: 100%;
   height: 100%;
-  background: var(--color-bg-muted);
-  border-radius: var(--radius-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed var(--color-bg-border);
-}
-.hero-placeholder span {
-  font-size: var(--fs-body-sm);
-  color: var(--color-text-muted);
-  letter-spacing: 0.06em;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 20px 40px rgba(26,33,24,0.10));
 }
 
-/* Badge */
 .hero-badge {
   position: absolute;
   bottom: var(--space-8);
@@ -148,8 +137,8 @@ h1 em {
 .hero-badge strong {
   font-family: var(--font-serif);
   font-size: 2rem;
-  font-weight: var(--fw-light);
-  color: var(--color-accent);
+  font-weight: var(--fw-thin);
+  color: var(--color-moss);
   line-height: 1;
   display: block;
 }
@@ -159,7 +148,6 @@ h1 em {
   letter-spacing: 0.04em;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .hero {
     grid-template-columns: 1fr;
@@ -168,14 +156,13 @@ h1 em {
     padding-bottom: var(--space-12);
     gap: var(--space-10);
   }
-
   .hero-image {
     height: 50vw;
     min-height: 280px;
     max-height: 400px;
     order: -1;
+    overflow: hidden;
   }
-
   .hero-badge {
     left: var(--space-4);
     bottom: var(--space-4);
@@ -183,12 +170,7 @@ h1 em {
 }
 
 @media (max-width: 480px) {
-  .hero-sub {
-    font-size: var(--fs-body);
-  }
-  .hero-image {
-    height: 60vw;
-  }
+  .hero-sub { font-size: var(--fs-body); }
+  .hero-image { height: 60vw; }
 }
-
 </style>
