@@ -1,0 +1,153 @@
+---
+const razones = [
+  {
+    tag: "Individual",
+    titulo: "Me busco a mí misma",
+    sub: "Sientes que algo no va bien, pero no sabes explicarlo.",
+    href: "/servicios",
+  },
+  {
+    tag: "Parejas",
+    titulo: "Mi relación necesita ayuda",
+    sub: "Tu relación ya no es como antes.",
+    href: "/servicios",
+  },
+  {
+    tag: "Familias",
+    titulo: "Es para mi hij@",
+    sub: "Te cuesta entender lo que le pasa a tu hij@.",
+    href: "/servicios",
+  },
+];
+---
+
+<section class="razones" id="servicios">
+  <div class="container">
+    <p class="eyebrow">¿Qué te trae aquí?</p>
+    <ul class="reason-list" role="list">
+      {razones.map((r) => (
+        <li>
+          <a class="reason" href={r.href}>
+            <div class="reason-body">
+              <span class="reason-tag">{r.tag}</span>
+              <strong class="reason-titulo">{r.titulo}</strong>
+              <p class="reason-sub">{r.sub}</p>
+            </div>
+            <span class="reason-arrow" aria-hidden="true">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none">
+                <path d="M1 1l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+.razones {
+  background: var(--color-bg-soft);
+  padding: var(--section-pad-y) 0;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semi);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  margin: 0 0 var(--space-6);
+}
+
+.reason-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.reason {
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-moss-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+.reason:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-moss);
+}
+
+.reason-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.reason-tag {
+  font-family: var(--font-sans);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-muted);
+}
+
+.reason-titulo {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-heading);
+  color: var(--color-text-primary);
+}
+
+.reason-sub {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.reason-arrow {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--color-moss-soft);
+  color: var(--color-moss);
+  display: grid;
+  place-items: center;
+  transition: background var(--transition-fast);
+}
+.reason:hover .reason-arrow {
+  background: var(--color-moss);
+  color: var(--color-text-inverse);
+}
+
+@media (min-width: 880px) {
+  .reason {
+    padding: var(--space-5) var(--space-6);
+    gap: var(--space-6);
+  }
+  .reason-arrow {
+    width: 36px;
+    height: 36px;
+  }
+}
+</style>

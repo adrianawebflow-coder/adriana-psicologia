@@ -1,0 +1,116 @@
+---
+---
+
+<section class="modalidad" id="como">
+  <div class="container">
+    <p class="eyebrow">Modalidad</p>
+    <div class="mod-grid">
+
+      <div class="mod-card">
+        <div class="mod-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/>
+            <circle cx="12" cy="10" r="2.6"/>
+          </svg>
+        </div>
+        <h3>Presencial · Madrid</h3>
+        <p>Consulta en Manoteras / Hortaleza. Sesiones de 50 minutos.</p>
+      </div>
+
+      <div class="mod-card">
+        <div class="mod-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2.5" y="4" width="19" height="13" rx="1.5"/>
+            <path d="M8 21h8M12 17v4"/>
+          </svg>
+        </div>
+        <h3>Online · Desde casa</h3>
+        <p>Videollamada segura. Desde España o desde donde estés.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.modalidad {
+  background: var(--color-bg-base);
+  padding: var(--section-pad-y) 0;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semi);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  margin: 0 0 var(--space-6);
+}
+
+.mod-grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+}
+
+.mod-card {
+  background: var(--color-bg-muted);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  transition: transform var(--transition-fast);
+}
+.mod-card:hover {
+  transform: translateY(-2px);
+}
+
+.mod-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-base);
+  color: var(--color-moss);
+  display: grid;
+  place-items: center;
+}
+
+.mod-card h3 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-heading);
+  color: var(--color-text-primary);
+  margin: 0;
+  letter-spacing: var(--ls-tight);
+}
+
+.mod-card p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body);
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 28ch;
+}
+
+@media (min-width: 880px) {
+  .mod-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+  .mod-card {
+    padding: var(--space-10) var(--space-6);
+  }
+}
+</style>

@@ -1,0 +1,70 @@
+---
+---
+
+<section class="cta-final" id="contacto">
+  <div class="container">
+    <h2>No esperes a que todo se derrumbe</h2>
+    <p>¿List@ para dar el primer paso? Solo es una conversación. Sin compromiso, sin tener que tenerlo todo claro.</p>
+    <a class="btn" href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener">
+      Reservar primera sesión →
+    </a>
+  </div>
+</section>
+
+<style>
+.cta-final {
+  background: var(--color-moss);
+  color: var(--color-text-inverse);
+  padding: var(--space-16) 0;
+  text-align: center;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+h2 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-4);
+}
+
+p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body);
+  margin: 0 auto var(--space-8);
+  max-width: 54ch;
+  opacity: 0.92;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 var(--space-8);
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-medium);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+.btn:hover {
+  background: var(--color-bg-soft);
+  transform: translateY(-1px);
+}
+
+@media (min-width: 880px) {
+  .cta-final {
+    padding: var(--space-20) 0;
+  }
+}
+</style>

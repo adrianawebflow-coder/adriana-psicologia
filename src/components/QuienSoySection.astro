@@ -1,0 +1,115 @@
+---
+---
+
+<section class="quien" id="sobre">
+  <div class="container">
+    <p class="eyebrow">Quién soy</p>
+    <div class="quien-card">
+      <img
+        src="/images/Ellipse.png"
+        alt="Adriana Esteban Labelle, psicóloga"
+        class="avatar"
+        width="140"
+        height="140"
+      />
+      <div class="quien-text">
+        <h2>Hola, soy Adriana</h2>
+        <p>
+          Me hice psicóloga porque quería entender por qué las personas hacemos
+          lo que hacemos. Lo que de verdad me enganchó fue acompañar a alguien
+          en ese proceso de entenderse a sí misma.
+        </p>
+        <a class="btn" href="/sobre-mi">Conocer más →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.quien {
+  background: var(--color-bg-base);
+  padding: var(--section-pad-y) 0;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semi);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  margin: 0 0 var(--space-8);
+}
+
+.quien-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  align-items: flex-start;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.quien-text h2 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-heading);
+  color: var(--color-text-primary);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-4);
+}
+
+.quien-text p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-body);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-6);
+  max-width: 62ch;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 var(--space-6);
+  background: var(--color-moss);
+  color: var(--color-text-inverse);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-medium);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+.btn:hover {
+  background: var(--color-moss-hover);
+  transform: translateY(-1px);
+}
+
+@media (min-width: 880px) {
+  .quien-card {
+    flex-direction: row;
+    gap: var(--space-10);
+    align-items: flex-start;
+  }
+  .avatar {
+    width: 140px;
+    height: 140px;
+  }
+}
+</style>
