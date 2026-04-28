@@ -36,7 +36,7 @@ const especialidades = [
 <section class="especialidades">
   <div class="especialidades-inner">
 
-    <header class="especialidades-header">
+    <header class="especialidades-header reveal">
       <p class="eyebrow">Especialidades</p>
       <h2>¿En qué puedo <em>ayudarte</em>?</h2>
       <p class="subtitulo">
@@ -46,7 +46,7 @@ const especialidades = [
 
     <ul class="grid" role="list">
       {especialidades.map((e) => (
-        <li class="card">
+        <li class="card reveal">
           <span class="card-icono" aria-hidden="true">{e.icono}</span>
           <h3>{e.titulo}</h3>
           <p>{e.descripcion}</p>
