@@ -39,6 +39,27 @@ p {
   color: var(--color-text-secondary);
 }
 
+/* ── 12-column grid system ──────────────────────────────────── */
+/*
+ * Desktop (> 900px): 12 cols · margen 32px · gutter 20px · Stretch
+ * Usar .grid-12 en el wrapper de una sección para obtener el grid.
+ * Los hijos directos sin clase span ocupan 1 columna.
+ * Usa grid-column: span N para ocupar N columnas (máx 12).
+ */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 12), 1fr);
+  column-gap: var(--col-gap);
+}
+
+/* Contenedor estándar: max-width + margen 32px */
+.container {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  width: 100%;
+}
+
 /* ── Scroll reveal ───────────────────────────────────────────── */
 .reveal {
   opacity: 0;

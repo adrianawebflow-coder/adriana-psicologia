@@ -213,13 +213,14 @@ const especialidades = [
   }
   .esp-grid {
     grid-template-columns: 1.1fr 0.9fr;
-    gap: var(--space-20);
+    column-gap: calc(var(--col-gap) * 4);  /* 80px = 4 gutters de separación entre columnas principales */
+    row-gap: var(--space-16);
     align-items: start;
   }
   .esp-row {
     flex-direction: row;
     align-items: flex-start;
-    gap: var(--space-8);
+    gap: var(--col-gap);
   }
   .esp-desc {
     margin-top: 0;
