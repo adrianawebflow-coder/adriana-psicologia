@@ -3,29 +3,33 @@
 
 <section class="modalidad" id="como">
   <div class="container">
-    <p class="eyebrow reveal">Modalidad</p>
+    <h2 class="section-title reveal">Modalidad</h2>
     <div class="mod-grid">
 
-      <div class="mod-card reveal">
+      <div class="mod-card mod-presencial reveal">
         <div class="mod-icon" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/>
             <circle cx="12" cy="10" r="2.6"/>
           </svg>
         </div>
-        <h3>Presencial · Madrid</h3>
-        <p>Consulta en Manoteras / Hortaleza. Sesiones de 50 minutos.</p>
+        <div class="mod-label">
+          <h3>Presencial · Madrid</h3>
+          <p>Consulta en Manoteras / Hortaleza. Sesiones de 50 minutos.</p>
+        </div>
       </div>
 
-      <div class="mod-card reveal">
+      <div class="mod-card mod-online reveal">
         <div class="mod-icon" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2.5" y="4" width="19" height="13" rx="1.5"/>
             <path d="M8 21h8M12 17v4"/>
           </svg>
         </div>
-        <h3>Online · Desde casa</h3>
-        <p>Videollamada segura. Desde España o desde donde estés.</p>
+        <div class="mod-label">
+          <h3>Online · Desde casa</h3>
+          <p>Videollamada segura. Desde España o desde donde estés.</p>
+        </div>
       </div>
 
     </div>
@@ -39,78 +43,104 @@
 }
 
 .container {
-  max-width: 1080px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
 
-.eyebrow {
-  font-family: var(--font-sans);
-  font-size: var(--fs-label);
+.section-title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
   font-weight: var(--fw-semi);
-  color: var(--color-text-muted);
-  letter-spacing: var(--ls-wider);
-  text-transform: uppercase;
+  color: var(--color-text-primary);
+  letter-spacing: var(--ls-tight);
   margin: 0 0 var(--space-6);
 }
 
 .mod-grid {
   display: grid;
-  gap: var(--space-6);
   grid-template-columns: 1fr;
+  gap: var(--space-5);
 }
 
+/* ── Card base ── */
 .mod-card {
-  background: var(--color-bg-muted);
-  border-radius: var(--radius-lg);
-  padding: var(--space-8) var(--space-6);
-  text-align: center;
+  position: relative;
+  min-height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--space-4);
-  transition: transform var(--transition-fast);
+  justify-content: flex-end;
+  transition: transform 200ms ease;
 }
-.mod-card:hover {
-  transform: translateY(-2px);
-}
+.mod-card:hover { transform: translateY(-3px); }
 
+/* ── Centered icon ── */
 .mod-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radius-full);
-  background: var(--color-bg-base);
-  color: var(--color-moss);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fff;
   display: grid;
   place-items: center;
+  color: var(--color-moss);
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
 }
 
-.mod-card h3 {
-  font-family: var(--font-serif);
-  font-size: var(--fs-h4);
-  font-weight: var(--fw-light);
-  line-height: var(--lh-heading);
-  color: var(--color-text-primary);
-  margin: 0;
-  letter-spacing: var(--ls-tight);
+/* ── Glass label at bottom ── */
+.mod-label {
+  margin: 14px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: rgba(30,38,28,.65);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-align: center;
 }
-
-.mod-card p {
+.mod-label h3 {
   font-family: var(--font-sans);
-  font-size: var(--fs-body-sm);
-  line-height: var(--lh-body);
-  color: var(--color-text-secondary);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semi);
+  color: #fff;
+  margin: 0 0 var(--space-2);
+}
+.mod-label p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-label);
+  line-height: 1.4;
   margin: 0;
-  max-width: 28ch;
+  opacity: .92;
+  max-width: 30ch;
+  margin-inline: auto;
+}
+
+/* ── Card variants ── */
+.mod-presencial {
+  background: #cfd1cf center / cover no-repeat;
+  background-image: url('/images/consulta-presencial.webp');
+}
+
+.mod-online {
+  background: var(--color-bg-muted) center / cover no-repeat;
+  background-image: url('/images/modalidad.png');
 }
 
 @media (min-width: 880px) {
+  .modalidad {
+    padding: var(--section-pad-y) 0;
+  }
   .mod-grid {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-8);
   }
   .mod-card {
-    padding: var(--space-10) var(--space-6);
+    min-height: 340px;
   }
 }
 </style>

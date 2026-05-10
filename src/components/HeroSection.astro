@@ -1,218 +1,117 @@
 ---
-import HeroShapes from './shapes/HeroShapes.astro';
 ---
 <section class="hero">
-  <HeroShapes />
-  <div class="hero-text">
-    <p class="hero-eyebrow">Psicóloga colegiada M-35913</p>
-    <h1>
-      <em>Psicóloga en Madrid.</em> Un espacio para entender lo que te pasa
-    </h1>
-    <p class="hero-sub">
-      No necesitas tenerlo todo claro para empezar. Solo sentir que algo no va bien.
-    </p>
-    <a href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener" class="hero-cta">Empieza ahora</a>
-  </div>
+  <div class="hero-grid">
 
-  <div class="hero-image">
-    <img src="/images/Hero-pic-adri-2.png" alt="Adriana Esteban Labelle, psicóloga en Madrid" class="hero-photo" />
-    <div class="hero-badge">
-      <strong>+6</strong>
-      <span>años de experiencia</span>
+    <div class="hero-text">
+      <h1>Psicóloga en Madrid. Un espacio para entender lo que te pasa</h1>
+      <p class="lead">
+        No necesitas tenerlo todo claro para empezar.
+        Solo sentir que algo no va bien.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener">
+          Reservar primera sesión
+        </a>
+        <a class="btn btn-secondary" href="#sobre">Conocer a Adriana</a>
+      </div>
     </div>
+
+    <div class="hero-photo" role="img" aria-label="Adriana Esteban Labelle, psicóloga en Madrid"></div>
+
   </div>
 </section>
 
 <style>
-@keyframes hero-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-h1 {
-  animation: hero-fade-in 500ms cubic-bezier(0.25, 0, 0, 1) both;
-  animation-delay: 100ms;
-}
-
-.hero-sub {
-  animation: hero-fade-in 500ms cubic-bezier(0.25, 0, 0, 1) both;
-  animation-delay: 200ms;
-}
-
-.hero-cta {
-  animation: hero-fade-in 500ms cubic-bezier(0.25, 0, 0, 1) both;
-  animation-delay: 300ms;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-eyebrow,
-  h1,
-  .hero-sub,
-  .hero-cta {
-    animation: none;
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* ── Hero layout ── */
 .hero {
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-  padding-top: var(--nav-height);
+  background: var(--color-bg-base);
+}
+
+.hero-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding-left: var(--gutter);
-  padding-right: var(--gutter);
-  gap: var(--space-12);
+  grid-template-columns: 1fr;
+  align-items: stretch;
 }
 
 .hero-text {
-  position: relative;
-  z-index: 1;
+  padding: var(--section-pad-y) var(--gutter);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: var(--space-6);
-}
-
-.hero-eyebrow {
-  animation: hero-fade-in 500ms cubic-bezier(0.25, 0, 0, 1) both;
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  font-size: var(--fs-label);
-  font-weight: var(--fw-semi);
-  letter-spacing: var(--ls-wider);
-  text-transform: uppercase;
-  color: var(--color-moss);
-}
-.hero-eyebrow::before {
-  content: '';
-  display: block;
-  width: 24px;
-  height: 1px;
-  background: var(--color-moss);
+  justify-content: center;
 }
 
 h1 {
   font-family: var(--font-serif);
-  font-size: var(--fs-display);
-  font-weight: var(--fw-thin);
-  line-height: var(--lh-tight);
+  font-weight: var(--fw-semi);
+  font-size: clamp(1.875rem, 5vw, 3rem);
+  line-height: 1.1;
   color: var(--color-text-primary);
-  letter-spacing: -0.02em;
-}
-h1 em {
-  color: var(--color-moss);
-  font-style: italic;
-  font-weight: var(--fw-light);
+  letter-spacing: -0.01em;
+  max-width: 18ch;
+  margin: 0;
 }
 
-.hero-sub {
+.lead {
+  font-family: var(--font-sans);
   font-size: var(--fs-body-lg);
+  line-height: 1.55;
   color: var(--color-text-secondary);
-  line-height: var(--lh-loose);
-  max-width: 46ch;
+  max-width: 42ch;
+  margin: 0;
 }
 
-.hero-cta {
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.btn {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  height: 52px;
-  padding: 0 var(--space-10);
-  background: var(--color-moss);
-  color: white;
-  font-size: var(--fs-body-sm);
-  font-weight: var(--fw-medium);
-  letter-spacing: 0.03em;
-  border-radius: var(--radius-sm);
-  text-decoration: none;
-  transition: background var(--transition-base), transform var(--transition-base);
-}
-.hero-cta::after { content: '→'; }
-.hero-cta:hover {
-  background: var(--color-moss-hover);
-  transform: translateY(-2px);
-}
-
-.hero-image {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: flex-end;
   justify-content: center;
-  height: 75vh;
-  max-height: 680px;
-  width: 100%;
-  overflow: hidden;
+  height: 44px;
+  padding: 0 22px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semi);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 120ms ease, filter 120ms ease, background var(--transition-fast);
 }
+.btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
 
+.btn-primary  { background: var(--color-moss); color: var(--color-text-inverse); }
+.btn-primary:hover  { background: var(--color-moss-hover); filter: none; }
+.btn-secondary { background: var(--color-clay); color: var(--color-text-inverse); }
+
+/* ── Hero photo ── */
 .hero-photo {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: bottom center;
-  filter: drop-shadow(0 20px 40px rgba(26,33,24,0.10));
+  aspect-ratio: 5 / 4;
+  background: var(--color-bg-muted) center / cover no-repeat;
+  background-image: url('/images/hero-adriana.png');
 }
 
-.hero-badge {
-  position: absolute;
-  bottom: var(--space-8);
-  left: calc(-1 * var(--space-8));
-  background: var(--color-bg-base);
-  border: 1px solid var(--color-bg-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-4) var(--space-5);
-  box-shadow: var(--shadow-lg);
-}
-.hero-badge strong {
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  font-weight: var(--fw-thin);
-  color: var(--color-moss);
-  line-height: 1;
-  display: block;
-}
-.hero-badge span {
-  font-size: var(--fs-meta);
-  color: var(--color-text-muted);
-  letter-spacing: 0.04em;
-}
-
-@media (max-width: 768px) {
-  .hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    padding-top: calc(var(--nav-height) + var(--space-8));
-    padding-bottom: var(--space-12);
-    gap: var(--space-10);
+@media (min-width: 880px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr;
+    min-height: 580px;
   }
-  .hero-image {
-    height: 50vw;
-    min-height: 280px;
-    max-height: 400px;
-    order: -1;
-    overflow: hidden;
+  .hero-text {
+    padding: var(--section-pad-y) var(--gutter) var(--section-pad-y)
+      max(var(--gutter), calc((100vw - 1280px) / 2 + var(--gutter)));
   }
-  .hero-badge {
-    left: var(--space-4);
-    bottom: var(--space-4);
+  h1 {
+    max-width: 14ch;
   }
-}
-
-@media (max-width: 480px) {
-  .hero-sub { font-size: var(--fs-body); }
-  .hero-image { height: 60vw; }
+  .hero-photo {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 580px;
+  }
 }
 </style>

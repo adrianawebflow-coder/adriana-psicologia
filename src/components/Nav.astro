@@ -1,109 +1,141 @@
 ---
 ---
 <header class="nav">
-  <a href="/" class="nav-logo">Adriana<em>Psicología</em></a>
-  <nav>
-    <ul class="nav-links">
-      <li><a href="/" class="nav-link">Inicio</a></li>
-      <li><a href="/sobre-mi" class="nav-link">Sobre mí</a></li>
-      <li><a href="/servicios" class="nav-link">Servicios</a></li>
-      <li><a href="/precio" class="nav-link">Precio</a></li>
-      <li><a href="/blog" class="nav-link">Blog</a></li>
-    </ul>
-  </nav>
-  <a href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" class="nav-cta">Contáctame</a>
-  <button class="nav-hamburger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="Adriana Psicología">
+      <span class="brand-name">Adriana</span>
+      <span class="brand-sub">PSICOLOGÍA</span>
+    </a>
+
+    <nav class="nav-menu" aria-label="Principal">
+      <a href="/" class="active">Inicio</a>
+      <a href="/sobre-mi">Sobre mí</a>
+      <a href="/servicios">Servicios</a>
+      <a href="/precio">Precio</a>
+      <a href="/blog">Blog</a>
+    </nav>
+
+    <div class="nav-cta">
+      <a class="btn-cta" href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener">
+        Contáctame
+      </a>
+    </div>
+
+    <button class="burger" aria-label="Abrir menú" id="navBurger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
 
-<div class="nav-mobile" id="mobileMenu">
-  <ul>
-    <li><a href="/" class="nav-mobile-link">Inicio</a></li>
-    <li><a href="/sobre-mi" class="nav-mobile-link">Sobre mí</a></li>
-    <li><a href="/servicios" class="nav-mobile-link">Servicios</a></li>
-    <li><a href="/precio" class="nav-mobile-link">Precio</a></li>
-    <li><a href="/blog" class="nav-mobile-link">Blog</a></li>
-    <li><a href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" class="nav-mobile-cta">Contáctame →</a></li>
-  </ul>
+<div class="sheet" id="navSheet" aria-hidden="true">
+  <div class="sheet-panel">
+    <button class="sheet-close" id="navSheetClose" aria-label="Cerrar menú">×</button>
+    <a href="/">Inicio</a>
+    <a href="/sobre-mi">Sobre mí</a>
+    <a href="/servicios">Servicios</a>
+    <a href="/precio">Precio</a>
+    <a href="/blog">Blog</a>
+    <a href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener" class="sheet-cta">
+      Contáctame
+    </a>
+  </div>
 </div>
 
 <style>
 .nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  height: var(--nav-height);
+  background: var(--color-bg-base);
+  border-bottom: 1px solid rgba(0,0,0,.04);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--gutter);
-  background: rgba(245,242,234,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--color-bg-border);
-  transition: box-shadow var(--transition-base);
+  gap: 24px;
 }
-.nav.scrolled { box-shadow: var(--shadow-md); }
 
-.nav-logo {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: var(--fw-regular);
-  color: var(--color-text-primary);
-  letter-spacing: 0.02em;
-  text-decoration: none;
-}
-.nav-logo em { color: var(--color-moss); font-style: italic; }
-
-.nav-links {
+.brand {
   display: flex;
-  align-items: center;
-  gap: var(--space-8);
-  list-style: none;
-}
-.nav-link {
-  font-size: var(--fs-body-sm);
-  font-weight: var(--fw-medium);
-  color: var(--color-text-secondary);
+  flex-direction: column;
+  line-height: 1;
   text-decoration: none;
-  padding: var(--space-2) 0;
-  border-bottom: 1.5px solid transparent;
-  transition: color var(--transition-base), border-color var(--transition-base);
-  min-height: var(--touch-target);
-  display: inline-flex;
-  align-items: center;
+  color: var(--color-text-primary);
 }
-.nav-link:hover { color: var(--color-text-primary); }
-.nav-link.active { color: var(--color-moss); border-color: var(--color-moss); }
-
-.nav-cta {
-  font-size: var(--fs-body-sm);
-  font-weight: var(--fw-medium);
-  color: var(--color-text-inverse);
-  background: var(--color-text-primary);
-  padding: 0 var(--space-6);
-  height: 40px;
-  display: inline-flex;
-  align-items: center;
-  border-radius: var(--radius-sm);
-  text-decoration: none;
-  letter-spacing: 0.03em;
-  transition: background var(--transition-base);
-  white-space: nowrap;
+.brand-name {
+  font-family: var(--font-script);
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
-.nav-cta:hover { background: var(--color-moss); }
+.brand-sub {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-top: -2px;
+  padding-left: 4px;
+}
 
-.nav-hamburger {
+.nav-menu {
   display: none;
+  gap: 32px;
+  align-items: center;
+}
+.nav-menu a {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+.nav-menu a:hover,
+.nav-menu a.active {
+  color: var(--color-moss);
+}
+
+.nav-cta { display: none; }
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 22px;
+  background: var(--color-moss);
+  color: var(--color-text-inverse);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+.btn-cta:hover {
+  background: var(--color-moss-hover);
+  transform: translateY(-1px);
+}
+
+.burger {
+  width: 36px;
+  height: 36px;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: var(--touch-target);
-  height: var(--touch-target);
+  align-items: flex-end;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: 4px;
 }
-.nav-hamburger span {
+.burger span {
   display: block;
   width: 22px;
   height: 2px;
@@ -111,65 +143,78 @@
   border-radius: 2px;
 }
 
-.nav-mobile {
-  display: none;
-  position: fixed;
-  top: var(--nav-height);
-  left: 0; right: 0; bottom: 0;
-  background: var(--color-bg-base);
-  z-index: 99;
-  padding: var(--space-8) var(--gutter);
-  flex-direction: column;
-  overflow-y: auto;
-}
-.nav-mobile.open { display: flex; }
-.nav-mobile ul { list-style: none; display: flex; flex-direction: column; }
-.nav-mobile-link {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: var(--fs-h3);
-  font-weight: var(--fw-light);
-  color: var(--color-text-primary);
-  text-decoration: none;
-  padding: var(--space-5) 0;
-  border-bottom: 1px solid var(--color-bg-border);
-  transition: color var(--transition-base);
-}
-.nav-mobile-link:hover { color: var(--color-moss); }
-.nav-mobile-cta {
-  display: inline-flex;
-  align-items: center;
-  margin-top: var(--space-8);
-  font-size: var(--fs-body-lg);
-  font-weight: var(--fw-medium);
-  color: var(--color-moss);
-  text-decoration: none;
+@media (min-width: 880px) {
+  .nav-menu,
+  .nav-cta { display: flex; }
+  .burger   { display: none; }
 }
 
-@media (max-width: 768px) {
-  .nav-links, .nav-cta { display: none; }
-  .nav-hamburger { display: flex; }
+/* ── Mobile sheet ── */
+.sheet {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,33,24,.55);
+  display: none;
+  z-index: 50;
+}
+.sheet.open { display: block; }
+
+.sheet-panel {
+  position: absolute;
+  top: 0; right: 0;
+  height: 100%;
+  width: min(82vw, 320px);
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: -12px 0 32px rgba(0,0,0,.2);
+}
+.sheet-panel a {
+  padding: 14px 4px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-bg-border);
+}
+.sheet-panel a:hover { color: var(--color-moss); }
+
+.sheet-cta {
+  margin-top: 16px;
+  text-align: center;
+  background: var(--color-moss);
+  color: var(--color-text-inverse) !important;
+  border-radius: var(--radius-full);
+  border-bottom: none !important;
+}
+
+.sheet-close {
+  align-self: flex-end;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  color: var(--color-text-primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 8px;
 }
 </style>
 
 <script>
-const nav = document.querySelector('.nav');
-window.addEventListener('scroll', () => {
-  nav?.classList.toggle('scrolled', window.scrollY > 20);
-});
-
-const btn = document.querySelector('.nav-hamburger');
-const menu = document.getElementById('mobileMenu');
-btn?.addEventListener('click', () => {
-  const isOpen = menu?.classList.toggle('open');
-  btn.setAttribute('aria-expanded', String(isOpen));
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-menu?.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    menu.classList.remove('open');
-    btn?.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  });
-});
+  const burger     = document.getElementById('navBurger');
+  const sheet      = document.getElementById('navSheet');
+  const sheetClose = document.getElementById('navSheetClose');
+  const open  = () => { sheet?.classList.add('open');    sheet?.setAttribute('aria-hidden','false'); };
+  const close = () => { sheet?.classList.remove('open'); sheet?.setAttribute('aria-hidden','true');  };
+  burger?.addEventListener('click', open);
+  sheetClose?.addEventListener('click', close);
+  sheet?.addEventListener('click', (e) => { if (e.target === sheet) close(); });
+  sheet?.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
 </script>

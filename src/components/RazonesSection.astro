@@ -23,7 +23,7 @@ const razones = [
 
 <section class="razones" id="servicios">
   <div class="container">
-    <p class="eyebrow reveal">¿Qué te trae aquí?</p>
+    <h2 class="section-eyebrow reveal">¿Qué te trae aquí?</h2>
     <ul class="reason-list" role="list">
       {razones.map((r) => (
         <li class="reveal">
@@ -57,20 +57,19 @@ const razones = [
   padding: 0 var(--gutter);
 }
 
-.eyebrow {
-  font-family: var(--font-sans);
-  font-size: var(--fs-label);
+.section-eyebrow {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
   font-weight: var(--fw-semi);
-  color: var(--color-text-muted);
-  letter-spacing: var(--ls-wider);
-  text-transform: uppercase;
+  color: var(--color-text-primary);
+  letter-spacing: var(--ls-tight);
   margin: 0 0 var(--space-6);
 }
 
 .reason-list {
   list-style: none;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: var(--space-4);
 }
 
@@ -141,13 +140,21 @@ const razones = [
 }
 
 @media (min-width: 880px) {
-  .reason {
-    padding: var(--space-5) var(--space-6);
+  .reason-list {
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-6);
+  }
+  .reason {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-6);
+    gap: var(--space-5);
   }
   .reason-arrow {
     width: 36px;
     height: 36px;
+    align-self: flex-end;
   }
+  .reason-titulo { font-size: var(--fs-h3); }
 }
 </style>

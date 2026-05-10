@@ -1,0 +1,228 @@
+---
+const especialidades = [
+  "Ansiedad y estrés",
+  "Depresión y estado de ánimo",
+  "Autoestima e identidad",
+  "Duelo y pérdida",
+  "Terapia de pareja",
+  "Trauma y EMDR",
+];
+---
+
+<section class="esp" id="sobre">
+  <div class="container">
+    <div class="esp-grid">
+
+      <!-- Especialidades -->
+      <div class="esp-col reveal">
+        <h2 class="section-title">Especialidades</h2>
+        <div class="esp-row">
+          <div class="timeline">
+            <div class="rail"></div>
+            <ul>
+              {especialidades.map((e, i) => (
+                <li class={i === 0 ? 'first' : ''}>{e}</li>
+              ))}
+            </ul>
+          </div>
+          <p class="esp-desc">
+            Herramientas para gestionar la preocupación constante, los ataques
+            de pánico y la tensión crónica del día a día, acompañándote en el
+            proceso de entenderte a ti misma.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quién soy -->
+      <div class="quien-col reveal">
+        <h2 class="section-title">¿Quién soy?</h2>
+        <div class="quien-card">
+          <div class="quien-head">
+            <div class="avatar" role="img" aria-label="Foto de Adriana"></div>
+            <h3>Hola, soy Adriana</h3>
+          </div>
+          <p>
+            Me hice psicóloga porque quería entender por qué las personas
+            hacemos lo que hacemos. Lo que de verdad me enganchó fue acompañar
+            a alguien en ese proceso de entenderse a sí misma.
+          </p>
+          <a class="btn" href="/sobre-mi">Conocer más →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.esp {
+  background: var(--color-bg-base);
+  padding: var(--section-pad-y) 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.esp-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-16);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semi);
+  color: var(--color-text-primary);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-6);
+}
+
+/* ── Timeline ── */
+.esp-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 14px;
+  align-items: start;
+}
+
+.rail {
+  position: relative;
+  width: 5px;
+  margin-left: 6px;
+  border-radius: 3px;
+  background: linear-gradient(var(--color-moss) 0%, var(--color-moss-soft) 100%);
+  align-self: stretch;
+}
+.rail::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, 0);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-moss);
+}
+
+.timeline ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.timeline li {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semi);
+  color: var(--color-text-secondary);
+  line-height: 1.3;
+}
+.timeline li.first {
+  color: var(--color-text-primary);
+}
+
+.esp-desc {
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-clay-soft);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body);
+  color: var(--color-text-primary);
+  max-width: 380px;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Quién soy ── */
+.quien-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.quien-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-muted) center / cover no-repeat;
+  background-image: url('/images/adriana.png');
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+}
+
+.quien-card h3 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semi);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.quien-card p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 38ch;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 22px;
+  background: var(--color-moss);
+  color: var(--color-text-inverse);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semi);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  align-self: flex-start;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+.btn:hover {
+  background: var(--color-moss-hover);
+  transform: translateY(-1px);
+}
+
+@media (min-width: 880px) {
+  .esp {
+    padding: var(--section-pad-y) 0;
+  }
+  .esp-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--space-20);
+    align-items: start;
+  }
+  .esp-row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-8);
+  }
+  .esp-desc {
+    margin-top: 0;
+  }
+}
+</style>

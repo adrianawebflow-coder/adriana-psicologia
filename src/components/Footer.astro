@@ -4,7 +4,10 @@
   <div class="footer-inner">
 
     <div class="footer-brand">
-      <a href="/" class="footer-logo">Adriana<em>Psicología</em></a>
+      <a href="/" class="footer-logo">
+        <span class="footer-logo-name">Adriana</span>
+        <span class="footer-logo-sub">PSICOLOGÍA</span>
+      </a>
       <p>Psicóloga colegiada M-35913. Acompañamiento individual, de pareja y familiar. Online y presencial en Madrid.</p>
       <div class="footer-contact">
         <span>Adriana Esteban Labelle</span>
@@ -75,18 +78,27 @@
 }
 
 .footer-logo {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: var(--fw-light);
-  color: var(--color-text-inverse);
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
   text-decoration: none;
-  letter-spacing: 0.02em;
-  display: block;
   margin-bottom: var(--space-4);
 }
-.footer-logo em {
-  color: var(--color-moss-light);
-  font-style: italic;
+.footer-logo-name {
+  font-family: var(--font-script);
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--color-text-inverse);
+  letter-spacing: -0.01em;
+}
+.footer-logo-sub {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(245,242,234,.6);
+  margin-top: 2px;
+  padding-left: 4px;
 }
 
 .footer-brand p {
