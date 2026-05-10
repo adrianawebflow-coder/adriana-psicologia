@@ -125,7 +125,7 @@
   --fs-h1:      clamp(2rem,    4.5vw, 3.5rem);    /* 32–56px              */
   --fs-h2:      1.5rem;                            /* 24px fijo            */
   --fs-h3:      clamp(1.25rem,  2vw,  1.875rem);  /* 20–30px              */
-  --fs-h4:      clamp(1.125rem, 1.5vw, 1.375rem); /* 18–22px              */
+  --fs-h4:      1.125rem;                          /* 18px fijo            */
   --fs-body-lg: 1.125rem;   /* 18px — párrafos intro                       */
   --fs-body:    1rem;       /* 16px — body (mínimo WCAG 1.4.4)             */
   --fs-body-sm: 0.9375rem;  /* 15px — UI: botones, tabs, nav               */
@@ -182,7 +182,9 @@
   --col-gap:        1.25rem;     /* 20px — gutter entre columnas */
   --nav-height:     70px;
   --nav-h:          var(--nav-height);
-  --section-pad-y:  clamp(3.5rem, 8vw, 7rem);
+  --section-pad-y:      clamp(3.5rem, 8vw, 7rem);  /* heredado — no usar en secciones nuevas */
+  --section-pad-top:    2.5rem;   /* 40px */
+  --section-pad-bottom: 3.75rem;  /* 60px */
 
 
   /* ─────────────────────────────────────────────
@@ -232,6 +234,12 @@
      lg: 1024px
      xl: 1280px
    ───────────────────────────────────────────── */
+
+@media (min-width: 1280px) {
+  :root {
+    --gutter: 2rem;   /* 32px — padding lateral en contenedor a max-width */
+  }
+}
 
 @media (max-width: 900px) {
   :root {

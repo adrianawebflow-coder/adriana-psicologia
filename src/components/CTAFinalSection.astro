@@ -20,7 +20,8 @@
   position: relative;
   background: var(--color-moss);
   color: var(--color-text-inverse);
-  padding: var(--space-16) 0;
+  padding-top: var(--section-pad-top);
+  padding-bottom: var(--section-pad-bottom);
   text-align: center;
   overflow: hidden;
 }
@@ -51,7 +52,7 @@ h2 {
   line-height: var(--lh-heading);
   letter-spacing: var(--ls-tight);
   margin: 0 0 var(--space-4);
-  color: #fff;
+  
 }
 
 p {
@@ -61,7 +62,6 @@ p {
   margin: 0 auto var(--space-8);
   max-width: 54ch;
   opacity: 0.92;
-  color: #fff;
 }
 
 .btn {
@@ -85,7 +85,8 @@ p {
 
 @media (min-width: 880px) {
   .cta-final {
-    padding: var(--space-20) 0;
+    padding-top: var(--section-pad-top);
+    padding-bottom: var(--section-pad-bottom);
   }
   h2 { font-size: var(--fs-h1); }
 }

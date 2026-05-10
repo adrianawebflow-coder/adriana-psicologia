@@ -48,7 +48,8 @@ const razones = [
 <style>
 .razones {
   background: var(--color-bg-soft);
-  padding: var(--section-pad-y) 0;
+  padding-top: var(--section-pad-top);
+  padding-bottom: var(--section-pad-bottom);
 }
 
 .container {
@@ -84,6 +85,7 @@ const razones = [
   gap: var(--space-4);
   text-decoration: none;
   color: inherit;
+  height: 100%;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 .reason:hover {

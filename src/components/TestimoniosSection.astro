@@ -37,7 +37,8 @@ const testimonioActivo = testimonios[0];
 .testimonios {
   position: relative;
   background: var(--color-bg-soft);
-  padding: var(--section-pad-y) 0 calc(var(--section-pad-y) + var(--space-4));
+  padding-top: var(--section-pad-top);
+  padding-bottom: calc(var(--section-pad-bottom) + var(--space-4));
   overflow: hidden;
 }
 
@@ -151,7 +152,8 @@ const testimonioActivo = testimonios[0];
 
 @media (min-width: 880px) {
   .testimonios {
-    padding: var(--section-pad-y) 0;
+    padding-top: var(--section-pad-top);
+    padding-bottom: var(--section-pad-bottom);
   }
 }
 </style>

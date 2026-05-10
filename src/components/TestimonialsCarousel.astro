@@ -1,0 +1,460 @@
+---
+import TestimonialsShapes from './shapes/TestimonialsShapes.astro';
+
+const testimonials = [
+  {
+    quote: "Adriana es ambas cosas para mí: el amigo que te apoya y la luz que te muestra el camino. Es increíble que alguien sea a la vez tan profesional, empática y humana.",
+    name: "Sandra",
+    detail: "Más de 2 años en terapia",
+  },
+  {
+    quote: "Sabe acompañarte en cada situación por muy compleja que sea. Entiende lo que quieres decir incluso antes de acabar las frases.",
+    name: "Camila",
+    detail: "Más de 2 años en terapia",
+  },
+  {
+    quote: "Ha sido un apoyo clave en mi recuperación. Destaco su escucha, apoyo incondicional, tacto, humanidad, empatía y cariño.",
+    name: "Laura",
+    detail: "Años en terapia",
+  },
+  {
+    quote: "Mi pareja y yo empezamos a acudir a terapia con Adriana en mayo, y encontrarla y confiar en ella ha sido la mejor decisión.",
+    name: "Adela Macarro",
+    detail: "Terapia de pareja",
+  },
+  {
+    quote: "Voy a terapia con Adriana desde Octubre de 2024. Es una gran profesional, con ella volví a confiar en la psicología y en la terapia.",
+    name: "Natalisestas",
+    detail: "Paciente desde 2024",
+  },
+];
+
+const N = testimonials.length;
+---
+
+<section class="tcarousel-section" id="testimonios">
+  <TestimonialsShapes />
+
+  <div class="container">
+    <h2 class="section-title reveal">Lo que dicen mis pacientes</h2>
+
+    <div
+      class="tc-outer"
+      id="tcOuter"
+      aria-label="Testimonios de pacientes"
+      tabindex="0"
+    >
+      <!-- aria-live region for screen readers -->
+      <p class="tc-live" id="tcLive" aria-live="polite" aria-atomic="true"></p>
+
+      <div class="tc-stack" id="tcStack">
+        {testimonials.map((t, i) => (
+          <article
+            class="tc-card"
+            data-index={String(i)}
+            data-state={i === 0 ? 'front' : i === 1 ? 'middle' : i === 2 ? 'back' : 'hidden'}
+            aria-hidden={i > 0 ? 'true' : 'false'}
+          >
+            <div class="tc-stars" aria-label="5 estrellas de 5">★★★★★</div>
+            <blockquote class="tc-quote">&ldquo;{t.quote}&rdquo;</blockquote>
+            <footer class="tc-author">
+              <div class="tc-avatar" aria-hidden="true">{t.name.charAt(0)}</div>
+              <div class="tc-author-info">
+                <span class="tc-name">{t.name}</span>
+                <span class="tc-detail">{t.detail}</span>
+              </div>
+            </footer>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="tc-dots" role="tablist" aria-label="Selector de testimonio">
+      {testimonials.map((t, i) => (
+        <button
+          class={`tc-dot${i === 0 ? ' active' : ''}`}
+          role="tab"
+          aria-selected={String(i === 0)}
+          aria-label={`Testimonio de ${t.name}`}
+          data-index={String(i)}
+        ></button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+/* ── Section ── */
+.tcarousel-section {
+  position: relative;
+  background: var(--color-bg-soft);
+  padding-top: var(--section-pad-top);
+  padding-bottom: var(--section-pad-bottom);
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semi);
+  color: var(--color-text-primary);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-8);
+  text-align: center;
+}
+
+/* ── Outer wrapper (keyboard + hover target) ── */
+.tc-outer {
+  outline: none;
+}
+.tc-outer:focus-visible {
+  outline: 3px solid var(--color-moss);
+  outline-offset: 6px;
+  border-radius: var(--radius-lg);
+}
+
+/* Screen-reader live region */
+.tc-live {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* ── Stack ── */
+.tc-stack {
+  position: relative;
+  padding-top: 14px; /* room for peeking back cards */
+  /* height set by JS to front-card height + 14px */
+  min-height: 180px;
+}
+
+/* ── Cards ── */
+.tc-card {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100%;
+  max-width: 480px;
+  padding: var(--space-8);
+  /* var(--color-bg-dark) = #1A2118, ~4% white overlay */
+  background: color-mix(in srgb, var(--color-bg-dark) 96%, white 4%);
+  border: 1px solid rgba(245,242,234,0.08);
+  border-radius: var(--radius-lg);
+  box-sizing: border-box;
+}
+
+/* ── Card states ── */
+.tc-card[data-state="front"] {
+  transform: translateX(-50%) translateY(0) scale(1);
+  opacity: 1;
+  z-index: 3;
+  transition: transform 400ms ease-out, opacity 400ms ease-out;
+}
+.tc-card[data-state="middle"] {
+  transform: translateX(-50%) translateY(-8px) scale(0.97);
+  opacity: 0.7;
+  z-index: 2;
+  transition: transform 400ms ease-out, opacity 400ms ease-out;
+}
+.tc-card[data-state="back"] {
+  transform: translateX(-50%) translateY(-14px) scale(0.94);
+  opacity: 0.45;
+  z-index: 1;
+  transition: transform 400ms ease-out, opacity 400ms ease-out;
+}
+.tc-card[data-state="exit"] {
+  transform: translateX(-50%) translateY(60px) scale(1);
+  opacity: 0;
+  z-index: 4;
+  pointer-events: none;
+  transition: transform 320ms ease-in, opacity 320ms ease-in;
+}
+.tc-card[data-state="entering"] {
+  transform: translateX(-50%) translateY(-14px) scale(0.94);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: none;
+}
+.tc-card[data-state="hidden"] {
+  transform: translateX(-50%) translateY(-14px) scale(0.94);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: none;
+}
+
+/* ── Card content ── */
+.tc-stars {
+  color: var(--color-gold);
+  letter-spacing: 2px;
+  font-size: 13px;
+  margin: 0 0 var(--space-4);
+  display: block;
+}
+
+.tc-quote {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-light);
+  font-style: italic;
+  font-size: 17px;
+  line-height: var(--lh-loose);
+  color: rgba(245,242,234,0.88);
+  margin: 0 0 var(--space-6);
+}
+
+.tc-author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.tc-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-full);
+  background: var(--color-moss);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: var(--fw-semi);
+  color: var(--color-text-inverse);
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.tc-author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tc-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: var(--fw-medium);
+  color: var(--color-text-inverse);
+}
+
+.tc-detail {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(245,242,234,0.4);
+}
+
+/* ── Dots ── */
+.tc-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-8);
+}
+
+.tc-dot {
+  height: 8px;
+  width: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-moss-soft);
+  opacity: 0.4;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: width 300ms ease, opacity 300ms ease, background 300ms ease;
+}
+.tc-dot.active {
+  width: 24px;
+  background: var(--color-moss);
+  opacity: 1;
+}
+.tc-dot:hover:not(.active) {
+  opacity: 0.7;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .tc-card { transition: none !important; }
+  .tc-card:not([data-state="front"]) { display: none !important; }
+  .tc-dot { transition: none !important; }
+}
+</style>
+
+<script>
+(function () {
+  const N = 5;
+  const stack  = document.getElementById('tcStack');
+  const outer  = document.getElementById('tcOuter');
+  const liveEl = document.getElementById('tcLive');
+  if (!stack || !outer) return;
+
+  const cards   = Array.from(stack.querySelectorAll('.tc-card'));
+  const dotBtns = Array.from(document.querySelectorAll('.tc-dot'));
+
+  let frontIdx   = 0;
+  let isAnimating = false;
+  let autoTimer   = null;
+
+  // ── Helpers ───────────────────────────────────────────────
+  function wrap(i) { return ((i % N) + N) % N; }
+  function card(offset) { return cards[wrap(frontIdx + offset)]; }
+
+  function updateHeight() {
+    const front = cards.find(c => c.dataset.state === 'front');
+    if (front) stack.style.height = (front.offsetHeight + 14) + 'px';
+  }
+
+  function updateDots(idx) {
+    dotBtns.forEach((d, i) => {
+      const active = i === idx;
+      d.classList.toggle('active', active);
+      d.setAttribute('aria-selected', String(active));
+    });
+  }
+
+  function announceCard(idx) {
+    const t = cards[idx];
+    if (liveEl && t) {
+      liveEl.textContent = t.querySelector('.tc-name')?.textContent ?? '';
+    }
+    cards.forEach((c, i) => c.setAttribute('aria-hidden', String(i !== idx)));
+  }
+
+  // ── Advance (animated, forward) ───────────────────────────
+  function advance() {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const exitCard  = card(0);   // front → exits down
+    const newFront  = card(1);   // middle → front
+    const newMiddle = card(2);   // back → middle
+    const enterCard = card(3);   // hidden → entering back
+
+    // Exit current front (slides down)
+    exitCard.dataset.state = 'exit';
+
+    // Promote middle and back
+    newFront.dataset.state  = 'front';
+    newMiddle.dataset.state = 'middle';
+
+    // Snap entering card to back position without transition, then fade in
+    enterCard.dataset.state = 'entering';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        enterCard.dataset.state = 'back';
+      });
+    });
+
+    // Hide all other cards (anything beyond the 3 visible slots)
+    cards.forEach((c, i) => {
+      const rel = wrap(i - frontIdx);
+      if (rel > 3 && c !== exitCard) c.dataset.state = 'hidden';
+    });
+
+    setTimeout(() => {
+      exitCard.dataset.state = 'hidden';
+      frontIdx = wrap(frontIdx + 1);
+      updateDots(frontIdx);
+      announceCard(frontIdx);
+      updateHeight();
+      isAnimating = false;
+    }, 420);
+  }
+
+  // ── Jump to index (instant) ────────────────────────────────
+  function goTo(idx) {
+    if (idx === frontIdx || isAnimating) return;
+
+    // Single forward step → use animated advance
+    if (wrap(idx - frontIdx) === 1) {
+      advance();
+      return;
+    }
+
+    // Otherwise snap instantly
+    isAnimating = true;
+    frontIdx = idx;
+
+    cards.forEach(c => { c.style.transition = 'none'; });
+
+    cards.forEach((c, i) => {
+      const rel = wrap(i - idx);
+      if      (rel === 0) c.dataset.state = 'front';
+      else if (rel === 1) c.dataset.state = 'middle';
+      else if (rel === 2) c.dataset.state = 'back';
+      else                c.dataset.state = 'hidden';
+    });
+
+    // Re-enable transitions after reflow
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        cards.forEach(c => { c.style.transition = ''; });
+        isAnimating = false;
+      });
+    });
+
+    updateDots(idx);
+    announceCard(idx);
+    updateHeight();
+  }
+
+  // ── Auto-advance ──────────────────────────────────────────
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(advance, 5000);
+  }
+  function stopAuto() {
+    if (autoTimer) clearInterval(autoTimer);
+    autoTimer = null;
+  }
+
+  // ── Events ────────────────────────────────────────────────
+  outer.addEventListener('mouseenter', stopAuto);
+  outer.addEventListener('mouseleave', startAuto);
+
+  dotBtns.forEach((d, i) => {
+    d.addEventListener('click', () => { stopAuto(); goTo(i); startAuto(); });
+  });
+
+  outer.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); stopAuto(); advance(); startAuto(); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); stopAuto(); goTo(wrap(frontIdx - 1)); startAuto(); }
+  });
+
+  // Touch / swipe
+  let touchX = 0;
+  stack.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+  stack.addEventListener('touchend', (e) => {
+    const delta = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 40) {
+      stopAuto();
+      delta > 0 ? advance() : goTo(wrap(frontIdx - 1));
+      startAuto();
+    }
+  }, { passive: true });
+
+  // ── Reduced motion: disable auto, show only front ─────────
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // CSS already hides non-front cards; just don't auto-advance
+    return;
+  }
+
+  // ── Init ──────────────────────────────────────────────────
+  updateDots(0);
+  announceCard(0);
+  updateHeight();
+  window.addEventListener('resize', updateHeight);
+  startAuto();
+})();
+</script>
