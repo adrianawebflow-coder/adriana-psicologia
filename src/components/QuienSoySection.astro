@@ -1,7 +1,9 @@
 ---
+import AboutShapes from './shapes/AboutShapes.astro';
 ---
 
 <section class="quien" id="sobre">
+  <AboutShapes />
   <div class="container">
     <p class="eyebrow reveal">Quién soy</p>
     <div class="quien-card reveal">
@@ -27,11 +29,15 @@
 
 <style>
 .quien {
+  position: relative;
+  overflow: hidden;
   background: var(--color-bg-base);
   padding: var(--section-pad-y) 0;
 }
 
 .container {
+  position: relative;
+  z-index: 1;
   max-width: 1080px;
   margin: 0 auto;
   padding: 0 var(--gutter);

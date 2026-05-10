@@ -1,0 +1,146 @@
+---
+/**
+ * AboutShapes.astro
+ * Blobs orgánicos SVG para la sección Sobre mí / Quién soy.
+ * Uso: <AboutShapes /> dentro de la sección about, como primer hijo.
+ *
+ * La sección padre necesita:
+ *   position: relative;
+ *   overflow: hidden;
+ *   background: var(--color-bg-base);
+ */
+---
+
+<div class="about-shapes" aria-hidden="true">
+  <svg
+    class="about-shapes-svg"
+    viewBox="0 0 800 500"
+    preserveAspectRatio="xMidYMid slice"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <!-- Blob 1 — musgo oscuro, esquina sup-izq, sangra -->
+    <path
+      class="blob blob-1"
+      d="M-40,120 C10,60 90,55 130,100 C170,145 175,220 135,255
+         C95,290 20,285 -15,245 C-50,205 -90,180 -40,120Z"
+      fill="var(--color-moss, #3D5C35)"
+    />
+
+    <!-- Blob 2 — musgo suave, centro-derecha -->
+    <path
+      class="blob blob-2"
+      d="M580,80 C620,50 690,62 710,105 C730,148 712,210 678,230
+         C644,250 588,240 568,205 C548,170 540,110 580,80Z"
+      fill="var(--color-bg-stone, #C8D9C2)"
+    />
+
+    <!-- Blob 3 — arcilla, centro flotando -->
+    <path
+      class="blob blob-3"
+      d="M310,200 C345,172 400,178 418,212 C436,246 420,300 390,315
+         C360,330 308,320 292,290 C276,260 275,228 310,200Z"
+      fill="var(--color-clay, #9C6B4E)"
+    />
+
+    <!-- Blob 4 — outline musgo, esquina inf-der -->
+    <path
+      class="blob blob-4"
+      d="M640,340 C680,308 750,316 768,358 C786,400 762,450 728,462
+         C694,474 640,460 622,428 C604,396 600,372 640,340Z"
+      fill="none"
+      stroke="var(--color-moss, #3D5C35)"
+      stroke-width="1.5"
+    />
+
+    <!-- Blob 5 — lino oscuro, inf-izq -->
+    <path
+      class="blob blob-5"
+      d="M-20,380 C20,348 90,352 105,390 C120,428 95,475 58,482
+         C21,489 -25,470 -38,438 C-51,406 -60,412 -20,380Z"
+      fill="var(--color-bg-muted, #E2DDD1)"
+    />
+  </svg>
+</div>
+
+<style>
+  .about-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .about-shapes-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .blob { opacity: 0; }
+
+  .blob-1 {
+    --final-opacity: 0.10;
+    animation:
+      blob-in 1000ms 100ms cubic-bezier(0.25, 0, 0, 1) forwards,
+      float-slow 20s 1200ms ease-in-out infinite;
+  }
+
+  .blob-2 {
+    --final-opacity: 0.50;
+    animation:
+      blob-in 1000ms 200ms cubic-bezier(0.25, 0, 0, 1) forwards,
+      float-slow 24s 1400ms ease-in-out infinite reverse;
+  }
+
+  .blob-3 {
+    --final-opacity: 0.14;
+    animation:
+      blob-in 1000ms 320ms cubic-bezier(0.25, 0, 0, 1) forwards,
+      float-med 18s 1600ms ease-in-out infinite;
+  }
+
+  .blob-4 {
+    --final-opacity: 0.20;
+    animation:
+      blob-in 1000ms 440ms cubic-bezier(0.25, 0, 0, 1) forwards,
+      float-slow 28s 1800ms ease-in-out infinite reverse;
+  }
+
+  .blob-5 {
+    --final-opacity: 0.60;
+    animation: blob-in 1000ms 540ms cubic-bezier(0.25, 0, 0, 1) forwards;
+  }
+
+  @keyframes blob-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px) scale(0.96);
+    }
+    to {
+      opacity: var(--final-opacity, 0.15);
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    33%       { transform: translateY(-10px) translateX(4px); }
+    66%       { transform: translateY(-4px) translateX(-6px); }
+  }
+
+  @keyframes float-med {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-14px); }
+  }
+
+  /* ── Accesibilidad ── */
+  @media (prefers-reduced-motion: reduce) {
+    .blob {
+      animation: none !important;
+      opacity: var(--final-opacity, 0.15) !important;
+      transform: none !important;
+    }
+  }
+</style>

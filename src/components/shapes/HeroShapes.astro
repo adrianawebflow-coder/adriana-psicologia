@@ -1,0 +1,134 @@
+---
+/**
+ * HeroShapes.astro
+ * Formas abstractas decorativas para la sección Hero.
+ * Uso: <HeroShapes /> dentro de la sección hero, como primer hijo.
+ *
+ * La sección padre necesita:
+ *   position: relative;
+ *   overflow: hidden;
+ */
+---
+
+<div class="hero-shapes" aria-hidden="true">
+  <!-- Círculo grande: esquina superior derecha, sangra fuera -->
+  <div class="shape shape-circle-lg"></div>
+  <!-- Círculo mediano: esquina inferior izquierda -->
+  <div class="shape shape-circle-md"></div>
+  <!-- Círculo outline: flotando centro-izquierda -->
+  <div class="shape shape-circle-outline"></div>
+  <!-- Punto acento arcilla -->
+  <div class="shape shape-dot-clay"></div>
+  <!-- Punto acento musgo pequeño -->
+  <div class="shape shape-dot-moss"></div>
+</div>
+
+<style>
+  .hero-shapes {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  /* ── Base de todas las formas ── */
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+  }
+
+  /* ── Círculo grande sup-der ── */
+  .shape-circle-lg {
+    width: clamp(280px, 40vw, 520px);
+    height: clamp(280px, 40vw, 520px);
+    top: calc(-1 * clamp(140px, 20vw, 260px));
+    right: calc(-1 * clamp(100px, 12vw, 180px));
+    background: var(--color-bg-stone, #C8D9C2);
+    --final-opacity: 0.38;
+    animation:
+      shape-in 900ms 80ms cubic-bezier(0.25, 0, 0, 1) forwards,
+      float-a 14s 1000ms ease-in-out infinite;
+  }
+
+  /* ── Círculo mediano inf-izq ── */
+  .shape-circle-md {
+    width: clamp(120px, 18vw, 240px);
+    height: clamp(120px, 18vw, 240px);
+    bottom: calc(-1 * clamp(60px, 9vw, 120px));
+    left: calc(-1 * clamp(40px, 6vw, 80px));
+    background: var(--color-moss, #3D5C35);
+    --final-opacity: 0.07;
+    animation: shape-in 900ms 180ms cubic-bezier(0.25, 0, 0, 1) forwards;
+  }
+
+  /* ── Círculo outline ── */
+  .shape-circle-outline {
+    width: clamp(80px, 12vw, 160px);
+    height: clamp(80px, 12vw, 160px);
+    top: 35%;
+    left: 8%;
+    background: transparent;
+    border: 1.5px solid var(--color-moss, #3D5C35);
+    --final-opacity: 0.18;
+    animation:
+      shape-in 900ms 280ms cubic-bezier(0.25, 0, 0, 1) forwards,
+      float-b 18s 1200ms ease-in-out infinite;
+  }
+
+  /* ── Punto arcilla ── */
+  .shape-dot-clay {
+    width: clamp(28px, 4vw, 52px);
+    height: clamp(28px, 4vw, 52px);
+    bottom: 28%;
+    right: 18%;
+    background: var(--color-clay, #9C6B4E);
+    --final-opacity: 0.20;
+    animation:
+      shape-in 900ms 360ms cubic-bezier(0.25, 0, 0, 1) forwards,
+      float-a 22s 1500ms ease-in-out infinite;
+  }
+
+  /* ── Punto musgo ── */
+  .shape-dot-moss {
+    width: clamp(14px, 2vw, 24px);
+    height: clamp(14px, 2vw, 24px);
+    top: 20%;
+    right: 28%;
+    background: var(--color-moss, #3D5C35);
+    --final-opacity: 0.22;
+    animation: shape-in 900ms 440ms cubic-bezier(0.25, 0, 0, 1) forwards;
+  }
+
+  /* ── Keyframe compartido ── */
+  @keyframes shape-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: var(--final-opacity, 0.2);
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float-a {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-12px); }
+  }
+
+  @keyframes float-b {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50%       { transform: translateY(-8px) rotate(3deg); }
+  }
+
+  /* ── Accesibilidad: sin movimiento ── */
+  @media (prefers-reduced-motion: reduce) {
+    .shape {
+      animation: none !important;
+      opacity: var(--final-opacity, 0.2) !important;
+      transform: none !important;
+    }
+  }
+</style>

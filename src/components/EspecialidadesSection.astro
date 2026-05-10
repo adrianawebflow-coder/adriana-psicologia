@@ -1,4 +1,5 @@
 ---
+import CardShapes from './shapes/CardShapes.astro';
 const especialidades = [
   {
     titulo: "Ansiedad y estrés",
@@ -34,6 +35,7 @@ const especialidades = [
 ---
 
 <section class="especialidades">
+  <CardShapes accent="moss" />
   <div class="especialidades-inner">
 
     <header class="especialidades-header reveal">
@@ -59,12 +61,16 @@ const especialidades = [
 
 <style>
 .especialidades {
+  position: relative;
+  overflow: hidden;
   background: var(--color-bg-soft);
   padding-top: var(--section-pad-y);
   padding-bottom: var(--section-pad-y);
 }
 
 .especialidades-inner {
+  position: relative;
+  z-index: 1;
   max-width: var(--max-width);
   margin: 0 auto;
   padding-left: var(--gutter);
