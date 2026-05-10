@@ -4,11 +4,12 @@
 <section class="modalidad" id="como">
   <div class="container">
     <h2 class="section-title reveal">Modalidad</h2>
+
     <div class="mod-grid">
 
       <div class="mod-card mod-presencial reveal">
         <div class="mod-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/>
             <circle cx="12" cy="10" r="2.6"/>
           </svg>
@@ -21,7 +22,7 @@
 
       <div class="mod-card mod-online reveal">
         <div class="mod-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2.5" y="4" width="19" height="13" rx="1.5"/>
             <path d="M8 21h8M12 17v4"/>
           </svg>
@@ -43,7 +44,7 @@
 }
 
 .container {
-  max-width: 1100px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
@@ -52,29 +53,37 @@
   font-family: var(--font-serif);
   font-size: var(--fs-h2);
   font-weight: var(--fw-semi);
-  color: var(--color-text-primary);
+  color: var(--color-moss);
   letter-spacing: var(--ls-tight);
   margin: 0 0 var(--space-6);
 }
 
+@media (min-width: 880px) {
+  .section-title {
+    padding-inline: calc(100% / 12);
+  }
+}
+
+/* ── Grid ── */
 .mod-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-5);
+  gap: 0;
+  /* Full-bleed en mobile: cancela el padding del container */
+  margin-inline: calc(-1 * var(--gutter));
 }
 
 /* ── Card base ── */
 .mod-card {
   position: relative;
-  min-height: 280px;
-  border-radius: 16px;
+  min-height: 420px;
+  border-radius: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   transition: transform 200ms ease;
 }
-.mod-card:hover { transform: translateY(-3px); }
 
 /* ── Centered icon ── */
 .mod-icon {
@@ -82,22 +91,22 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: #fff;
   display: grid;
   place-items: center;
   color: var(--color-moss);
-  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+  box-shadow: 0 4px 16px rgba(0,0,0,.15);
 }
 
 /* ── Glass label at bottom ── */
 .mod-label {
-  margin: 14px;
-  padding: 14px 16px;
-  border-radius: 10px;
-  background: rgba(30,38,28,.65);
+  margin: 16px;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: rgba(30,38,28,.68);
   color: #fff;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -105,19 +114,18 @@
 }
 .mod-label h3 {
   font-family: var(--font-sans);
-  font-size: var(--fs-h4);
+  font-size: var(--fs-h3);
   font-weight: var(--fw-semi);
   color: #fff;
   margin: 0 0 var(--space-2);
 }
 .mod-label p {
   font-family: var(--font-sans);
-  font-size: var(--fs-label);
-  line-height: 1.4;
+  font-size: var(--fs-body-sm);
+  line-height: 1.45;
   margin: 0;
+  color: #fff;  
   opacity: .92;
-  max-width: 30ch;
-  margin-inline: auto;
 }
 
 /* ── Card variants ── */
@@ -125,22 +133,24 @@
   background: #cfd1cf center / cover no-repeat;
   background-image: url('/images/consulta-presencial.webp');
 }
-
 .mod-online {
   background: var(--color-bg-muted) center / cover no-repeat;
   background-image: url('/images/modalidad.png');
 }
 
+/* ── Desktop ── */
 @media (min-width: 880px) {
-  .modalidad {
-    padding: var(--section-pad-y) 0;
-  }
   .mod-grid {
     grid-template-columns: 1fr 1fr;
-    gap: var(--col-gap);
+    gap: 40px;
+    /* 10 de 12 columnas: 1 col de margen a cada lado */
+    margin-inline: calc(100% / 12);
   }
   .mod-card {
-    min-height: 340px;
+    min-height: 380px;
+    border-radius: 16px;
   }
+  .mod-card:hover { transform: translateY(-3px); }
+  .mod-label h3 { font-size: var(--fs-h4); }
 }
 </style>

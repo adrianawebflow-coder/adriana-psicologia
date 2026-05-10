@@ -61,7 +61,7 @@ const especialidades = [
 }
 
 .container {
-  max-width: 1100px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
@@ -135,7 +135,7 @@ const especialidades = [
 }
 
 .esp-desc {
-  background: var(--color-bg-base);
+  background: #FAF9F5;
   border: 1px solid var(--color-clay-soft);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
@@ -143,8 +143,8 @@ const especialidades = [
   font-size: var(--fs-body-sm);
   line-height: var(--lh-body);
   color: var(--color-text-primary);
-  max-width: 380px;
   box-shadow: var(--shadow-sm);
+  flex: 1;
 }
 
 /* ── Quién soy ── */
@@ -184,7 +184,6 @@ const especialidades = [
   line-height: var(--lh-body);
   color: var(--color-text-secondary);
   margin: 0;
-  max-width: 38ch;
 }
 
 .btn {
@@ -212,10 +211,12 @@ const especialidades = [
     padding: var(--section-pad-y) 0;
   }
   .esp-grid {
-    grid-template-columns: 1.1fr 0.9fr;
-    column-gap: calc(var(--col-gap) * 4);  /* 80px = 4 gutters de separación entre columnas principales */
-    row-gap: var(--space-16);
+    /* 70 / 30 dentro de las 10 columnas centrales del grid de 12 */
+    grid-template-columns: 7fr 3fr;
+    column-gap: 80px;
     align-items: start;
+    /* 1 columna de margen a cada lado → ocupa 10 de las 12 columnas */
+    margin-inline: calc(100% / 12);
   }
   .esp-row {
     flex-direction: row;
