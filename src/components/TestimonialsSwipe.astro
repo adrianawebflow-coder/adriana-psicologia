@@ -7,30 +7,35 @@ const testimonials = [
     name: "Sandra",
     detail: "Más de 2 años en terapia",
     initials: "S",
+    avatarColor: "var(--color-clay)",        /* terracota */
   },
   {
     quote: "Sabe acompañarte en cada situación por muy compleja que sea. Entiende lo que quieres decir incluso antes de acabar las frases.",
     name: "Camila",
     detail: "Más de 2 años en terapia",
     initials: "C",
+    avatarColor: "var(--color-moss-hover)",  /* verde oscuro */
   },
   {
     quote: "Ha sido un apoyo clave en mi recuperación. Destaco su escucha, apoyo incondicional, tacto, humanidad, empatía y cariño.",
     name: "Laura",
     detail: "Años en terapia",
     initials: "L",
+    avatarColor: "var(--color-clay-hover)",  /* terracota oscura */
   },
   {
     quote: "Mi pareja y yo empezamos a acudir a terapia con Adriana en mayo, y encontrarla y confiar en ella ha sido la mejor decisión.",
     name: "Adela Macarro",
     detail: "Terapia de pareja",
     initials: "AM",
+    avatarColor: "var(--color-moss)",        /* verde musgo */
   },
   {
     quote: "Voy a terapia con Adriana desde Octubre de 2024. Es una gran profesional, con ella volví a confiar en la psicología y en la terapia.",
     name: "Natalisestas",
     detail: "Paciente desde 2024",
     initials: "N",
+    avatarColor: "var(--color-bg-dark)",     /* casi negro */
   },
 ];
 ---
@@ -69,7 +74,7 @@ const testimonials = [
             <div class="tsw-stars" aria-label="5 estrellas">★★★★★</div>
             <blockquote class="tsw-quote">&ldquo;{t.quote}&rdquo;</blockquote>
             <footer class="tsw-author">
-              <div class="tsw-avatar" aria-hidden="true">{t.initials}</div>
+              <div class="tsw-avatar" aria-hidden="true" style={`background:${t.avatarColor}`}>{t.initials}</div>
               <div class="tsw-author-text">
                 <span class="tsw-name">{t.name}</span>
                 <span class="tsw-detail">{t.detail}</span>
@@ -103,7 +108,7 @@ const testimonials = [
 /* ── Section ── */
 .tsw-section {
   position: relative;
-  background: var(--color-bg-dark);
+  background: var(--color-bg-soft);
   padding-top: var(--section-pad-top);
   padding-bottom: var(--section-pad-bottom);
   overflow: hidden;
@@ -121,7 +126,7 @@ const testimonials = [
   font-family: var(--font-serif);
   font-size: var(--fs-h2);
   font-weight: var(--fw-semi);
-  color: var(--color-text-inverse);
+  color: var(--color-text-primary);
   letter-spacing: var(--ls-tight);
   margin: 0 0 var(--space-10);
   text-align: center;
@@ -152,7 +157,7 @@ const testimonials = [
   width: calc(100% - 48px);
   max-width: 480px;
   padding: var(--space-8);
-  background: var(--color-bg-dark);
+  background: var(--color-moss);
   border: 1px solid rgba(245,242,234,0.07);
   border-radius: 16px;
   will-change: transform, opacity;
@@ -192,7 +197,7 @@ const testimonials = [
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--color-moss);
+  /* background set per-testimonial via inline style */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -301,7 +306,6 @@ const testimonials = [
 
 <script>
 // @ts-nocheck — vanilla browser JS, strict TS types no aplican aquí
-import { animate, spring } from 'motion';
 
 (function () {
   /* ─── Constants ─────────────────────────────────── */
@@ -407,14 +411,8 @@ import { animate, spring } from 'motion';
   function onPtrDown(e) {
     if (isAnimating || e.button !== 0) return;
 
-    // Cancel any running WAAPI animations on the front card (Motion One spring
-    // may still be active) and clear any CSS transition left by the hover tilt.
-    // Without this, style.transform changes during drag are overridden.
+    // Clear any CSS transition so drag applyDrag() is instant (not eased).
     const fc = cards[activeIdx];
-    fc.getAnimations().forEach(anim => {
-      try { anim.commitStyles(); } catch (_) {}
-      anim.cancel();
-    });
     fc.style.transition = '';
     tiltCard = null;
 
@@ -514,19 +512,30 @@ import { animate, spring } from 'motion';
     dragX = 0;
   }
 
+  /* ─── CSS transition helpers ────────────────────── */
+  // Pure CSS transitions — avoids WAAPI (Motion One) fill-mode conflicts
+  // that prevent style.transform from being overridable during next drag.
+  const T_EXIT    = 'transform 380ms cubic-bezier(0.32,0,0.67,0), opacity 380ms cubic-bezier(0.32,0,0.67,0)';
+  const T_PROMOTE = 'transform 420ms cubic-bezier(0.22,1,0.36,1), opacity 420ms ease-out, filter 420ms ease-out';
+  const T_ENTER   = 'transform 420ms cubic-bezier(0.34,1.56,0.64,1), opacity 400ms ease-out, filter 400ms ease-out';
+  const T_SNAP    = 'transform 480ms cubic-bezier(0.34,1.56,0.64,1), opacity 480ms ease-out, filter 480ms ease-out';
+
+  function clearTx(el) { el.style.transition = 'none'; }
+  function reflow(el)  { void el.offsetHeight; }          // force layout flush
+
   /* ─── Commit Swipe ──────────────────────────────── */
-  async function commitSwipe(dir) {
+  function commitSwipe(dir) {
     isAnimating = true;
 
-    const flyX = (dir === 'right' ? 1 : -1) * window.innerWidth * 1.2;
-    const flyR = (dir === 'right' ? 14 : -14) + 'deg';
+    const flyX = `${(dir === 'right' ? 1 : -1) * 120}vw`;
+    const flyR = dir === 'right' ? '14deg' : '-14deg';
 
     const iFC  = activeIdx;
     const iMC  = wrap(activeIdx + 1);
     const iBK  = wrap(activeIdx + 2);
     const iNBK = wrap(activeIdx + 3);
 
-    // Advance state immediately (dots update)
+    // Advance state immediately
     activeIdx = iMC;
     updateDots(activeIdx);
     announce(activeIdx);
@@ -536,107 +545,96 @@ import { animate, spring } from 'motion';
     const bk  = cards[iBK];
     const nbk = cards[iNBK];
 
-    // Snap new-back card to entering position instantly
-    nbk.style.transition  = 'none';
-    nbk.style.transform   = 'translateX(0px) translateY(-30px) scale(0.88)';
-    nbk.style.opacity     = '0';
-    nbk.style.filter      = '';
-    nbk.style.zIndex      = '1';
+    // Snap entering-back card to start position with NO transition
+    clearTx(nbk);
+    nbk.style.transform     = 'translateX(0px) translateY(-30px) scale(0.88)';
+    nbk.style.opacity       = '0';
+    nbk.style.filter        = '';
+    nbk.style.zIndex        = '1';
     nbk.style.pointerEvents = 'none';
     nbk.setAttribute('aria-hidden', 'true');
 
-    // ① Front → flies out
-    animate(fc,
-      {
-        transform: [`translateX(${dragX || 0}px) translateY(0px) rotate(0deg) scale(1)`,
-                    `translateX(${flyX}px) translateY(0px) rotate(${flyR}) scale(1)`],
-        opacity: [1, 0],
-      },
-      { duration: 0.38, easing: [0.32, 0, 0.67, 0] }
-    );
+    // Force reflow so the browser registers the start state before transitioning
+    reflow(fc); reflow(mc); reflow(bk); reflow(nbk);
+
+    // ① Front flies out
+    fc.style.zIndex    = '4';
+    fc.style.transition = T_EXIT;
+    fc.style.transform = `translateX(${flyX}) translateY(0px) rotate(${flyR}) scale(1)`;
+    fc.style.opacity   = '0';
 
     // ② Middle → Front
-    animate(mc,
-      {
-        transform: 'translateX(0px) translateY(0px) scale(1)',
-        opacity: 1,
-        filter: 'blur(0px)',
-      },
-      { duration: 0.42, easing: spring({ stiffness: 260, damping: 24 }) }
-    );
+    mc.style.zIndex     = '3';
+    mc.style.transition = T_PROMOTE;
+    mc.style.transform  = 'translateX(0px) translateY(0px) scale(1)';
+    mc.style.opacity    = '1';
+    mc.style.filter     = 'blur(0px)';
 
-    // ③ Back → Middle
-    animate(bk,
-      {
-        transform: 'translateX(0px) translateY(-12px) scale(0.96)',
-        opacity: 0.75,
-        filter: 'blur(1px)',
-      },
-      { duration: 0.42, delay: 0.04, easing: spring({ stiffness: 260, damping: 24 }) }
-    );
+    // ③ Back → Middle (40ms delay via transition-delay)
+    bk.style.zIndex     = '2';
+    bk.style.transition = `transform 420ms 40ms cubic-bezier(0.22,1,0.36,1), opacity 420ms 40ms ease-out, filter 420ms 40ms ease-out`;
+    bk.style.transform  = 'translateX(0px) translateY(-12px) scale(0.96)';
+    bk.style.opacity    = '0.75';
+    bk.style.filter     = 'blur(1px)';
 
-    // ④ New Back enters (after 80ms head-start)
+    // ④ New back enters (80ms later so it appears after the stack has moved)
     setTimeout(() => {
-      nbk.style.transition = '';
-      animate(nbk,
-        {
-          transform: 'translateX(0px) translateY(-22px) scale(0.92)',
-          opacity: 0.45,
-          filter: 'blur(2px)',
-        },
-        { duration: 0.42, easing: [0.34, 1.56, 0.64, 1] }
-      );
+      nbk.style.transition = T_ENTER;
+      nbk.style.transform  = 'translateX(0px) translateY(-22px) scale(0.92)';
+      nbk.style.opacity    = '0.45';
+      nbk.style.filter     = 'blur(2px)';
     }, 80);
 
-    // Clean up after all animations finish
+    // Cleanup: clear all transitions so next drag isn't throttled by CSS
     setTimeout(() => {
-      // Hide old front
-      applyNow(fc, { ...STATES.hidden });
-      fc.style.filter = '';
+      // Hide old front, no transition
+      clearTx(fc);
+      fc.style.transform     = 'translateX(0px) translateY(-30px) scale(0.88)';
+      fc.style.opacity       = '0';
+      fc.style.filter        = '';
+      fc.style.zIndex        = '0';
+      fc.style.pointerEvents = 'none';
+      fc.setAttribute('aria-hidden', 'true');
 
-      // Commit and cancel any Motion One WAAPI animations still running on
-      // the new front card (mc) so that drag style changes aren't overridden.
-      mc.getAnimations().forEach(anim => {
-        try { anim.commitStyles(); } catch (_) {}
-        anim.cancel();
-      });
-
-      // Restore all pointer-events and z-indices
+      // Clear transitions on every card so drag applyDrag() runs instantly
       cards.forEach((c, i) => {
+        c.style.transition    = '';
         const st = STATES[stateFor(i)];
-        c.style.zIndex       = st.z;
+        c.style.zIndex        = st.z;
         c.style.pointerEvents = st.pe ? 'auto' : 'none';
+        c.setAttribute('aria-hidden', st.pe ? 'false' : 'true');
       });
 
       updateHeight();
       isAnimating = false;
       scheduleResume();
-    }, 460);
+    }, 480);
   }
 
   /* ─── Snap Back ─────────────────────────────────── */
   function snapBack() {
     isAnimating = true;
 
-    animate(cards[activeIdx],
-      {
-        transform: 'translateX(0px) translateY(0px) rotate(0deg) scale(1)',
-        boxShadow: STATES.front.shadow,
-      },
-      { duration: 0.5, easing: spring({ stiffness: 300, damping: 28 }) }
-    );
+    const fc = cards[activeIdx];
+    fc.style.transition = T_SNAP;
+    fc.style.transform  = 'translateX(0px) translateY(0px) rotate(0deg) scale(1)';
+    fc.style.boxShadow  = STATES.front.shadow;
 
-    animate(cards[wrap(activeIdx + 1)],
-      { transform: 'translateX(0px) translateY(-12px) scale(0.96)', opacity: 0.75, filter: 'blur(1px)' },
-      { duration: 0.4, easing: spring({ stiffness: 280, damping: 26 }) }
-    );
+    const mc = cards[wrap(activeIdx + 1)];
+    mc.style.transition = T_SNAP;
+    mc.style.transform  = 'translateX(0px) translateY(-12px) scale(0.96)';
+    mc.style.opacity    = '0.75';
+    mc.style.filter     = 'blur(1px)';
 
-    animate(cards[wrap(activeIdx + 2)],
-      { transform: 'translateX(0px) translateY(-22px) scale(0.92)', opacity: 0.45, filter: 'blur(2px)' },
-      { duration: 0.4, easing: spring({ stiffness: 280, damping: 26 }) }
-    );
+    const bc = cards[wrap(activeIdx + 2)];
+    bc.style.transition = T_SNAP;
+    bc.style.transform  = 'translateX(0px) translateY(-22px) scale(0.92)';
+    bc.style.opacity    = '0.45';
+    bc.style.filter     = 'blur(2px)';
 
     setTimeout(() => {
+      // Clear transitions before next drag
+      cards.forEach(c => { c.style.transition = ''; });
       isAnimating = false;
       scheduleResume();
     }, 500);
