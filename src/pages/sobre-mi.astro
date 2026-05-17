@@ -11,9 +11,9 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
   <!-- ══ HERO: foto + tarjeta "Mi historia" superpuesta ════════ -->
   <section class="hero">
     <div class="hero-wrap">
-      <div class="hero-photo" role="img" aria-label="Adriana en su despacho"></div>
+      <div class="hero-photo sm-hero-photo" role="img" aria-label="Adriana en su despacho"></div>
 
-      <article class="hero-card">
+      <article class="hero-card sm-hero-card">
         <h1 transition:name="hero-title">Mi historia</h1>
         <p id="historiaP" class="collapsed">
           Actualmente desarrollo mi labor profesional atendiendo a adolescentes,
@@ -43,17 +43,17 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
 
         <!-- Enfoque -->
         <div class="enfoque-col">
-          <h2 class="section-title">Mi enfoque</h2>
+          <h2 class="section-title reveal">Mi enfoque</h2>
           <div class="enfoque-list">
-            <article class="enfoque-card">
+            <article class="enfoque-card reveal">
               <h3>Sin juicios</h3>
               <p>Tu historia es tuya. Yo solo te ayudo a mirarla desde otro ángulo.</p>
             </article>
-            <article class="enfoque-card">
+            <article class="enfoque-card reveal">
               <h3>A tu ritmo</h3>
               <p>Cada proceso terapéutico es diferente. No hay prisa ni plazos fijos.</p>
             </article>
-            <article class="enfoque-card">
+            <article class="enfoque-card reveal">
               <h3>Basado en evidencia</h3>
               <p>Terapia cognitivo-conductual y otras técnicas con respaldo científico.</p>
             </article>
@@ -62,8 +62,8 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
 
         <!-- Experiencia -->
         <div class="exp-col">
-          <h2 class="section-title">Mi experiencia</h2>
-          <div class="exp-timeline">
+          <h2 class="section-title reveal">Mi experiencia</h2>
+          <div class="exp-timeline reveal">
             <div class="rail" aria-hidden="true"></div>
             <div class="exp-blocks">
               <div>
@@ -84,7 +84,7 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
               </div>
             </div>
           </div>
-          <div class="exp-cta">
+          <div class="exp-cta reveal">
             <a
               class="btn btn-primary"
               href="https://calendly.com/adrianapsicologia/15-20min"
@@ -108,7 +108,7 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
     <div class="container">
       <div class="colab-grid">
 
-        <div class="colab-text">
+        <div class="colab-text reveal">
           <h2 class="section-title">Colaboraciones</h2>
           <p>
             En ocasiones se recomienda el abordaje multidisciplinar. Actualmente
@@ -116,7 +116,7 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
           </p>
         </div>
 
-        <div class="person-stack">
+        <div class="person-stack reveal">
           <article class="person-card">
             <div class="person-avatar" role="img" aria-label="Foto de Belén Silveira"></div>
             <div class="person-id">
@@ -151,6 +151,33 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
 </Layout>
 
 <style>
+/* ══ Interacción 1 — Fade-in escalonado al cargar ═════════════
+   La foto entra primero; la tarjeta llega 200ms después.
+   Usamos clases únicas (sm-hero-*) para no interferir con el
+   transition:name="hero-title" del h1 (View Transitions API).
+══════════════════════════════════════════════════════════════ */
+@keyframes sm-fadein {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sm-hero-photo {
+  animation: sm-fadein 600ms cubic-bezier(0.25, 0, 0, 1) both;
+}
+
+.sm-hero-card {
+  animation: sm-fadein 600ms 200ms cubic-bezier(0.25, 0, 0, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sm-hero-photo,
+  .sm-hero-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ── Shared ── */
 .container {
   max-width: 1100px;
