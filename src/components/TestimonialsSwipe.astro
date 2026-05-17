@@ -1,0 +1,788 @@
+---
+import TestimonialsShapes from './shapes/TestimonialsShapes.astro';
+
+const testimonials = [
+  {
+    quote: "Adriana es ambas cosas para mí: el amigo que te apoya y la luz que te muestra el camino. Es increíble que alguien sea a la vez tan profesional, empática y humana.",
+    name: "Sandra",
+    detail: "Más de 2 años en terapia",
+    initials: "S",
+  },
+  {
+    quote: "Sabe acompañarte en cada situación por muy compleja que sea. Entiende lo que quieres decir incluso antes de acabar las frases.",
+    name: "Camila",
+    detail: "Más de 2 años en terapia",
+    initials: "C",
+  },
+  {
+    quote: "Ha sido un apoyo clave en mi recuperación. Destaco su escucha, apoyo incondicional, tacto, humanidad, empatía y cariño.",
+    name: "Laura",
+    detail: "Años en terapia",
+    initials: "L",
+  },
+  {
+    quote: "Mi pareja y yo empezamos a acudir a terapia con Adriana en mayo, y encontrarla y confiar en ella ha sido la mejor decisión.",
+    name: "Adela Macarro",
+    detail: "Terapia de pareja",
+    initials: "AM",
+  },
+  {
+    quote: "Voy a terapia con Adriana desde Octubre de 2024. Es una gran profesional, con ella volví a confiar en la psicología y en la terapia.",
+    name: "Natalisestas",
+    detail: "Paciente desde 2024",
+    initials: "N",
+  },
+];
+---
+
+<section
+  class="tsw-section"
+  role="region"
+  aria-label="Testimonios de pacientes"
+  aria-roledescription="carrusel"
+  id="testimonios"
+>
+  <TestimonialsShapes />
+
+  <!-- Visually-hidden live region -->
+  <div
+    id="tswLive"
+    aria-live="polite"
+    aria-atomic="true"
+    class="tsw-live"
+  ></div>
+
+  <div class="tsw-container">
+    <h2 class="tsw-heading reveal">Lo que dicen mis pacientes</h2>
+
+    <!-- Card stack -->
+    <div class="tsw-stack-outer" id="tswOuter">
+      <div class="tsw-stack" id="tswStack" style="perspective: 1000px">
+        {testimonials.map((t, i) => (
+          <article
+            class="tsw-card"
+            data-idx={String(i)}
+            role="group"
+            aria-label={`Testimonio de ${t.name}`}
+            aria-hidden={i > 0 ? 'true' : 'false'}
+          >
+            <div class="tsw-stars" aria-label="5 estrellas">★★★★★</div>
+            <blockquote class="tsw-quote">&ldquo;{t.quote}&rdquo;</blockquote>
+            <footer class="tsw-author">
+              <div class="tsw-avatar" aria-hidden="true">{t.initials}</div>
+              <div class="tsw-author-text">
+                <span class="tsw-name">{t.name}</span>
+                <span class="tsw-detail">{t.detail}</span>
+              </div>
+            </footer>
+            <div class="tsw-rule" aria-hidden="true"></div>
+            <span class="tsw-google" aria-hidden="true">
+              Reseña verificada de Google →
+            </span>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- Dot navigation -->
+    <div class="tsw-dots" role="tablist" aria-label="Selector de testimonio">
+      {testimonials.map((t, i) => (
+        <button
+          class={`tsw-dot${i === 0 ? ' active' : ''}`}
+          role="tab"
+          aria-selected={String(i === 0)}
+          aria-label={`Testimonio ${i + 1} de ${testimonials.length}`}
+          data-idx={String(i)}
+        ></button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+/* ── Section ── */
+.tsw-section {
+  position: relative;
+  background: var(--color-bg-dark);
+  padding-top: var(--section-pad-top);
+  padding-bottom: var(--section-pad-bottom);
+  overflow: hidden;
+}
+
+.tsw-container {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.tsw-heading {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semi);
+  color: var(--color-text-inverse);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-10);
+  text-align: center;
+}
+
+/* ── Stack ── */
+.tsw-stack-outer {
+  cursor: grab;
+  user-select: none;
+  overflow: visible;
+}
+.tsw-stack-outer:active { cursor: grabbing; }
+
+.tsw-stack {
+  position: relative;
+  /* height set by JS */
+  min-height: 200px;
+  overflow: visible;
+}
+
+/* ── Card base ── */
+.tsw-card {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: calc(100% - 48px);
+  max-width: 480px;
+  padding: var(--space-8);
+  background: var(--color-bg-dark);
+  border: 1px solid rgba(245,242,234,0.07);
+  border-radius: 16px;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  user-select: none;
+  touch-action: pan-y;
+  box-sizing: border-box;
+}
+
+/* ── Card content ── */
+.tsw-stars {
+  display: block;
+  color: var(--color-gold);
+  letter-spacing: 3px;
+  font-size: 13px;
+  margin-bottom: var(--space-5);
+}
+
+.tsw-quote {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-light);
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  line-height: var(--lh-loose);
+  color: rgba(245,242,234,0.90);
+  margin: 0 0 var(--space-8);
+}
+
+.tsw-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tsw-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-moss);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.tsw-author-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tsw-name {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-text-inverse);
+}
+
+.tsw-detail {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 12px;
+  color: rgba(245,242,234,0.45);
+}
+
+.tsw-rule {
+  margin-top: var(--space-6);
+  border-top: 1px solid rgba(245,242,234,0.06);
+  padding-top: var(--space-5);
+}
+
+.tsw-google {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--color-moss-light);
+  opacity: 0.7;
+  letter-spacing: 0.04em;
+}
+
+/* ── Dots ── */
+.tsw-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--space-8);
+}
+
+.tsw-dot {
+  height: 6px;
+  width: 6px;
+  border-radius: 3px;
+  background: var(--color-moss-soft);
+  opacity: 0.35;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition:
+    width   300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 200ms ease,
+    background 200ms ease;
+}
+.tsw-dot.active {
+  width: 22px;
+  background: var(--color-moss);
+  opacity: 1;
+}
+.tsw-dot:hover:not(.active) { opacity: 0.6; }
+
+/* ── Focus ring ── */
+.tsw-stack-outer:focus-visible {
+  outline: 3px solid var(--color-moss);
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+/* ── Visually hidden live region ── */
+.tsw-live {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* ── Reduced motion: opacity-only crossfade ── */
+@media (prefers-reduced-motion: reduce) {
+  .tsw-card {
+    transition: opacity 200ms ease !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .tsw-card:not([data-state="front"]) {
+    pointer-events: none;
+  }
+  .tsw-dot { transition: none !important; }
+}
+</style>
+
+<script>
+import { animate, spring } from 'motion';
+
+(function () {
+  /* ─── Constants ─────────────────────────────────── */
+  const N                = 5;
+  const THRESHOLD_RATIO  = 0.38;
+  const VEL_THRESHOLD    = 0.5;     // px/ms
+  const AUTOPLAY_MS      = 6000;
+  const AUTOPLAY_RESUME_DELAY = 1000;
+
+  /* ─── Elements ──────────────────────────────────── */
+  const outer   = document.getElementById('tswOuter');
+  const stack   = document.getElementById('tswStack');
+  const liveEl  = document.getElementById('tswLive');
+  if (!outer || !stack) return;
+
+  const cards   = Array.from(stack.querySelectorAll('.tsw-card'));
+  const dotBtns = Array.from(document.querySelectorAll('.tsw-dot'));
+
+  /* ─── State ─────────────────────────────────────── */
+  let activeIdx   = 0;
+  let isAnimating = false;
+  let isDragging  = false;
+  let dragX       = 0;
+  let dragStartX  = 0;
+  let dragStartY  = 0;
+  let isHoriz     = null;   // null = undecided, true/false
+  let velBuf      = [];     // [{x, t}]
+  let rafId       = null;
+  let autoTimer   = null;
+  let resumeTimer = null;
+  let cardW       = 0;
+  let threshold   = 0;
+
+  /* ─── Reduced-motion flag ────────────────────────── */
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ─── Helpers ───────────────────────────────────── */
+  function wrap(i) { return ((i % N) + N) % N; }
+  function rel(i)  { return wrap(i - activeIdx); }
+
+  const STATES = {
+    front:  { y: 0,   s: 1,    o: 1,    blur: 0, z: 3, shadow: '0 24px 64px rgba(26,33,24,0.22)', pe: true  },
+    middle: { y: -12, s: 0.96, o: 0.75, blur: 1, z: 2, shadow: '0 12px 32px rgba(26,33,24,0.14)', pe: false },
+    back:   { y: -22, s: 0.92, o: 0.45, blur: 2, z: 1, shadow: '0 6px 16px rgba(26,33,24,0.08)',  pe: false },
+    hidden: { y: -30, s: 0.88, o: 0,    blur: 0, z: 0, shadow: 'none',                             pe: false },
+  };
+
+  function stateFor(cardIdx) {
+    const r = rel(cardIdx);
+    return r === 0 ? 'front' : r === 1 ? 'middle' : r === 2 ? 'back' : 'hidden';
+  }
+
+  function applyNow(el, p) {
+    el.style.transform    = `translateX(${p.x ?? 0}px) translateY(${p.y}px) scale(${p.s})`;
+    el.style.opacity      = p.o;
+    el.style.filter       = p.blur ? `blur(${p.blur}px)` : '';
+    el.style.boxShadow    = p.shadow;
+    el.style.zIndex       = p.z;
+    el.style.pointerEvents = p.pe ? 'auto' : 'none';
+    el.setAttribute('aria-hidden', p.pe ? 'false' : 'true');
+  }
+
+  function updateMeasurements() {
+    cardW     = cards[activeIdx].offsetWidth || 400;
+    threshold = cardW * THRESHOLD_RATIO;
+  }
+
+  function updateHeight() {
+    const front = cards[activeIdx];
+    if (front) stack.style.height = (front.offsetHeight + 22) + 'px';
+  }
+
+  function updateDots(idx) {
+    dotBtns.forEach((d, i) => {
+      const active = i === idx;
+      d.classList.toggle('active', active);
+      d.setAttribute('aria-selected', String(active));
+    });
+  }
+
+  function announce(idx) {
+    const c = cards[idx];
+    if (liveEl && c) {
+      const name = c.querySelector('.tsw-name')?.textContent ?? '';
+      liveEl.textContent = `Testimonio ${idx + 1} de ${N} — ${name}`;
+    }
+    cards.forEach((c, i) => c.setAttribute('aria-hidden', String(i !== idx)));
+  }
+
+  /* ─── Init ──────────────────────────────────────── */
+  function initAll() {
+    cards.forEach((c, i) => {
+      const st = STATES[stateFor(i)];
+      applyNow(c, st);
+    });
+    updateMeasurements();
+    updateHeight();
+    updateDots(0);
+    announce(0);
+  }
+
+  /* ─── Drag ──────────────────────────────────────── */
+  function onPtrDown(e) {
+    if (isAnimating || e.button !== 0) return;
+
+    isDragging  = true;
+    dragX       = 0;
+    dragStartX  = e.clientX;
+    dragStartY  = e.clientY;
+    isHoriz     = null;
+    velBuf      = [{ x: e.clientX, t: e.timeStamp }];
+
+    cards[activeIdx].setPointerCapture(e.pointerId);
+    document.body.style.cursor = 'grabbing';
+    stopAutoplay();
+  }
+
+  function onPtrMove(e) {
+    if (!isDragging) return;
+
+    const dx = e.clientX - dragStartX;
+    const dy = e.clientY - dragStartY;
+
+    // Determine axis once
+    if (isHoriz === null) {
+      if (Math.abs(dx) > 4 || Math.abs(dy) > 4) {
+        isHoriz = Math.abs(dx) >= Math.abs(dy);
+        if (isHoriz) cards[activeIdx].style.touchAction = 'none';
+      }
+      return;
+    }
+    if (!isHoriz) return;
+    e.preventDefault();
+
+    dragX = dx;
+
+    // Velocity buffer
+    velBuf.push({ x: e.clientX, t: e.timeStamp });
+    if (velBuf.length > 3) velBuf.shift();
+
+    // Throttle via RAF
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(applyDrag);
+  }
+
+  function applyDrag() {
+    const progress  = Math.min(Math.abs(dragX) / threshold, 1);
+    const rotation  = (dragX / cardW) * 8;
+    const scaleUp   = 1 + (Math.abs(dragX) / cardW) * 0.02;
+    const shadowA   = (0.22 + progress * 0.13).toFixed(3);
+
+    // Front card
+    const fc = cards[activeIdx];
+    fc.style.transform = `translateX(${dragX}px) translateY(0px) rotate(${rotation}deg) scale(${scaleUp})`;
+    fc.style.boxShadow = `0 ${Math.round(24 + progress * 8)}px ${Math.round(64 + progress * 16)}px rgba(26,33,24,${shadowA})`;
+
+    // Middle card
+    const mc = cards[wrap(activeIdx + 1)];
+    const mS = 0.96 + progress * 0.04;
+    const mO = 0.75 + progress * 0.25;
+    const mY = -12  + progress * 12;
+    mc.style.transform = `translateX(0px) translateY(${mY}px) scale(${mS})`;
+    mc.style.opacity   = String(mO);
+    mc.style.filter    = `blur(${(1 - progress).toFixed(2)}px)`;
+
+    // Back card
+    const bc = cards[wrap(activeIdx + 2)];
+    const bS = 0.92 + progress * 0.03;
+    const bO = 0.45 + progress * 0.20;
+    const bY = -22  + progress * 8;
+    bc.style.transform = `translateX(0px) translateY(${bY}px) scale(${bS})`;
+    bc.style.opacity   = String(bO);
+  }
+
+  function getVelocity() {
+    if (velBuf.length < 2) return 0;
+    const a = velBuf[0], b = velBuf[velBuf.length - 1];
+    const dt = b.t - a.t;
+    return dt > 0 ? Math.abs(b.x - a.x) / dt : 0;
+  }
+
+  function onPtrUp(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    if (rafId) cancelAnimationFrame(rafId);
+
+    document.body.style.cursor = '';
+    cards[activeIdx].style.touchAction = 'pan-y';
+
+    const velocity = getVelocity();
+    const commit   = Math.abs(dragX) > threshold || velocity > VEL_THRESHOLD;
+
+    if (commit && !isAnimating) {
+      commitSwipe(dragX > 0 ? 'right' : 'left');
+    } else {
+      snapBack();
+    }
+
+    dragX = 0;
+  }
+
+  /* ─── Commit Swipe ──────────────────────────────── */
+  async function commitSwipe(dir) {
+    isAnimating = true;
+
+    const flyX = (dir === 'right' ? 1 : -1) * window.innerWidth * 1.2;
+    const flyR = (dir === 'right' ? 14 : -14) + 'deg';
+
+    const iFC  = activeIdx;
+    const iMC  = wrap(activeIdx + 1);
+    const iBK  = wrap(activeIdx + 2);
+    const iNBK = wrap(activeIdx + 3);
+
+    // Advance state immediately (dots update)
+    activeIdx = iMC;
+    updateDots(activeIdx);
+    announce(activeIdx);
+
+    const fc  = cards[iFC];
+    const mc  = cards[iMC];
+    const bk  = cards[iBK];
+    const nbk = cards[iNBK];
+
+    // Snap new-back card to entering position instantly
+    nbk.style.transition  = 'none';
+    nbk.style.transform   = 'translateX(0px) translateY(-30px) scale(0.88)';
+    nbk.style.opacity     = '0';
+    nbk.style.filter      = '';
+    nbk.style.zIndex      = '1';
+    nbk.style.pointerEvents = 'none';
+    nbk.setAttribute('aria-hidden', 'true');
+
+    // ① Front → flies out
+    animate(fc,
+      {
+        transform: [`translateX(${dragX || 0}px) translateY(0px) rotate(0deg) scale(1)`,
+                    `translateX(${flyX}px) translateY(0px) rotate(${flyR}) scale(1)`],
+        opacity: [1, 0],
+      },
+      { duration: 0.38, easing: [0.32, 0, 0.67, 0] }
+    );
+
+    // ② Middle → Front
+    animate(mc,
+      {
+        transform: 'translateX(0px) translateY(0px) scale(1)',
+        opacity: 1,
+        filter: 'blur(0px)',
+      },
+      { duration: 0.42, easing: spring({ stiffness: 260, damping: 24 }) }
+    );
+
+    // ③ Back → Middle
+    animate(bk,
+      {
+        transform: 'translateX(0px) translateY(-12px) scale(0.96)',
+        opacity: 0.75,
+        filter: 'blur(1px)',
+      },
+      { duration: 0.42, delay: 0.04, easing: spring({ stiffness: 260, damping: 24 }) }
+    );
+
+    // ④ New Back enters (after 80ms head-start)
+    setTimeout(() => {
+      nbk.style.transition = '';
+      animate(nbk,
+        {
+          transform: 'translateX(0px) translateY(-22px) scale(0.92)',
+          opacity: 0.45,
+          filter: 'blur(2px)',
+        },
+        { duration: 0.42, easing: [0.34, 1.56, 0.64, 1] }
+      );
+    }, 80);
+
+    // Clean up after all animations finish
+    setTimeout(() => {
+      applyNow(fc,  { ...STATES.hidden });
+      fc.style.filter = '';
+
+      // Restore z-indices to match new state
+      cards.forEach((c, i) => {
+        const st = STATES[stateFor(i)];
+        c.style.zIndex      = st.z;
+        c.style.pointerEvents = st.pe ? 'auto' : 'none';
+      });
+
+      updateHeight();
+      isAnimating = false;
+      scheduleResume();
+    }, 460);
+  }
+
+  /* ─── Snap Back ─────────────────────────────────── */
+  function snapBack() {
+    isAnimating = true;
+
+    animate(cards[activeIdx],
+      {
+        transform: 'translateX(0px) translateY(0px) rotate(0deg) scale(1)',
+        boxShadow: STATES.front.shadow,
+      },
+      { duration: 0.5, easing: spring({ stiffness: 300, damping: 28 }) }
+    );
+
+    animate(cards[wrap(activeIdx + 1)],
+      { transform: 'translateX(0px) translateY(-12px) scale(0.96)', opacity: 0.75, filter: 'blur(1px)' },
+      { duration: 0.4, easing: spring({ stiffness: 280, damping: 26 }) }
+    );
+
+    animate(cards[wrap(activeIdx + 2)],
+      { transform: 'translateX(0px) translateY(-22px) scale(0.92)', opacity: 0.45, filter: 'blur(2px)' },
+      { duration: 0.4, easing: spring({ stiffness: 280, damping: 26 }) }
+    );
+
+    setTimeout(() => {
+      isAnimating = false;
+      scheduleResume();
+    }, 500);
+  }
+
+  /* ─── Programmatic advance (autoplay / keyboard) ── */
+  function advance() {
+    if (isAnimating) return;
+    dragX = 0;
+    commitSwipe('left');
+  }
+
+  function retreat() {
+    if (isAnimating) return;
+    dragX = 0;
+    commitSwipe('right');
+  }
+
+  function goTo(idx) {
+    if (idx === activeIdx || isAnimating) return;
+    if (wrap(idx - activeIdx) === 1) { advance(); return; }
+
+    // Instant jump for non-adjacent
+    isAnimating = true;
+    activeIdx   = idx;
+    cards.forEach((c, i) => {
+      applyNow(c, { ...STATES[stateFor(i)] });
+      c.style.filter = '';
+    });
+    updateDots(idx);
+    announce(idx);
+    updateHeight();
+    requestAnimationFrame(() => { isAnimating = false; });
+  }
+
+  /* ─── Hover tilt (desktop only) ─────────────────── */
+  function onMouseMove(e) {
+    if (isDragging || reduced) return;
+    const fc   = cards[activeIdx];
+    const rect = fc.getBoundingClientRect();
+    const cx   = rect.left + rect.width  / 2;
+    const cy   = rect.top  + rect.height / 2;
+    const rx   = ((e.clientY - cy) / rect.height) * -4; // rotateX
+    const ry   = ((e.clientX - cx) / rect.width)  *  4; // rotateY
+    fc.style.transform    = `translateX(0px) translateY(0px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(8px) scale(1)`;
+    fc.style.transition   = 'transform 180ms ease-out';
+  }
+
+  function onMouseLeave() {
+    const fc = cards[activeIdx];
+    fc.style.transition = 'transform 300ms ease-out';
+    fc.style.transform  = 'translateX(0px) translateY(0px) rotateX(0deg) rotateY(0deg) translateZ(0px) scale(1)';
+    setTimeout(() => { fc.style.transition = ''; }, 310);
+  }
+
+  /* ─── Autoplay ───────────────────────────────────── */
+  function startAutoplay(interval = AUTOPLAY_MS) {
+    stopAutoplay();
+    autoTimer = setInterval(advance, interval);
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoTimer);
+    autoTimer = null;
+    clearTimeout(resumeTimer);
+    resumeTimer = null;
+  }
+
+  function scheduleResume() {
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => startAutoplay(), AUTOPLAY_RESUME_DELAY);
+  }
+
+  /* ─── Reduced-motion: opacity crossfade only ──────── */
+  function initReduced() {
+    cards.forEach((c, i) => {
+      c.style.position = 'absolute';
+      c.style.bottom   = '0';
+      c.style.left = c.style.right = '0';
+      c.style.margin   = 'auto';
+      c.style.opacity  = i === 0 ? '1' : '0';
+      c.style.zIndex   = i === 0 ? '3' : '0';
+      c.style.pointerEvents = i === 0 ? 'auto' : 'none';
+    });
+    updateHeight();
+    updateDots(0);
+    announce(0);
+
+    startAutoplay(10000);
+
+    dotBtns.forEach((d, i) => {
+      d.addEventListener('click', () => {
+        cards[activeIdx].style.opacity = '0';
+        cards[activeIdx].style.pointerEvents = 'none';
+        cards[activeIdx].style.zIndex = '0';
+        cards[activeIdx].setAttribute('aria-hidden', 'true');
+        activeIdx = i;
+        cards[i].style.opacity = '1';
+        cards[i].style.pointerEvents = 'auto';
+        cards[i].style.zIndex = '3';
+        cards[i].setAttribute('aria-hidden', 'false');
+        updateDots(i);
+        announce(i);
+      });
+    });
+  }
+
+  /* ─── Wire Events ────────────────────────────────── */
+  function wireEvents() {
+    // Pointer drag
+    outer.addEventListener('pointerdown',   onPtrDown,  { passive: true });
+    outer.addEventListener('pointermove',   onPtrMove,  { passive: false });
+    outer.addEventListener('pointerup',     onPtrUp);
+    outer.addEventListener('pointercancel', onPtrUp);
+
+    // Hover tilt (desktop)
+    const matchDesktop = window.matchMedia('(pointer: fine)');
+    if (matchDesktop.matches) {
+      cards[activeIdx]?.addEventListener('mousemove', onMouseMove);
+      outer.addEventListener('mouseleave', onMouseLeave);
+    }
+
+    // Cursor
+    outer.addEventListener('pointerenter', () => { if (!isDragging) document.body.style.cursor = 'grab'; });
+    outer.addEventListener('pointerleave', () => { document.body.style.cursor = ''; });
+
+    // Autoplay pause/resume
+    outer.addEventListener('pointerenter', stopAutoplay);
+    outer.addEventListener('pointerleave', () => scheduleResume());
+    outer.addEventListener('focus', stopAutoplay, { capture: true });
+    outer.addEventListener('blur',  () => scheduleResume(), { capture: true });
+
+    // Dots
+    dotBtns.forEach((d, i) => {
+      d.addEventListener('click', () => { stopAutoplay(); goTo(i); scheduleResume(); });
+    });
+
+    // Keyboard
+    outer.setAttribute('tabindex', '0');
+    outer.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        stopAutoplay();
+        e.key === 'ArrowRight' ? advance() : retreat();
+        scheduleResume();
+      }
+      if (e.key === 'Escape') {
+        document.querySelector('.tsw-heading')?.focus();
+      }
+    });
+
+    // Resize
+    let rTimer = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(rTimer);
+      rTimer = setTimeout(() => { updateMeasurements(); updateHeight(); }, 150);
+    });
+  }
+
+  /* ─── Bootstrap ─────────────────────────────────── */
+  if (reduced) {
+    initReduced();
+  } else {
+    initAll();
+    wireEvents();
+    startAutoplay();
+  }
+})();
+</script>
