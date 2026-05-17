@@ -75,7 +75,9 @@ const {
 </style>
 
 <script>
-  (function () {
+  // astro:page-load fires on every navigation (including first load)
+  // so the IntersectionObserver is re-created for each page's .reveal elements.
+  document.addEventListener('astro:page-load', () => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const elements = Array.from(document.querySelectorAll('.reveal'));
 
@@ -97,5 +99,5 @@ const {
     );
 
     elements.forEach(el => observer.observe(el));
-  })();
+  });
 </script>
