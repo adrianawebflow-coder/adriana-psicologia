@@ -407,6 +407,17 @@ import { animate, spring } from 'motion';
   function onPtrDown(e) {
     if (isAnimating || e.button !== 0) return;
 
+    // Cancel any running WAAPI animations on the front card (Motion One spring
+    // may still be active) and clear any CSS transition left by the hover tilt.
+    // Without this, style.transform changes during drag are overridden.
+    const fc = cards[activeIdx];
+    fc.getAnimations().forEach(anim => {
+      try { anim.commitStyles(); } catch (_) {}
+      anim.cancel();
+    });
+    fc.style.transition = '';
+    tiltCard = null;
+
     isDragging  = true;
     dragX       = 0;
     dragStartX  = e.clientX;
@@ -414,7 +425,7 @@ import { animate, spring } from 'motion';
     isHoriz     = null;
     velBuf      = [{ x: e.clientX, t: e.timeStamp }];
 
-    cards[activeIdx].setPointerCapture(e.pointerId);
+    fc.setPointerCapture(e.pointerId);
     document.body.style.cursor = 'grabbing';
     stopAutoplay();
   }
@@ -579,13 +590,21 @@ import { animate, spring } from 'motion';
 
     // Clean up after all animations finish
     setTimeout(() => {
-      applyNow(fc,  { ...STATES.hidden });
+      // Hide old front
+      applyNow(fc, { ...STATES.hidden });
       fc.style.filter = '';
 
-      // Restore z-indices to match new state
+      // Commit and cancel any Motion One WAAPI animations still running on
+      // the new front card (mc) so that drag style changes aren't overridden.
+      mc.getAnimations().forEach(anim => {
+        try { anim.commitStyles(); } catch (_) {}
+        anim.cancel();
+      });
+
+      // Restore all pointer-events and z-indices
       cards.forEach((c, i) => {
         const st = STATES[stateFor(i)];
-        c.style.zIndex      = st.z;
+        c.style.zIndex       = st.z;
         c.style.pointerEvents = st.pe ? 'auto' : 'none';
       });
 
@@ -654,23 +673,31 @@ import { animate, spring } from 'motion';
   }
 
   /* ─── Hover tilt (desktop only) ─────────────────── */
+  // Track which card last received the tilt so onMouseLeave only resets it.
+  let tiltCard = null;
+
   function onMouseMove(e) {
     if (isDragging || reduced) return;
     const fc   = cards[activeIdx];
     const rect = fc.getBoundingClientRect();
     const cx   = rect.left + rect.width  / 2;
     const cy   = rect.top  + rect.height / 2;
-    const rx   = ((e.clientY - cy) / rect.height) * -4; // rotateX
-    const ry   = ((e.clientX - cx) / rect.width)  *  4; // rotateY
-    fc.style.transform    = `translateX(0px) translateY(0px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(8px) scale(1)`;
-    fc.style.transition   = 'transform 180ms ease-out';
+    const rx   = ((e.clientY - cy) / rect.height) * -4;
+    const ry   = ((e.clientX - cx) / rect.width)  *  4;
+    fc.style.transform  = `translateX(0px) translateY(0px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(8px) scale(1)`;
+    fc.style.transition = 'transform 180ms ease-out';
+    tiltCard = fc;
   }
 
   function onMouseLeave() {
-    const fc = cards[activeIdx];
-    fc.style.transition = 'transform 300ms ease-out';
-    fc.style.transform  = 'translateX(0px) translateY(0px) rotateX(0deg) rotateY(0deg) translateZ(0px) scale(1)';
-    setTimeout(() => { fc.style.transition = ''; }, 310);
+    // Only reset the card that actually had tilt applied — not cards[activeIdx]
+    // generically, which could be a different card after a swipe.
+    const target = tiltCard;
+    if (!target) return;
+    tiltCard = null;
+    target.style.transition = 'transform 300ms ease-out';
+    target.style.transform  = 'translateX(0px) translateY(0px) scale(1)';
+    setTimeout(() => { target.style.transition = ''; }, 310);
   }
 
   /* ─── Autoplay ───────────────────────────────────── */
