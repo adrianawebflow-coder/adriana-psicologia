@@ -8,530 +8,566 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
   description="Conoce a Adriana Esteban Labelle, psicóloga colegiada en Madrid. Su historia, enfoque terapéutico y experiencia."
 >
 
-  <!-- ══ MI HISTORIA ══════════════════════════════════════════ -->
-  <section class="historia-section">
-    <div class="historia-grid">
+  <!-- ══ HERO: foto + tarjeta "Mi historia" superpuesta ════════ -->
+  <section class="hero">
+    <div class="hero-wrap">
+      <div class="hero-photo" role="img" aria-label="Adriana en su despacho"></div>
 
-      <div class="historia-text">
-        <p class="eyebrow">Sobre mí</p>
+      <article class="hero-card">
         <h1 transition:name="hero-title">Mi historia</h1>
-        <p class="historia-body">
+        <p id="historiaP" class="collapsed">
           Actualmente desarrollo mi labor profesional atendiendo a adolescentes,
           adultos y familias o parejas con diversos tipos de dificultades, de manera
           online y presencial en mi despacho ubicado en el barrio de Hortaleza,
           en la zona norte de Madrid.
-        </p>
-        <p class="historia-body">
+
           A lo largo del año llevo a cabo talleres de formación para colegios,
           institutos y universidades, así como terapias grupales según la
           problemática. No siempre que recibimos un caso significa que podamos
           ayudar a esa persona.
-        </p>
-        <p class="historia-body">
+
           Las habilidades del terapeuta no sirven sin formación y viceversa.
           Por esa razón he tratado siempre de seguir especializándome para poder
           acompañar más y mejor, a través de diferentes cursos sobre personalidad,
           duelo, depresión, suicidio, etc.
         </p>
-      </div>
-
-      <div
-        class="historia-foto"
-        role="img"
-        aria-label="Adriana Esteban Labelle, psicóloga"
-      ></div>
-
+        <button class="leer" id="leerMas" aria-expanded="false">Leer más</button>
+      </article>
     </div>
   </section>
 
-  <!-- ══ MI ENFOQUE ══════════════════════════════════════════ -->
-  <section class="enfoque-section">
+  <!-- ══ MI ENFOQUE + MI EXPERIENCIA ══════════════════════════════ -->
+  <section class="twocol">
     <div class="container">
-      <div class="enfoque-header">
-        <h2>Mi enfoque</h2>
-        <p class="enfoque-lead">
-          Cada persona necesita un proceso distinto. Mi manera de acompañar parte
-          de la escucha activa, el respeto por los tiempos de cada uno y un enfoque
-          basado en evidencia científica.
-        </p>
-      </div>
+      <div class="twocol-grid">
 
-      <ul class="enfoque-grid" role="list">
-        <li class="enfoque-card">
-          <div class="enfoque-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
+        <!-- Enfoque -->
+        <div class="enfoque-col">
+          <h2 class="section-title">Mi enfoque</h2>
+          <div class="enfoque-list">
+            <article class="enfoque-card">
+              <h3>Sin juicios</h3>
+              <p>Tu historia es tuya. Yo solo te ayudo a mirarla desde otro ángulo.</p>
+            </article>
+            <article class="enfoque-card">
+              <h3>A tu ritmo</h3>
+              <p>Cada proceso terapéutico es diferente. No hay prisa ni plazos fijos.</p>
+            </article>
+            <article class="enfoque-card">
+              <h3>Basado en evidencia</h3>
+              <p>Terapia cognitivo-conductual y otras técnicas con respaldo científico.</p>
+            </article>
           </div>
-          <h3>Basado en evidencia</h3>
-          <p>Terapia cognitivo-conductual y otras técnicas con respaldo científico.</p>
-        </li>
-
-        <li class="enfoque-card">
-          <div class="enfoque-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 8v4l3 3"/>
-            </svg>
-          </div>
-          <h3>A tu ritmo</h3>
-          <p>Cada proceso terapéutico es diferente. No hay prisa ni plazos fijos.</p>
-        </li>
-
-        <li class="enfoque-card">
-          <div class="enfoque-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-            </svg>
-          </div>
-          <h3>Sin juicios</h3>
-          <p>Tu historia es tuya. Yo solo te ayudo a mirarla desde otro ángulo.</p>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ══ MI EXPERIENCIA ══════════════════════════════════════ -->
-  <section class="experiencia-section">
-    <div class="container">
-      <h2>Mi experiencia</h2>
-
-      <div class="experiencia-grid">
-        <div class="exp-col">
-          <h3>Formación</h3>
-          <ul class="exp-list">
-            <li>Grado en Psicología — Universidad Complutense de Madrid</li>
-            <li>Máster en Psicología Sanitaria</li>
-            <li>Formación especializada en TCA</li>
-            <li>Formación en Terapia EMDR</li>
-            <li>Cursos de especialización en personalidad, duelo y depresión</li>
-          </ul>
         </div>
 
+        <!-- Experiencia -->
         <div class="exp-col">
-          <h3>Trayectoria</h3>
-          <ul class="exp-list">
-            <li>Psicóloga en consulta privada (individual, parejas, familias)</li>
-            <li>Talleres de formación en colegios, institutos y universidades</li>
-            <li>Terapias grupales según problemática</li>
-            <li>Colaboración con equipos multidisciplinares de salud</li>
-            <li>Colegiada M-35913</li>
-          </ul>
+          <h2 class="section-title">Mi experiencia</h2>
+          <div class="exp-timeline">
+            <div class="rail" aria-hidden="true"></div>
+            <div class="exp-blocks">
+              <div>
+                <h4>Formación</h4>
+                <ul>
+                  <li>Grado en Psicología — Universidad Complutense de Madrid</li>
+                  <li>Máster en Psicología Sanitaria</li>
+                  <li>Formación especializada en TCA</li>
+                </ul>
+              </div>
+              <div>
+                <h4>Trayectoria</h4>
+                <ul>
+                  <li>Psicóloga en consulta privada (individual, parejas, familias)</li>
+                  <li>Talleres de formación en colegios, institutos y universidades</li>
+                  <li>Terapias grupales según problemática</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="exp-cta">
+            <a
+              class="btn btn-primary"
+              href="https://calendly.com/adrianapsicologia/15-20min"
+              target="_blank"
+              rel="noopener"
+            >
+              Consultar currículum
+            </a>
+          </div>
         </div>
-      </div>
 
-      <a
-        class="btn-cv"
-        href="https://calendly.com/adrianapsicologia/15-20min"
-        target="_blank"
-        rel="noopener"
-      >
-        Reservar primera consulta →
-      </a>
+      </div>
     </div>
   </section>
 
-  <!-- ══ COLABORACIONES ══════════════════════════════════════ -->
-  <section class="colab-section">
-    <div class="container">
-      <div class="colab-header">
-        <h2>Colaboraciones</h2>
-        <p>
-          En ocasiones se recomienda el abordaje multidisciplinar. Actualmente
-          trabajo de forma coordinada con otros profesionales de la salud.
-        </p>
-      </div>
+  <!-- ══ COLABORACIONES ════════════════════════════════════════════ -->
+  <section class="colab">
+    <span class="blob" aria-hidden="true"></span>
+    <span class="blob b2" aria-hidden="true"></span>
 
+    <div class="container">
       <div class="colab-grid">
-        <div class="colab-card">
-          <div class="colab-avatar" aria-hidden="true">B</div>
-          <div>
-            <strong class="colab-name">Belén Silveira</strong>
-            <span class="colab-role">Endocrinóloga</span>
-          </div>
+
+        <div class="colab-text">
+          <h2 class="section-title">Colaboraciones</h2>
+          <p>
+            En ocasiones se recomienda el abordaje multidisciplinar. Actualmente
+            trabajo de forma coordinada con otros profesionales de la salud.
+          </p>
         </div>
+
+        <div class="person-stack">
+          <article class="person-card">
+            <div class="person-avatar" role="img" aria-label="Foto de Belén Silveira"></div>
+            <div class="person-id">
+              <h3 class="person-name">Belén Silveira</h3>
+              <p class="person-role">Endocrinóloga</p>
+            </div>
+            <div class="person-socials">
+              <a href="#" aria-label="Instagram de Belén Silveira">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="5"/>
+                  <circle cx="12" cy="12" r="4"/>
+                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="Email de Belén Silveira">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="5" width="18" height="14" rx="2"/>
+                  <path d="M3 7l9 6 9-6"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ══ CTA FINAL ════════════════════════════════════════════ -->
-  <section class="sm-cta">
-    <div class="container">
-      <h2>¿Conectamos?</h2>
-      <p>Si sientes que puedo acompañarte, da el primer paso. La primera sesión es solo una conversación.</p>
-      <a
-        class="btn-primary"
-        href="https://calendly.com/adrianapsicologia/15-20min"
-        target="_blank"
-        rel="noopener"
-      >
-        Reservar primera sesión →
-      </a>
-    </div>
-  </section>
+  <!-- ══ CTA FINAL ═════════════════════════════════════════════════ -->
+  <CTAFinalSection />
 
 </Layout>
 
 <style>
 /* ── Shared ── */
 .container {
-  max-width: var(--max-width);
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
 
-.eyebrow {
-  font-family: var(--font-sans);
-  font-size: var(--fs-label);
-  font-weight: var(--fw-semi);
-  letter-spacing: var(--ls-wider);
-  text-transform: uppercase;
-  color: var(--color-moss);
-  margin: 0 0 var(--space-3);
-}
-
-/* ── Mi historia ── */
-.historia-section {
-  background: var(--color-bg-base);
-}
-
-.historia-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: stretch;
-}
-
-.historia-text {
-  padding: var(--section-pad-top) var(--gutter) var(--section-pad-bottom);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: var(--space-5);
-}
-
-h1 {
-  font-family: var(--font-serif);
-  font-weight: var(--fw-semi);
-  font-size: clamp(1.875rem, 5vw, 3rem);
-  line-height: 1.1;
-  letter-spacing: var(--ls-tight);
-  color: var(--color-text-primary);
-  margin: 0;
-}
-
-.historia-body {
-  font-family: var(--font-sans);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  color: var(--color-text-secondary);
-  margin: 0;
-  max-width: 56ch;
-}
-
-.historia-foto {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  background: var(--color-bg-muted) center / cover no-repeat;
-  background-image: url('/images/hero-adriana.png');
-}
-
-@media (min-width: 880px) {
-  .historia-grid {
-    grid-template-columns: 1fr 1fr;
-    min-height: 520px;
-  }
-  .historia-text {
-    padding: var(--section-pad-top) var(--space-12) var(--section-pad-bottom)
-      max(var(--gutter), calc((100vw - var(--max-width)) / 2 + var(--gutter)));
-  }
-  .historia-foto {
-    aspect-ratio: auto;
-    height: 100%;
-  }
-}
-
-/* ── Mi enfoque ── */
-.enfoque-section {
-  background: var(--color-bg-soft);
-  padding: var(--section-pad-top) 0 var(--section-pad-bottom);
-}
-
-.enfoque-header {
-  margin-bottom: var(--space-10);
-}
-
-.enfoque-header h2 {
+.section-title {
   font-family: var(--font-serif);
   font-size: var(--fs-h2);
   font-weight: var(--fw-semi);
   color: var(--color-text-primary);
   letter-spacing: var(--ls-tight);
+  margin: 0 0 var(--space-6);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 22px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semi);
+  text-decoration: none;
+  transition: transform 120ms ease, filter 120ms ease;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+.btn-primary { background: var(--color-moss); color: #fff; }
+
+/* ── Hero ── */
+.hero {
+  background: var(--color-bg-base);
+  padding: var(--section-pad-top) 0;
+}
+
+.hero-wrap {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.hero-photo {
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--color-bg-muted) center / cover no-repeat;
+  background-image: url('/images/sobre-mi-hero.png');
+  box-shadow: 0 8px 28px rgba(26,33,24,.10);
+}
+
+.hero-card {
+  background: var(--color-text-secondary);
+  color: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  margin-top: -32px;
+  margin-inline: 16px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 16px 40px rgba(26,33,24,.18);
+}
+
+.hero-card h1 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semi);
+  line-height: 1.15;
+  letter-spacing: var(--ls-tight);
+  color: #fff;
   margin: 0 0 var(--space-4);
 }
 
-.enfoque-lead {
+.hero-card p {
   font-family: var(--font-sans);
-  font-size: var(--fs-body-lg);
-  line-height: var(--lh-body);
-  color: var(--color-text-secondary);
+  font-size: var(--fs-body-sm);
+  line-height: 1.6;
+  color: rgba(245,242,234,0.92);
   margin: 0;
-  max-width: 60ch;
+  white-space: pre-line;
 }
 
-.enfoque-grid {
-  list-style: none;
+.hero-card p.collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.leer {
+  margin-top: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body-sm);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: #fff;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+@media (min-width: 880px) {
+  .hero {
+    padding: var(--section-pad-top) 0 var(--section-pad-bottom);
+  }
+  .hero-wrap {
+    min-height: 430px;
+  }
+  .hero-photo {
+    width: 58%;
+    aspect-ratio: auto;
+    height: 380px;
+  }
+  .hero-card {
+    position: absolute;
+    right: var(--gutter);
+    bottom: 0;
+    width: 52%;
+    max-width: 480px;
+    margin: 0;
+    padding: 26px 28px;
+  }
+}
+
+/* ── Mi enfoque + Mi experiencia ── */
+.twocol {
+  background: var(--color-bg-soft);
+  padding: var(--section-pad-top) 0 var(--section-pad-bottom);
+}
+
+.twocol-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--col-gap);
+  gap: var(--space-16);
+}
+
+/* Enfoque */
+.enfoque-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
 
 .enfoque-card {
   background: var(--color-bg-base);
-  border: 1px solid var(--color-moss-soft);
+  border: 1px solid var(--color-clay-soft);
   border-radius: var(--radius-lg);
-  padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
   box-shadow: var(--shadow-sm);
+  padding: var(--space-5) var(--space-5);
+  max-width: 420px;
 }
-
-.enfoque-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-full);
-  background: var(--color-moss-soft);
-  color: var(--color-moss);
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-}
+.enfoque-card + .enfoque-card { margin-left: var(--space-8); }
+.enfoque-card + .enfoque-card + .enfoque-card { margin-left: calc(var(--space-8) * 2); }
 
 .enfoque-card h3 {
-  font-family: var(--font-serif);
-  font-size: var(--fs-h4);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
   font-weight: var(--fw-semi);
   color: var(--color-text-primary);
-  margin: 0;
+  margin: 0 0 var(--space-2);
 }
 
 .enfoque-card p {
   font-family: var(--font-sans);
   font-size: var(--fs-body-sm);
-  line-height: var(--lh-body);
+  line-height: 1.5;
   color: var(--color-text-secondary);
   margin: 0;
 }
 
+/* Experiencia timeline */
+.exp-timeline {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 18px;
+  align-items: stretch;
+}
+
+.rail {
+  position: relative;
+  width: 6px;
+  margin-left: 6px;
+  border-radius: 3px;
+  background: linear-gradient(var(--color-moss) 0%, var(--color-moss-soft) 100%);
+}
+.rail::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-moss);
+}
+
+.exp-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+  padding-top: 2px;
+}
+
+.exp-blocks h4 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semi);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-3);
+  line-height: 1.2;
+}
+
+.exp-blocks ul {
+  list-style: disc;
+  padding-left: var(--space-5);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.exp-cta {
+  margin-top: var(--space-8);
+}
+
 @media (min-width: 880px) {
-  .enfoque-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .twocol-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  .enfoque-card + .enfoque-card { margin-left: 32px; }
+  .enfoque-card + .enfoque-card + .enfoque-card { margin-left: 64px; }
+  .exp-cta {
+    display: flex;
+    justify-content: center;
   }
 }
 
-/* ── Mi experiencia ── */
-.experiencia-section {
-  background: var(--color-bg-base);
-  padding: var(--section-pad-top) 0 var(--section-pad-bottom);
-}
-
-.experiencia-section h2 {
-  font-family: var(--font-serif);
-  font-size: var(--fs-h2);
-  font-weight: var(--fw-semi);
-  color: var(--color-text-primary);
-  letter-spacing: var(--ls-tight);
-  margin: 0 0 var(--space-8);
-}
-
-.experiencia-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-10);
-  margin-bottom: var(--space-10);
-}
-
-.exp-col h3 {
-  font-family: var(--font-sans);
-  font-size: var(--fs-body-sm);
-  font-weight: var(--fw-semi);
-  letter-spacing: var(--ls-wider);
-  text-transform: uppercase;
-  color: var(--color-moss);
-  margin: 0 0 var(--space-4);
-}
-
-.exp-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: 0;
-  margin: 0;
-}
-
-.exp-list li {
-  font-family: var(--font-sans);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  color: var(--color-text-secondary);
-  padding-left: var(--space-5);
-  position: relative;
-}
-
-.exp-list li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.6em;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-moss-soft);
-}
-
-.btn-cv {
-  display: inline-flex;
-  align-items: center;
-  height: 44px;
-  padding: 0 22px;
-  background: var(--color-moss);
-  color: var(--color-text-inverse);
-  font-family: var(--font-sans);
-  font-size: var(--fs-body-sm);
-  font-weight: var(--fw-semi);
-  border-radius: var(--radius-full);
-  text-decoration: none;
-  transition: background var(--transition-fast), transform var(--transition-fast);
-}
-.btn-cv:hover {
-  background: var(--color-moss-hover);
-  transform: translateY(-1px);
-}
-
-@media (min-width: 880px) {
-  .experiencia-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
+@media (max-width: 600px) {
+  .enfoque-card + .enfoque-card,
+  .enfoque-card + .enfoque-card + .enfoque-card {
+    margin-left: 0;
   }
 }
 
 /* ── Colaboraciones ── */
-.colab-section {
-  background: var(--color-bg-soft);
+.colab {
+  position: relative;
+  background: var(--color-bg-base);
   padding: var(--section-pad-top) 0 var(--section-pad-bottom);
+  overflow: hidden;
 }
 
-.colab-header {
-  margin-bottom: var(--space-8);
+.blob {
+  position: absolute;
+  pointer-events: none;
+  opacity: .6;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(200,217,194,.55), transparent 70%);
+  top: -160px;
+  right: -120px;
+}
+.blob.b2 {
+  left: -160px;
+  top: auto;
+  bottom: -200px;
+  right: auto;
+  background: radial-gradient(closest-side, rgba(210,250,200,.35), transparent 70%);
 }
 
-.colab-header h2 {
-  font-family: var(--font-serif);
-  font-size: var(--fs-h2);
-  font-weight: var(--fw-semi);
-  color: var(--color-text-primary);
-  letter-spacing: var(--ls-tight);
-  margin: 0 0 var(--space-4);
-}
-
-.colab-header p {
-  font-family: var(--font-sans);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  color: var(--color-text-secondary);
-  margin: 0;
-  max-width: 56ch;
+.colab .container {
+  position: relative;
+  z-index: 1;
 }
 
 .colab-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--col-gap);
-}
-
-.colab-card {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  background: var(--color-bg-base);
-  border: 1px solid var(--color-bg-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5) var(--space-6);
-  box-shadow: var(--shadow-sm);
-}
-
-.colab-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
-  background: var(--color-clay);
-  color: #fff;
   display: grid;
-  place-items: center;
-  font-family: var(--font-sans);
-  font-weight: var(--fw-semi);
-  font-size: 16px;
-  flex-shrink: 0;
+  grid-template-columns: 1fr;
+  gap: var(--space-10);
+  align-items: center;
 }
 
-.colab-name {
-  display: block;
+.colab-text p {
   font-family: var(--font-sans);
   font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 42ch;
+}
+
+/* Stacked person card */
+.person-stack {
+  position: relative;
+  width: min(100%, 340px);
+  margin: 0 auto;
+  aspect-ratio: 0.94 / 1;
+}
+
+.person-card {
+  position: absolute;
+  inset: 0;
+  background: var(--color-clay-soft);
+  border: 2px solid var(--color-clay-soft);
+  border-radius: 14px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  z-index: 3;
+  box-shadow: 0 10px 30px rgba(26,33,24,.10);
+}
+
+.person-card::before,
+.person-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  border: 2px solid var(--color-clay-soft);
+  background: transparent;
+  z-index: -1;
+}
+.person-card::before { transform: rotate(-4deg) translate(-8px, 6px); }
+.person-card::after  { transform: rotate(3deg) translate(10px, 12px); }
+
+.person-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--color-bg-muted) center / cover no-repeat;
+  background-image: url('/images/adriana.png');
+  box-shadow: 0 6px 14px rgba(26,33,24,.08);
+}
+
+.person-id {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.person-name {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h4);
   font-weight: var(--fw-semi);
   color: var(--color-text-primary);
+  margin: 0;
+  letter-spacing: var(--ls-tight);
+  text-align: center;
+  line-height: 1.15;
 }
 
-.colab-role {
-  display: block;
+.person-role {
   font-family: var(--font-sans);
-  font-size: var(--fs-label);
-  color: var(--color-text-muted);
-  margin-top: 2px;
-}
-
-/* ── CTA ── */
-.sm-cta {
-  background: var(--color-moss);
-  padding: var(--section-pad-top) 0 var(--section-pad-bottom);
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
   text-align: center;
 }
 
-.sm-cta h2 {
-  font-family: var(--font-serif);
-  font-size: var(--fs-h2);
-  font-weight: var(--fw-semi);
-  color: var(--color-text-inverse);
-  letter-spacing: var(--ls-tight);
-  margin: 0 0 var(--space-4);
+.person-socials {
+  display: flex;
+  gap: 14px;
 }
 
-.sm-cta p {
-  font-family: var(--font-sans);
-  font-size: var(--fs-body-lg);
-  line-height: var(--lh-body);
-  color: rgba(245,242,234,0.88);
-  margin: 0 auto var(--space-8);
-  max-width: 48ch;
-}
-
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  height: 52px;
-  padding: 0 var(--space-8);
+.person-socials a {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   background: var(--color-bg-base);
-  color: var(--color-text-primary);
-  font-family: var(--font-sans);
-  font-size: var(--fs-body-sm);
-  font-weight: var(--fw-semi);
-  border-radius: var(--radius-full);
-  text-decoration: none;
-  transition: background var(--transition-fast), transform var(--transition-fast);
+  display: grid;
+  place-items: center;
+  color: var(--color-text-secondary);
+  transition: transform 150ms ease, background-color 150ms ease, color 150ms ease;
 }
-.btn-primary:hover {
-  background: var(--color-bg-soft);
-  transform: translateY(-1px);
+.person-socials a:hover {
+  transform: translateY(-2px);
+  background: #fff;
+  color: var(--color-moss);
+}
+
+@media (min-width: 880px) {
+  .colab-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
 }
 </style>
+
+<script>
+  // Leer más / Leer menos toggle
+  const p       = document.getElementById('historiaP');
+  const leerBtn = document.getElementById('leerMas');
+  leerBtn?.addEventListener('click', () => {
+    const isCollapsed = p?.classList.toggle('collapsed') === false;
+    if (leerBtn) {
+      leerBtn.textContent = p?.classList.contains('collapsed') ? 'Leer más' : 'Leer menos';
+      leerBtn.setAttribute('aria-expanded', String(!p?.classList.contains('collapsed')));
+    }
+  });
+</script>
