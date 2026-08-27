@@ -8,42 +8,91 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
   description="Conoce a Adriana Esteban Labelle, psicóloga colegiada en Madrid. Su historia, enfoque terapéutico y experiencia."
 >
 
-  <!-- ══ HERO: foto + tarjeta "Mi historia" superpuesta ════════ -->
-  <section class="hero">
-    <div class="hero-wrap">
-      <div class="hero-photo sm-hero-photo" role="img" aria-label="Adriana en su despacho"></div>
+  <!-- ══ HERO: foto + tarjeta carrusel "Mi historia" ════════ -->
+  <section class="hero" id="mi-historia">
+    <div class="hero-stage">
+      <img class="hero-photo sm-hero-photo" src="/images/photo-adriana-sobre-mi.jpg" alt="Adriana Esteban Labelle, psicóloga, en su despacho" fetchpriority="high" />
 
       <article class="hero-card sm-hero-card">
-        <h1 transition:name="hero-title">Mi historia</h1>
-        <p id="historiaP" class="collapsed">
-          Actualmente desarrollo mi labor profesional atendiendo a adolescentes,
-          adultos y familias o parejas con diversos tipos de dificultades, de manera
-          online y presencial en mi despacho ubicado en el barrio de Hortaleza,
-          en la zona norte de Madrid.
+        <div class="hero-body" aria-live="polite">
+          <h1 id="heroTitle" transition:name="hero-title">Mi historia</h1>
 
-          A lo largo del año llevo a cabo talleres de formación para colegios,
-          institutos y universidades, así como terapias grupales según la
-          problemática. No siempre que recibimos un caso significa que podamos
-          ayudar a esa persona.
+          <div class="hero-slide active" data-title="Mi historia">
+            <p>
+              Soy Adriana Esteban Labelle, psicóloga general sanitaria, terapeuta
+              familiar y de pareja y mediadora acreditada por la Universidad
+              Francisco de Vitoria y el Instituto de Psicoterapia Familiar
+              Sistémica y Adicciones.
+            </p>
+          </div>
+          <div class="hero-slide" data-title="Mi formación">
+            <p>
+              Cuento con formación especializada en Trastornos de la Conducta
+              Alimentaria y Terapia Sistémica, áreas en las que he desarrollado
+              gran parte de mi experiencia clínica.
+            </p>
+          </div>
+          <div class="hero-slide" data-title="Mi trayectoria">
+            <p>
+              Desde el inicio de mi trayectoria profesional me he especializado
+              en el acompañamiento de adolescentes, adultos, familias y parejas
+              que atraviesan momentos de dificultad emocional, conflictos
+              relacionales o situaciones de sufrimiento que afectan a su
+              bienestar y calidad de vida.
+            </p>
+          </div>
+          <div class="hero-slide" data-title="Mi forma de trabajar">
+            <p>
+              Mi forma de trabajar se basa en crear un espacio seguro, cercano
+              y libre de juicios, donde cada persona pueda comprender mejor lo
+              que le ocurre y encontrar herramientas para afrontar sus
+              dificultades.
+            </p>
+          </div>
+          <div class="hero-slide" data-title="Actualmente">
+            <p>
+              Actualmente atiendo pacientes de forma presencial en mi consulta
+              privada ubicada en el barrio de Hortaleza (Madrid), así como en
+              modalidad online, adaptándome a las necesidades de cada persona.
+            </p>
+          </div>
+          <div class="hero-slide" data-title="Además">
+            <p>
+              Además de mi labor asistencial, compagino la práctica clínica con
+              la docencia como profesora del Máster de Trastornos de la
+              Conducta Alimentaria en el Instituto Superior de Estudios
+              Psicológicos, así como impartiendo cursos, talleres y programas
+              de formación en salud mental para centros educativos y otras
+              instituciones.
+            </p>
+          </div>
+        </div>
 
-          Las habilidades del terapeuta no sirven sin formación y viceversa.
-          Por esa razón he tratado siempre de seguir especializándome para poder
-          acompañar más y mejor, a través de diferentes cursos sobre personalidad,
-          duelo, depresión, suicidio, etc.
-        </p>
-        <button class="leer" id="leerMas" aria-expanded="false">Leer más</button>
+        <div class="hero-nav">
+          <div class="hero-dots" id="heroDots" role="tablist" aria-label="Fragmentos de mi historia"></div>
+          <button class="hero-arrow" id="heroNext" type="button" aria-label="Siguiente fragmento">
+            <svg width="7" height="12" viewBox="0 0 7 12" fill="none" aria-hidden="true">
+              <path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </article>
     </div>
   </section>
 
   <!-- ══ MI ENFOQUE + MI EXPERIENCIA ══════════════════════════════ -->
-  <section class="twocol">
+  <section class="twocol" id="enfoque">
     <div class="container">
       <div class="twocol-grid">
 
         <!-- Enfoque -->
-        <div class="enfoque-col">
+        <div>
           <h2 class="section-title reveal">Mi enfoque</h2>
+          <p class="twocol-intro reveal">
+            Cada persona necesita un proceso distinto. Mi manera de acompañar
+            parte de la escucha activa, el respeto por los tiempos de cada uno
+            y un enfoque basado en evidencia científica.
+          </p>
           <div class="enfoque-list">
             <article class="enfoque-card reveal">
               <h3>Sin juicios</h3>
@@ -64,7 +113,7 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
         <div class="exp-col">
           <h2 class="section-title reveal">Mi experiencia</h2>
           <div class="exp-timeline reveal">
-            <div class="rail" aria-hidden="true"></div>
+            <div class="rail" aria-hidden="true"><i></i><b></b></div>
             <div class="exp-blocks">
               <div>
                 <h4>Formación</h4>
@@ -91,7 +140,8 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
               target="_blank"
               rel="noopener"
             >
-              Consultar currículum
+              <span class="lbl-wide">Consultar currículum</span>
+              <span class="lbl-narrow">Conocer más →</span>
             </a>
           </div>
         </div>
@@ -101,46 +151,113 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
   </section>
 
   <!-- ══ COLABORACIONES ════════════════════════════════════════════ -->
-  <section class="colab">
+  <section class="colab" id="colaboraciones">
     <span class="blob" aria-hidden="true"></span>
     <span class="blob b2" aria-hidden="true"></span>
 
     <div class="container">
-      <div class="colab-grid">
+      <div class="colab-inner">
+        <h2 class="section-title reveal">Colaboraciones</h2>
+        <p class="reveal">
+          En ocasiones se recomienda el abordaje multidisciplinar. Actualmente
+          trabajo de forma coordinada con otros profesionales de la salud.
+        </p>
 
-        <div class="colab-text reveal">
-          <h2 class="section-title">Colaboraciones</h2>
-          <p>
-            En ocasiones se recomienda el abordaje multidisciplinar. Actualmente
-            trabajo de forma coordinada con otros profesionales de la salud.
-          </p>
-        </div>
+        <div class="colab-carousel reveal">
+          <span class="ghost g1" aria-hidden="true"></span>
+          <span class="ghost g2" aria-hidden="true"></span>
 
-        <div class="person-stack reveal">
           <article class="person-card">
-            <div class="person-avatar" role="img" aria-label="Foto de Belén Silveira"></div>
-            <div class="person-id">
-              <h3 class="person-name">Belén Silveira</h3>
-              <p class="person-role">Endocrinóloga</p>
+            <div class="person-slide active">
+              <div class="person-avatar" role="img" aria-label="Foto de Belén Silveira" style="background-image:url('/images/colab-1.png')"></div>
+              <div class="person-id">
+                <h3 class="person-name">Belén Silveira</h3>
+                <p class="person-role">Endocrinóloga</p>
+              </div>
+              <div class="person-socials">
+                <a href="#" aria-label="Instagram de Belén Silveira">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/>
+                  </svg>
+                </a>
+                <a href="#" aria-label="Email de Belén Silveira">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/>
+                  </svg>
+                </a>
+              </div>
             </div>
-            <div class="person-socials">
-              <a href="#" aria-label="Instagram de Belén Silveira">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="5"/>
-                  <circle cx="12" cy="12" r="4"/>
-                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+
+            <div class="person-slide">
+              <div class="person-avatar" role="img" aria-label="Foto de Belén Silveira" style="background-image:url('/images/colab-2.png')"></div>
+              <div class="person-id">
+                <h3 class="person-name">Belén Silveira</h3>
+                <p class="person-role">Endocrinóloga</p>
+              </div>
+              <div class="person-socials">
+                <a href="#" aria-label="Instagram">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/>
+                  </svg>
+                </a>
+                <a href="#" aria-label="Email">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="person-slide">
+              <div class="person-avatar" role="img" aria-label="Foto de Belén Silveira" style="background-image:url('/images/colab-3.png')"></div>
+              <div class="person-id">
+                <h3 class="person-name">Belén Silveira</h3>
+                <p class="person-role">Endocrinóloga</p>
+              </div>
+              <div class="person-socials">
+                <a href="#" aria-label="Instagram">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/>
+                  </svg>
+                </a>
+                <a href="#" aria-label="Email">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="person-slide">
+              <div class="person-avatar" role="img" aria-label="Foto de Belén Silveira" style="background-image:url('/images/colab-4.png')"></div>
+              <div class="person-id">
+                <h3 class="person-name">Belén Silveira</h3>
+                <p class="person-role">Endocrinóloga</p>
+              </div>
+              <div class="person-socials">
+                <a href="#" aria-label="Instagram">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/>
+                  </svg>
+                </a>
+                <a href="#" aria-label="Email">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <div class="person-nav">
+              <div class="person-dots" id="colabDots" role="tablist" aria-label="Colaboradores"></div>
+              <button class="person-arrow" id="colabNext" type="button" aria-label="Siguiente colaborador">
+                <svg width="7" height="12" viewBox="0 0 7 12" fill="none" aria-hidden="true">
+                  <path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-              </a>
-              <a href="#" aria-label="Email de Belén Silveira">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="5" width="18" height="14" rx="2"/>
-                  <path d="M3 7l9 6 9-6"/>
-                </svg>
-              </a>
+              </button>
             </div>
           </article>
         </div>
-
       </div>
     </div>
   </section>
@@ -180,18 +297,22 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
 
 /* ── Shared ── */
 .container {
-  max-width: 1100px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: var(--fs-h2);
+  font-size: 22px;
   font-weight: var(--fw-semi);
   color: var(--color-text-primary);
   letter-spacing: var(--ls-tight);
-  margin: 0 0 var(--space-6);
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+@media (min-width: 960px) {
+  .section-title { font-size: 24px; }
 }
 
 .btn {
@@ -214,147 +335,219 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
 /* ── Hero ── */
 .hero {
   background: var(--color-bg-base);
-  padding: var(--section-pad-top) 0;
+  padding: 0 0 40px;
 }
 
-.hero-wrap {
+.hero-stage {
   position: relative;
   max-width: 980px;
   margin: 0 auto;
-  padding: 0 var(--gutter);
 }
 
 .hero-photo {
+  display: block;
   width: 100%;
-  aspect-ratio: 5 / 4;
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--color-bg-muted) center / cover no-repeat;
-  background-image: url('/images/sobre-mi-hero.png');
-  box-shadow: 0 8px 28px rgba(26,33,24,.10);
+  height: 243px;
+  background: var(--color-bg-muted);
+  object-fit: cover;
+  object-position: center 20%;
 }
 
 .hero-card {
   background: var(--color-text-secondary);
   color: #fff;
-  border-radius: 14px;
-  padding: 22px;
-  margin-top: -32px;
-  margin-inline: 16px;
+  border-radius: 12px;
+  padding: 20px;
+  margin: -68px 16px 0;
   position: relative;
   z-index: 2;
-  box-shadow: 0 16px 40px rgba(26,33,24,.18);
+  min-height: 291px;
+  box-shadow: 0 18px 44px rgba(26,33,24,.20);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero-body {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-rows: auto auto;
 }
 
 .hero-card h1 {
+  grid-row: 1;
   font-family: var(--font-serif);
-  font-size: var(--fs-h2);
+  font-size: 20px;
   font-weight: var(--fw-semi);
-  line-height: 1.15;
+  line-height: 1.1;
   letter-spacing: var(--ls-tight);
   color: #fff;
-  margin: 0 0 var(--space-4);
+  margin: 0 0 12px;
 }
 
-.hero-card p {
+/* Los 6 fragmentos se apilan en la misma celda de grid: así la altura de la
+   tarjeta queda fijada por el más largo y no "baila" al cambiar de slide. */
+.hero-slide {
+  grid-row: 2;
+  grid-column: 1;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-slide.active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  animation: sm-slidefade 350ms ease;
+}
+
+@keyframes sm-slidefade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.hero-slide p {
   font-family: var(--font-sans);
-  font-size: var(--fs-body-sm);
-  line-height: 1.6;
-  color: rgba(245,242,234,0.92);
-  margin: 0;
-  white-space: pre-line;
-}
-
-.hero-card p.collapsed {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.leer {
-  margin-top: var(--space-4);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--font-sans);
-  font-weight: var(--fw-semi);
-  font-size: var(--fs-body-sm);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  font-size: 14px;
+  line-height: 22px;
   color: #fff;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
+  margin: 0;
 }
+
+.hero-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+}
+
+.hero-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+}
+
+.hero-dots :global(button) {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  padding: 0;
+  border: none;
+  background: var(--color-moss-soft);
+  opacity: .5;
+  cursor: pointer;
+  transition: background-color 200ms ease, opacity 200ms ease, transform 200ms ease;
+}
+.hero-dots :global(button):hover { opacity: .85; transform: scale(1.15); }
+.hero-dots :global(button[aria-current="true"]) { background: #fff; opacity: 1; }
+
+.hero-arrow {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-moss-soft);
+  color: var(--color-moss);
+  border: none;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+.hero-arrow:hover { transform: translateX(2px); filter: brightness(1.06); }
 
 @media (min-width: 880px) {
   .hero {
-    padding: var(--section-pad-top) 0 var(--section-pad-bottom);
+    padding: 40px 0 80px;
   }
-  .hero-wrap {
-    min-height: 430px;
+  .hero-stage {
+    width: min(100%, 760px);
+    aspect-ratio: 1520 / 812;
   }
   .hero-photo {
-    width: 58%;
-    aspect-ratio: auto;
-    height: 380px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 61.8%;
+    height: 73.2%;
+    border-radius: 12px;
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
   }
   .hero-card {
     position: absolute;
-    right: var(--gutter);
-    bottom: 0;
-    width: 52%;
-    max-width: 480px;
+    left: 44.4%;
+    top: 37.8%;
+    width: 55.6%;
     margin: 0;
-    padding: 26px 28px;
+    min-height: 245px;
   }
 }
 
 /* ── Mi enfoque + Mi experiencia ── */
 .twocol {
   background: var(--color-bg-soft);
-  padding: var(--section-pad-top) 0 var(--section-pad-bottom);
+  padding: 40px 0;
 }
 
 .twocol-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-16);
+  gap: 40px;
+}
+
+.twocol-intro {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--color-text-secondary);
+  margin: 0 0 32px;
+  max-width: 44ch;
 }
 
 /* Enfoque */
 .enfoque-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 24px;
+  align-items: flex-start;
 }
 
 .enfoque-card {
-  background: var(--color-bg-base);
-  border: 1px solid var(--color-clay-soft);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: var(--space-5) var(--space-5);
-  max-width: 420px;
+  width: 100%;
+  max-width: 440px;
+  background: #FAF9F5;
+  border: 1px solid var(--color-moss-soft);
+  border-left: 6px solid var(--color-moss-soft);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(26,33,24,0.06);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-.enfoque-card + .enfoque-card { margin-left: var(--space-8); }
-.enfoque-card + .enfoque-card + .enfoque-card { margin-left: calc(var(--space-8) * 2); }
+.enfoque-card:nth-child(2) { margin-left: 60px; }
+.enfoque-card:nth-child(3) { margin-left: 120px; }
+@media (max-width: 620px) {
+  .enfoque-card:nth-child(2),
+  .enfoque-card:nth-child(3) { margin-left: 0; }
+}
 
 .enfoque-card h3 {
   font-family: var(--font-sans);
-  font-size: var(--fs-body);
+  font-size: 16px;
   font-weight: var(--fw-semi);
   color: var(--color-text-primary);
-  margin: 0 0 var(--space-2);
+  margin: 0;
+  line-height: 1.1;
 }
 
 .enfoque-card p {
   font-family: var(--font-sans);
-  font-size: var(--fs-body-sm);
-  line-height: 1.5;
-  color: var(--color-text-secondary);
+  font-size: 16px;
+  line-height: 26px;
+  color: #333;
   margin: 0;
 }
 
@@ -362,107 +555,105 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
 .exp-timeline {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 0 18px;
+  gap: 0 8px;
   align-items: stretch;
 }
 
 .rail {
   position: relative;
-  width: 6px;
-  margin-left: 6px;
-  border-radius: 3px;
-  background: linear-gradient(var(--color-moss) 0%, var(--color-moss-soft) 100%);
+  width: 28px;
 }
-.rail::before {
-  content: '';
+.rail i {
   position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translateX(-50%);
+  left: 5px;
+  top: 8px;
   width: 18px;
   height: 18px;
   border-radius: 50%;
   background: var(--color-moss);
 }
+.rail b {
+  position: absolute;
+  left: 11px;
+  top: 25px;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(180deg, var(--color-moss) 0%, var(--color-moss-soft) 100%);
+}
 
 .exp-blocks {
   display: flex;
   flex-direction: column;
-  gap: var(--space-7);
-  padding-top: 2px;
+  gap: 32px;
 }
 
 .exp-blocks h4 {
   font-family: var(--font-sans);
-  font-size: var(--fs-h4);
+  font-size: 18px;
   font-weight: var(--fw-semi);
   color: var(--color-text-primary);
-  margin: 0 0 var(--space-3);
-  line-height: 1.2;
+  margin: 0 0 12px;
+  line-height: 30px;
 }
 
 .exp-blocks ul {
-  list-style: disc;
-  padding-left: var(--space-5);
+  list-style: none;
+  padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
   font-family: var(--font-sans);
-  font-size: var(--fs-body-sm);
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 26px;
   color: var(--color-text-secondary);
 }
 
 .exp-cta {
-  margin-top: var(--space-8);
+  margin-top: 32px;
 }
+.exp-cta .lbl-wide { display: none; }
 
-@media (min-width: 880px) {
+@media (min-width: 960px) {
   .twocol-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 64px;
+    max-width: 1160px;
+    margin: 0 auto;
   }
-  .enfoque-card + .enfoque-card { margin-left: 32px; }
-  .enfoque-card + .enfoque-card + .enfoque-card { margin-left: 64px; }
+  .enfoque-list { max-width: 460px; }
   .exp-cta {
     display: flex;
     justify-content: center;
   }
-}
-
-@media (max-width: 600px) {
-  .enfoque-card + .enfoque-card,
-  .enfoque-card + .enfoque-card + .enfoque-card {
-    margin-left: 0;
-  }
+  .exp-cta .lbl-wide { display: inline; }
+  .exp-cta .lbl-narrow { display: none; }
 }
 
 /* ── Colaboraciones ── */
 .colab {
   position: relative;
   background: var(--color-bg-base);
-  padding: var(--section-pad-top) 0 var(--section-pad-bottom);
+  padding: 40px 0;
   overflow: hidden;
 }
 
 .blob {
   position: absolute;
   pointer-events: none;
-  opacity: .6;
-  width: 520px;
-  height: 520px;
+  width: 346px;
+  height: 622px;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(200,217,194,.55), transparent 70%);
-  top: -160px;
-  right: -120px;
+  background: radial-gradient(closest-side, rgba(200,217,194,.35), transparent 72%);
+  left: 30%;
+  top: -89px;
+  transform: rotate(-18deg);
 }
 .blob.b2 {
-  left: -160px;
-  top: auto;
-  bottom: -200px;
-  right: auto;
-  background: radial-gradient(closest-side, rgba(210,250,200,.35), transparent 70%);
+  left: auto;
+  right: 8%;
+  top: 0;
+  width: 242px;
+  height: 434px;
+  background: radial-gradient(closest-side, rgba(210,250,200,.28), transparent 72%);
+  transform: rotate(39deg);
 }
 
 .colab .container {
@@ -470,64 +661,61 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
   z-index: 1;
 }
 
-.colab-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-10);
-  align-items: center;
+.colab-inner {
+  max-width: 598px;
+  margin: 0 auto;
 }
-
-.colab-text p {
+.colab-inner > p {
   font-family: var(--font-sans);
-  font-size: var(--fs-body);
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 26px;
   color: var(--color-text-secondary);
   margin: 0;
-  max-width: 42ch;
+  max-width: 495px;
 }
 
-/* Stacked person card */
-.person-stack {
+/* Carrusel de colaboradores */
+.colab-carousel {
   position: relative;
-  width: min(100%, 340px);
-  margin: 0 auto;
-  aspect-ratio: 0.94 / 1;
+  margin: 32px auto 0;
+  width: 313px;
+}
+@media (min-width: 880px) {
+  .colab-carousel { margin: 24px 0 0 auto; }
 }
 
-.person-card {
+.colab-carousel .ghost {
   position: absolute;
   inset: 0;
+  border-radius: 14px;
+  border: 2px solid var(--color-clay-soft);
+  background: var(--color-bg-base);
+}
+.colab-carousel .ghost.g1 { transform: rotate(-4deg) translate(-9px, 7px); }
+.colab-carousel .ghost.g2 { transform: rotate(3deg) translate(11px, 12px); }
+
+.person-card {
+  position: relative;
+  z-index: 2;
   background: var(--color-clay-soft);
   border: 2px solid var(--color-clay-soft);
   border-radius: 14px;
-  padding: 28px 24px;
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-5);
-  z-index: 3;
+  gap: 24px;
   box-shadow: 0 10px 30px rgba(26,33,24,.10);
 }
 
-.person-card::before,
-.person-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 14px;
-  border: 2px solid var(--color-clay-soft);
-  background: transparent;
-  z-index: -1;
-}
-.person-card::before { transform: rotate(-4deg) translate(-8px, 6px); }
-.person-card::after  { transform: rotate(3deg) translate(10px, 12px); }
+.person-slide { display: none; flex-direction: column; align-items: center; gap: 24px; align-self: stretch; }
+.person-slide.active { display: flex; animation: sm-slidefade 350ms ease; }
 
 .person-avatar {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: var(--color-bg-muted) center / cover no-repeat;
-  background-image: url('/images/adriana.png');
+  background: #fff center / cover no-repeat;
   box-shadow: 0 6px 14px rgba(26,33,24,.08);
 }
 
@@ -535,23 +723,23 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .person-name {
   font-family: var(--font-serif);
-  font-size: var(--fs-h4);
   font-weight: var(--fw-semi);
+  font-size: 18px;
   color: var(--color-text-primary);
   margin: 0;
   letter-spacing: var(--ls-tight);
   text-align: center;
-  line-height: 1.15;
+  line-height: 1.1;
 }
 
 .person-role {
   font-family: var(--font-sans);
-  font-size: var(--fs-body-sm);
+  font-size: 16px;
   color: var(--color-text-secondary);
   margin: 0;
   text-align: center;
@@ -559,12 +747,12 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
 
 .person-socials {
   display: flex;
-  gap: 14px;
+  gap: 24px;
+  justify-content: center;
 }
-
 .person-socials a {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   background: var(--color-bg-base);
   display: grid;
@@ -578,23 +766,97 @@ import CTAFinalSection from '../components/CTAFinalSection.astro';
   color: var(--color-moss);
 }
 
+.person-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  min-height: 32px;
+}
+.person-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+}
+.person-dots :global(button) {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  padding: 0;
+  border: none;
+  background: var(--color-text-secondary);
+  opacity: .28;
+  cursor: pointer;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.person-dots :global(button):hover { opacity: .6; transform: scale(1.15); }
+.person-dots :global(button[aria-current="true"]) { opacity: 1; }
+
+.person-arrow {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-bg-base);
+  color: var(--color-moss);
+  border: none;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+.person-arrow:hover { transform: translateX(2px); filter: brightness(1.04); }
+
 @media (min-width: 880px) {
-  .colab-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-  }
+  .hero { padding: 40px 0 80px; }
+  .twocol { padding: 80px 0; }
+  .colab { padding: 80px 0; }
 }
 </style>
 
 <script>
-  // Leer más / Leer menos toggle
-  const p       = document.getElementById('historiaP');
-  const leerBtn = document.getElementById('leerMas');
-  leerBtn?.addEventListener('click', () => {
-    const isCollapsed = p?.classList.toggle('collapsed') === false;
-    if (leerBtn) {
-      leerBtn.textContent = p?.classList.contains('collapsed') ? 'Leer más' : 'Leer menos';
-      leerBtn.setAttribute('aria-expanded', String(!p?.classList.contains('collapsed')));
+  // Carrusel genérico de dots + flecha, reutilizado por "Mi historia" y "Colaboraciones".
+  // sobre-mi.astro no usa transition:persist, así que tras una navegación SPA
+  // del ClientRouter este <script> se inserta de nuevo pero el navegador no
+  // lo ejecuta salvo que reaccionemos al evento astro:page-load (se dispara
+  // tanto en la carga inicial como en cada navegación posterior).
+  document.addEventListener('astro:page-load', () => {
+    function initCarousel(slideSelector: string, dotsId: string, nextId: string, label: string, onChange?: (slide: Element) => void) {
+      const slides = Array.from(document.querySelectorAll(slideSelector));
+      const dotsWrap = document.getElementById(dotsId);
+      if (!slides.length || !dotsWrap) return;
+
+      dotsWrap.innerHTML = '';
+      let idx = 0;
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', `${label} ${i + 1}`);
+        dot.addEventListener('click', () => go(i));
+        dotsWrap.appendChild(dot);
+      });
+      const dots = Array.from(dotsWrap.children);
+
+      function go(n: number) {
+        idx = (n + slides.length) % slides.length;
+        slides.forEach((slide, i) => slide.classList.toggle('active', i === idx));
+        dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === idx)));
+        onChange?.(slides[idx]);
+      }
+
+      document.getElementById(nextId)?.addEventListener('click', () => go(idx + 1));
+      go(0);
     }
+
+    const heroTitle = document.getElementById('heroTitle');
+    initCarousel('.hero-body .hero-slide', 'heroDots', 'heroNext', 'Fragmento', (slide) => {
+      if (heroTitle) heroTitle.textContent = (slide as HTMLElement).dataset.title ?? '';
+    });
+
+    initCarousel('.person-card .person-slide', 'colabDots', 'colabNext', 'Colaborador');
   });
 </script>

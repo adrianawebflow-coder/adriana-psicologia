@@ -1,4 +1,6 @@
 ---
+const path = Astro.url.pathname;
+const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
 ---
 <header class="nav" transition:persist>
   <div class="nav-inner">
@@ -22,10 +24,12 @@
     </a>
 
     <nav class="nav-menu" aria-label="Principal">
-      <a href="/" class="active">Inicio</a>
-      <a href="/sobre-mi">Sobre mí</a>
-      <a href="/servicios">Servicios</a>
+      <a href="/" class={path === '/' ? 'active' : ''}>Inicio</a>
+      <a href="/sobre-mi" class={isActive('/sobre-mi') ? 'active' : ''}>Sobre mí</a>
+      <a href="/#servicios">Servicios</a>
+      <a href="/#como">Cómo funciona</a>
       <a href="/precio">Precio</a>
+      <a href="#contacto">Contacto</a>
       <a href="/blog">Blog</a>
     </nav>
 
@@ -44,10 +48,12 @@
 <div class="sheet" id="navSheet" aria-hidden="true">
   <div class="sheet-panel">
     <button class="sheet-close" id="navSheetClose" aria-label="Cerrar menú">×</button>
-    <a href="/">Inicio</a>
-    <a href="/sobre-mi">Sobre mí</a>
-    <a href="/servicios">Servicios</a>
+    <a href="/" class={path === '/' ? 'active' : ''}>Inicio</a>
+    <a href="/sobre-mi" class={isActive('/sobre-mi') ? 'active' : ''}>Sobre mí</a>
+    <a href="/#servicios">Servicios</a>
+    <a href="/#como">Cómo funciona</a>
     <a href="/precio">Precio</a>
+    <a href="#contacto">Contacto</a>
     <a href="/blog">Blog</a>
     <a href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener" class="sheet-cta">
       Contáctame
@@ -65,9 +71,10 @@
 }
 
 .nav-inner {
-  max-width: 1280px;
+  max-width: 1248px;
   margin: 0 auto;
-  padding: 14px 20px;
+  padding: 10px 20px;
+  min-height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -80,29 +87,44 @@
   text-decoration: none;
   color: var(--color-text-primary);
   flex-shrink: 0;
+  line-height: 0;
 }
 .brand svg {
-  height: 34px;
+  height: 43px;
   width: auto;
   display: block;
 }
 
 .nav-menu {
   display: none;
-  gap: 32px;
+  gap: 26px;
   align-items: center;
 }
 .nav-menu a {
   font-family: var(--font-sans);
   font-size: 15px;
-  font-weight: 500;
-  color: var(--color-text-primary);
+  font-weight: 400;
+  color: var(--color-text-muted);
   text-decoration: none;
-  transition: color 150ms ease;
+  transition: color 150ms ease, font-weight 150ms ease;
 }
-.nav-menu a:hover,
+.nav-menu a:hover {
+  color: var(--color-moss);
+}
 .nav-menu a.active {
   color: var(--color-moss);
+  font-weight: 700;
+  position: relative;
+}
+.nav-menu a.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--color-moss);
 }
 
 .nav-cta { display: none; }
@@ -110,13 +132,14 @@
 .btn-cta {
   display: inline-flex;
   align-items: center;
-  height: 42px;
-  padding: 0 22px;
+  height: 44px;
+  padding: 0 16px;
   background: var(--color-moss);
   color: var(--color-text-inverse);
   font-family: var(--font-sans);
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
+  border: 1px solid #333;
   border-radius: var(--radius-full);
   text-decoration: none;
   transition: background var(--transition-fast), transform var(--transition-fast);
@@ -147,7 +170,8 @@
   border-radius: 2px;
 }
 
-@media (min-width: 880px) {
+@media (min-width: 1000px) {
+  .nav-inner { padding: 20px 24px; }
   .nav-menu,
   .nav-cta { display: flex; }
   .burger   { display: none; }
@@ -180,12 +204,13 @@
   padding: 14px 4px;
   font-family: var(--font-sans);
   font-size: 16px;
-  font-weight: 500;
-  color: var(--color-text-primary);
+  font-weight: 400;
+  color: var(--color-text-muted);
   text-decoration: none;
   border-bottom: 1px solid var(--color-bg-border);
 }
 .sheet-panel a:hover { color: var(--color-moss); }
+.sheet-panel a.active { color: var(--color-moss); font-weight: 700; }
 
 .sheet-cta {
   margin-top: 16px;
@@ -221,4 +246,18 @@
   sheetClose?.addEventListener('click', close);
   sheet?.addEventListener('click', (e) => { if (e.target === sheet) close(); });
   sheet?.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+
+  // El header usa transition:persist, así que sobrevive a las navegaciones
+  // de ClientRouter sin volver a renderizarse: el estado "active" calculado
+  // en el servidor se queda obsoleto tras la primera navegación. Lo
+  // recalculamos aquí en cada carga (inicial y las siguientes vía SPA).
+  document.addEventListener('astro:page-load', () => {
+    const path = window.location.pathname;
+    document.querySelectorAll('a[href="/"]').forEach((a) => {
+      a.classList.toggle('active', path === '/');
+    });
+    document.querySelectorAll('a[href="/sobre-mi"]').forEach((a) => {
+      a.classList.toggle('active', path.startsWith('/sobre-mi'));
+    });
+  });
 </script>
