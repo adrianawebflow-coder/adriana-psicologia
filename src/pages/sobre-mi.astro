@@ -16,54 +16,56 @@ import Layout from '../layouts/Layout.astro';
         <div class="hero-body" aria-live="polite">
           <h1 id="heroTitle" transition:name="hero-title">Mi historia</h1>
 
-          <div class="hero-slide active" data-title="Mi historia">
-            <p>
-              Soy Adriana Esteban Labelle, psicóloga general sanitaria, terapeuta
-              familiar y de pareja y mediadora acreditada por la Universidad
-              Francisco de Vitoria y el Instituto de Psicoterapia Familiar
-              Sistémica y Adicciones.
-            </p>
-          </div>
-          <div class="hero-slide" data-title="Mi formación">
-            <p>
-              Cuento con formación especializada en Trastornos de la Conducta
-              Alimentaria y Terapia Sistémica, áreas en las que he desarrollado
-              gran parte de mi experiencia clínica.
-            </p>
-          </div>
-          <div class="hero-slide" data-title="Mi trayectoria">
-            <p>
-              Desde el inicio de mi trayectoria profesional me he especializado
-              en el acompañamiento de adolescentes, adultos, familias y parejas
-              que atraviesan momentos de dificultad emocional, conflictos
-              relacionales o situaciones de sufrimiento que afectan a su
-              bienestar y calidad de vida.
-            </p>
-          </div>
-          <div class="hero-slide" data-title="Mi forma de trabajar">
-            <p>
-              Mi forma de trabajar se basa en crear un espacio seguro, cercano
-              y libre de juicios, donde cada persona pueda comprender mejor lo
-              que le ocurre y encontrar herramientas para afrontar sus
-              dificultades.
-            </p>
-          </div>
-          <div class="hero-slide" data-title="Actualmente">
-            <p>
-              Actualmente atiendo pacientes de forma presencial en mi consulta
-              privada ubicada en el barrio de Hortaleza (Madrid), así como en
-              modalidad online, adaptándome a las necesidades de cada persona.
-            </p>
-          </div>
-          <div class="hero-slide" data-title="Además">
-            <p>
-              Además de mi labor asistencial, compagino la práctica clínica con
-              la docencia como profesora del Máster de Trastornos de la
-              Conducta Alimentaria en el Instituto Superior de Estudios
-              Psicológicos, así como impartiendo cursos, talleres y programas
-              de formación en salud mental para centros educativos y otras
-              instituciones.
-            </p>
+          <div class="hero-track" id="heroTrack">
+            <div class="hero-slide" data-title="Mi historia">
+              <p>
+                Soy Adriana Esteban Labelle, psicóloga general sanitaria, terapeuta
+                familiar y de pareja y mediadora acreditada por la Universidad
+                Francisco de Vitoria y el Instituto de Psicoterapia Familiar
+                Sistémica y Adicciones.
+              </p>
+            </div>
+            <div class="hero-slide" data-title="Mi formación">
+              <p>
+                Cuento con formación especializada en Trastornos de la Conducta
+                Alimentaria y Terapia Sistémica, áreas en las que he desarrollado
+                gran parte de mi experiencia clínica.
+              </p>
+            </div>
+            <div class="hero-slide" data-title="Mi trayectoria">
+              <p>
+                Desde el inicio de mi trayectoria profesional me he especializado
+                en el acompañamiento de adolescentes, adultos, familias y parejas
+                que atraviesan momentos de dificultad emocional, conflictos
+                relacionales o situaciones de sufrimiento que afectan a su
+                bienestar y calidad de vida.
+              </p>
+            </div>
+            <div class="hero-slide" data-title="Mi forma de trabajar">
+              <p>
+                Mi forma de trabajar se basa en crear un espacio seguro, cercano
+                y libre de juicios, donde cada persona pueda comprender mejor lo
+                que le ocurre y encontrar herramientas para afrontar sus
+                dificultades.
+              </p>
+            </div>
+            <div class="hero-slide" data-title="Actualmente">
+              <p>
+                Actualmente atiendo pacientes de forma presencial en mi consulta
+                privada ubicada en el barrio de Hortaleza (Madrid), así como en
+                modalidad online, adaptándome a las necesidades de cada persona.
+              </p>
+            </div>
+            <div class="hero-slide" data-title="Además">
+              <p>
+                Además de mi labor asistencial, compagino la práctica clínica con
+                la docencia como profesora del Máster de Trastornos de la
+                Conducta Alimentaria en el Instituto Superior de Estudios
+                Psicológicos, así como impartiendo cursos, talleres y programas
+                de formación en salud mental para centros educativos y otras
+                instituciones.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -353,9 +355,6 @@ import Layout from '../layouts/Layout.astro';
   color: #fff;
   border-radius: 12px;
   padding: 20px;
-  touch-action: pan-y;
-  transition: transform 280ms ease;
-  will-change: transform;
   margin: -68px 16px 0;
   position: relative;
   z-index: 2;
@@ -366,18 +365,16 @@ import Layout from '../layouts/Layout.astro';
   gap: 20px;
 }
 
-.hero-card.dragging {
-  transition: none;
-}
-
 .hero-body {
   flex: 1 1 auto;
-  display: grid;
-  grid-template-rows: auto auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  touch-action: pan-y;
 }
 
 .hero-card h1 {
-  grid-row: 1;
   font-family: var(--font-serif);
   font-size: 20px;
   font-weight: var(--fw-semi);
@@ -387,25 +384,23 @@ import Layout from '../layouts/Layout.astro';
   margin: 0 0 12px;
 }
 
-/* Los 6 fragmentos se apilan en la misma celda de grid: así la altura de la
-   tarjeta queda fijada por el más largo y no "baila" al cambiar de slide. */
-.hero-slide {
-  grid-row: 2;
-  grid-column: 1;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
+/* Los fragmentos se colocan uno junto a otro; arrastrar/cambiar de slide
+   desplaza .hero-track horizontalmente, dejando ver el siguiente/anterior
+   entrando por el borde. */
+.hero-track {
+  display: flex;
+  flex-wrap: nowrap;
+  flex: 1 1 auto;
+  transition: transform 280ms ease;
 }
-.hero-slide.active {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-  animation: sm-slidefade 350ms ease;
+.hero-track.dragging {
+  transition: none;
 }
 
-@keyframes sm-slidefade {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: none; }
+.hero-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .hero-slide p {
@@ -720,6 +715,11 @@ import Layout from '../layouts/Layout.astro';
 .person-slide { display: none; flex-direction: column; align-items: center; gap: 24px; align-self: stretch; }
 .person-slide.active { display: flex; animation: sm-slidefade 350ms ease; }
 
+@keyframes sm-slidefade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+
 .person-avatar {
   width: 120px;
   height: 120px;
@@ -832,81 +832,7 @@ import Layout from '../layouts/Layout.astro';
   // lo ejecuta salvo que reaccionemos al evento astro:page-load (se dispara
   // tanto en la carga inicial como en cada navegación posterior).
   document.addEventListener('astro:page-load', () => {
-    function attachDrag(cardEl: HTMLElement | null, onSwipeLeft: () => void, onSwipeRight: () => void) {
-      if (!cardEl) return;
-      const card = cardEl;
-      const DRAG_THRESHOLD = 60;
-      let startX = 0;
-      let startY = 0;
-      let dx = 0;
-      let dragging = false;
-      let axisLocked: 'x' | 'y' | null = null;
-
-      function setX(x: number) {
-        card.style.transform = x ? `translateX(${x}px)` : '';
-      }
-
-      card.addEventListener('touchstart', (e) => {
-        const t = e.touches[0];
-        startX = t.clientX;
-        startY = t.clientY;
-        dx = 0;
-        dragging = true;
-        axisLocked = null;
-        card.classList.add('dragging');
-      }, { passive: true });
-
-      card.addEventListener('touchmove', (e) => {
-        if (!dragging) return;
-        const t = e.touches[0];
-        dx = t.clientX - startX;
-        const dy = t.clientY - startY;
-        if (!axisLocked) axisLocked = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
-        if (axisLocked === 'x') setX(dx);
-      }, { passive: true });
-
-      function release() {
-        if (!dragging) return;
-        dragging = false;
-        card.classList.remove('dragging');
-
-        if (axisLocked !== 'x' || Math.abs(dx) < DRAG_THRESHOLD) {
-          setX(0);
-          return;
-        }
-
-        const width = card.offsetWidth;
-        const exitX = dx > 0 ? width : -width;
-        setX(exitX);
-
-        let settled = false;
-        function finishExit() {
-          if (settled) return;
-          settled = true;
-          card.removeEventListener('transitionend', finishExit);
-          card.classList.add('dragging');
-          setX(dx > 0 ? -width : width);
-          void card.offsetWidth;
-          card.classList.remove('dragging');
-          if (dx > 0) onSwipeRight(); else onSwipeLeft();
-          setX(0);
-        }
-        card.addEventListener('transitionend', finishExit, { once: true });
-        setTimeout(finishExit, 320);
-      }
-
-      card.addEventListener('touchend', release);
-      card.addEventListener('touchcancel', release);
-    }
-
-    function initCarousel(
-      slideSelector: string,
-      dotsId: string,
-      nextId: string,
-      label: string,
-      onChange?: (slide: Element) => void,
-      swipeEl?: HTMLElement | null,
-    ) {
+    function initCarousel(slideSelector: string, dotsId: string, nextId: string, label: string, onChange?: (slide: Element) => void) {
       const slides = Array.from(document.querySelectorAll(slideSelector));
       const dotsWrap = document.getElementById(dotsId);
       if (!slides.length || !dotsWrap) return;
@@ -932,15 +858,93 @@ import Layout from '../layouts/Layout.astro';
       }
 
       document.getElementById(nextId)?.addEventListener('click', () => go(idx + 1));
-      attachDrag(swipeEl ?? null, () => go(idx + 1), () => go(idx - 1));
       go(0);
     }
 
-    const heroTitle = document.getElementById('heroTitle');
-    initCarousel('.hero-body .hero-slide', 'heroDots', 'heroNext', 'Fragmento', (slide) => {
-      if (heroTitle) heroTitle.textContent = (slide as HTMLElement).dataset.title ?? '';
-    }, document.querySelector<HTMLElement>('.hero-card'));
+    // Carrusel del hero: los fragmentos viven uno junto a otro en .hero-track;
+    // arrastrar (o pulsar la flecha) desplaza el track para que el siguiente/
+    // anterior entre visiblemente por el borde, en vez de solo hacer fade.
+    function initHeroCarousel() {
+      const viewport = document.querySelector<HTMLElement>('.hero-body');
+      const track = document.getElementById('heroTrack');
+      const dotsWrap = document.getElementById('heroDots');
+      const heroTitle = document.getElementById('heroTitle');
+      if (!viewport || !track || !dotsWrap) return;
 
+      const slides = Array.from(track.children) as HTMLElement[];
+      if (!slides.length) return;
+
+      dotsWrap.innerHTML = '';
+      let idx = 0;
+      let dx = 0;
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-label', `Fragmento ${i + 1}`);
+        dot.addEventListener('click', () => go(i));
+        dotsWrap.appendChild(dot);
+      });
+      const dots = Array.from(dotsWrap.children);
+
+      function place(offset: number) {
+        track.style.transform = `translateX(calc(${-idx * 100}% + ${offset}px))`;
+      }
+
+      function go(n: number) {
+        idx = (n + slides.length) % slides.length;
+        dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === idx)));
+        if (heroTitle) heroTitle.textContent = slides[idx].dataset.title ?? '';
+        place(0);
+      }
+
+      document.getElementById('heroNext')?.addEventListener('click', () => go(idx + 1));
+
+      const DRAG_THRESHOLD = 60;
+      let startX = 0;
+      let startY = 0;
+      let dragging = false;
+      let axisLocked: 'x' | 'y' | null = null;
+
+      viewport.addEventListener('touchstart', (e) => {
+        const t = e.touches[0];
+        startX = t.clientX;
+        startY = t.clientY;
+        dx = 0;
+        dragging = true;
+        axisLocked = null;
+        track.classList.add('dragging');
+      }, { passive: true });
+
+      viewport.addEventListener('touchmove', (e) => {
+        if (!dragging) return;
+        const t = e.touches[0];
+        dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+        if (!axisLocked) axisLocked = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+        if (axisLocked === 'x') place(dx);
+      }, { passive: true });
+
+      function release() {
+        if (!dragging) return;
+        dragging = false;
+        track.classList.remove('dragging');
+        if (axisLocked === 'x' && Math.abs(dx) >= DRAG_THRESHOLD) {
+          go(dx < 0 ? idx + 1 : idx - 1);
+        } else {
+          place(0);
+        }
+      }
+      viewport.addEventListener('touchend', release);
+      viewport.addEventListener('touchcancel', release);
+
+      window.addEventListener('resize', () => place(0));
+
+      go(0);
+    }
+
+    initHeroCarousel();
     initCarousel('.person-card .person-slide', 'colabDots', 'colabNext', 'Colaborador');
   });
 </script>
