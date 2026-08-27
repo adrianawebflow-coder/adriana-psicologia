@@ -353,6 +353,9 @@ import Layout from '../layouts/Layout.astro';
   color: #fff;
   border-radius: 12px;
   padding: 20px;
+  touch-action: pan-y;
+  transition: transform 280ms ease;
+  will-change: transform;
   margin: -68px 16px 0;
   position: relative;
   z-index: 2;
@@ -361,6 +364,10 @@ import Layout from '../layouts/Layout.astro';
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.hero-card.dragging {
+  transition: none;
 }
 
 .hero-body {
@@ -452,6 +459,10 @@ import Layout from '../layouts/Layout.astro';
   transition: transform 150ms ease, filter 150ms ease;
 }
 .hero-arrow:hover { transform: translateX(2px); filter: brightness(1.06); }
+
+@media (max-width: 879px) {
+  .hero-arrow { display: none; }
+}
 
 @media (min-width: 880px) {
   .hero {
@@ -821,7 +832,81 @@ import Layout from '../layouts/Layout.astro';
   // lo ejecuta salvo que reaccionemos al evento astro:page-load (se dispara
   // tanto en la carga inicial como en cada navegación posterior).
   document.addEventListener('astro:page-load', () => {
-    function initCarousel(slideSelector: string, dotsId: string, nextId: string, label: string, onChange?: (slide: Element) => void) {
+    function attachDrag(cardEl: HTMLElement | null, onSwipeLeft: () => void, onSwipeRight: () => void) {
+      if (!cardEl) return;
+      const card = cardEl;
+      const DRAG_THRESHOLD = 60;
+      let startX = 0;
+      let startY = 0;
+      let dx = 0;
+      let dragging = false;
+      let axisLocked: 'x' | 'y' | null = null;
+
+      function setX(x: number) {
+        card.style.transform = x ? `translateX(${x}px)` : '';
+      }
+
+      card.addEventListener('touchstart', (e) => {
+        const t = e.touches[0];
+        startX = t.clientX;
+        startY = t.clientY;
+        dx = 0;
+        dragging = true;
+        axisLocked = null;
+        card.classList.add('dragging');
+      }, { passive: true });
+
+      card.addEventListener('touchmove', (e) => {
+        if (!dragging) return;
+        const t = e.touches[0];
+        dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+        if (!axisLocked) axisLocked = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+        if (axisLocked === 'x') setX(dx);
+      }, { passive: true });
+
+      function release() {
+        if (!dragging) return;
+        dragging = false;
+        card.classList.remove('dragging');
+
+        if (axisLocked !== 'x' || Math.abs(dx) < DRAG_THRESHOLD) {
+          setX(0);
+          return;
+        }
+
+        const width = card.offsetWidth;
+        const exitX = dx > 0 ? width : -width;
+        setX(exitX);
+
+        let settled = false;
+        function finishExit() {
+          if (settled) return;
+          settled = true;
+          card.removeEventListener('transitionend', finishExit);
+          card.classList.add('dragging');
+          setX(dx > 0 ? -width : width);
+          void card.offsetWidth;
+          card.classList.remove('dragging');
+          if (dx > 0) onSwipeRight(); else onSwipeLeft();
+          setX(0);
+        }
+        card.addEventListener('transitionend', finishExit, { once: true });
+        setTimeout(finishExit, 320);
+      }
+
+      card.addEventListener('touchend', release);
+      card.addEventListener('touchcancel', release);
+    }
+
+    function initCarousel(
+      slideSelector: string,
+      dotsId: string,
+      nextId: string,
+      label: string,
+      onChange?: (slide: Element) => void,
+      swipeEl?: HTMLElement | null,
+    ) {
       const slides = Array.from(document.querySelectorAll(slideSelector));
       const dotsWrap = document.getElementById(dotsId);
       if (!slides.length || !dotsWrap) return;
@@ -847,13 +932,14 @@ import Layout from '../layouts/Layout.astro';
       }
 
       document.getElementById(nextId)?.addEventListener('click', () => go(idx + 1));
+      attachDrag(swipeEl ?? null, () => go(idx + 1), () => go(idx - 1));
       go(0);
     }
 
     const heroTitle = document.getElementById('heroTitle');
     initCarousel('.hero-body .hero-slide', 'heroDots', 'heroNext', 'Fragmento', (slide) => {
       if (heroTitle) heroTitle.textContent = (slide as HTMLElement).dataset.title ?? '';
-    });
+    }, document.querySelector<HTMLElement>('.hero-card'));
 
     initCarousel('.person-card .person-slide', 'colabDots', 'colabNext', 'Colaborador');
   });
