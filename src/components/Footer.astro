@@ -4,9 +4,8 @@
   <div class="footer-inner">
 
     <div class="foot-brand">
-      <a href="/" class="footer-logo">
-        <span class="footer-logo-name">Adriana</span>
-        <span class="footer-logo-sub">PSICOLOGÍA</span>
+      <a href="/" class="footer-logo" aria-label="Adriana Psicología">
+        <img src="/images/logo-adriana-inverse.svg" width="139" height="43" alt="Adriana Psicología" />
       </a>
       <p class="foot-brand-meta">Madrid · Online</p>
       <p class="foot-brand-desc">Psicóloga colegiada M-35913. Acompañamiento individual, de pareja y familiar.</p>
@@ -99,33 +98,21 @@
 
 .footer-logo {
   display: flex;
-  flex-direction: column;
-  line-height: 1;
+  align-items: center;
+  line-height: 0;
   text-decoration: none;
-  margin-bottom: var(--space-2);
 }
-.footer-logo-name {
-  font-family: var(--font-script);
-  font-size: 30px;
-  font-weight: 600;
-  color: var(--color-text-inverse);
-  letter-spacing: -0.01em;
-}
-.footer-logo-sub {
-  font-family: var(--font-sans);
-  font-size: 9px;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: rgba(245,242,234,.6);
-  margin-top: 2px;
-  padding-left: 4px;
+.footer-logo img {
+  height: 34px;
+  width: auto;
+  display: block;
 }
 
 .foot-brand-meta {
   font-family: var(--font-sans);
   font-size: 12px;
   color: rgba(245,242,234,.85);
-  margin: 8px 0 0;
+  margin: var(--space-4) 0 0;
 }
 
 .foot-brand-desc {

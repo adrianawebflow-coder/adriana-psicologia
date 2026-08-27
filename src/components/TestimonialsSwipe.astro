@@ -307,7 +307,12 @@ const testimonials = [
 <script>
 // @ts-nocheck — vanilla browser JS, strict TS types no aplican aquí
 
-(function () {
+// Esta sección no usa transition:persist, así que tras una navegación SPA
+// del ClientRouter el <script> se inserta de nuevo pero el navegador no lo
+// ejecuta salvo que reaccionemos a astro:page-load (carga inicial y cada
+// navegación posterior). Sin esto, initAll() nunca corre en la vuelta a
+// Home y las tarjetas se quedan sin transformar ni altura calculada.
+document.addEventListener('astro:page-load', () => {
   /* ─── Constants ─────────────────────────────────── */
   const N                = 5;
   const THRESHOLD_RATIO  = 0.38;
@@ -810,5 +815,11 @@ const testimonials = [
     wireEvents();
     startAutoplay();
   }
-})();
+
+  // Antes de salir de la página (siguiente navegación SPA), para el
+  // autoplay: si no lo hacemos, el setInterval de esta instancia sigue
+  // vivo indefinidamente incluso tras dejar Home, acumulándose con el de
+  // cada visita posterior.
+  document.addEventListener('astro:before-swap', stopAutoplay, { once: true });
+});
 </script>
