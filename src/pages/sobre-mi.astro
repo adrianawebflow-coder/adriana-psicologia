@@ -844,21 +844,20 @@ import Layout from '../layouts/Layout.astro';
 @media (max-width: 879px) {
   #colabNext { display: none; }
 
-  /* Idle: solo translateY + scale, sin rotación ni desplazamiento horizontal.
-     La fase "rise" (subida periódica) se anima desde JS con un translateY
-     proporcional al alto real de la card — ver initColabPeekLoop. */
-  .colab-carousel .ghost,
-  .colab-carousel.is-peeking .ghost.g1,
-  .colab-carousel.is-peeking .ghost.g2 {
-    transition: transform 400ms ease-in;
+  .colab-carousel {
+    width: 240px;
   }
-  .colab-carousel .ghost.g1,
+
+  /* Misma animación que desktop (fan-out con rotación en g1/g2, idle
+     heredado de la regla base .colab-carousel .ghost.g1/g2), pero con un
+     recorrido más corto para que no se corte contra el overflow:hidden de
+     la sección ni se salga del viewport en pantallas estrechas. El trigger
+     es automático (ver initColabPeek) en vez de hover, ya que no hay ratón. */
   .colab-carousel.is-peeking .ghost.g1 {
-    transform: translateY(-6px) scale(0.98);
+    transform: translate(-46px, 14px) rotate(-8deg) scale(1);
   }
-  .colab-carousel .ghost.g2,
   .colab-carousel.is-peeking .ghost.g2 {
-    transform: translateY(-12px) scale(0.96);
+    transform: translate(46px, 14px) rotate(8deg) scale(1);
   }
   .colab-carousel {
     overflow: visible;
@@ -1131,15 +1130,19 @@ import Layout from '../layouts/Layout.astro';
       go(0);
     }
 
-    // Stack "peek" de Colaboraciones: hover abre las ghost en abanico; no
-    // toca los dots ni la flecha, que siguen navegando el carrusel aparte.
+    // Stack "peek" de Colaboraciones: en desktop, hover abre las ghost en
+    // abanico. En ambos breakpoints, al entrar la sección en el viewport
+    // (mitad visible) se dispara la misma animación una sola vez de forma
+    // automática — en mobile es el único trigger, ya que no hay hover.
+    // No toca los dots ni la flecha, que navegan el carrusel aparte.
     function initColabPeek() {
       const stack = document.querySelector<HTMLElement>('.colab-carousel');
       if (!stack) return;
-      if (window.matchMedia('(max-width: 879px)').matches) return; // en mobile, ver initColabPeekLoop
 
-      stack.addEventListener('mouseenter', () => stack.classList.add('is-peeking'));
-      stack.addEventListener('mouseleave', () => stack.classList.remove('is-peeking'));
+      if (!window.matchMedia('(max-width: 879px)').matches) {
+        stack.addEventListener('mouseenter', () => stack.classList.add('is-peeking'));
+        stack.addEventListener('mouseleave', () => stack.classList.remove('is-peeking'));
+      }
 
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReduced) return;
@@ -1181,87 +1184,6 @@ import Layout from '../layouts/Layout.astro';
       fillGhost(document.querySelector('.ghost.g2'), next);
     }
 
-    // Peek automático en mobile: una sola vez, al entrar la sección en el
-    // viewport, las dos ghost "suben" (translateY proporcional al alto real
-    // de la card, sin rotación ni desplazamiento horizontal), se mantienen
-    // arriba un momento y vuelven a su posición idle. No se repite después.
-    // Los dots viven fuera de la card y no se tocan aquí.
-    function initColabPeekLoop() {
-      if (!window.matchMedia('(max-width: 879px)').matches) return;
-      const cardEl = document.querySelector<HTMLElement>('.person-card');
-      const stackEl = document.querySelector<HTMLElement>('.colab-carousel');
-      const g1El = document.querySelector<HTMLElement>('.ghost.g1');
-      const g2El = document.querySelector<HTMLElement>('.ghost.g2');
-      if (!cardEl || !stackEl || !g1El || !g2El) return;
-      const card = cardEl;
-      const g1 = g1El;
-      const g2 = g2El;
-
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const RISE_MS = prefersReduced ? 0 : 250;
-      const HOLD_MS = prefersReduced ? 0 : 900;
-      const FALL_MS = prefersReduced ? 0 : 400;
-
-      let played = false;
-      let holdTimeoutId: ReturnType<typeof setTimeout> | null = null;
-
-      function resetGhostStyles() {
-        g1.style.transition = '';
-        g1.style.transform = '';
-        g2.style.transition = '';
-        g2.style.transform = '';
-      }
-
-      function runOnce() {
-        if (played) return;
-        played = true;
-
-        const h = card.offsetHeight;
-        const level2Y = -(h * 0.19);
-        const level3Y = -(h * 0.375);
-
-        g1.style.transition = `transform ${RISE_MS}ms ease-out`;
-        g2.style.transition = `transform ${RISE_MS}ms ease-out`;
-        g1.style.transform = `translateY(${level2Y}px) scale(1)`;
-        g2.style.transform = `translateY(${level3Y}px) scale(1)`;
-
-        holdTimeoutId = setTimeout(() => {
-          holdTimeoutId = null;
-          g1.style.transition = `transform ${FALL_MS}ms ease-in`;
-          g2.style.transition = `transform ${FALL_MS}ms ease-in`;
-          g1.style.transform = '';
-          g2.style.transform = '';
-        }, RISE_MS + HOLD_MS);
-      }
-
-      function stop() {
-        if (holdTimeoutId !== null) {
-          clearTimeout(holdTimeoutId);
-          holdTimeoutId = null;
-        }
-        resetGhostStyles();
-      }
-
-      // El drag pausa el peek si llega a mitad de animación; como es de una
-      // sola vez, "reanudar" simplemente evita que se repita más adelante.
-      pauseColabPeekLoop = () => {
-        played = true;
-        stop();
-      };
-      resumeColabPeekLoop = () => {};
-
-      if (prefersReduced) return;
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          runOnce();
-          observer.disconnect();
-        });
-      }, { threshold: 0.5 });
-      observer.observe(stackEl);
-    }
-
     // Los dots viven dentro de .person-card en el markup (así en desktop
     // quedan superpuestos a la card, sin tocar nada). En mobile .person-card
     // recibe un transform durante el drag/swipe, y como transform crea un
@@ -1271,10 +1193,13 @@ import Layout from '../layouts/Layout.astro';
     // el viewport es mobile, y los devolvemos a su sitio original en desktop
     // para no alterar en absoluto su marcado/posición ahí.
     function initColabNav() {
-      const stack = document.querySelector<HTMLElement>('.person-stack');
-      const card = document.querySelector<HTMLElement>('.person-card');
-      const nav = document.querySelector<HTMLElement>('.person-nav');
-      if (!stack || !card || !nav) return;
+      const stackEl = document.querySelector<HTMLElement>('.person-stack');
+      const cardEl = document.querySelector<HTMLElement>('.person-card');
+      const navEl = document.querySelector<HTMLElement>('.person-nav');
+      if (!stackEl || !cardEl || !navEl) return;
+      const stack = stackEl;
+      const card = cardEl;
+      const nav = navEl;
 
       function sync() {
         if (window.matchMedia('(max-width: 879px)').matches) {
@@ -1325,9 +1250,13 @@ import Layout from '../layouts/Layout.astro';
           g2.style.transform = '';
           return;
         }
-        const y = lerp(-12, -4, progress);
-        const scale = lerp(0.96, 0.985, progress);
-        g2.style.transform = `translateY(${y}px) scale(${scale})`;
+        // Interpola desde el idle base (translate(10px,-12px) scale(.96))
+        // hacia el mismo fan-out que usa el trigger automático en mobile.
+        const x = lerp(10, 46, progress);
+        const y = lerp(-12, 14, progress);
+        const rotate = lerp(0, 8, progress);
+        const scale = lerp(0.96, 1, progress);
+        g2.style.transform = `translate(${x}px, ${y}px) rotate(${rotate}deg) scale(${scale})`;
       }
 
       card.addEventListener('touchstart', (e) => {
@@ -1398,7 +1327,6 @@ import Layout from '../layouts/Layout.astro';
     initHeroCarousel();
     initCarousel('.person-card .person-slide', 'colabDots', 'colabNext', 'Colaborador', updateGhosts);
     initColabPeek();
-    initColabPeekLoop();
     initColabNav();
     initColabDrag();
   });
