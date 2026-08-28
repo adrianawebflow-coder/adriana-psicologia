@@ -1248,8 +1248,14 @@ import Layout from '../layouts/Layout.astro';
         if (!g2) return;
         if (progress <= 0) {
           g2.style.transform = '';
+          g2.style.zIndex = '';
           return;
         }
+        // g2 (el colaborador siguiente, al que realmente se navega) vive por
+        // defecto en z-index:0, por debajo de g1 (el anterior, z-index:1).
+        // Al arrastrar hay que subirla por encima de g1 para que la card que
+        // se ve asomar detrás sea la que de verdad se va a mostrar.
+        g2.style.zIndex = '2';
         // Interpola desde el idle base (translate(10px,-12px) scale(.96))
         // hacia el mismo fan-out que usa el trigger automático en mobile.
         const x = lerp(10, 46, progress);

@@ -45,7 +45,7 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
   </div>
 </header>
 
-<div class="sheet" id="navSheet" aria-hidden="true">
+<div class="sheet" id="navSheet" aria-hidden="true" transition:persist>
   <div class="sheet-panel">
     <button class="sheet-close" id="navSheetClose" aria-label="Cerrar menú">×</button>
     <a href="/" class={path === '/' ? 'active' : ''}>Inicio</a>

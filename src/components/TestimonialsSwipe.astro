@@ -166,6 +166,10 @@ const testimonials = [
   user-select: none;
   touch-action: pan-y;
   box-sizing: border-box;
+  /* La altura la fija JS (updateHeight) igualándola a la card con más
+     contenido, para que el stack no "baile" al cambiar de testimonio. */
+  display: flex;
+  flex-direction: column;
 }
 
 /* ── Card content ── */
@@ -178,6 +182,7 @@ const testimonials = [
 }
 
 .tsw-quote {
+  flex: 1 0 auto;
   font-family: var(--font-serif);
   font-weight: var(--fw-light);
   font-style: italic;
@@ -378,9 +383,17 @@ document.addEventListener('astro:page-load', () => {
     threshold = cardW * THRESHOLD_RATIO;
   }
 
+  // Iguala todas las cards a la altura de la que tenga más contenido, para
+  // que el stack no cambie de tamaño (ni el resto de la página "baile") al
+  // pasar de un testimonio corto a uno largo.
   function updateHeight() {
-    const front = cards[activeIdx];
-    if (front) stack.style.height = (front.offsetHeight + 22) + 'px';
+    let maxH = 0;
+    cards.forEach((c) => {
+      c.style.height = 'auto';
+      maxH = Math.max(maxH, c.offsetHeight);
+    });
+    cards.forEach((c) => { c.style.height = maxH + 'px'; });
+    stack.style.height = (maxH + 22) + 'px';
   }
 
   function updateDots(idx) {
