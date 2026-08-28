@@ -164,9 +164,46 @@ import Layout from '../layouts/Layout.astro';
         </p>
 
         <div class="colab-carousel reveal">
-          <span class="ghost g1" aria-hidden="true"></span>
-          <span class="ghost g2" aria-hidden="true"></span>
+          <div class="ghost g1" aria-hidden="true">
+            <div class="ghost-avatar"></div>
+            <div class="ghost-id">
+              <p class="ghost-name"></p>
+              <p class="ghost-role"></p>
+            </div>
+            <div class="ghost-socials">
+              <span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="ghost g2" aria-hidden="true">
+            <div class="ghost-avatar"></div>
+            <div class="ghost-id">
+              <p class="ghost-name"></p>
+              <p class="ghost-role"></p>
+            </div>
+            <div class="ghost-socials">
+              <span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/>
+                </svg>
+              </span>
+            </div>
+          </div>
 
+          <div class="person-stack">
           <article class="person-card">
             <div class="person-slide active">
               <div class="person-avatar" role="img" aria-label="Foto de Belén Silveira" style="background-image:url('/images/colab-1.png')"></div>
@@ -257,6 +294,7 @@ import Layout from '../layouts/Layout.astro';
               </button>
             </div>
           </article>
+          </div>
         </div>
       </div>
     </div>
@@ -363,6 +401,7 @@ import Layout from '../layouts/Layout.astro';
   display: flex;
   flex-direction: column;
   gap: 20px;
+  touch-action: pan-y;
 }
 
 .hero-body {
@@ -371,12 +410,11 @@ import Layout from '../layouts/Layout.astro';
   flex-direction: column;
   min-height: 0;
   overflow: hidden;
-  touch-action: pan-y;
 }
 
 .hero-card h1 {
   font-family: var(--font-serif);
-  font-size: 20px;
+  font-size: 24px;
   font-weight: var(--fw-semi);
   line-height: 1.1;
   letter-spacing: var(--ls-tight);
@@ -405,8 +443,8 @@ import Layout from '../layouts/Layout.astro';
 
 .hero-slide p {
   font-family: var(--font-sans);
-  font-size: 14px;
-  line-height: 22px;
+  font-size: 16px;
+  line-height: 30px;
   color: #fff;
   margin: 0;
 }
@@ -688,15 +726,96 @@ import Layout from '../layouts/Layout.astro';
   .colab-carousel { margin: 24px 0 0 auto; }
 }
 
+/* En mobile .person-nav se reparenta aquí (ver initColabNav): así queda
+   fuera de .person-card y no la sigue cuando esta recibe transform durante
+   el drag. En desktop nunca se reparenta, así que este selector no aplica. */
+.person-stack {
+  position: relative;
+}
+
+/* Stack "peek": en reposo las ghost quedan casi superpuestas detrás de la
+   card activa; al hacer hover (o al entrar en viewport) se abren en abanico
+   para insinuar que hay más colaboradores detrás. */
 .colab-carousel .ghost {
   position: absolute;
-  inset: 0;
+  inset: 0 28px;
   border-radius: 14px;
   border: 2px solid var(--color-clay-soft);
-  background: var(--color-bg-base);
+  background: #FAF1EB;
+  transform: translate(10px, -12px) scale(0.96);
+  transition: transform 200ms ease-in;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px 20px;
+  box-sizing: border-box;
 }
-.colab-carousel .ghost.g1 { transform: rotate(-4deg) translate(-9px, 7px); }
-.colab-carousel .ghost.g2 { transform: rotate(3deg) translate(11px, 12px); }
+.colab-carousel .ghost.g1 { z-index: 1; }
+.colab-carousel .ghost.g2 { z-index: 0; }
+
+.ghost-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: #fff center / cover no-repeat;
+  box-shadow: 0 6px 14px rgba(26,33,24,.08);
+  flex-shrink: 0;
+}
+
+.ghost-id {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.ghost-name {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 17px;
+  color: var(--color-text-primary);
+  margin: 0;
+  text-align: center;
+  letter-spacing: var(--ls-tight);
+  white-space: nowrap;
+}
+
+.ghost-role {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ghost-socials {
+  display: flex;
+  gap: 16px;
+}
+.ghost-socials span {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-bg-base);
+  color: var(--color-text-secondary);
+  display: grid;
+  place-items: center;
+}
+
+/* La card central (313px) tapa el centro del stack, así que el abanico
+   necesita bastante recorrido para que el contenido de las ghost, centrado
+   en su propia card, asome de verdad en vez de quedar oculto detrás. */
+.colab-carousel.is-peeking .ghost.g1 {
+  transform: translate(-190px, 20px) rotate(-10deg) scale(1);
+  transition: transform 300ms ease-out;
+}
+.colab-carousel.is-peeking .ghost.g2 {
+  transform: translate(190px, 20px) rotate(10deg) scale(1);
+  transition: transform 300ms ease-out;
+}
 
 .person-card {
   position: relative;
@@ -710,6 +829,65 @@ import Layout from '../layouts/Layout.astro';
   align-items: center;
   gap: 24px;
   box-shadow: 0 10px 30px rgba(26,33,24,.10);
+  transition: box-shadow 300ms ease-out, transform 280ms ease;
+}
+.person-card.dragging {
+  transition: box-shadow 300ms ease-out;
+}
+.colab-carousel.is-peeking .person-card {
+  box-shadow: 0 20px 44px rgba(26,33,24,.18);
+}
+
+/* En mobile no hay hover ni flecha: las ghost quedan siempre asomando por
+   arriba (como un mazo visto de canto) y avanzar de colaborador se hace
+   deslizando la card frontal hacia la izquierda, igual que en el hero. */
+@media (max-width: 879px) {
+  #colabNext { display: none; }
+
+  /* Idle: solo translateY + scale, sin rotación ni desplazamiento horizontal.
+     La fase "rise" (subida periódica) se anima desde JS con un translateY
+     proporcional al alto real de la card — ver initColabPeekLoop. */
+  .colab-carousel .ghost,
+  .colab-carousel.is-peeking .ghost.g1,
+  .colab-carousel.is-peeking .ghost.g2 {
+    transition: transform 400ms ease-in;
+  }
+  .colab-carousel .ghost.g1,
+  .colab-carousel.is-peeking .ghost.g1 {
+    transform: translateY(-6px) scale(0.98);
+  }
+  .colab-carousel .ghost.g2,
+  .colab-carousel.is-peeking .ghost.g2 {
+    transform: translateY(-12px) scale(0.96);
+  }
+  .colab-carousel {
+    overflow: visible;
+  }
+
+  /* Los dots pasan a ser un elemento independiente debajo del stack, no
+     superpuesto/dentro del padding de la card (eso solo pasa en desktop).
+     position:absolute los saca del flujo del flex de .person-card, así que
+     la card recalcula su alto solo con avatar+nombre+rol+iconos, sin el
+     hueco que antes reservaba para la fila de dots. */
+  .person-nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    margin-top: 20px;
+  }
+  .colab-carousel {
+    margin-bottom: 52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .colab-carousel .ghost,
+  .colab-carousel.is-peeking .ghost.g1,
+  .colab-carousel.is-peeking .ghost.g2,
+  .person-card {
+    transition-duration: 0ms;
+  }
 }
 
 .person-slide { display: none; flex-direction: column; align-items: center; gap: 24px; align-self: stretch; }
@@ -819,8 +997,8 @@ import Layout from '../layouts/Layout.astro';
 .person-arrow:hover { transform: translateX(2px); filter: brightness(1.04); }
 
 @media (min-width: 880px) {
-  .hero { padding: 40px 0 80px; }
-  .twocol { padding: 80px 0; }
+  .hero { padding: 40px 0 40px; }
+  .twocol { padding: 100px 0; }
   .colab { padding: 80px 0; }
 }
 </style>
@@ -832,6 +1010,13 @@ import Layout from '../layouts/Layout.astro';
   // lo ejecuta salvo que reaccionemos al evento astro:page-load (se dispara
   // tanto en la carga inicial como en cada navegación posterior).
   document.addEventListener('astro:page-load', () => {
+    // Puente entre el loop automático del peek (mobile) y el drag manual:
+    // initColabDrag pausa/reanuda el loop para que no compitan por el
+    // transform de las mismas ghost. initColabPeekLoop rellena la
+    // implementación real; por defecto son no-ops (p.ej. en desktop).
+    let pauseColabPeekLoop = () => {};
+    let resumeColabPeekLoop = () => {};
+
     function initCarousel(slideSelector: string, dotsId: string, nextId: string, label: string, onChange?: (slide: Element) => void) {
       const slides = Array.from(document.querySelectorAll(slideSelector));
       const dotsWrap = document.getElementById(dotsId);
@@ -865,11 +1050,13 @@ import Layout from '../layouts/Layout.astro';
     // arrastrar (o pulsar la flecha) desplaza el track para que el siguiente/
     // anterior entre visiblemente por el borde, en vez de solo hacer fade.
     function initHeroCarousel() {
-      const viewport = document.querySelector<HTMLElement>('.hero-body');
-      const track = document.getElementById('heroTrack');
+      const cardEl = document.querySelector<HTMLElement>('.hero-card');
+      const trackEl = document.getElementById('heroTrack');
       const dotsWrap = document.getElementById('heroDots');
       const heroTitle = document.getElementById('heroTitle');
-      if (!viewport || !track || !dotsWrap) return;
+      if (!cardEl || !trackEl || !dotsWrap) return;
+      const card = cardEl;
+      const track = trackEl;
 
       const slides = Array.from(track.children) as HTMLElement[];
       if (!slides.length) return;
@@ -907,7 +1094,7 @@ import Layout from '../layouts/Layout.astro';
       let dragging = false;
       let axisLocked: 'x' | 'y' | null = null;
 
-      viewport.addEventListener('touchstart', (e) => {
+      card.addEventListener('touchstart', (e) => {
         const t = e.touches[0];
         startX = t.clientX;
         startY = t.clientY;
@@ -917,7 +1104,7 @@ import Layout from '../layouts/Layout.astro';
         track.classList.add('dragging');
       }, { passive: true });
 
-      viewport.addEventListener('touchmove', (e) => {
+      card.addEventListener('touchmove', (e) => {
         if (!dragging) return;
         const t = e.touches[0];
         dx = t.clientX - startX;
@@ -936,15 +1123,283 @@ import Layout from '../layouts/Layout.astro';
           place(0);
         }
       }
-      viewport.addEventListener('touchend', release);
-      viewport.addEventListener('touchcancel', release);
+      card.addEventListener('touchend', release);
+      card.addEventListener('touchcancel', release);
 
       window.addEventListener('resize', () => place(0));
 
       go(0);
     }
 
+    // Stack "peek" de Colaboraciones: hover abre las ghost en abanico; no
+    // toca los dots ni la flecha, que siguen navegando el carrusel aparte.
+    function initColabPeek() {
+      const stack = document.querySelector<HTMLElement>('.colab-carousel');
+      if (!stack) return;
+      if (window.matchMedia('(max-width: 879px)').matches) return; // en mobile, ver initColabPeekLoop
+
+      stack.addEventListener('mouseenter', () => stack.classList.add('is-peeking'));
+      stack.addEventListener('mouseleave', () => stack.classList.remove('is-peeking'));
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          stack.classList.add('is-peeking');
+          setTimeout(() => stack.classList.remove('is-peeking'), 900);
+          observer.disconnect();
+        });
+      }, { threshold: 0.5 });
+      observer.observe(stack);
+    }
+
+    // Las ghost cards del peek muestran al colaborador anterior/siguiente
+    // real (foto + nombre), leídos del propio slide activo, para que al
+    // abrir el abanico se vea a quién hay detrás en vez de una card vacía.
+    function fillGhost(ghost: Element | null, slide: Element | undefined) {
+      if (!ghost || !slide) return;
+      const avatarSrc = slide.querySelector<HTMLElement>('.person-avatar')?.style.backgroundImage ?? '';
+      const name = slide.querySelector('.person-name')?.textContent ?? '';
+      const role = slide.querySelector('.person-role')?.textContent ?? '';
+      const ghostAvatar = ghost.querySelector<HTMLElement>('.ghost-avatar');
+      const ghostName = ghost.querySelector('.ghost-name');
+      const ghostRole = ghost.querySelector('.ghost-role');
+      if (ghostAvatar) ghostAvatar.style.backgroundImage = avatarSrc;
+      if (ghostName) ghostName.textContent = name;
+      if (ghostRole) ghostRole.textContent = role;
+    }
+
+    function updateGhosts(currentSlide: Element) {
+      const slides = Array.from(document.querySelectorAll('.person-card .person-slide'));
+      const i = slides.indexOf(currentSlide);
+      if (i === -1) return;
+      const prev = slides[(i - 1 + slides.length) % slides.length];
+      const next = slides[(i + 1) % slides.length];
+      fillGhost(document.querySelector('.ghost.g1'), prev);
+      fillGhost(document.querySelector('.ghost.g2'), next);
+    }
+
+    // Peek automático en mobile: una sola vez, al entrar la sección en el
+    // viewport, las dos ghost "suben" (translateY proporcional al alto real
+    // de la card, sin rotación ni desplazamiento horizontal), se mantienen
+    // arriba un momento y vuelven a su posición idle. No se repite después.
+    // Los dots viven fuera de la card y no se tocan aquí.
+    function initColabPeekLoop() {
+      if (!window.matchMedia('(max-width: 879px)').matches) return;
+      const cardEl = document.querySelector<HTMLElement>('.person-card');
+      const stackEl = document.querySelector<HTMLElement>('.colab-carousel');
+      const g1El = document.querySelector<HTMLElement>('.ghost.g1');
+      const g2El = document.querySelector<HTMLElement>('.ghost.g2');
+      if (!cardEl || !stackEl || !g1El || !g2El) return;
+      const card = cardEl;
+      const g1 = g1El;
+      const g2 = g2El;
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const RISE_MS = prefersReduced ? 0 : 250;
+      const HOLD_MS = prefersReduced ? 0 : 900;
+      const FALL_MS = prefersReduced ? 0 : 400;
+
+      let played = false;
+      let holdTimeoutId: ReturnType<typeof setTimeout> | null = null;
+
+      function resetGhostStyles() {
+        g1.style.transition = '';
+        g1.style.transform = '';
+        g2.style.transition = '';
+        g2.style.transform = '';
+      }
+
+      function runOnce() {
+        if (played) return;
+        played = true;
+
+        const h = card.offsetHeight;
+        const level2Y = -(h * 0.19);
+        const level3Y = -(h * 0.375);
+
+        g1.style.transition = `transform ${RISE_MS}ms ease-out`;
+        g2.style.transition = `transform ${RISE_MS}ms ease-out`;
+        g1.style.transform = `translateY(${level2Y}px) scale(1)`;
+        g2.style.transform = `translateY(${level3Y}px) scale(1)`;
+
+        holdTimeoutId = setTimeout(() => {
+          holdTimeoutId = null;
+          g1.style.transition = `transform ${FALL_MS}ms ease-in`;
+          g2.style.transition = `transform ${FALL_MS}ms ease-in`;
+          g1.style.transform = '';
+          g2.style.transform = '';
+        }, RISE_MS + HOLD_MS);
+      }
+
+      function stop() {
+        if (holdTimeoutId !== null) {
+          clearTimeout(holdTimeoutId);
+          holdTimeoutId = null;
+        }
+        resetGhostStyles();
+      }
+
+      // El drag pausa el peek si llega a mitad de animación; como es de una
+      // sola vez, "reanudar" simplemente evita que se repita más adelante.
+      pauseColabPeekLoop = () => {
+        played = true;
+        stop();
+      };
+      resumeColabPeekLoop = () => {};
+
+      if (prefersReduced) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          runOnce();
+          observer.disconnect();
+        });
+      }, { threshold: 0.5 });
+      observer.observe(stackEl);
+    }
+
+    // Los dots viven dentro de .person-card en el markup (así en desktop
+    // quedan superpuestos a la card, sin tocar nada). En mobile .person-card
+    // recibe un transform durante el drag/swipe, y como transform crea un
+    // nuevo containing block para sus descendientes position:absolute, los
+    // dots se moverían con la card si se quedan dentro. Los reparentamos a
+    // .person-stack (hermano de la card, nunca se transforma) solo mientras
+    // el viewport es mobile, y los devolvemos a su sitio original en desktop
+    // para no alterar en absoluto su marcado/posición ahí.
+    function initColabNav() {
+      const stack = document.querySelector<HTMLElement>('.person-stack');
+      const card = document.querySelector<HTMLElement>('.person-card');
+      const nav = document.querySelector<HTMLElement>('.person-nav');
+      if (!stack || !card || !nav) return;
+
+      function sync() {
+        if (window.matchMedia('(max-width: 879px)').matches) {
+          if (nav.parentElement !== stack) stack.appendChild(nav);
+        } else {
+          if (nav.parentElement !== card) card.appendChild(nav);
+        }
+      }
+
+      sync();
+      window.addEventListener('resize', sync);
+    }
+
+    // En mobile no hay flecha: deslizar la card frontal hacia la izquierda
+    // avanza al siguiente colaborador (mismo gesto que el carrusel del hero),
+    // reutilizando el click del botón #colabNext para no duplicar el go()
+    // que ya vive dentro de initCarousel. Mientras se arrastra, la ghost
+    // "g2" (siguiente) se anima de "asomando arriba" a "lista en el centro"
+    // para insinuar la card que está a punto de entrar.
+    function initColabDrag() {
+      if (!window.matchMedia('(max-width: 879px)').matches) return;
+      const cardEl = document.querySelector<HTMLElement>('.person-card');
+      const nextBtnEl = document.getElementById('colabNext');
+      if (!cardEl || !nextBtnEl) return;
+      const card = cardEl;
+      const nextBtn = nextBtnEl;
+
+      const DRAG_THRESHOLD = 60;
+      const PEEK_DISTANCE = 140;
+      let startX = 0;
+      let startY = 0;
+      let dx = 0;
+      let dragging = false;
+      let axisLocked: 'x' | 'y' | null = null;
+
+      function lerp(a: number, b: number, t: number) {
+        return a + (b - a) * t;
+      }
+
+      function setCardX(x: number) {
+        card.style.transform = x ? `translateX(${x}px)` : '';
+      }
+
+      function setNextPeek(progress: number) {
+        const g2 = document.querySelector<HTMLElement>('.ghost.g2');
+        if (!g2) return;
+        if (progress <= 0) {
+          g2.style.transform = '';
+          return;
+        }
+        const y = lerp(-12, -4, progress);
+        const scale = lerp(0.96, 0.985, progress);
+        g2.style.transform = `translateY(${y}px) scale(${scale})`;
+      }
+
+      card.addEventListener('touchstart', (e) => {
+        const t = e.touches[0];
+        startX = t.clientX;
+        startY = t.clientY;
+        dx = 0;
+        dragging = true;
+        axisLocked = null;
+      }, { passive: true });
+
+      card.addEventListener('touchmove', (e) => {
+        if (!dragging) return;
+        const t = e.touches[0];
+        dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+        if (!axisLocked) {
+          axisLocked = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+          if (axisLocked === 'x') {
+            card.classList.add('dragging');
+            pauseColabPeekLoop();
+          }
+        }
+        if (axisLocked !== 'x') return;
+        if (dx < 0) {
+          setCardX(dx);
+          setNextPeek(Math.min(1, Math.abs(dx) / PEEK_DISTANCE));
+        } else {
+          setCardX(0);
+          setNextPeek(0);
+        }
+      }, { passive: true });
+
+      function release() {
+        if (!dragging) return;
+        dragging = false;
+        card.classList.remove('dragging');
+
+        if (axisLocked === 'x' && dx <= -DRAG_THRESHOLD) {
+          const width = card.offsetWidth;
+          setCardX(-width);
+
+          let settled = false;
+          function finish() {
+            if (settled) return;
+            settled = true;
+            card.removeEventListener('transitionend', finish);
+            nextBtn.click();
+            card.classList.add('dragging');
+            setCardX(0);
+            void card.offsetWidth;
+            card.classList.remove('dragging');
+            setNextPeek(0);
+            resumeColabPeekLoop();
+          }
+          card.addEventListener('transitionend', finish, { once: true });
+          setTimeout(finish, 320);
+        } else {
+          setCardX(0);
+          setNextPeek(0);
+          resumeColabPeekLoop();
+        }
+      }
+      card.addEventListener('touchend', release);
+      card.addEventListener('touchcancel', release);
+    }
+
     initHeroCarousel();
-    initCarousel('.person-card .person-slide', 'colabDots', 'colabNext', 'Colaborador');
+    initCarousel('.person-card .person-slide', 'colabDots', 'colabNext', 'Colaborador', updateGhosts);
+    initColabPeek();
+    initColabPeekLoop();
+    initColabNav();
+    initColabDrag();
   });
 </script>
