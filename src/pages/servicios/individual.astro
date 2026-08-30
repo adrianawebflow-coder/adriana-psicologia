@@ -66,7 +66,12 @@ const despachoImages = fs
       </div>
 
       <div class="gallery-dots" id="galleryDots" role="tablist" aria-label="Fotos del despacho"></div>
-      <button class="gallery-arrow" id="galleryNext" type="button" aria-label="Siguiente foto">
+      <button class="gallery-arrow prev" id="galleryPrev" type="button" aria-label="Foto anterior">
+        <svg width="9" height="16" viewBox="0 0 7 12" fill="none" aria-hidden="true">
+          <path d="M6 1L1 6l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <button class="gallery-arrow next" id="galleryNext" type="button" aria-label="Siguiente foto">
         <svg width="9" height="16" viewBox="0 0 7 12" fill="none" aria-hidden="true">
           <path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -286,7 +291,6 @@ const despachoImages = fs
 .gallery-arrow {
   position: absolute;
   z-index: 1;
-  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   width: 44px;
@@ -300,9 +304,11 @@ const despachoImages = fs
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform var(--transition-fast), filter var(--transition-fast);
+  transition: filter var(--transition-fast);
 }
 .gallery-arrow:hover { filter: brightness(1.15); }
+.gallery-arrow.next { right: 16px; }
+.gallery-arrow.prev { left: 16px; }
 
 .location-panel {
   background: var(--color-bg-base);
@@ -536,11 +542,11 @@ const despachoImages = fs
     function go(n: number) {
       idx = (n + slides.length) % slides.length;
       dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === idx)));
-      dots[idx]?.scrollIntoView({ block: 'nearest', inline: 'center' });
       place(0);
     }
 
     document.getElementById('galleryNext')?.addEventListener('click', () => go(idx + 1));
+    document.getElementById('galleryPrev')?.addEventListener('click', () => go(idx - 1));
 
     const DRAG_THRESHOLD = 60;
     let startX = 0;
