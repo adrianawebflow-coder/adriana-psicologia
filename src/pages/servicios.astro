@@ -275,7 +275,7 @@ const initialCtaExternal = !initialTab.href;
   }
 }
 
-.price-label {
+.card .price-label {
   font-family: var(--font-sans);
   font-weight: var(--fw-semi);
   font-size: var(--fs-body-sm);
@@ -284,7 +284,7 @@ const initialCtaExternal = !initialTab.href;
   text-transform: uppercase;
   margin: 0 0 8px;
 }
-.price-value {
+.card .price-value {
   font-family: var(--font-serif);
   font-weight: var(--fw-semi);
   font-size: 22px;
@@ -375,7 +375,7 @@ const initialCtaExternal = !initialTab.href;
   }
   .tabs-container { display: flex; flex-direction: column; gap: 20px; }
   .tabs-container .tab { font-size: var(--fs-body); padding-bottom: 12px; }
-  .tabs-container .card p { font-size: 15px; }
+  .tabs-container .card p:not(.price-label):not(.price-value) { font-size: 15px; }
   .cta-desktop { display: block; }
   .cta-mobile { display: none; }
 }
