@@ -318,7 +318,7 @@ const initialCtaExternal = !initialTab.href;
   background: var(--color-clay);
   color: #fff;
   font-weight: var(--fw-semi);
-  padding: 8px 32px;
+  width: 100%;
 }
 .btn-terra:hover { color: #fff; }
 
@@ -326,8 +326,6 @@ const initialCtaExternal = !initialTab.href;
 .cta-mobile {
   padding: 0 var(--gutter) 40px;
   background: var(--color-bg-soft);
-  display: flex;
-  justify-content: center;
 }
 
 @media (min-width: 1000px) {
@@ -378,7 +376,7 @@ const initialCtaExternal = !initialTab.href;
   .tabs-container { display: flex; flex-direction: column; gap: 20px; }
   .tabs-container .tab { font-size: var(--fs-body); padding-bottom: 12px; }
   .tabs-container .card p:not(.price-label):not(.price-value) { font-size: 15px; }
-  .cta-desktop { display: block; align-self: center; }
+  .cta-desktop { display: block; }
   .cta-mobile { display: none; }
 }
 </style>
