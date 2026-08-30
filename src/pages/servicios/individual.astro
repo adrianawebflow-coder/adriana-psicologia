@@ -289,6 +289,7 @@ const despachoImages = fs
   transform: scale(1.25);
 }
 .gallery-arrow {
+  display: none;
   position: absolute;
   z-index: 1;
   top: 50%;
@@ -300,7 +301,6 @@ const despachoImages = fs
   backdrop-filter: blur(12px);
   border: none;
   color: #fff;
-  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -494,6 +494,7 @@ const despachoImages = fs
 
   .therapy-gallery { flex-direction: row; align-items: stretch; }
   .gallery-photo { flex: 1 1 0; height: auto; min-height: 475px; }
+  .gallery-arrow { display: flex; }
   .location-panel {
     flex: 0 0 570px;
     display: flex;
