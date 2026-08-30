@@ -57,7 +57,7 @@ const initialCtaExternal = !initialTab.href;
 >
 
   <section class="services-hero">
-    <h1>¿En qué puedo ayudarte?</h1>
+    <h1 transition:name="hero-title">¿En qué puedo ayudarte?</h1>
     <p>Cada persona es diferente. Elige el tipo de terapia que mejor se adapta a tu situación.</p>
   </section>
 
@@ -68,7 +68,7 @@ const initialCtaExternal = !initialTab.href;
       </div>
 
       <div class="services-panel">
-        <h1>¿En qué puedo ayudarte?</h1>
+        <h1 transition:name="hero-title">¿En qué puedo ayudarte?</h1>
         <p class="lede">Cada persona es diferente. Elige el tipo de terapia que mejor se adapta a tu situación.</p>
 
         <div class="tabs-container">
@@ -99,18 +99,18 @@ const initialCtaExternal = !initialTab.href;
               data-panel={tab.id}
               hidden={tab.id !== initial}
             >
-              <div class="card">
+              <div class="card reveal">
                 <p>{tab.description}</p>
               </div>
 
-              <div class="card">
+              <div class="card reveal">
                 <h3>Cómo son las sesiones</h3>
                 <ul class="details-list">
                   {tab.details.map((d) => <li>{d}</li>)}
                 </ul>
               </div>
 
-              <div class="card">
+              <div class="card reveal">
                 <p class="price-label">Precio</p>
                 <p class="price-value">{tab.price}</p>
               </div>

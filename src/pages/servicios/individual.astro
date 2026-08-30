@@ -21,7 +21,7 @@ const despachoImages = fs
   <section class="therapy-hero">
     <div class="therapy-hero-inner">
       <div>
-        <h1>Terapia individual</h1>
+        <h1 transition:name="hero-title">Terapia individual</h1>
         <p class="lede">Proceso en el que una persona explora sus emociones, pensamientos y comportamientos para adquirir herramientas de crecimiento personal y bienestar emocional.</p>
       </div>
       <div>
@@ -33,17 +33,17 @@ const despachoImages = fs
 
   <section class="therapy-info">
     <div class="therapy-info-inner">
-      <h2>Información de la terapia</h2>
+      <h2 class="reveal">Información de la terapia</h2>
       <div class="info-grid">
-        <div class="info-card">
+        <div class="info-card reveal">
           <h3>Presencial</h3>
           <p>Entorno cómodo y seguro para trabajar cara a cara en el despacho en Madrid.</p>
         </div>
-        <div class="info-card">
+        <div class="info-card reveal">
           <h3>Online</h3>
           <p>Acceso a la terapia desde tu hogar, a través de plataformas de telepsicología.</p>
         </div>
-        <div class="info-card">
+        <div class="info-card reveal">
           <h3>Mixto</h3>
           <p>Combinación de sesiones presenciales y online según la necesidad del paciente.</p>
         </div>
@@ -52,7 +52,7 @@ const despachoImages = fs
   </section>
 
   <section class="therapy-gallery">
-    <div class="gallery-photo" id="gallery">
+    <div class="gallery-photo reveal" id="gallery">
       <div class="gallery-track" id="galleryTrack">
         {despachoImages.map((src, i) => (
           <div class="gallery-slide">
@@ -78,7 +78,7 @@ const despachoImages = fs
       </button>
     </div>
 
-    <div class="location-panel">
+    <div class="location-panel reveal">
       <div class="location-box">
         <div class="details">
           <h3>📍 Despacho en Manoteras, Madrid</h3>
@@ -102,9 +102,9 @@ const despachoImages = fs
 
   <section class="other-services">
     <div class="other-services-inner">
-      <h2>Otros servicios</h2>
+      <h2 class="reveal">Otros servicios</h2>
       <div class="other-grid">
-        <a class="other-card" href="/servicios?tipo=parejas">
+        <a class="other-card reveal" href="/servicios?tipo=parejas">
           <div class="other-card-body">
             <p class="tag">Parejas</p>
             <h4>Mi relación necesita ayuda</h4>
@@ -112,7 +112,7 @@ const despachoImages = fs
           </div>
           <span class="chev" aria-hidden="true">›</span>
         </a>
-        <a class="other-card" href="/servicios?tipo=familias">
+        <a class="other-card reveal" href="/servicios?tipo=familias">
           <div class="other-card-body">
             <p class="tag">Familias</p>
             <h4>Es para mi hij@</h4>
