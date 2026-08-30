@@ -1,7 +1,16 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import Layout from '../../layouts/Layout.astro';
 
 const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
+
+const despachoDir = path.join(process.cwd(), 'public/images/despacho');
+const despachoImages = fs
+  .readdirSync(despachoDir)
+  .filter((file) => /\.(webp|jpe?g|png)$/i.test(file))
+  .sort()
+  .map((file) => `/images/despacho/${file}`);
 ---
 
 <Layout
@@ -43,10 +52,25 @@ const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
   </section>
 
   <section class="therapy-gallery">
-    <div class="gallery-photo">
-      <div class="gallery-dots" aria-hidden="true">
-        <span class="active"></span><span></span><span></span><span></span><span></span><span></span>
+    <div class="gallery-photo" id="gallery">
+      <div class="gallery-track" id="galleryTrack">
+        {despachoImages.map((src, i) => (
+          <div class="gallery-slide">
+            <img
+              src={src}
+              alt={`Despacho de Adriana Psicología ${i + 1}`}
+              loading={i === 0 ? 'eager' : 'lazy'}
+            />
+          </div>
+        ))}
       </div>
+
+      <div class="gallery-dots" id="galleryDots" role="tablist" aria-label="Fotos del despacho"></div>
+      <button class="gallery-arrow" id="galleryNext" type="button" aria-label="Siguiente foto">
+        <svg width="9" height="16" viewBox="0 0 7 12" fill="none" aria-hidden="true">
+          <path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
 
     <div class="location-panel">
@@ -199,28 +223,86 @@ const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
 }
 .gallery-photo {
   position: relative;
-  background: var(--color-bg-muted) url('/images/modalidad.png') center / cover no-repeat;
+  background: var(--color-bg-muted);
   height: 280px;
+  overflow: hidden;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   padding: 20px 16px;
 }
+.gallery-track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  height: 100%;
+  transition: transform 280ms ease;
+  touch-action: pan-y;
+}
+.gallery-track.dragging { transition: none; }
+.gallery-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+}
+.gallery-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
 .gallery-dots {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  overflow-x: auto;
   background: rgba(51,51,51,.5);
   backdrop-filter: blur(12px);
-  border-radius: 12px;
-  padding: 12px;
+  border-radius: 9999px;
+  padding: 10px 12px;
   display: flex;
-  gap: 8px;
+  gap: 6px;
+  scrollbar-width: none;
 }
-.gallery-dots span {
-  width: 16px;
-  height: 16px;
+.gallery-dots::-webkit-scrollbar { display: none; }
+.gallery-dots :global(button) {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
   border-radius: var(--radius-full);
   background: rgba(255,255,255,.4);
+  cursor: pointer;
+  transition: background-color 200ms ease, transform 200ms ease;
 }
-.gallery-dots span.active { background: #fff; }
+.gallery-dots :global(button:hover) { background: rgba(255,255,255,.7); }
+.gallery-dots :global(button[aria-current="true"]) {
+  background: #fff;
+  transform: scale(1.25);
+}
+.gallery-arrow {
+  position: absolute;
+  z-index: 1;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: rgba(51,51,51,.8);
+  backdrop-filter: blur(12px);
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+.gallery-arrow:hover { filter: brightness(1.15); }
 
 .location-panel {
   background: var(--color-bg-base);
@@ -400,7 +482,7 @@ const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
   .therapy-hero-inner > div { flex: 1 1 0; }
   .therapy-hero h1 { font-size: 34px; }
 
-  .therapy-info { padding: 40px 135px 60px; }
+  .therapy-info { padding: 60px 135px 100px; }
   .info-grid { flex-direction: row; }
   .info-card { flex: 1 1 0; }
 
@@ -420,3 +502,86 @@ const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
   .other-card { flex: 1 1 0; }
 }
 </style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const galleryEl = document.getElementById('gallery');
+    const trackEl = document.getElementById('galleryTrack');
+    const dotsWrap = document.getElementById('galleryDots');
+    if (!galleryEl || !trackEl || !dotsWrap) return;
+    const gallery = galleryEl;
+    const track = trackEl;
+
+    const slides = Array.from(track.children) as HTMLElement[];
+    if (slides.length <= 1) return;
+
+    dotsWrap.innerHTML = '';
+    let idx = 0;
+    let dx = 0;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Foto ${i + 1}`);
+      dot.addEventListener('click', () => go(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children) as HTMLElement[];
+
+    function place(offset: number) {
+      track.style.transform = `translateX(calc(${-idx * 100}% + ${offset}px))`;
+    }
+
+    function go(n: number) {
+      idx = (n + slides.length) % slides.length;
+      dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === idx)));
+      dots[idx]?.scrollIntoView({ block: 'nearest', inline: 'center' });
+      place(0);
+    }
+
+    document.getElementById('galleryNext')?.addEventListener('click', () => go(idx + 1));
+
+    const DRAG_THRESHOLD = 60;
+    let startX = 0;
+    let startY = 0;
+    let dragging = false;
+    let axisLocked: 'x' | 'y' | null = null;
+
+    gallery.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      startX = t.clientX;
+      startY = t.clientY;
+      dx = 0;
+      dragging = true;
+      axisLocked = null;
+      track.classList.add('dragging');
+    }, { passive: true });
+
+    gallery.addEventListener('touchmove', (e) => {
+      if (!dragging) return;
+      const t = e.touches[0];
+      dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      if (!axisLocked) axisLocked = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      if (axisLocked === 'x') place(dx);
+    }, { passive: true });
+
+    function release() {
+      if (!dragging) return;
+      dragging = false;
+      track.classList.remove('dragging');
+      if (axisLocked === 'x' && Math.abs(dx) >= DRAG_THRESHOLD) {
+        go(dx < 0 ? idx + 1 : idx - 1);
+      } else {
+        place(0);
+      }
+    }
+    gallery.addEventListener('touchend', release);
+    gallery.addEventListener('touchcancel', release);
+
+    window.addEventListener('resize', () => place(0));
+
+    go(0);
+  });
+</script>
