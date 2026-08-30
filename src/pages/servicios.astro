@@ -1,0 +1,409 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const tabs = [
+  {
+    id: 'individual',
+    label: 'Individual',
+    description:
+      'La terapia individual tiene como objetivo fortalecer la salud mental, mejorar la calidad de vida y desarrollar habilidades para afrontar cualquier tipo de dificultad.',
+    details: [
+      'Duración: 50 minutos',
+      'Frecuencia: semanal o quincenal',
+      'Primera sesión: sin compromiso',
+      'Modalidad: presenciales, online o mixto',
+    ],
+    price: 'Desde 60€ / sesión',
+  },
+  {
+    id: 'parejas',
+    label: 'Parejas',
+    description:
+      'La terapia de pareja ayuda a mejorar la comunicación, resolver conflictos recurrentes y reconstruir la confianza cuando la relación atraviesa un momento difícil.',
+    details: [
+      'Duración: 60 minutos',
+      'Frecuencia: semanal o quincenal',
+      'Primera sesión: sin compromiso',
+      'Modalidad: presenciales, online o mixto',
+    ],
+    price: 'Desde 75€ / sesión',
+  },
+  {
+    id: 'familias',
+    label: 'Familias',
+    description:
+      'La terapia familiar sistémica trabaja las dinámicas y la comunicación entre los miembros de la familia para afrontar juntos los conflictos y acompañar mejor a los más jóvenes.',
+    details: [
+      'Duración: 60 minutos',
+      'Frecuencia: semanal o quincenal',
+      'Primera sesión: sin compromiso',
+      'Modalidad: presenciales, online o mixto',
+    ],
+    price: 'Desde 75€ / sesión',
+  },
+];
+
+const initial = tabs[0].id;
+---
+
+<Layout
+  title="Servicios"
+  description="Terapia individual, de pareja y familiar en Madrid y online. Elige el tipo de terapia que mejor se adapta a tu situación."
+>
+
+  <section class="services-hero">
+    <h1>¿En qué puedo ayudarte?</h1>
+    <p>Cada persona es diferente. Elige el tipo de terapia que mejor se adapta a tu situación.</p>
+  </section>
+
+  <section class="services-body">
+    <div class="services-container">
+      <div class="collage" aria-hidden="true">
+        <img class="collage-photo" src="/images/Collage-Visual.png" alt="" width="1000" height="1000" />
+      </div>
+
+      <div class="services-panel">
+        <h1>¿En qué puedo ayudarte?</h1>
+        <p class="lede">Cada persona es diferente. Elige el tipo de terapia que mejor se adapta a tu situación.</p>
+
+        <div class="tabs-container">
+          <div class="tabs" role="tablist" aria-label="Tipo de terapia" id="tabs">
+            {tabs.map((tab) => (
+              <button
+                class:list={['tab', { active: tab.id === initial }]}
+                role="tab"
+                id={`tab-${tab.id}`}
+                aria-controls={`panel-${tab.id}`}
+                aria-selected={tab.id === initial}
+                data-tab={tab.id}
+                type="button"
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {tabs.map((tab) => (
+            <div
+              class="info-cards"
+              id={`panel-${tab.id}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${tab.id}`}
+              data-panel={tab.id}
+              hidden={tab.id !== initial}
+            >
+              <div class="card">
+                <p>{tab.description}</p>
+              </div>
+
+              <div class="card">
+                <h3>Cómo son las sesiones</h3>
+                <ul class="details-list">
+                  {tab.details.map((d) => <li>{d}</li>)}
+                </ul>
+              </div>
+
+              <div class="card">
+                <p class="price-label">Precio</p>
+                <p class="price-value">{tab.price}</p>
+              </div>
+            </div>
+          ))}
+
+          <a
+            class="btn btn-terra cta-desktop"
+            href="https://calendly.com/adrianapsicologia/15-20min"
+            target="_blank"
+            rel="noopener"
+          >
+            Consultar más información
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-mobile">
+    <a
+      class="btn btn-terra"
+      href="https://calendly.com/adrianapsicologia/15-20min"
+      target="_blank"
+      rel="noopener"
+    >
+      Consultar más información
+    </a>
+  </div>
+
+</Layout>
+
+<style>
+.services-hero {
+  background: var(--color-bg-base);
+  padding: 40px var(--gutter) 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.services-hero h1 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+.services-hero p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 560px;
+}
+
+.services-body {
+  background: var(--color-bg-soft);
+  padding: 32px var(--gutter) 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.services-container {
+  width: 100%;
+  max-width: 1010px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Collage (visible only desktop) */
+.collage { display: none; }
+
+.tabs {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--color-clay-soft);
+}
+.tab {
+  flex: 1 1 auto;
+  padding: 0 12px 12px;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  color: var(--color-text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+}
+.tab.active {
+  font-weight: var(--fw-semi);
+  color: var(--color-text-secondary);
+  border-bottom-color: var(--color-text-secondary);
+}
+
+.info-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+.info-cards[hidden] { display: none; }
+
+.card {
+  background: var(--color-bg-base);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+}
+.card p {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+.card h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body);
+  line-height: 1;
+  color: var(--color-text-primary);
+  margin: 0 0 16px;
+}
+
+.details-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.details-list li {
+  position: relative;
+  padding-left: 20px;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body-sm);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+.details-list li::before {
+  content: "•";
+  position: absolute;
+  left: 2px;
+  color: var(--color-text-primary);
+}
+@media (min-width: 1000px) {
+  .details-list li::before {
+    content: "✓";
+    color: var(--color-moss);
+    font-weight: var(--fw-semi);
+  }
+}
+
+.price-label {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body-sm);
+  letter-spacing: var(--ls-wide);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.price-value {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 22px;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.services-panel > h1,
+.services-panel > .lede {
+  display: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  white-space: nowrap;
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.06); }
+.btn-terra {
+  background: var(--color-clay);
+  color: #fff;
+  font-weight: var(--fw-semi);
+  width: 100%;
+}
+.btn-terra:hover { color: #fff; }
+
+.cta-desktop { display: none; }
+.cta-mobile {
+  padding: 0 var(--gutter) 40px;
+  background: var(--color-bg-soft);
+}
+
+@media (min-width: 1000px) {
+  .services-hero { display: none; }
+  .services-hero { padding: 80px 40px; }
+
+  .services-body { padding: 80px 40px; }
+  .services-container { flex-direction: row; gap: 40px; align-items: center; }
+
+  .collage {
+    display: block;
+    position: relative;
+    width: 500px;
+    height: 500px;
+    flex: 0 0 500px;
+  }
+  .collage-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .services-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    flex: 1 1 auto;
+  }
+  .services-panel > h1,
+  .services-panel > .lede {
+    display: block;
+  }
+  .services-panel h1 {
+    font-family: var(--font-serif);
+    font-weight: var(--fw-semi);
+    font-size: 36px;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+  .services-panel .lede {
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+  .tabs-container { display: flex; flex-direction: column; gap: 20px; }
+  .tabs-container .tab { font-size: var(--fs-body); padding-bottom: 12px; }
+  .tabs-container .card p { font-size: 15px; }
+  .cta-desktop { display: block; }
+  .cta-mobile { display: none; }
+}
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const tabsWrap = document.getElementById('tabs');
+    if (!tabsWrap) return;
+
+    const tabButtons = Array.from(tabsWrap.querySelectorAll<HTMLButtonElement>('.tab'));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>('.info-cards[data-panel]'));
+
+    function select(id: string) {
+      tabButtons.forEach((btn) => {
+        const active = btn.dataset.tab === id;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-selected', String(active));
+      });
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.panel !== id;
+      });
+    }
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.tab) select(btn.dataset.tab);
+      });
+    });
+
+    // El sitio es estático (sin adaptador SSR), así que el query param
+    // ?tipo= no llega a Astro.url en el servidor: se lee aquí en cliente.
+    const requested = new URLSearchParams(location.search).get('tipo');
+    if (requested && tabButtons.some((btn) => btn.dataset.tab === requested)) {
+      select(requested);
+    }
+  });
+</script>
