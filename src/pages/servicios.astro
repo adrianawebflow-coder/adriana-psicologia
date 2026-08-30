@@ -14,6 +14,7 @@ const tabs = [
       'Modalidad: presenciales, online o mixto',
     ],
     price: 'Desde 60€ / sesión',
+    href: '/servicios/individual',
   },
   {
     id: 'parejas',
@@ -43,7 +44,11 @@ const tabs = [
   },
 ];
 
+const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
 const initial = tabs[0].id;
+const initialTab = tabs.find((t) => t.id === initial)!;
+const initialCtaHref = initialTab.href ?? CALENDLY_URL;
+const initialCtaExternal = !initialTab.href;
 ---
 
 <Layout
@@ -76,6 +81,8 @@ const initial = tabs[0].id;
                 aria-controls={`panel-${tab.id}`}
                 aria-selected={tab.id === initial}
                 data-tab={tab.id}
+                data-cta-href={tab.href ?? CALENDLY_URL}
+                data-cta-external={String(!tab.href)}
                 type="button"
               >
                 {tab.label}
@@ -111,10 +118,10 @@ const initial = tabs[0].id;
           ))}
 
           <a
-            class="btn btn-terra cta-desktop"
-            href="https://calendly.com/adrianapsicologia/15-20min"
-            target="_blank"
-            rel="noopener"
+            class="btn btn-terra cta-desktop cta-info"
+            href={initialCtaHref}
+            target={initialCtaExternal ? '_blank' : undefined}
+            rel={initialCtaExternal ? 'noopener' : undefined}
           >
             Consultar más información
           </a>
@@ -125,10 +132,10 @@ const initial = tabs[0].id;
 
   <div class="cta-mobile">
     <a
-      class="btn btn-terra"
-      href="https://calendly.com/adrianapsicologia/15-20min"
-      target="_blank"
-      rel="noopener"
+      class="btn btn-terra cta-info"
+      href={initialCtaHref}
+      target={initialCtaExternal ? '_blank' : undefined}
+      rel={initialCtaExternal ? 'noopener' : undefined}
     >
       Consultar más información
     </a>
@@ -381,16 +388,33 @@ const initial = tabs[0].id;
 
     const tabButtons = Array.from(tabsWrap.querySelectorAll<HTMLButtonElement>('.tab'));
     const panels = Array.from(document.querySelectorAll<HTMLElement>('.info-cards[data-panel]'));
+    const ctaLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.cta-info'));
 
     function select(id: string) {
+      let activeBtn: HTMLButtonElement | undefined;
       tabButtons.forEach((btn) => {
         const active = btn.dataset.tab === id;
         btn.classList.toggle('active', active);
         btn.setAttribute('aria-selected', String(active));
+        if (active) activeBtn = btn;
       });
       panels.forEach((panel) => {
         panel.hidden = panel.dataset.panel !== id;
       });
+      if (activeBtn) {
+        const href = activeBtn.dataset.ctaHref ?? '';
+        const external = activeBtn.dataset.ctaExternal === 'true';
+        ctaLinks.forEach((link) => {
+          link.href = href;
+          if (external) {
+            link.target = '_blank';
+            link.rel = 'noopener';
+          } else {
+            link.removeAttribute('target');
+            link.removeAttribute('rel');
+          }
+        });
+      }
     }
 
     tabButtons.forEach((btn) => {
