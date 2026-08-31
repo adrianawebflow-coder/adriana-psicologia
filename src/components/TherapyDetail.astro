@@ -59,18 +59,47 @@ const despachoImages = fs
 
 <section class="therapy-info">
   <div class="therapy-info-inner">
-    <h2 class="reveal">Información de la terapia</h2>
+    <h2 class="info-heading reveal">Información de la terapia</h2>
+    <p class="info-lede reveal"><b>Sesión de evaluación:</b> es la primera sesión, en la que el terapeuta evalúa el motivo de consulta, recoge la historia del paciente y expone las condiciones del tratamiento. Por su parte, el paciente evalúa las habilidades del terapeuta para decidir si encaja con lo que necesita. La evaluación tiene una duración de 40–45 minutos y será gratuita en caso de iniciar el tratamiento.</p>
+
+    <h3 class="info-heading reveal">Normativa terapéutica</h3>
+    <p class="info-lede reveal">El autocuidado comienza con el compromiso con tu salud.</p>
     <div class="info-grid">
       <div class="info-card reveal">
-        <h3>Presencial</h3>
+        <h4>Organización</h4>
+        <ul class="info-card-list">
+          <li>Las citas canceladas con menos de 24h de antelación conllevarán el cobro del 100% del importe de la sesión.</li>
+          <li>El proceso de terapia quedará suspendido en caso de cancelaciones reiteradas por parte del paciente.</li>
+        </ul>
+      </div>
+      <div class="info-card reveal">
+        <h4>Privacidad</h4>
+        <ul class="info-card-list">
+          <li>Se recomienda el uso de auriculares y evitar conexiones de red públicas.</li>
+          <li>En caso de que el espacio no asegure el derecho a la intimidad del paciente, el profesional se reserva el derecho a paralizar la sesión y reubicar la cita.</li>
+        </ul>
+      </div>
+      <div class="info-card reveal">
+        <h4>Puntualidad</h4>
+        <ul class="info-card-list">
+          <li>Se ofrece un margen de flexibilidad de 20 minutos, tras los cuales la sesión quedará cancelada con su correspondiente coste.</li>
+          <li>Se requiere flexibilidad para las ocasiones en las que el terapeuta pueda alargarse con un paciente anterior y generar un retraso en las consultas siguientes.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="info-heading reveal">Modalidad</h3>
+    <div class="info-grid">
+      <div class="info-card reveal">
+        <h4>Presencial</h4>
         <p>Entorno cómodo y seguro para trabajar cara a cara en el despacho en Madrid.</p>
       </div>
       <div class="info-card reveal">
-        <h3>Online</h3>
+        <h4>Online</h4>
         <p>Acceso a la terapia desde tu hogar, a través de plataformas de telepsicología.</p>
       </div>
       <div class="info-card reveal">
-        <h3>Mixto</h3>
+        <h4>Mixto</h4>
         <p>Combinación de sesiones presenciales y online según la necesidad del paciente.</p>
       </div>
     </div>
@@ -247,14 +276,26 @@ const despachoImages = fs
   max-width: 1010px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
 }
-.therapy-info h2 {
+.info-heading {
   font-family: var(--font-serif);
   font-weight: var(--fw-semi);
   font-size: 24px;
   color: var(--color-text-primary);
-  margin: 0;
+  margin: 20px 0 0;
+}
+.info-heading:first-child { margin-top: 0; }
+.info-lede {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-lg);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 0 8px;
+}
+.info-lede b {
+  font-weight: var(--fw-semi);
+  color: var(--color-text-primary);
 }
 .info-grid {
   display: flex;
@@ -268,7 +309,7 @@ const despachoImages = fs
   border-bottom: 2px solid var(--color-clay-soft);
   padding: 16px;
 }
-.info-card h3 {
+.info-card h4 {
   font-family: var(--font-sans);
   font-weight: var(--fw-semi);
   font-size: var(--fs-body);
@@ -281,6 +322,28 @@ const despachoImages = fs
   line-height: 1.5;
   color: var(--color-text-secondary);
   margin: 0;
+}
+.info-card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.info-card-list li {
+  position: relative;
+  padding-left: 16px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+.info-card-list li::before {
+  content: "•";
+  position: absolute;
+  left: 2px;
+  color: var(--color-text-primary);
 }
 
 .therapy-gallery {
