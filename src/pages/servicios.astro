@@ -161,7 +161,7 @@ const initialCtaExternal = !initialTab.href;
 <style>
 .services-hero {
   background: var(--color-bg-base);
-  padding: 40px var(--gutter) 32px;
+  padding: 40px var(--gutter) 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -185,7 +185,7 @@ const initialCtaExternal = !initialTab.href;
 
 .services-body {
   background: var(--color-bg-soft);
-  padding: 32px var(--gutter) 40px;
+  padding: 24px var(--gutter) 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -233,6 +233,7 @@ const initialCtaExternal = !initialTab.href;
   flex-direction: column;
   gap: 20px;
   margin-top: 20px;
+  margin-bottom: 16px;
 }
 .info-cards[hidden] { display: none; }
 
@@ -366,16 +367,16 @@ const initialCtaExternal = !initialTab.href;
 
 @media (min-width: 1000px) {
   .services-hero { display: none; }
-  .services-hero { padding: 80px 40px; }
+  .services-hero { padding: 32px 40px; }
 
-  .services-body { padding: 80px 40px; }
+  .services-body { padding: 32px 40px; }
   .services-container { flex-direction: row; gap: 40px; align-items: center; }
 
   .collage {
     display: block;
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 474px;
+    height: 474px;
     flex: 0 0 500px;
   }
   .collage-photo {
@@ -387,7 +388,7 @@ const initialCtaExternal = !initialTab.href;
   .services-panel {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 0px;
     flex: 1 1 auto;
   }
   .services-panel > h1,
@@ -400,14 +401,14 @@ const initialCtaExternal = !initialTab.href;
     font-size: 36px;
     line-height: 1.2;
     color: var(--color-text-primary);
-    margin: 0;
+    margin: 0 0 16px;
   }
   .services-panel .lede {
     font-family: var(--font-sans);
     font-size: var(--fs-body);
     line-height: 1.6;
     color: var(--color-text-secondary);
-    margin: 0;
+    margin: 0 0 24px;
   }
   .tabs-container { display: flex; flex-direction: column; gap: 20px; }
   .tabs-container .tab { font-size: var(--fs-body); padding-bottom: 12px; }
