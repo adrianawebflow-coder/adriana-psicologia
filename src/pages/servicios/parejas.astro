@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TherapyDetail from '../../components/TherapyDetail.astro';
+---
+
+<Layout
+  title="Terapia de parejas"
+  description="Las parejas y sus diferentes configuraciones pueden conllevar problemas de relación, comunicación y conflictos conyugales. La terapia ofrece un espacio de diálogo donde aprender a resolverlos."
+>
+  <TherapyDetail
+    title="Terapia de parejas"
+    lede="Las parejas y sus diferentes configuraciones pueden conllevar problemas de relación, comunicación y conflictos conyugales. La terapia ofrece un espacio de diálogo donde aprender a resolverlos."
+    sectionTitle="Áreas de trabajo en pareja"
+    sectionDesc="Muchas parejas atraviesan crisis y las resuelven con éxito gracias a herramientas de comunicación afectiva y asertiva. La terapia ofrece el espacio para desarrollarlas."
+    sectionList={[
+      { label: 'Conyugalidad', text: 'Crisis, comunicación, acuerdos y desacuerdos en el ámbito de la pareja como unidad.' },
+      { label: 'Ciclo vital', text: 'Los hitos que atravesamos juntos: matrimonio, paternidad, separación, duelos, cambios.' },
+      { label: 'Sexualidad', text: 'Dificultades en el deseo, la intimidad o las disfunciones sexuales dentro de la relación.' },
+    ]}
+    price="Desde 90€ / sesión"
+    bono="320€/x4 sesiones."
+    otherServices={[
+      { tag: 'Individual', title: 'Me busco a mí misma', desc: 'Sientes que algo no va bien, pero no sabes explicarlo.', href: '/servicios?tipo=individual' },
+      { tag: 'Familias', title: 'Es para mi hij@', desc: 'Te cuesta entender lo que le pasa a tu hij@', href: '/servicios?tipo=familias' },
+    ]}
+  />
+</Layout>

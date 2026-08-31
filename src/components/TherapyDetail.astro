@@ -1,0 +1,684 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+interface OtherService {
+  tag: string;
+  title: string;
+  desc: string;
+  href: string;
+}
+
+interface SectionListItem {
+  label: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  lede: string;
+  sectionTitle: string;
+  sectionDesc: string;
+  sectionList?: SectionListItem[];
+  price: string;
+  bono: string;
+  otherServices: OtherService[];
+}
+
+const { title, lede, sectionTitle, sectionDesc, sectionList, price, bono, otherServices } = Astro.props;
+
+const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
+
+const despachoDir = path.join(process.cwd(), 'public/images/despacho');
+const despachoImages = fs
+  .readdirSync(despachoDir)
+  .filter((file) => /\.(webp|jpe?g|png)$/i.test(file))
+  .sort()
+  .map((file) => `/images/despacho/${file}`);
+---
+
+<section class="therapy-hero">
+  <div class="therapy-hero-inner">
+    <div>
+      <h1 transition:name="hero-title">{title}</h1>
+      <p class="lede">{lede}</p>
+    </div>
+    <div>
+      <h2>{sectionTitle}</h2>
+      <p class="desc">{sectionDesc}</p>
+      {sectionList && (
+        <ul class="section-list">
+          {sectionList.map((item) => (
+            <li><b>{item.label}</b>: {item.text}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </div>
+</section>
+
+<section class="therapy-info">
+  <div class="therapy-info-inner">
+    <h2 class="reveal">Información de la terapia</h2>
+    <div class="info-grid">
+      <div class="info-card reveal">
+        <h3>Presencial</h3>
+        <p>Entorno cómodo y seguro para trabajar cara a cara en el despacho en Madrid.</p>
+      </div>
+      <div class="info-card reveal">
+        <h3>Online</h3>
+        <p>Acceso a la terapia desde tu hogar, a través de plataformas de telepsicología.</p>
+      </div>
+      <div class="info-card reveal">
+        <h3>Mixto</h3>
+        <p>Combinación de sesiones presenciales y online según la necesidad del paciente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="therapy-gallery">
+  <div class="gallery-photo reveal" id="gallery">
+    <div class="gallery-track" id="galleryTrack">
+      {despachoImages.map((src, i) => (
+        <div class="gallery-slide">
+          <img
+            src={src}
+            alt={`Despacho de Adriana Psicología ${i + 1}`}
+            loading={i === 0 ? 'eager' : 'lazy'}
+          />
+        </div>
+      ))}
+    </div>
+
+    <div class="gallery-dots" id="galleryDots" role="tablist" aria-label="Fotos del despacho"></div>
+    <button class="gallery-arrow prev" id="galleryPrev" type="button" aria-label="Foto anterior">
+      <svg width="9" height="16" viewBox="0 0 7 12" fill="none" aria-hidden="true">
+        <path d="M6 1L1 6l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="gallery-arrow next" id="galleryNext" type="button" aria-label="Siguiente foto">
+      <svg width="9" height="16" viewBox="0 0 7 12" fill="none" aria-hidden="true">
+        <path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="location-panel reveal">
+    <div class="panel-card">
+      <h3>📍 Despacho en Manoteras, Madrid</h3>
+      <ul class="location-list">
+        <li><b>Metro</b>: Línea 4 – Manoteras (5 min) · Línea 1 – Pinar de Chamartín (15 min).</li>
+        <li><b>Cercanías</b>: Fuente de la Mora, líneas C1, C2, C7 y C10 (15 min andando).</li>
+        <li><b>Bus</b>: 129, 29, 7 · Paradas Alicún y Almanzora.</li>
+        <li><b>Parking</b>: Gratuito en calles cercanas, sin parquímetro.</li>
+      </ul>
+    </div>
+
+    <div class="panel-card">
+      <p class="price-label">Precio</p>
+      <p class="price-value">{price}</p>
+    </div>
+
+    <div class="panel-card bono-card">
+      <p class="bono-title">
+        <span class="badge-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+            <path d="M9 9h.01"/>
+            <path d="m15 9-6 6"/>
+            <path d="M15 15h.01"/>
+          </svg>
+        </span>
+        Bono: {bono}
+      </p>
+      <p class="bono-desc">Se trata de paquetes de sesiones que se van consumiendo en el tiempo. La mejor inversión en salud y una forma eficaz de reducir el coste del tratamiento.</p>
+    </div>
+
+    <a class="btn btn-green" href={CALENDLY_URL} target="_blank" rel="noopener">
+      Reservar primera sesión →
+    </a>
+  </div>
+</section>
+
+<section class="other-services">
+  <div class="other-services-inner">
+    <h2 class="reveal">Otros servicios</h2>
+    <div class="other-grid">
+      {otherServices.map((service) => (
+        <a class="other-card reveal" href={service.href}>
+          <div class="other-card-body">
+            <p class="tag">{service.tag}</p>
+            <h4>{service.title}</h4>
+            <p>{service.desc}</p>
+          </div>
+          <span class="chev" aria-hidden="true">›</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.therapy-hero {
+  background: var(--color-bg-base);
+  padding: 40px var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+.therapy-hero-inner {
+  width: 100%;
+  max-width: 1010px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.therapy-hero h1 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 30px;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+.therapy-hero .lede {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 8px 0 0;
+}
+.therapy-hero h2 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 22px;
+  line-height: 1.1;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+.therapy-hero .desc {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 8px 0 0;
+}
+.section-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.section-list li {
+  position: relative;
+  padding-left: 20px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+.section-list li::before {
+  content: "•";
+  position: absolute;
+  left: 2px;
+  color: var(--color-text-primary);
+}
+.section-list b {
+  font-weight: var(--fw-semi);
+  color: var(--color-text-primary);
+}
+
+.therapy-info {
+  background: var(--color-bg-soft);
+  padding: 40px var(--gutter) 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+.therapy-info-inner {
+  width: 100%;
+  max-width: 1010px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.therapy-info h2 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 24px;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.info-card {
+  background: var(--color-bg-base);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border-bottom: 2px solid var(--color-clay-soft);
+  padding: 16px;
+}
+.info-card h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body);
+  color: var(--color-text-primary);
+  margin: 0 0 8px;
+}
+.info-card p {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.therapy-gallery {
+  display: flex;
+  flex-direction: column;
+}
+.gallery-photo {
+  position: relative;
+  background: var(--color-bg-muted);
+  height: 420px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 20px 16px;
+}
+.gallery-track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  height: 100%;
+  transition: transform 280ms ease;
+  touch-action: pan-y;
+}
+.gallery-track.dragging { transition: none; }
+.gallery-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+}
+.gallery-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.gallery-dots {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  overflow-x: auto;
+  background: rgba(51,51,51,.5);
+  backdrop-filter: blur(12px);
+  border-radius: 9999px;
+  padding: 10px 12px;
+  display: flex;
+  gap: 6px;
+  scrollbar-width: none;
+}
+.gallery-dots::-webkit-scrollbar { display: none; }
+.gallery-dots :global(button) {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,.4);
+  cursor: pointer;
+  transition: background-color 200ms ease, transform 200ms ease;
+}
+.gallery-dots :global(button:hover) { background: rgba(255,255,255,.7); }
+.gallery-dots :global(button[aria-current="true"]) {
+  background: #fff;
+  transform: scale(1.25);
+}
+.gallery-arrow {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: rgba(51,51,51,.8);
+  backdrop-filter: blur(12px);
+  border: none;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: filter var(--transition-fast);
+}
+.gallery-arrow:hover { filter: brightness(1.15); }
+.gallery-arrow.next { right: 16px; }
+.gallery-arrow.prev { left: 16px; }
+
+.location-panel {
+  background: var(--color-bg-base);
+  padding: 24px var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.panel-card {
+  background: var(--color-bg-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+}
+.panel-card h3 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 20px;
+  color: var(--color-text-primary);
+  margin: 0 0 16px;
+}
+
+.location-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.location-list li {
+  position: relative;
+  padding-left: 20px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+.location-list li::before {
+  content: "•";
+  position: absolute;
+  left: 2px;
+  color: var(--color-text-primary);
+}
+.location-list b {
+  font-weight: var(--fw-semi);
+  color: var(--color-text-primary);
+}
+
+.price-label {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body-sm);
+  letter-spacing: var(--ls-wide);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.price-value {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 22px;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.badge-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  color: var(--color-clay);
+}
+
+.bono-card .bono-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 18px;
+  color: var(--color-text-primary);
+  margin: 0 0 8px;
+}
+.bono-card .bono-desc {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  white-space: nowrap;
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.06); }
+.btn-green {
+  background: var(--color-moss);
+  border: 1px solid var(--color-text-primary);
+  color: #fff;
+  font-weight: var(--fw-medium);
+  width: 100%;
+}
+.btn-green:hover { color: #fff; }
+
+.other-services {
+  background: var(--color-bg-soft);
+  padding: 40px var(--gutter) 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+.other-services-inner {
+  width: 100%;
+  max-width: 1010px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.other-services h2 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 24px;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+.other-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.other-card {
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-moss-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+.other-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-moss);
+}
+.other-card-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.other-card .tag {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body-sm);
+  color: var(--color-clay-hover);
+  margin: 0;
+}
+.other-card h4 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-h4);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+.other-card p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+.other-card .chev {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: var(--color-moss-soft);
+  color: var(--color-moss);
+  display: grid;
+  place-items: center;
+  font-size: var(--fs-body-sm);
+}
+.other-card:hover .chev {
+  background: var(--color-moss);
+  color: #fff;
+}
+
+@media (min-width: 1000px) {
+  .therapy-hero { padding: 60px 40px; }
+  .therapy-hero-inner { flex-direction: row; gap: 64px; }
+  .therapy-hero-inner > div { flex: 1 1 0; }
+  .therapy-hero h1 { font-size: 34px; }
+
+  .therapy-info { padding: 60px 135px 100px; }
+  .info-grid { flex-direction: row; }
+  .info-card { flex: 1 1 0; }
+
+  .therapy-gallery { flex-direction: row; align-items: stretch; }
+  .gallery-photo { flex: 1 1 0; height: auto; min-height: 475px; }
+  .gallery-arrow { display: flex; }
+  .location-panel {
+    flex: 0 0 570px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 32px 40px 40px;
+    justify-content: center;
+  }
+
+  .other-services { padding: 60px 135px; }
+  .other-grid { flex-direction: row; }
+  .other-card { flex: 1 1 0; }
+}
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const galleryEl = document.getElementById('gallery');
+    const trackEl = document.getElementById('galleryTrack');
+    const dotsWrap = document.getElementById('galleryDots');
+    if (!galleryEl || !trackEl || !dotsWrap) return;
+    const gallery = galleryEl;
+    const track = trackEl;
+
+    const slides = Array.from(track.children) as HTMLElement[];
+    if (slides.length <= 1) return;
+
+    dotsWrap.innerHTML = '';
+    let idx = 0;
+    let dx = 0;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Foto ${i + 1}`);
+      dot.addEventListener('click', () => go(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children) as HTMLElement[];
+
+    function place(offset: number) {
+      track.style.transform = `translateX(calc(${-idx * 100}% + ${offset}px))`;
+    }
+
+    function go(n: number) {
+      idx = (n + slides.length) % slides.length;
+      dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === idx)));
+      place(0);
+    }
+
+    document.getElementById('galleryNext')?.addEventListener('click', () => go(idx + 1));
+    document.getElementById('galleryPrev')?.addEventListener('click', () => go(idx - 1));
+
+    const DRAG_THRESHOLD = 60;
+    let startX = 0;
+    let startY = 0;
+    let dragging = false;
+    let axisLocked: 'x' | 'y' | null = null;
+
+    gallery.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      startX = t.clientX;
+      startY = t.clientY;
+      dx = 0;
+      dragging = true;
+      axisLocked = null;
+      track.classList.add('dragging');
+    }, { passive: true });
+
+    gallery.addEventListener('touchmove', (e) => {
+      if (!dragging) return;
+      const t = e.touches[0];
+      dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      if (!axisLocked) axisLocked = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      if (axisLocked === 'x') place(dx);
+    }, { passive: true });
+
+    function release() {
+      if (!dragging) return;
+      dragging = false;
+      track.classList.remove('dragging');
+      if (axisLocked === 'x' && Math.abs(dx) >= DRAG_THRESHOLD) {
+        go(dx < 0 ? idx + 1 : idx - 1);
+      } else {
+        place(0);
+      }
+    }
+    gallery.addEventListener('touchend', release);
+    gallery.addEventListener('touchcancel', release);
+
+    window.addEventListener('resize', () => place(0));
+
+    go(0);
+  });
+</script>
