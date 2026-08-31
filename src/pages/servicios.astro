@@ -16,6 +16,7 @@ const tabs = [
     price: 'Desde 80€ / sesión',
     bono: '280€/x4 sesiones.',
     href: '/servicios/individual',
+    collage: '/images/Collage-Visual.png',
   },
   {
     id: 'parejas',
@@ -31,6 +32,7 @@ const tabs = [
     price: 'Desde 90€ / sesión',
     bono: '320€/x4 sesiones.',
     href: '/servicios/parejas',
+    collage: '/images/Collage-Visual-parejas.png',
   },
   {
     id: 'familias',
@@ -46,6 +48,7 @@ const tabs = [
     price: 'Desde 100€ / sesión',
     bono: '360€/x4 sesiones.',
     href: '/servicios/familias',
+    collage: '/images/Collage-Visual-familias.png',
   },
 ];
 
@@ -69,7 +72,17 @@ const initialCtaExternal = !initialTab.href;
   <section class="services-body">
     <div class="services-container">
       <div class="collage" aria-hidden="true">
-        <img class="collage-photo" src="/images/Collage-Visual.png" alt="" width="1000" height="1000" />
+        {tabs.map((tab) => (
+          <img
+            class="collage-photo"
+            src={tab.collage}
+            alt=""
+            width="1000"
+            height="1000"
+            data-collage={tab.id}
+            hidden={tab.id !== initial}
+          />
+        ))}
       </div>
 
       <div class="services-panel">
@@ -427,6 +440,7 @@ const initialCtaExternal = !initialTab.href;
 
     const tabButtons = Array.from(tabsWrap.querySelectorAll<HTMLButtonElement>('.tab'));
     const panels = Array.from(document.querySelectorAll<HTMLElement>('.info-cards[data-panel]'));
+    const collagePhotos = Array.from(document.querySelectorAll<HTMLImageElement>('.collage-photo[data-collage]'));
     const ctaLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.cta-info'));
 
     function select(id: string) {
@@ -439,6 +453,9 @@ const initialCtaExternal = !initialTab.href;
       });
       panels.forEach((panel) => {
         panel.hidden = panel.dataset.panel !== id;
+      });
+      collagePhotos.forEach((photo) => {
+        photo.hidden = photo.dataset.collage !== id;
       });
       if (activeBtn) {
         const href = activeBtn.dataset.ctaHref ?? '';
