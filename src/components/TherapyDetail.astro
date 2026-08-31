@@ -297,17 +297,30 @@ const despachoImages = fs
   font-weight: var(--fw-semi);
   color: var(--color-text-primary);
 }
+/* Mobile: carrusel horizontal con scroll-snap. Se resetea a grid de
+   columnas iguales a partir de 1000px (ver media query más abajo). */
 .info-grid {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--gutter);
+  -webkit-overflow-scrolling: touch;
+  margin: 0 calc(-1 * var(--gutter));
+  padding: 4px var(--gutter) 8px;
+  scrollbar-width: none;
 }
+.info-grid::-webkit-scrollbar { display: none; }
 .info-card {
   background: var(--color-bg-base);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   border-bottom: 2px solid var(--color-clay-soft);
   padding: 16px;
+  flex: 0 0 85%;
+  scroll-snap-align: start;
 }
 .info-card h4 {
   font-family: var(--font-sans);
@@ -651,8 +664,13 @@ const despachoImages = fs
   .therapy-hero h1 { font-size: 34px; }
 
   .therapy-info { padding: 60px 135px 100px; }
-  .info-grid { flex-direction: row; }
-  .info-card { flex: 1 1 0; }
+  .info-grid {
+    overflow-x: visible;
+    scroll-snap-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .info-card { flex: 1 1 0; scroll-snap-align: none; }
 
   .therapy-gallery-inner { flex-direction: row; align-items: stretch; }
   .gallery-photo { flex: 1 1 0; height: auto; min-height: 475px; }
