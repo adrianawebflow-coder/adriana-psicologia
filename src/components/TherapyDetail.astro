@@ -78,6 +78,7 @@ const despachoImages = fs
 </section>
 
 <section class="therapy-gallery">
+ <div class="therapy-gallery-inner">
   <div class="gallery-photo reveal" id="gallery">
     <div class="gallery-track" id="galleryTrack">
       {despachoImages.map((src, i) => (
@@ -139,6 +140,7 @@ const despachoImages = fs
       Reservar primera sesión →
     </a>
   </div>
+ </div>
 </section>
 
 <section class="other-services">
@@ -170,7 +172,7 @@ const despachoImages = fs
 }
 .therapy-hero-inner {
   width: 100%;
-  max-width: 1010px;
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -242,7 +244,7 @@ const despachoImages = fs
 }
 .therapy-info-inner {
   width: 100%;
-  max-width: 1010px;
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -282,6 +284,13 @@ const despachoImages = fs
 }
 
 .therapy-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.therapy-gallery-inner {
+  width: 100%;
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
 }
@@ -496,7 +505,7 @@ const despachoImages = fs
 }
 .other-services-inner {
   width: 100%;
-  max-width: 1010px;
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -582,7 +591,7 @@ const despachoImages = fs
   .info-grid { flex-direction: row; }
   .info-card { flex: 1 1 0; }
 
-  .therapy-gallery { flex-direction: row; align-items: stretch; }
+  .therapy-gallery-inner { flex-direction: row; align-items: stretch; }
   .gallery-photo { flex: 1 1 0; height: auto; min-height: 475px; }
   .gallery-arrow { display: flex; }
   .location-panel {
@@ -590,7 +599,7 @@ const despachoImages = fs
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 32px 40px 40px;
+    padding: 32px 40px 32px;
     justify-content: center;
   }
 
