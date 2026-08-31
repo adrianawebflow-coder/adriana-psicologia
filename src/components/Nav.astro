@@ -68,6 +68,16 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
   position: sticky;
   top: 0;
   z-index: 30;
+  transform: translateY(0);
+  transition: transform 420ms cubic-bezier(0.25, 0, 0, 1);
+}
+.nav.nav-hidden {
+  transform: translateY(-100%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav {
+    transition: none;
+  }
 }
 
 .nav-inner {
@@ -246,6 +256,35 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
   sheetClose?.addEventListener('click', close);
   sheet?.addEventListener('click', (e) => { if (e.target === sheet) close(); });
   sheet?.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+
+  // Oculta el nav al hacer scroll hacia abajo y lo muestra al subir.
+  // El header usa transition:persist (misma instancia en todas las
+  // páginas), así que este listener se registra una única vez y sigue
+  // funcionando tras cada navegación SPA sin necesidad de reengancharlo.
+  const nav = document.querySelector<HTMLElement>('.nav');
+  const HIDE_THRESHOLD = 80; // px mínimos scrolleados antes de poder ocultar
+  let lastScrollY = window.scrollY;
+  let ticking = false;
+
+  function updateNavVisibility() {
+    ticking = false;
+    if (sheet?.classList.contains('open')) return;
+    const currentScrollY = window.scrollY;
+    if (currentScrollY <= HIDE_THRESHOLD) {
+      nav?.classList.remove('nav-hidden');
+    } else if (currentScrollY > lastScrollY) {
+      nav?.classList.add('nav-hidden');
+    } else if (currentScrollY < lastScrollY) {
+      nav?.classList.remove('nav-hidden');
+    }
+    lastScrollY = currentScrollY;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateNavVisibility);
+  }, { passive: true });
 
   // El header usa transition:persist, así que sobrevive a las navegaciones
   // de ClientRouter sin volver a renderizarse: el estado "active" calculado
