@@ -103,10 +103,7 @@ const initialCtaExternal = !initialTab.href;
               hidden={tab.id !== initial}
             >
               <div class="card reveal">
-                <p>{tab.description}</p>
-              </div>
-
-              <div class="card reveal">
+                <p class="card-intro">{tab.description}</p>
                 <h3>Cómo son las sesiones</h3>
                 <ul class="details-list">
                   {tab.details.map((d) => <li>{d}</li>)}
@@ -252,6 +249,9 @@ const initialCtaExternal = !initialTab.href;
   line-height: 1.6;
   color: var(--color-text-secondary);
   margin: 0;
+}
+.card .card-intro {
+  margin: 0 0 20px;
 }
 .card h3 {
   font-family: var(--font-sans);
