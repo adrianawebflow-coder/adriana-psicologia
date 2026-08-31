@@ -92,7 +92,34 @@ const despachoImages = fs
         <div class="price-card">
           <p class="price-label">Precio</p>
           <p class="price-value">Desde 60€ / sesión</p>
+          <p class="price-bono">
+            <span class="badge-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+                <path d="M9 9h.01"/>
+                <path d="m15 9-6 6"/>
+                <path d="M15 15h.01"/>
+              </svg>
+            </span>
+            320€/x4 sesiones.
+          </p>
         </div>
+
+        <div class="bonos-info">
+          <h3>
+            <span class="badge-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+                <path d="M9 9h.01"/>
+                <path d="m15 9-6 6"/>
+                <path d="M15 15h.01"/>
+              </svg>
+            </span>
+            Bonos
+          </h3>
+          <p>Se trata de paquetes de sesiones que se van consumiendo en el tiempo. La mejor inversión en salud y una forma eficaz de reducir el coste del tratamiento.</p>
+        </div>
+
         <a class="btn btn-green" href={CALENDLY_URL} target="_blank" rel="noopener">
           Reservar primera sesión →
         </a>
@@ -367,6 +394,40 @@ const despachoImages = fs
   font-weight: var(--fw-semi);
   font-size: 22px;
   color: var(--color-text-primary);
+  margin: 0;
+}
+.price-bono {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-serif);
+  font-size: var(--fs-body);
+  color: var(--color-text-primary);
+  margin: 12px 0 0;
+}
+
+.badge-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  color: var(--color-clay);
+}
+
+.bonos-info h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-h4);
+  color: var(--color-text-primary);
+  margin: 0 0 12px;
+}
+.bonos-info p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
