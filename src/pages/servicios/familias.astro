@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TherapyDetail from '../../components/TherapyDetail.astro';
+---
+
+<Layout
+  title="Terapia de familia"
+  description="Se refiere al restablecimiento del equilibrio del sistema cuando surgen tensiones en las relaciones entre los familiares."
+>
+  <TherapyDetail
+    title="Terapia de familia"
+    lede="Se refiere al restablecimiento del equilibrio del sistema cuando surgen tensiones en las relaciones entre los familiares."
+    sectionTitle="Áreas de trabajo familiar"
+    sectionDesc="Todas las familias tienen conflictos. La diferencia está en contar con las herramientas para resolverlos y promover actitudes de autocuidado en el vínculo."
+    sectionList={[
+      { label: 'Conflictos', text: 'herencias, divorcios, infidelidades, duelos, migraciones. La terapia ofrece herramientas para resolverlos.' },
+      { label: 'Roles disfuncionales', text: 'hijos que actúan como padres, bandos enfrentados. Roles que no encajan generan distanciamientos no deseados.' },
+      { label: 'Parentalidad', text: 'Desacuerdos en criterios de educación, dificultad para poner límites, diferencias en el cuidado de los hijos.' },
+    ]}
+    price="Desde 100€ / sesión"
+    bono="360€/x4 sesiones."
+    otherServices={[
+      { tag: 'Individual', title: 'Me busco a mí misma', desc: 'Sientes que algo no va bien, pero no sabes explicarlo.', href: '/servicios/individual' },
+      { tag: 'Parejas', title: 'Mi relación necesita ayuda', desc: 'Tu relación ya no es como antes.', href: '/servicios/parejas' },
+    ]}
+  />
+</Layout>
