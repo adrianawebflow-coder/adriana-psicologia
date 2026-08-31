@@ -14,6 +14,7 @@ const tabs = [
       'Modalidad: presenciales, online o mixto',
     ],
     price: 'Desde 60€ / sesión',
+    bono: '320€/x4 sesiones.',
     href: '/servicios/individual',
   },
   {
@@ -28,6 +29,7 @@ const tabs = [
       'Modalidad: presenciales, online o mixto',
     ],
     price: 'Desde 75€ / sesión',
+    bono: '400€/x4 sesiones.',
   },
   {
     id: 'familias',
@@ -41,6 +43,7 @@ const tabs = [
       'Modalidad: presenciales, online o mixto',
     ],
     price: 'Desde 75€ / sesión',
+    bono: '400€/x4 sesiones.',
   },
 ];
 
@@ -113,6 +116,21 @@ const initialCtaExternal = !initialTab.href;
               <div class="card reveal">
                 <p class="price-label">Precio</p>
                 <p class="price-value">{tab.price}</p>
+              </div>
+
+              <div class="card reveal bono-card">
+                <p class="bono-title">
+                  <span class="badge-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+                      <path d="M9 9h.01"/>
+                      <path d="m15 9-6 6"/>
+                      <path d="M15 15h.01"/>
+                    </svg>
+                  </span>
+                  Bono: {tab.bono}
+                </p>
+                <p class="bono-desc">Se trata de paquetes de sesiones que se van consumiendo en el tiempo. La mejor inversión en salud y una forma eficaz de reducir el coste del tratamiento.</p>
               </div>
             </div>
           ))}
@@ -292,6 +310,24 @@ const initialCtaExternal = !initialTab.href;
   margin: 0;
 }
 
+.bono-card { display: flex; flex-direction: column; gap: 8px; }
+.card .bono-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 18px;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+.badge-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  color: var(--color-clay);
+}
+
 .services-panel > h1,
 .services-panel > .lede {
   display: none;
@@ -375,7 +411,7 @@ const initialCtaExternal = !initialTab.href;
   }
   .tabs-container { display: flex; flex-direction: column; gap: 20px; }
   .tabs-container .tab { font-size: var(--fs-body); padding-bottom: 12px; }
-  .tabs-container .card p:not(.price-label):not(.price-value) { font-size: 15px; }
+  .tabs-container .card p:not(.price-label):not(.price-value):not(.bono-title) { font-size: 15px; }
   .cta-desktop { display: flex; }
   .cta-mobile { display: none; }
 }
