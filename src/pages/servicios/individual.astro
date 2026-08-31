@@ -79,51 +79,39 @@ const despachoImages = fs
     </div>
 
     <div class="location-panel reveal">
-      <div class="location-box">
-        <div class="details">
-          <h3>📍 Despacho en Manoteras, Madrid</h3>
-          <p><b>Metro</b>: Línea 4 – Manoteras (5 min) · Línea 1 – Pinar de Chamartín (15 min).</p>
-          <p><b>Cercanías</b>: Fuente de la Mora, líneas C1, C2, C7 y C10 (15 min andando).</p>
-          <p><b>Bus</b>: 129, 29, 7 · Paradas Alicún y Almanzora.</p>
-          <p><b>Parking</b>: Gratuito en calles cercanas, sin parquímetro.</p>
-        </div>
+      <div class="panel-card">
+        <h3>📍 Despacho en Manoteras, Madrid</h3>
+        <ul class="location-list">
+          <li><b>Metro</b>: Línea 4 – Manoteras (5 min) · Línea 1 – Pinar de Chamartín (15 min).</li>
+          <li><b>Cercanías</b>: Fuente de la Mora, líneas C1, C2, C7 y C10 (15 min andando).</li>
+          <li><b>Bus</b>: 129, 29, 7 · Paradas Alicún y Almanzora.</li>
+          <li><b>Parking</b>: Gratuito en calles cercanas, sin parquímetro.</li>
+        </ul>
       </div>
-      <div class="price-block">
-        <div class="price-card">
-          <p class="price-label">Precio</p>
-          <p class="price-value">Desde 80€ / sesión</p>
-          <p class="price-bono">
-            <span class="badge-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
-                <path d="M9 9h.01"/>
-                <path d="m15 9-6 6"/>
-                <path d="M15 15h.01"/>
-              </svg>
-            </span>
-            280€/x4 sesiones.
-          </p>
-        </div>
 
-        <div class="bonos-info">
-          <h3>
-            <span class="badge-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
-                <path d="M9 9h.01"/>
-                <path d="m15 9-6 6"/>
-                <path d="M15 15h.01"/>
-              </svg>
-            </span>
-            Bonos
-          </h3>
-          <p>Se trata de paquetes de sesiones que se van consumiendo en el tiempo. La mejor inversión en salud y una forma eficaz de reducir el coste del tratamiento.</p>
-        </div>
-
-        <a class="btn btn-green" href={CALENDLY_URL} target="_blank" rel="noopener">
-          Reservar primera sesión →
-        </a>
+      <div class="panel-card">
+        <p class="price-label">Precio</p>
+        <p class="price-value">Desde 80€ / sesión</p>
       </div>
+
+      <div class="panel-card bono-card">
+        <p class="bono-title">
+          <span class="badge-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+              <path d="M9 9h.01"/>
+              <path d="m15 9-6 6"/>
+              <path d="M15 15h.01"/>
+            </svg>
+          </span>
+          Bono: 280€/x4 sesiones.
+        </p>
+        <p class="bono-desc">Se trata de paquetes de sesiones que se van consumiendo en el tiempo. La mejor inversión en salud y una forma eficaz de reducir el coste del tratamiento.</p>
+      </div>
+
+      <a class="btn btn-green" href={CALENDLY_URL} target="_blank" rel="noopener">
+        Reservar primera sesión →
+      </a>
     </div>
   </section>
 
@@ -342,44 +330,50 @@ const despachoImages = fs
   padding: 24px var(--gutter);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
-.location-box .details h3 {
+
+.panel-card {
+  background: var(--color-bg-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+}
+.panel-card h3 {
   font-family: var(--font-serif);
   font-weight: var(--fw-semi);
   font-size: 20px;
   color: var(--color-text-primary);
   margin: 0 0 16px;
 }
-.location-box .details {
-  background: var(--color-bg-soft);
-  border-radius: var(--radius-lg);
-  padding: 16px;
+
+.location-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
-.location-box .details p {
+.location-list li {
+  position: relative;
+  padding-left: 20px;
   font-family: var(--font-sans);
   font-size: var(--fs-body);
-  line-height: 1.65;
+  line-height: 1.5;
   color: var(--color-text-secondary);
-  margin: 0 0 8px;
 }
-.location-box .details p:last-child { margin-bottom: 0; }
-.location-box .details b {
+.location-list li::before {
+  content: "•";
+  position: absolute;
+  left: 2px;
+  color: var(--color-text-primary);
+}
+.location-list b {
   font-weight: var(--fw-semi);
   color: var(--color-text-primary);
 }
 
-.price-block {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.price-card {
-  background: var(--color-bg-soft);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: 16px;
-}
 .price-label {
   font-family: var(--font-sans);
   font-weight: var(--fw-semi);
@@ -396,15 +390,6 @@ const despachoImages = fs
   color: var(--color-text-primary);
   margin: 0;
 }
-.price-bono {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-serif);
-  font-size: var(--fs-body);
-  color: var(--color-text-primary);
-  margin: 12px 0 0;
-}
 
 .badge-icon {
   flex: 0 0 auto;
@@ -413,17 +398,17 @@ const despachoImages = fs
   color: var(--color-clay);
 }
 
-.bonos-info h3 {
+.bono-card .bono-title {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   font-weight: var(--fw-semi);
-  font-size: var(--fs-h4);
+  font-size: 18px;
   color: var(--color-text-primary);
-  margin: 0 0 12px;
+  margin: 0 0 8px;
 }
-.bonos-info p {
+.bono-card .bono-desc {
   font-family: var(--font-sans);
   font-size: var(--fs-body);
   line-height: 1.6;
