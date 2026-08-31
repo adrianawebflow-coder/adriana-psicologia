@@ -607,6 +607,37 @@ const despachoImages = fs
   .other-grid { flex-direction: row; }
   .other-card { flex: 1 1 0; }
 }
+
+/* 1280–1399px: therapy-gallery se queda en 1280px (valor por defecto);
+   el resto de secciones mantiene 1010px (también valor por defecto,
+   sin necesidad de override aquí). */
+
+/* 1400–1920px: todas las secciones, incluida therapy-gallery, a 1280px.
+   therapy-info y other-services usan 135px de padding lateral fijo, que
+   por debajo de ~1550px les impide alcanzar 1280px de ancho real; se
+   reduce aquí para que max-width sea lo único que las limite. */
+@media (min-width: 1400px) and (max-width: 1920px) {
+  .therapy-hero-inner,
+  .therapy-info-inner,
+  .other-services-inner {
+    max-width: 1280px;
+  }
+  .therapy-info,
+  .other-services {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+/* > 1920px: todas las secciones, incluida therapy-gallery, a 1010px */
+@media (min-width: 1921px) {
+  .therapy-hero-inner,
+  .therapy-info-inner,
+  .therapy-gallery-inner,
+  .other-services-inner {
+    max-width: 1010px;
+  }
+}
 </style>
 
 <script>
