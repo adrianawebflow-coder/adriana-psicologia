@@ -2,7 +2,7 @@
 const path = Astro.url.pathname;
 const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
 ---
-<header class="nav" transition:persist>
+<header class="nav" transition:persist transition:name="site-nav">
   <div class="nav-inner">
     <a class="brand" href="/" aria-label="Adriana Psicología">
       <svg width="139" height="43" viewBox="0 0 139 43" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
@@ -45,7 +45,7 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
   </div>
 </header>
 
-<div class="sheet" id="navSheet" aria-hidden="true" transition:persist>
+<div class="sheet" id="navSheet" aria-hidden="true" transition:persist transition:name="site-nav-sheet">
   <div class="sheet-panel">
     <button class="sheet-close" id="navSheetClose" aria-label="Cerrar menú">×</button>
     <a href="/" class={path === '/' ? 'active' : ''}>Inicio</a>
