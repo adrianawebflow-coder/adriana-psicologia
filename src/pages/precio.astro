@@ -76,6 +76,7 @@ const initial = tabs[0].id;
 
   <section class="precio-section" id="precio">
       <div class="precio-left">
+       <div class="precio-left-inner">
         <h1>Invierte en tu salud</h1>
         <p class="lede">La terapia no es un gasto, es tiempo y energía que dedicas a ti misma.</p>
 
@@ -128,6 +129,7 @@ const initial = tabs[0].id;
             </div>
           </div>
         ))}
+       </div>
       </div>
 
       <div class="precio-right">
@@ -177,6 +179,11 @@ const initial = tabs[0].id;
   padding: 40px var(--gutter) 60px;
   display: flex;
   flex-direction: column;
+}
+.precio-left-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .precio-right {
@@ -380,7 +387,7 @@ const initial = tabs[0].id;
   background: var(--color-bg-base);
   border: 1px solid var(--color-bg-border);
   border-radius: var(--radius-lg);
-  padding: 4px 16px;
+  padding: 4px 12px;
 }
 .accordion-item summary {
   list-style: none;
@@ -388,7 +395,7 @@ const initial = tabs[0].id;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px 0;
+  padding: 12px 0;
   cursor: pointer;
   font-family: var(--font-sans);
   font-weight: var(--fw-medium);
@@ -444,6 +451,14 @@ const initial = tabs[0].id;
   .precio-left { flex: 1 1 0; padding: 80px 60px; }
   .precio-right { flex: 1 1 0; }
   .normativa-content { padding: 80px 60px 40px; }
+
+  /* A partir de aquí el contenido deja de crecer con la ventana; solo
+     el color de fondo de cada columna sigue ocupando el espacio
+     disponible. */
+  .precio-left-inner,
+  .normativa-content {
+    max-width: 640px;
+  }
 }
 </style>
 
