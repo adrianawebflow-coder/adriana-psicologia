@@ -118,7 +118,7 @@ const faqs = [
 .como-hero {
   background: var(--color-bg-soft);
   padding: 40px 0;
-  text-align: center;
+  text-align: left;
 }
 .como-hero h1 {
   font-family: var(--font-serif);
@@ -133,7 +133,7 @@ const faqs = [
   font-size: var(--fs-body);
   line-height: 1.6;
   color: var(--color-text-secondary);
-  margin: 0 auto;
+  margin: 0;
   max-width: 46ch;
 }
 
@@ -211,14 +211,15 @@ const faqs = [
   background: #FAF7EF;
   padding: 40px 0 60px;
 }
+.faq .section-title { text-align: left; }
 .faq-lede {
   font-family: var(--font-sans);
   font-size: var(--fs-body);
   line-height: 1.6;
   color: var(--color-text-secondary);
-  margin: 0 auto 24px;
+  margin: 0 0 24px;
   max-width: 46ch;
-  text-align: center;
+  text-align: left;
 }
 
 .faq-list {
@@ -233,7 +234,7 @@ const faqs = [
   padding: 4px 16px;
   width: 100%;
   max-width: 598px;
-  margin: 0 auto;
+  margin: 0;
 }
 .faq-item summary {
   list-style: none;
@@ -270,9 +271,9 @@ const faqs = [
 }
 
 @media (min-width: 900px) {
-  .como-hero { padding: 80px 0; }
+  .como-hero { padding: 80px 0; text-align: center; }
   .como-hero h1 { font-size: 40px; }
-  .como-hero .lede { font-size: var(--fs-body-lg); max-width: 52ch; }
+  .como-hero .lede { font-size: var(--fs-body-lg); max-width: 52ch; margin: 0 auto; }
 
   .steps { max-width: 720px; }
   .step { width: 440px; }
