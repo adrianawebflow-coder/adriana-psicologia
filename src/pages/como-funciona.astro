@@ -166,20 +166,11 @@ const faqs = [
   position: relative;
   display: grid;
   grid-template-columns: 48px 1fr;
+  align-items: center;
   column-gap: 20px;
   padding-bottom: 32px;
 }
 .step:last-child { padding-bottom: 0; }
-.step::before {
-  content: '';
-  position: absolute;
-  left: 23px;
-  top: 48px;
-  bottom: 0;
-  width: 1px;
-  background: var(--color-clay-soft);
-}
-.step:last-child::before { display: none; }
 
 .step-num {
   position: relative;
@@ -203,7 +194,7 @@ const faqs = [
   font-weight: var(--fw-semi);
   font-size: var(--fs-body);
   color: var(--color-text-primary);
-  margin: 10px 0 8px;
+  margin: 0 0 8px;
 }
 .step-body p {
   font-family: var(--font-sans);
@@ -282,5 +273,6 @@ const faqs = [
   .faq { padding: 80px 0; }
 
   .steps { max-width: 720px; }
+  .step:nth-child(even) { margin-left: 160px; }
 }
 </style>
