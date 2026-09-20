@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import CTAFinalSection from '../components/CTAFinalSection.astro';
 
 const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
 
@@ -76,7 +75,6 @@ const initial = tabs[0].id;
 >
 
   <section class="precio-section" id="precio">
-    <div class="precio-container">
       <div class="precio-left">
         <h1>Invierte en tu salud</h1>
         <p class="lede">La terapia no es un gasto, es tiempo y energía que dedicas a ti misma.</p>
@@ -130,61 +128,64 @@ const initial = tabs[0].id;
             </div>
           </div>
         ))}
-
-        <a class="btn btn-terra cta-info" href={CALENDLY_URL} target="_blank" rel="noopener">
-          Consultar más información
-        </a>
       </div>
 
       <div class="precio-right">
-        <h2 id="normativa">Normativa terapéutica</h2>
-        <p class="lede-sm">El autocuidado empieza con el compromiso</p>
+        <div class="normativa-content">
+          <h2 id="normativa">Normativa terapéutica</h2>
+          <p class="lede-sm">El autocuidado empieza con el compromiso</p>
 
-        <div class="accordion-list">
-          {normativa.map((n) => (
-            <details class="accordion-item reveal">
-              <summary>
-                <span>{n.title}</span>
-                <span class="chevron" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m6 9 6 6 6-6"/>
-                  </svg>
-                </span>
-              </summary>
-              <ul class="details-list">
-                {n.items.map((item) => <li>{item}</li>)}
-              </ul>
-            </details>
-          ))}
+          <div class="accordion-list">
+            {normativa.map((n) => (
+              <details class="accordion-item reveal">
+                <summary>
+                  <span>{n.title}</span>
+                  <span class="chevron" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                  </span>
+                </summary>
+                <ul class="details-list">
+                  {n.items.map((item) => <li>{item}</li>)}
+                </ul>
+              </details>
+            ))}
+          </div>
+        </div>
+
+        <div class="precio-cta">
+          <h3>¿Todo más claro?</h3>
+          <p>La primera sesión no te compromete a nada. Solo es una conversación.</p>
+          <a class="btn btn-light" href={CALENDLY_URL} target="_blank" rel="noopener">
+            Reservar primera sesión →
+          </a>
         </div>
       </div>
-    </div>
   </section>
-
-  <CTAFinalSection
-    heading="¿Todo más claro?"
-    text="La primera sesión no te compromete a nada. Solo es una conversación."
-  />
 
 </Layout>
 
 <style>
 .precio-section {
-  background: var(--color-bg-soft);
-  padding: 40px var(--gutter) 60px;
-}
-.precio-container {
-  max-width: 1010px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 40px;
 }
 
-.precio-left,
-.precio-right {
+.precio-left {
+  background: var(--color-bg-soft);
+  padding: 40px var(--gutter) 60px;
   display: flex;
   flex-direction: column;
+}
+
+.precio-right {
+  background: var(--color-bg-base);
+  display: flex;
+  flex-direction: column;
+}
+.normativa-content {
+  padding: 40px var(--gutter) 24px;
 }
 
 .precio-left h1 {
@@ -326,16 +327,15 @@ const initial = tabs[0].id;
   text-decoration: none;
 }
 .btn:hover { transform: translateY(-1px); filter: brightness(1.06); }
-.btn-terra {
-  background: var(--color-clay);
-  color: #fff;
+.btn-light {
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
   font-weight: var(--fw-semi);
-  width: 100%;
 }
-.btn-terra:hover { color: #fff; }
+.btn-light:hover { color: var(--color-text-primary); }
 
 /* ── Normativa terapéutica (derecha) ── */
-.precio-right h2 {
+.normativa-content h2 {
   font-family: var(--font-serif);
   font-weight: var(--fw-semi);
   font-size: var(--fs-h2);
@@ -390,11 +390,40 @@ const initial = tabs[0].id;
 .accordion-item[open] .chevron { transform: rotate(180deg); }
 .accordion-item .details-list { padding-bottom: 16px; }
 
+/* ── CTA (dentro de la columna derecha, debajo de normativa) ── */
+.precio-cta {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  background: var(--color-clay);
+  color: #fff;
+  padding: 40px var(--gutter);
+}
+.precio-cta h3 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 24px;
+  color: #fff;
+  margin: 0;
+}
+.precio-cta p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: #fff;
+  margin: 0;
+  max-width: 40ch;
+}
+
 @media (min-width: 1000px) {
-  .precio-section { padding: 80px 40px; }
-  .precio-container { flex-direction: row; align-items: flex-start; gap: 64px; max-width: 1280px; }
-  .precio-left,
+  .precio-section { flex-direction: row; align-items: stretch; }
+  .precio-left { flex: 1 1 0; padding: 80px 60px; }
   .precio-right { flex: 1 1 0; }
+  .normativa-content { padding: 80px 60px 40px; }
 }
 </style>
 
