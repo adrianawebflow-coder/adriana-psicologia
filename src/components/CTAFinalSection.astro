@@ -1,4 +1,13 @@
 ---
+interface Props {
+  heading?: string;
+  text?: string;
+}
+
+const {
+  heading = 'No esperes a que todo se derrumbe',
+  text = 'Todos tenemos problemas. A terapia viene quien decide resolverlos.',
+} = Astro.props;
 ---
 
 <section class="cta-final" id="contacto">
@@ -7,8 +16,8 @@
   <span class="blob b3" aria-hidden="true"></span>
 
   <div class="container">
-    <h2>No esperes a que todo se derrumbe</h2>
-    <p>Todos tenemos problemas. A terapia viene quien decide resolverlos.</p>
+    <h2>{heading}</h2>
+    <p>{text}</p>
     <a class="btn" href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener">
       Reservar primera sesión →
     </a>

@@ -27,7 +27,7 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
       <a href="/" class={path === '/' ? 'active' : ''}>Inicio</a>
       <a href="/sobre-mi" class={isActive('/sobre-mi') ? 'active' : ''}>Sobre mí</a>
       <a href="/servicios?tipo=individual" class={isActive('/servicios') ? 'active' : ''}>Servicios</a>
-      <a href="/#como">Cómo funciona</a>
+      <a href="/como-funciona" class={isActive('/como-funciona') ? 'active' : ''}>Cómo funciona</a>
       <a href="/precio">Precio</a>
       <a href="#contacto">Contacto</a>
       <a href="/blog">Blog</a>
@@ -51,7 +51,7 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
     <a href="/" class={path === '/' ? 'active' : ''}>Inicio</a>
     <a href="/sobre-mi" class={isActive('/sobre-mi') ? 'active' : ''}>Sobre mí</a>
     <a href="/servicios?tipo=individual" class={isActive('/servicios') ? 'active' : ''}>Servicios</a>
-    <a href="/#como">Cómo funciona</a>
+    <a href="/como-funciona" class={isActive('/como-funciona') ? 'active' : ''}>Cómo funciona</a>
     <a href="/precio">Precio</a>
     <a href="#contacto">Contacto</a>
     <a href="/blog">Blog</a>
@@ -300,6 +300,9 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
     });
     document.querySelectorAll('a[href^="/servicios"]').forEach((a) => {
       a.classList.toggle('active', path.startsWith('/servicios'));
+    });
+    document.querySelectorAll('a[href="/como-funciona"]').forEach((a) => {
+      a.classList.toggle('active', path.startsWith('/como-funciona'));
     });
   });
 </script>

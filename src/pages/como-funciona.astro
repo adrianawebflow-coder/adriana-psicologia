@@ -1,0 +1,286 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTAFinalSection from '../components/CTAFinalSection.astro';
+
+const pasos = [
+  {
+    id: 'reservas',
+    title: 'Reservas tu primera sesión',
+    desc: 'A través del calendario online. Sin formularios, sin esperas. Eliges día y hora tú.',
+  },
+  {
+    id: 'primera-sesion',
+    title: 'Primera sesión (50 minutos)',
+    desc: 'Hablamos. Me cuentas qué te trae y yo te explico cómo puedo ayudarte. No hay diagnóstico ni compromiso. Es solo conocernos.',
+  },
+  {
+    id: 'decidimos',
+    title: 'Decidimos junt@s',
+    desc: 'Si conectamos y tiene sentido seguir, acordamos la frecuencia y el enfoque de las sesiones. Si no, sin problema.',
+  },
+  {
+    id: 'iniciamos',
+    title: 'Iniciamos el proceso terapéutico',
+    desc: 'Sesiones semanales o quincenales. El ritmo y la duración del proceso dependen de cada persona. No hay plazos fijos.',
+  },
+];
+
+const faqs = [
+  {
+    q: '¿Cómo sé si la terapia me va a funcionar?',
+    a: 'No hay garantías, pero sí una primera sesión pensada para que puedas evaluarlo: ahí conoces mi forma de trabajar y decides si conectamos. Si después de unas sesiones no notas avances, lo hablamos y ajustamos el enfoque.',
+  },
+  {
+    q: '¿Cuánto tiempo dura el proceso?',
+    a: 'Depende de cada persona y de lo que traiga a terapia. Algunos procesos duran unos meses, otros más tiempo. Lo revisamos juntas periódicamente.',
+  },
+  {
+    q: '¿Puedo cambiar de online a presencial?',
+    a: 'Sí, puedes alternar entre modalidad online y presencial cuando lo necesites, avisando con antelación para organizar la sesión.',
+  },
+  {
+    q: '¿Es confidencial?',
+    a: 'Sí. Todo lo que compartas en sesión está protegido por el secreto profesional, salvo en las excepciones que marca la ley, como un riesgo grave para ti o para terceros.',
+  },
+  {
+    q: '¿Qué pasa si tengo que cancelar?',
+    a: 'Puedes cancelar o reprogramar sin coste si avisas con al menos 24 horas de antelación.',
+  },
+];
+---
+
+<Layout
+  title="Cómo funciona"
+  description="Lo desconocido da miedo. Por eso te contamos exactamente qué pasa desde que decides contactar con Adriana Psicología."
+>
+
+  <section class="como-hero">
+    <div class="container">
+      <h1 transition:name="hero-title">¿Cómo es una sesión con Adriana?</h1>
+      <p class="lede">Lo desconocido da miedo. Por eso te cuento exactamente qué pasa desde que decides contactar.</p>
+    </div>
+  </section>
+
+  <section class="pasos">
+    <div class="container">
+      <h2 class="section-title reveal">Pasos</h2>
+      <ol class="steps">
+        {pasos.map((paso, i) => (
+          <li class="step reveal" id={paso.id}>
+            <span class="step-num">{i + 1}</span>
+            <div class="step-body">
+              <h3>{paso.title}</h3>
+              <p>{paso.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="faq">
+    <div class="container">
+      <h2 class="section-title reveal">Preguntas frecuentes</h2>
+      <p class="faq-lede reveal">Lo desconocido da miedo. Por eso te cuento exactamente qué pasa desde que decides contactar.</p>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item reveal">
+            <summary>
+              <span>{faq.q}</span>
+              <span class="chevron" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </span>
+            </summary>
+            <p>{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTAFinalSection
+    heading="¿Todo más claro?"
+    text="La primera sesión no te compromete a nada. Solo es una conversación."
+  />
+
+</Layout>
+
+<style>
+.container {
+  max-width: 1010px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ── Hero ── */
+.como-hero {
+  background: var(--color-bg-base);
+  padding: 40px 0;
+  text-align: center;
+}
+.como-hero h1 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin: 0 0 16px;
+}
+.como-hero .lede {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 auto;
+  max-width: 46ch;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-h2);
+  color: var(--color-text-primary);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 24px;
+  text-align: center;
+}
+
+/* ── Pasos ── */
+.pasos {
+  background: var(--color-bg-soft);
+  padding: 40px 0 44px;
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  column-gap: 20px;
+  padding-bottom: 32px;
+}
+.step:last-child { padding-bottom: 0; }
+.step::before {
+  content: '';
+  position: absolute;
+  left: 23px;
+  top: 48px;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-clay-soft);
+}
+.step:last-child::before { display: none; }
+
+.step-num {
+  position: relative;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-clay-soft);
+  background: var(--color-bg-soft);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: 18px;
+  color: var(--color-text-primary);
+}
+
+.step-body h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body);
+  color: var(--color-text-primary);
+  margin: 10px 0 8px;
+}
+.step-body p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ── FAQ ── */
+.faq {
+  background: var(--color-bg-soft);
+  padding: 40px 0 60px;
+}
+.faq-lede {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 auto 24px;
+  max-width: 46ch;
+  text-align: center;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.faq-item {
+  background: var(--color-bg-base);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 4px 16px;
+}
+.faq-item summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body);
+  color: var(--color-text-primary);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item .chevron {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-moss-soft);
+  color: var(--color-moss);
+  display: grid;
+  place-items: center;
+  transition: transform var(--transition-fast);
+}
+.faq-item[open] .chevron { transform: rotate(180deg); }
+.faq-item p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 0 16px;
+}
+
+@media (min-width: 900px) {
+  .como-hero { padding: 80px 0; }
+  .como-hero h1 { font-size: 40px; }
+  .como-hero .lede { font-size: var(--fs-body-lg); max-width: 52ch; }
+
+  .pasos { padding: 80px 0; }
+  .faq { padding: 80px 0; }
+
+  .steps { max-width: 720px; }
+}
+</style>
