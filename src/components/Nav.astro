@@ -28,7 +28,7 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
       <a href="/sobre-mi" class={isActive('/sobre-mi') ? 'active' : ''}>Sobre mí</a>
       <a href="/servicios?tipo=individual" class={isActive('/servicios') ? 'active' : ''}>Servicios</a>
       <a href="/como-funciona" class={isActive('/como-funciona') ? 'active' : ''}>Cómo funciona</a>
-      <a href="/precio">Precio</a>
+      <a href="/precio" class={isActive('/precio') ? 'active' : ''}>Precio</a>
       <a href="#contacto">Contacto</a>
       <a href="/blog">Blog</a>
     </nav>
@@ -52,7 +52,7 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
     <a href="/sobre-mi" class={isActive('/sobre-mi') ? 'active' : ''}>Sobre mí</a>
     <a href="/servicios?tipo=individual" class={isActive('/servicios') ? 'active' : ''}>Servicios</a>
     <a href="/como-funciona" class={isActive('/como-funciona') ? 'active' : ''}>Cómo funciona</a>
-    <a href="/precio">Precio</a>
+    <a href="/precio" class={isActive('/precio') ? 'active' : ''}>Precio</a>
     <a href="#contacto">Contacto</a>
     <a href="/blog">Blog</a>
     <a href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener" class="sheet-cta">
@@ -303,6 +303,9 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
     });
     document.querySelectorAll('a[href="/como-funciona"]').forEach((a) => {
       a.classList.toggle('active', path.startsWith('/como-funciona'));
+    });
+    document.querySelectorAll('a[href="/precio"]').forEach((a) => {
+      a.classList.toggle('active', path.startsWith('/precio'));
     });
   });
 </script>

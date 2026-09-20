@@ -1,0 +1,426 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTAFinalSection from '../components/CTAFinalSection.astro';
+
+const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
+
+const tabs = [
+  {
+    id: 'individual',
+    label: 'Individual',
+    price: 'Desde 80€ / sesión',
+    bono: '280€/x4 sesiones.',
+    details: [
+      'Duración: 50 minutos',
+      'Frecuencia: semanal o quincenal',
+      'Primera sesión: sin compromiso',
+      'Modalidad: presenciales, online o mixto',
+    ],
+  },
+  {
+    id: 'parejas',
+    label: 'Parejas',
+    price: 'Desde 90€ / sesión',
+    bono: '320€/x4 sesiones.',
+    details: [
+      'Duración: 60 minutos',
+      'Frecuencia: semanal o quincenal',
+      'Primera sesión: sin compromiso',
+      'Modalidad: presenciales, online o mixto',
+    ],
+  },
+  {
+    id: 'familias',
+    label: 'Familias',
+    price: 'Desde 100€ / sesión',
+    bono: '360€/x4 sesiones.',
+    details: [
+      'Duración: 60 minutos',
+      'Frecuencia: semanal o quincenal',
+      'Primera sesión: sin compromiso',
+      'Modalidad: presenciales, online o mixto',
+    ],
+  },
+];
+
+const normativa = [
+  {
+    title: 'Organización',
+    items: [
+      'Las citas canceladas con menos de 24h de antelación conllevarán el cobro del 100% del importe de la sesión.',
+      'El proceso de terapia quedará suspendido en caso de cancelaciones reiteradas por parte del paciente.',
+    ],
+  },
+  {
+    title: 'Privacidad',
+    items: [
+      'Se recomienda el uso de auriculares y evitar conexiones de red públicas.',
+      'En caso de que el espacio no asegure el derecho a la intimidad del paciente, el profesional se reserva el derecho a paralizar la sesión y reubicar la cita.',
+    ],
+  },
+  {
+    title: 'Puntualidad',
+    items: [
+      'Se ofrece un margen de flexibilidad de 20 minutos, tras los cuales la sesión quedará cancelada con su correspondiente coste.',
+      'Se requiere flexibilidad para las ocasiones en las que el terapeuta pueda alargarse con un paciente anterior y generar un retraso en las consultas siguientes.',
+    ],
+  },
+];
+
+const initial = tabs[0].id;
+---
+
+<Layout
+  title="Precio"
+  description="La terapia no es un gasto, es tiempo y energía que dedicas a ti misma. Precios de terapia individual, de pareja y familiar."
+>
+
+  <section class="precio-section" id="precio">
+    <div class="precio-container">
+      <div class="precio-left">
+        <h1>Invierte en tu salud</h1>
+        <p class="lede">La terapia no es un gasto, es tiempo y energía que dedicas a ti misma.</p>
+
+        <div class="tabs" role="tablist" aria-label="Tipo de terapia" id="tabs">
+          {tabs.map((tab) => (
+            <button
+              class:list={['tab', { active: tab.id === initial }]}
+              role="tab"
+              id={`tab-${tab.id}`}
+              aria-controls={`panel-${tab.id}`}
+              aria-selected={tab.id === initial}
+              data-tab={tab.id}
+              type="button"
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {tabs.map((tab) => (
+          <div
+            class="info-cards"
+            id={`panel-${tab.id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${tab.id}`}
+            data-panel={tab.id}
+            hidden={tab.id !== initial}
+          >
+            <div class="card reveal">
+              <p class="price-label">Precio</p>
+              <p class="price-value">{tab.price}</p>
+              <ul class="details-list">
+                {tab.details.map((d) => <li>{d}</li>)}
+              </ul>
+            </div>
+
+            <div class="card reveal bono-card">
+              <p class="bono-title">
+                <span class="badge-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+                    <path d="M9 9h.01"/>
+                    <path d="m15 9-6 6"/>
+                    <path d="M15 15h.01"/>
+                  </svg>
+                </span>
+                Bono: {tab.bono}
+              </p>
+              <p class="bono-desc">Se trata de paquetes de sesiones que se van consumiendo en el tiempo. La mejor inversión en salud y una forma eficaz de reducir el coste del tratamiento.</p>
+            </div>
+          </div>
+        ))}
+
+        <a class="btn btn-terra cta-info" href={CALENDLY_URL} target="_blank" rel="noopener">
+          Consultar más información
+        </a>
+      </div>
+
+      <div class="precio-right">
+        <h2 id="normativa">Normativa terapéutica</h2>
+        <p class="lede-sm">El autocuidado empieza con el compromiso</p>
+
+        <div class="accordion-list">
+          {normativa.map((n) => (
+            <details class="accordion-item reveal">
+              <summary>
+                <span>{n.title}</span>
+                <span class="chevron" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m6 9 6 6 6-6"/>
+                  </svg>
+                </span>
+              </summary>
+              <ul class="details-list">
+                {n.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTAFinalSection
+    heading="¿Todo más claro?"
+    text="La primera sesión no te compromete a nada. Solo es una conversación."
+  />
+
+</Layout>
+
+<style>
+.precio-section {
+  background: var(--color-bg-soft);
+  padding: 40px var(--gutter) 60px;
+}
+.precio-container {
+  max-width: 1010px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.precio-left,
+.precio-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.precio-left h1 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin: 0 0 16px;
+}
+.precio-left .lede {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 0 24px;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--color-clay-soft);
+  margin-bottom: 20px;
+}
+.tab {
+  flex: 1 1 auto;
+  padding: 0 12px 12px;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  color: var(--color-text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+}
+.tab.active {
+  font-weight: var(--fw-semi);
+  color: var(--color-text-secondary);
+  border-bottom-color: var(--color-text-secondary);
+}
+
+.info-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.info-cards[hidden] { display: none; }
+
+.card {
+  background: var(--color-bg-base);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+}
+.price-label {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body-sm);
+  letter-spacing: var(--ls-wide);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin: 0 0 8px;
+}
+.price-value {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 22px;
+  color: var(--color-text-primary);
+  margin: 0 0 16px;
+}
+.details-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.details-list li {
+  position: relative;
+  padding-left: 20px;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body-sm);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+.details-list li::before {
+  content: "•";
+  position: absolute;
+  left: 2px;
+  color: var(--color-text-primary);
+}
+
+.badge-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  color: var(--color-clay);
+}
+.bono-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 18px;
+  color: var(--color-text-primary);
+  margin: 0 0 8px;
+}
+.bono-desc {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  white-space: nowrap;
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.06); }
+.btn-terra {
+  background: var(--color-clay);
+  color: #fff;
+  font-weight: var(--fw-semi);
+  width: 100%;
+}
+.btn-terra:hover { color: #fff; }
+
+/* ── Normativa terapéutica (derecha) ── */
+.precio-right h2 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-h2);
+  color: var(--color-text-primary);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 16px;
+}
+.lede-sm {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 0 24px;
+}
+
+.accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.accordion-item {
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-bg-border);
+  border-radius: var(--radius-lg);
+  padding: 4px 16px;
+}
+.accordion-item summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body);
+  color: var(--color-text-primary);
+}
+.accordion-item summary::-webkit-details-marker { display: none; }
+.accordion-item .chevron {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-moss-soft);
+  color: var(--color-moss);
+  display: grid;
+  place-items: center;
+  transition: transform var(--transition-fast);
+}
+.accordion-item[open] .chevron { transform: rotate(180deg); }
+.accordion-item .details-list { padding-bottom: 16px; }
+
+@media (min-width: 1000px) {
+  .precio-section { padding: 80px 40px; }
+  .precio-container { flex-direction: row; align-items: flex-start; gap: 64px; max-width: 1280px; }
+  .precio-left,
+  .precio-right { flex: 1 1 0; }
+}
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const tabsWrap = document.getElementById('tabs');
+    if (!tabsWrap) return;
+
+    const tabButtons = Array.from(tabsWrap.querySelectorAll<HTMLButtonElement>('.tab'));
+    const panels = Array.from(document.querySelectorAll<HTMLElement>('.info-cards[data-panel]'));
+
+    function select(id: string) {
+      tabButtons.forEach((btn) => {
+        const active = btn.dataset.tab === id;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-selected', String(active));
+      });
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.panel !== id;
+      });
+    }
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.tab) select(btn.dataset.tab);
+      });
+    });
+  });
+</script>
