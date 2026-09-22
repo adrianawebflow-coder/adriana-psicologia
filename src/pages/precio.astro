@@ -192,6 +192,7 @@ const initial = tabs[0].id;
   flex-direction: column;
 }
 .normativa-content {
+  background: var(--color-clay-soft);
   padding: 40px var(--gutter) 24px;
 }
 
@@ -381,13 +382,13 @@ const initial = tabs[0].id;
 .accordion-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 .accordion-item {
-  background: var(--color-bg-base);
-  border: 1px solid var(--color-bg-border);
+  background: #FAF9F5;
+  border: none;
   border-radius: var(--radius-lg);
-  padding: 4px 12px;
+  padding: 4px 20px;
 }
 .accordion-item summary {
   list-style: none;
@@ -395,7 +396,7 @@ const initial = tabs[0].id;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 12px 0;
+  padding: 20px 0;
   cursor: pointer;
   font-family: var(--font-sans);
   font-weight: var(--fw-medium);
@@ -408,14 +409,14 @@ const initial = tabs[0].id;
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--color-moss-soft);
-  color: var(--color-moss);
+  background: var(--color-clay-soft);
+  color: var(--color-clay-hover);
   display: grid;
   place-items: center;
   transition: transform var(--transition-fast);
 }
 .accordion-item[open] .chevron { transform: rotate(180deg); }
-.accordion-item .details-list { padding-bottom: 16px; }
+.accordion-item .details-list { padding-bottom: 20px; }
 
 /* ── CTA (dentro de la columna derecha, debajo de normativa) ── */
 .precio-cta {
