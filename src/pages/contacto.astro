@@ -234,13 +234,15 @@ const faqs = [
   background: var(--color-bg-soft);
   padding: 40px 0 60px;
 }
+.faq .section-title { text-align: center; }
 .faq-lede {
   font-family: var(--font-sans);
   font-size: var(--fs-body);
   line-height: 1.6;
   color: var(--color-text-secondary);
-  margin: 0 0 24px;
-  max-width: 52ch;
+  margin: 0 auto 24px;
+  max-width: 46ch;
+  text-align: center;
 }
 
 .faq-list {
@@ -254,6 +256,8 @@ const faqs = [
   box-shadow: var(--shadow-sm);
   padding: 4px 16px;
   width: 100%;
+  max-width: 598px;
+  margin: 0 auto;
 }
 .faq-item summary {
   list-style: none;
@@ -302,9 +306,6 @@ const faqs = [
   .booking-steps { flex: 1 1 0; }
   .booking-card { flex: 1 1 0; }
   .calendly-inline-widget { height: 100%; min-height: 680px; }
-
-  .faq .section-title,
-  .faq-lede { text-align: left; }
 }
 </style>
 
