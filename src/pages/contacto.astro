@@ -1,0 +1,347 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTAFinalSection from '../components/CTAFinalSection.astro';
+
+const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
+
+const pasos = [
+  {
+    title: 'Reservas tu primera sesión',
+    desc: 'A través del calendario online. Sin formularios, sin esperas. Eliges día y hora tú.',
+  },
+  {
+    title: 'Primera sesión (50 minutos)',
+    desc: 'Hablamos. Me cuentas qué te trae y yo te explico cómo puedo ayudarte. No hay diagnóstico ni compromiso. Es solo conocernos.',
+  },
+  {
+    title: 'Decidimos junt@s',
+    desc: 'Si conectamos y tiene sentido seguir, acordamos la frecuencia y el enfoque de las sesiones. Si no, sin problema.',
+  },
+];
+
+const faqs = [
+  {
+    q: '¿Cómo sé si la terapia me va a funcionar?',
+    a: 'No hay garantías, pero sí una primera sesión pensada para que puedas evaluarlo: ahí conoces mi forma de trabajar y decides si conectamos. Si después de unas sesiones no notas avances, lo hablamos y ajustamos el enfoque.',
+  },
+  {
+    q: '¿Cuánto tiempo dura el proceso?',
+    a: 'Depende de cada persona y de lo que traiga a terapia. Algunos procesos duran unos meses, otros más tiempo. Lo revisamos juntas periódicamente.',
+  },
+  {
+    q: '¿Puedo cambiar de online a presencial?',
+    a: 'Sí, puedes alternar entre modalidad online y presencial cuando lo necesites, avisando con antelación para organizar la sesión.',
+  },
+  {
+    q: '¿Es confidencial?',
+    a: 'Sí. Todo lo que compartas en sesión está protegido por el secreto profesional, salvo en las excepciones que marca la ley, como un riesgo grave para ti o para terceros.',
+  },
+  {
+    q: '¿Qué pasa si tengo que cancelar?',
+    a: 'Puedes cancelar o reprogramar sin coste si avisas con al menos 24 horas de antelación.',
+  },
+];
+---
+
+<Layout
+  title="Contacto"
+  description="Reserva tu primera sesión directamente. Sin formularios largos, sin esperas. Eliges día y hora tú."
+>
+
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+
+  <section class="contacto-hero">
+    <div class="container">
+      <h1 transition:name="hero-title">Da el primer paso</h1>
+      <p class="lede">Reserva tu primera sesión directamente. Sin formularios largos, sin esperas. Eliges día y hora tú.</p>
+    </div>
+  </section>
+
+  <section class="booking">
+    <div class="container booking-grid">
+      <div class="booking-steps">
+        <h2 class="booking-title reveal">¿Cómo es la primera sesión?</h2>
+        <ol class="steps">
+          {pasos.map((paso) => (
+            <li class="step reveal">
+              <span class="step-num">{pasos.indexOf(paso) + 1}</span>
+              <div class="step-body">
+                <h3>{paso.title}</h3>
+                <p>{paso.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="booking-card reveal">
+        <div class="calendly-inline-widget" data-url={CALENDLY_URL}></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <div class="container">
+      <h2 class="section-title reveal">Preguntas frecuentes</h2>
+      <p class="faq-lede reveal">Lo desconocido da miedo. Por eso te cuento exactamente qué pasa desde que decides contactar.</p>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item reveal">
+            <summary>
+              <span>{faq.q}</span>
+              <span class="chevron" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </span>
+            </summary>
+            <p>{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTAFinalSection
+    heading="No esperes a que todo se derrumbe"
+    text="¿List@ para dar el primer paso? Solo es una conversación. Sin compromiso, sin tener que tenerlo todo claro."
+  />
+
+</Layout>
+
+<style>
+.container {
+  max-width: 1010px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ── Hero ── */
+.contacto-hero {
+  background: var(--color-bg-soft);
+  padding: 40px 0;
+  text-align: left;
+}
+.contacto-hero h1 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin: 0 0 16px;
+}
+.contacto-hero .lede {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 46ch;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-h2);
+  color: var(--color-text-primary);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 24px;
+}
+
+/* ── Booking (pasos + widget) ── */
+.booking {
+  background: var(--color-bg-base);
+  padding: 40px 0 60px;
+}
+.booking-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.booking-title {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-h3);
+  color: var(--color-text-primary);
+  letter-spacing: var(--ls-tight);
+  margin: 0 0 24px;
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  align-items: center;
+  column-gap: 20px;
+  padding-bottom: 32px;
+  list-style: none;
+}
+.step::marker { content: none; }
+.step:last-child { padding-bottom: 0; }
+
+.step-num {
+  position: relative;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-clay-soft);
+  background: #fff;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: 18px;
+  color: var(--color-text-primary);
+}
+
+.step-body h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body);
+  color: var(--color-text-primary);
+  margin: 0 0 8px;
+}
+.step-body p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.booking-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.calendly-inline-widget {
+  min-width: 280px;
+  height: 620px;
+}
+
+/* ── FAQ ── */
+.faq {
+  background: var(--color-bg-soft);
+  padding: 40px 0 60px;
+}
+.faq-lede {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 0 24px;
+  max-width: 52ch;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.faq-item {
+  background: #FAF9F5;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 4px 16px;
+  width: 100%;
+}
+.faq-item summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body);
+  color: var(--color-text-primary);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item .chevron {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-moss-soft);
+  color: var(--color-moss);
+  display: grid;
+  place-items: center;
+  transition: transform var(--transition-fast);
+}
+.faq-item[open] .chevron { transform: rotate(180deg); }
+.faq-item p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 0 16px;
+}
+
+@media (min-width: 900px) {
+  .contacto-hero { padding: 80px 0; text-align: center; }
+  .contacto-hero h1 { font-size: 40px; }
+  .contacto-hero .lede { font-size: var(--fs-body-lg); max-width: 52ch; margin: 0 auto; }
+
+  .booking-grid {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 60px;
+  }
+  .booking-steps { flex: 1 1 0; }
+  .booking-card { flex: 1 1 0; }
+  .calendly-inline-widget { height: 100%; min-height: 680px; }
+
+  .faq .section-title,
+  .faq-lede { text-align: left; }
+}
+</style>
+
+<script>
+  function initCalendly() {
+    const el = document.querySelector<HTMLElement>('.calendly-inline-widget');
+    if (!el || el.querySelector('iframe')) return;
+    const w = (window as any).Calendly;
+    if (w) {
+      w.initInlineWidget({ url: el.dataset.url, parentElement: el });
+    }
+  }
+
+  document.addEventListener('astro:page-load', () => {
+    if (!document.querySelector('.calendly-inline-widget')) return;
+
+    if ((window as any).Calendly) {
+      initCalendly();
+      return;
+    }
+
+    if (!document.getElementById('calendly-widget-script')) {
+      const script = document.createElement('script');
+      script.id = 'calendly-widget-script';
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      script.onload = initCalendly;
+      document.body.appendChild(script);
+    } else {
+      // El script ya se está cargando desde una navegación anterior;
+      // reintenta hasta que Calendly quede disponible en window.
+      const retry = setInterval(() => {
+        if ((window as any).Calendly) {
+          clearInterval(retry);
+          initCalendly();
+        }
+      }, 100);
+    }
+  });
+</script>
