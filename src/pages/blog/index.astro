@@ -53,11 +53,9 @@ const sidebarPosts = posts.slice(0, 3);
         <div class="grid">
           {gridPosts.map((post) => (
             <a class="card reveal" href={`/blog/${post.slug}`} data-category={post.category}>
-              <div class="card-media">
-                <img src={post.image} alt={post.title} loading="lazy" />
-                <span class="card-badge">{post.category}</span>
-              </div>
+              <img class="card-img" src={post.image} alt={post.title} loading="lazy" />
               <div class="card-body">
+                <span class="card-badge">{post.category}</span>
                 <h3 class="card-title">{post.title}</h3>
                 <p class="card-excerpt">{post.excerpt}</p>
               </div>
@@ -189,13 +187,12 @@ const sidebarPosts = posts.slice(0, 3);
 }
 .card {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: block;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  background: #fff;
-  box-shadow: var(--shadow-sm);
+  aspect-ratio: 3 / 4;
   text-decoration: none;
+  box-shadow: var(--shadow-sm);
   transition: box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 .card:hover {
@@ -204,48 +201,55 @@ const sidebarPosts = posts.slice(0, 3);
 }
 .card[hidden] { display: none; }
 
-.card-media {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-}
-.card-media img {
+.card-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform var(--transition-slow);
   display: block;
 }
-.card:hover .card-media img { transform: scale(1.04); }
-.card-badge {
+.card:hover .card-img { transform: scale(1.04); }
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.55) 42%, rgba(0,0,0,.05) 75%, transparent 100%);
+}
+
+.card-body {
   position: absolute;
   z-index: 1;
-  left: 16px;
-  top: 16px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+.card-badge {
+  align-self: flex-start;
   padding: 6px 14px;
   border-radius: var(--radius-full);
-  background: rgba(255,255,255,.9);
+  background: rgba(255,255,255,.92);
   color: var(--color-text-primary);
   font-family: var(--font-sans);
   font-size: var(--fs-meta);
   font-weight: var(--fw-medium);
 }
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 20px;
-}
 .card-title {
   font-family: var(--font-sans);
   font-weight: var(--fw-semi);
-  font-size: var(--fs-body-lg);
-  line-height: 1.35;
-  color: var(--color-text-primary);
+  font-size: var(--fs-h4);
+  line-height: 1.3;
+  color: #fff;
   margin: 0;
+  text-shadow: 0 1px 12px rgba(0,0,0,.35);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -253,7 +257,7 @@ const sidebarPosts = posts.slice(0, 3);
   font-family: var(--font-sans);
   font-size: var(--fs-body-sm);
   line-height: 1.6;
-  color: var(--color-text-secondary);
+  color: rgba(255,255,255,.88);
   margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
