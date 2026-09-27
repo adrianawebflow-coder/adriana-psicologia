@@ -59,8 +59,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La pandemia y el confinamiento dispararon la ansiedad, el insomnio y las fobias sociales en gran parte de la población, no solo en quienes pasaron la enfermedad. Sanitarios y psicólogos advierten de síntomas compatibles con el estrés postraumático, mientras el llamado «síndrome de la cabaña» y la sobreexposición mediática al virus se han consolidado como nuevos problemas de salud mental derivados de estos años.' },
+        body: [
+      { type: 'p', text: 'La pandemia y el confinamiento dispararon la ansiedad, el insomnio y las fobias sociales en gran parte de la población, no solo en quienes pasaron la enfermedad, según psicólogos del PsiCall UCM e Instituto Centta. El artículo describe el «síndrome de la cabaña» (miedo a volver a salir tras el confinamiento), la sobreexposición mediática al virus como factor de malestar añadido, y recuerda la conexión entre mente y cuerpo: la ansiedad no gestionada también pasa factura física, por lo que se recomienda buscar apoyo psicológico, dieta e higiene de sueño adecuadas.' },
     ],
   },
   {
@@ -74,8 +74,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Las redes sociales no causan por sí solas un trastorno de la conducta alimentaria, pero sí actúan como un factor de riesgo relevante al reforzar comparaciones constantes e ideales de belleza inalcanzables. El artículo explora cómo los algoritmos de Instagram y TikTok, pensados para mostrarnos más de lo que ya consumimos, pueden atrapar a quienes ya son vulnerables en un bucle de contenido centrado en el cuerpo y la comida.' },
+        body: [
+      { type: 'p', text: 'Las redes sociales no causan por sí solas un trastorno de la conducta alimentaria (TCA), pero sí son un factor de riesgo relevante, según Adriana Esteban, al devolver un reflejo filtrado y aspiracional del cuerpo. El artículo explica cómo los algoritmos de Instagram y TikTok, diseñados para mostrar más de lo que ya consumimos, pueden convertir una búsqueda puntual sobre dieta o ejercicio en un bucle de contenido dañino para quien ya es vulnerable, cita a varias psicólogas y nutricionistas especializadas en TCA, y cierra con una lista de estrategias de prevención: contenido diverso, avisos de contenido sensible, restringir cuentas «proana»/«promia», ayuda en línea y más transparencia algorítmica.' },
     ],
   },
   {
@@ -89,8 +89,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La ortorexia es la preocupación obsesiva por seguir una alimentación saludable a través de normas cada vez más estrictas y restrictivas, un término todavía muy reciente que no figura en los manuales diagnósticos oficiales. El artículo repasa sus síntomas —desde la planificación obsesiva de las comidas hasta el aislamiento social— y recuerda que la rigidez alimentaria, lejos de ser sinónimo de salud, puede acabar perjudicando la calidad de vida.' },
+        body: [
+      { type: 'p', text: 'La ortorexia es la preocupación obsesiva por comer «sano» a través de reglas estrictas y restrictivas, un término acuñado en el año 2000 por Steven Bratman que todavía no figura en el DSM-V. Adriana Esteban explica sus síntomas (obsesión por ingredientes, planificación rígida de comidas, aislamiento social, culpa) y advierte de que, en los casos más graves, puede derivar en anorexia o bulimia. El artículo recomienda la «regla del 80-20» y la flexibilidad cognitiva como antídoto frente a la rigidez, recordando que comer un donut o un helado de vez en cuando no es incompatible con una alimentación sana.' },
     ],
   },
   {
@@ -104,8 +104,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Muchas dificultades a la hora de conocer pareja no vienen de la timidez ni de la falta de habilidades sociales, sino de expectativas poco realistas sobre lo que debe ser una cita. El artículo aborda el miedo al rechazo, la búsqueda de una persona «perfecta» y cómo la incompatibilidad, bien gestionada, puede ser incluso positiva en lugar de un obstáculo.' },
+        body: [
+      { type: 'p', text: 'A partir de la pregunta que hacen algunos pacientes en consulta, Adriana Esteban y Adrián Garrido (Instituto Centta) explican que las citas «que no funcionan» suelen deberse a expectativas poco ajustadas a la realidad, más que a falta de habilidades sociales. El artículo repasa si la timidez o la incompatibilidad son realmente un problema, el papel de la autoestima al conocer gente nueva, y ofrece consejos concretos sobre autenticidad, gestión del miedo al rechazo y cómo evitar «bloquearse» en una cita, insistiendo en que ligar es una habilidad que se entrena con la práctica.' },
     ],
   },
   {
@@ -119,8 +119,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La autoestima infantil se construye día a día en la relación con la familia, y no consiste en creerse el mejor sino en darse permiso para equivocarse y volver a intentarlo. El artículo recoge consejos prácticos —centrarse en el proceso y no solo en el resultado, dar espacio y responsabilidades acordes a la edad— para que padres y madres acompañen ese proceso sin caer en la sobreprotección.' },
+        body: [
+      { type: 'p', text: 'Con aportaciones de Santos Solano (Educar es todo) y Adriana Esteban, el artículo explica que la autoestima infantil se construye desde la familia y no depende de ser «el mejor», sino de aprender a equivocarse y volver a intentarlo. Ofrece cinco consejos concretos: centrarse en el proceso y no en el resultado, dar espacio y responsabilidades acordes a la edad, evitar etiquetas y comparaciones, cuidar la autoexigencia que se traslada a los hijos, y cuidar los pequeños detalles de la relación con ellos.' },
     ],
   },
   {
@@ -134,8 +134,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El auge del movimiento «realfooding» ha hecho que muchas más personas se fijen en lo que comen, algo positivo en general, pero especialistas en nutrición y psicología advierten de que vivirlo de forma rígida —en blanco o negro— puede derivar en problemas de alimentación en las personas más vulnerables. El artículo distingue entre el mensaje original y la interiorización extrema que algunos hacen de él.' },
+        body: [
+      { type: 'p', text: 'A raíz del movimiento «realfooding» del nutricionista Carlos Ríos, el artículo recoge las voces de varios nutricionistas (Nutrygente, Instituto Centta) y de la psicóloga Adriana Esteban sobre cómo un mensaje en principio positivo —priorizar alimentos no procesados— puede, vivido con rigidez y perfeccionismo, convertirse en un factor de riesgo para desarrollar un trastorno de la conducta alimentaria encubierto. Advierte de la culpa asociada a «romper» la dieta y reivindica moverse «en los grises»: comer real es también disfrutar del acto de comer, no solo cumplir reglas nutricionales.' },
     ],
   },
   {
@@ -149,8 +149,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Combinado con baja autoestima, perfeccionismo o baja tolerancia a la frustración, el ayuno intermitente puede convertirse en el caldo de cultivo de un trastorno de la conducta alimentaria. La psicóloga explica cómo tanto la dificultad para mantenerlo (que lleva al atracón) como sostenerlo en exceso (que altera la percepción del hambre y de la propia imagen corporal) generan un círculo vicioso difícil de romper sin ayuda profesional.' },
+        body: [
+      { type: 'p', text: 'Adriana Esteban (Instituto Centta) advierte de que el ayuno intermitente puede ser un desencadenante de trastornos de la conducta alimentaria, sobre todo en personas con baja autoestima, perfeccionismo o impulsividad, ya sea por la dificultad de sostenerlo (que lleva al atracón) o por sostenerlo demasiado tiempo (que altera la percepción de hambre y la imagen corporal). El artículo enumera señales de alarma —rigidez extrema, obsesión por el cuerpo, aislamiento social, cambios de humor— y recomienda que cualquier ayuno se haga bajo supervisión profesional.' },
     ],
   },
   {
@@ -163,8 +163,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La Navidad es una época especialmente difícil para las personas en proceso de recuperación de un trastorno de la conducta alimentaria, no tanto por la comida en sí como por las tensiones familiares y los reencuentros con vínculos poco frecuentes durante el año. Con motivo del Día Internacional de la Lucha contra los TCA, el artículo ofrece pautas para acompañar a un ser querido durante estas fechas tan señaladas.' },
+        body: [
+      { type: 'p', text: 'Con motivo del Día Internacional de la Lucha contra los TCA (30 de noviembre), Adriana Esteban explica por qué la Navidad es una época especialmente dura para quienes están en recuperación: no tanto por la comida en sí, sino por las tensiones familiares y los reencuentros con vínculos poco frecuentes durante el año. Ofrece tres consejos concretos para las familias: negociar la estructura de las celebraciones dando margen de decisión a la persona, fomentar la comunicación asertiva sobre expectativas y miedos, y facilitar la autorregulación respetando sus ritmos y ofreciendo vínculos seguros a los que acudir.' },
     ],
   },
   {
@@ -178,8 +178,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Cada vez más adolescentes y adultos jóvenes llegan a consulta con problemas de baja autoestima, depresión y dificultad para aceptar su imagen corporal ligados al uso compulsivo de redes sociales. El artículo, a partir de una conferencia sobre depresión en la generación Z, plantea la necesidad de acercar la salud mental a los jóvenes con estrategias distintas a las tradicionales.' },
+        body: [
+      { type: 'p', text: 'A partir de la conferencia «Millennials y Generación Z. Depresión invisible» (Lundbeck), el artículo alerta del aumento de consultas de jóvenes de 20 a 34 años relacionadas con el abuso de redes sociales, la comparación constante y la baja autoestima, con previsión de que la depresión sea la principal causa de incapacidad laboral en 2030. Señala la reluctancia de los adolescentes a pedir ayuda y plantea estrategias innovadoras, como acercar la atención de salud mental a espacios culturales y sociales juveniles fuera del entorno clínico tradicional.' },
     ],
   },
   {
@@ -193,8 +193,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La mayoría de las personas que acuden a terapia no tienen un trastorno mental grave, sino dificultades cotidianas que les cuesta afrontar solas. El artículo reivindica que pedir ayuda psicológica es un acto de valentía, no una señal de debilidad, y que la terapia sirve tanto para gestionar crisis puntuales como para el crecimiento personal.' },
+        body: [
+      { type: 'p', text: 'El artículo desmonta el estigma histórico que asocia ir al psicólogo con estar «loco», recordando que esa etiqueta se refería a trastornos graves con alucinaciones o delirios, mientras que la mayoría de quienes acuden a terapia solo buscan gestionar dificultades cotidianas. Defiende que la psicoterapia es para cualquier persona que quiera mejorar su bienestar emocional, y que pedir ayuda es un acto de valentía y autocuidado, no una señal de debilidad.' },
     ],
   },
   {
@@ -208,8 +208,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Las apuestas sin dinero real, el anonimato de internet y la publicidad protagonizada por deportistas de élite hacen que cada vez más menores se acerquen a las apuestas online sin percibir el riesgo real. El artículo repasa los datos sobre abuso de tecnología entre adolescentes españoles y las graves consecuencias personales, sociales y económicas de la adicción al juego.' },
+        body: [
+      { type: 'p', text: 'El artículo repasa la Estrategia Nacional Contra las Adicciones 2017-2024 y datos de una encuesta en secundaria que muestra que el 23,8% de las chicas y el 18,3% de los chicos de 14-18 años abusan de las TIC. Explica cómo las apuestas «sin dinero» actúan como puerta de entrada para menores, reduciendo su percepción de riesgo hasta que empiezan a apostar dinero real, favorecidas por el anonimato de internet y la publicidad de deportistas de élite. En España hay 500.000 personas diagnosticadas con adicción al juego, con consecuencias graves a nivel personal, social y económico.' },
     ],
   },
   {
@@ -223,8 +223,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El síndrome de Morris es una condición genética rara en la que una persona con cromosomas XY desarrolla una apariencia física femenina debido a una insensibilidad completa a los andrógenos. Más allá del reto médico, el artículo se centra en el impacto emocional del diagnóstico —habitual en la adolescencia— y en la importancia del acompañamiento psicológico frente al rechazo social o la incomprensión.' },
+        body: [
+      { type: 'p', text: 'El Síndrome de Morris (o Síndrome de Insensibilidad Completa a los Andrógenos) es una condición genética rara en la que una persona con cromosomas XY desarrolla una apariencia física femenina por una mutación en el receptor de andrógenos, careciendo de útero y ovarios. Suele detectarse en la adolescencia, al no aparecer la menstruación, y el artículo pone el foco en el impacto emocional del diagnóstico —desde la insatisfacción corporal hasta el rechazo social—, defendiendo la importancia del apoyo psicológico integral frente a los desafíos médicos y sociales que conlleva.' },
     ],
   },
   {
@@ -238,8 +238,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La conocida como «crisis de los 25» combina incertidumbre económica, un mercado laboral que no cumple expectativas y la presión de las redes sociales por proyectar una vida perfecta. El artículo plantea esta etapa no como un bloqueo sino como una oportunidad para revisar prioridades y reorientar metas hacia lo que de verdad importa.' },
+        body: [
+      { type: 'p', text: 'La «crisis de los 25» describe la confusión y sensación de estar atrapado que muchas personas sienten en la veintena, alimentada por la incertidumbre económica, un mercado laboral que decepciona expectativas y la presión de las redes sociales por proyectar una «vida perfecta». El artículo desglosa tres ejes de esta crisis —la búsqueda del trabajo perfecto, la priorización extrema de la independencia y la «falsa espiritualidad» centrada en lo material— y la plantea como una oportunidad de crecimiento y reorientación hacia lo que realmente importa, más que como un callejón sin salida.' },
     ],
   },
   {
@@ -253,8 +253,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El artículo repasa técnicas de relajación accesibles para manejar el estrés cotidiano: la respiración diafragmática para calmar la respuesta de lucha o huida, la relajación muscular progresiva para liberar la tensión física acumulada, y la visualización activa para cambiar el estado de ánimo. Se completan con hábitos como el ejercicio regular o llevar un diario de gratitud.' },
+        body: [
+      { type: 'p', text: 'El artículo repasa tres técnicas de relajación centrales —respiración diafragmática, relajación muscular progresiva (en tres etapas) y visualización activa— explicando su base fisiológica y sus beneficios para reducir la frecuencia cardíaca, la tensión física y la rumiación negativa. Las complementa con hábitos cotidianos: ejercicio regular, diario de gratitud, música relajante, aprender a decir «no», dedicar tiempo a aficiones y, cuando haga falta, acudir a terapia, recordando que no existe una solución única y que conviene combinar varias estrategias según cada persona.' },
     ],
   },
   {
@@ -268,8 +268,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La resiliencia es la capacidad de adaptarse al cambio y salir fortalecido de las adversidades, y se apoya en la autoestima, el apoyo social y la habilidad de aprender de las experiencias difíciles. El artículo defiende que se trata de una habilidad que se puede cultivar activamente, no de un rasgo con el que se nace.' },
+        body: [
+      { type: 'p', text: 'La resiliencia —la capacidad de enfrentar la adversidad y salir fortalecido de ella— no es un rasgo innato sino una habilidad que se entrena a lo largo de la vida. El artículo identifica sus componentes clave: la capacidad de adaptarse al cambio sin negar las emociones difíciles, una autoestima y autoconfianza sólidas, una red de apoyo social a la que acudir, y la capacidad de aprender de las experiencias negativas en lugar de vivirlas como un obstáculo insuperable.' },
     ],
   },
   {
@@ -283,8 +283,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Las Personas Altamente Sensibles (PAS) procesan la información sensorial de manera más profunda, lo que se traduce en mayor empatía pero también en mayor necesidad de aislarse para recargarse tras la sobreestimulación. El artículo advierte de que, si este rasgo no se comprende desde la infancia, puede derivar en ansiedad o depresión en la edad adulta.' },
+        body: [
+      { type: 'p', text: 'Las Personas Altamente Sensibles (PAS), un rasgo que afecta a entre el 15 y el 20% de la población según la Asociación Española de Profesionales Altamente Sensibles, procesan la información sensorial de forma más profunda: son más sensibles al ruido o la violencia, tienen alta empatía, pero también necesitan más tiempo de aislamiento para recargarse, lo que a veces se confunde con timidez. El artículo advierte de que, si este rasgo no se comprende ni gestiona desde la infancia, puede derivar en ansiedad o depresión en la edad adulta.' },
     ],
   },
   {
@@ -298,8 +298,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Existe una falta de educación emocional que nos lleva a temer expresar la tristeza o el malestar, reforzada por la «falsa felicidad» que proyectan las redes sociales. El artículo defiende la introspección como herramienta para reconocer y gestionar todas las emociones, en lugar de construir «muros emocionales» para evitarlas.' },
+        body: [
+      { type: 'p', text: 'El artículo aborda la dificultad para expresar emociones «negativas» como la tristeza, contrastando cómo la sociedad acepta fácilmente una lesión física pero juzga el malestar emocional. Señala la «falsa felicidad» de redes como Instagram como un factor de presión añadido, cita al psicólogo Leocadio Martín y su concepto de «muros emocionales» como mecanismos de defensa, y defiende la introspección como vía para sentir y gestionar todas las emociones en lugar de reprimirlas.' },
     ],
   },
   {
@@ -313,8 +313,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Las personas perfeccionistas y autocríticas tienden a atribuir sus logros a la suerte o a factores externos, lo que alimenta el temor constante a ser «descubiertas» como un fraude. El artículo cita estudios que muestran una mayor incidencia en mujeres y en personas de 18 a 34 años, y plantea la ayuda psicológica como vía para reconocer y valorar los propios méritos.' },
+        body: [
+      { type: 'p', text: 'El síndrome del impostor afecta a personas perfeccionistas y autocríticas que atribuyen sus logros a la suerte en lugar de a su propio mérito, alimentando un temor constante a ser «descubiertas». El artículo cita un estudio de la Universidad de Cincinnati según el cual 2 de cada 3 mujeres lo han experimentado alguna vez, y que hasta el 86% de las personas de 18 a 34 años dicen haberlo sentido, frente a una menor incidencia entre los 45 y 54 años. Plantea la ayuda psicológica como vía para reconocer y valorar los propios logros.' },
     ],
   },
   {
@@ -328,8 +328,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Un estudio muestra que un porcentaje significativo de trabajadores, especialmente los menores de 25 años, sigue en contacto con su empresa durante las vacaciones. El artículo relaciona esta dificultad con el miedo a no ser «indispensable» y propone el ocio activo y el mindfulness como estrategias para lograr una desconexión real.' },
+        body: [
+      { type: 'p', text: 'Un estudio de Randstad revela que el 30% de los trabajadores no logra desconectar del todo durante sus vacaciones, con un 48,6% entre los menores de 25 años y más dificultad entre los hombres que entre las mujeres. El artículo vincula esta incapacidad al miedo a no ser indispensable y a la necesidad de control, y propone el ocio activo, el mindfulness y la confianza en el equipo (para quienes dirigen personas) como estrategias para lograr una desconexión real.' },
     ],
   },
   {
@@ -343,8 +343,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El Taijin Kyofusho es un miedo desproporcionado a que las propias acciones resulten molestas para los demás, con subtipos centrados en el rubor, la propia imagen corporal, el contacto visual o el olor corporal. El artículo señala la terapia de exposición y la reestructuración cognitiva como los tratamientos más efectivos.' },
+        body: [
+      { type: 'p', text: 'Taijin Kyofusho es un síndrome de origen japonés caracterizado por el miedo desproporcionado a que las propias acciones resulten molestas u ofensivas para los demás, con síntomas físicos intensos (náuseas, taquicardia, sudoración). El artículo describe sus cuatro subtipos —centrados en sonrojarse, la propia imagen corporal, el contacto visual o el olor corporal— y señala la terapia de exposición y la reestructuración cognitiva como los tratamientos más efectivos.' },
     ],
   },
   {
@@ -358,8 +358,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'A diferencia de cuando somos niños, de adultos solemos asociar pedir ayuda con debilidad, lo que retrasa la búsqueda de apoyo psicológico. El artículo reivindica que acudir a terapia debería normalizarse igual que ir al fisioterapeuta o al nutricionista, como una forma más de cuidar la salud.' },
+        body: [
+      { type: 'p', text: 'El artículo explora por qué, a diferencia de cuando somos niños, de adultos nos cuesta pedir ayuda: el egocentrismo, el miedo a confesar un problema y el temor al juicio ajeno son las principales barreras. Defiende que pedir ayuda no es un signo de debilidad sino de valentía, y reivindica normalizar acudir al psicólogo igual que se normaliza ir al fisioterapeuta o al nutricionista, en un contexto en el que hablar de terapia cada vez está menos estigmatizado.' },
     ],
   },
   {
@@ -373,8 +373,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La llamada «depresión sonriente» describe a personas que ocultan un profundo malestar emocional tras una apariencia de bienestar, a menudo por miedo al rechazo o por sentir que deben ser un pilar para los demás. El artículo recuerda que sonreír es un gesto voluntario, mientras que la tristeza responde a otra lógica, y que ocultarla dificulta pedir la ayuda necesaria.' },
+        body: [
+      { type: 'p', text: 'La «depresión sonriente» describe a personas que ocultan un profundo malestar tras una apariencia de bienestar, especialmente quienes ocupan roles de liderazgo o se perciben como «fuertes». El artículo cita un estudio del Instituto de Psiquiatría del King\'s College según el cual el 71% de las personas con depresión ocultan su problema por miedo al rechazo o la discriminación, y distingue entre la sonrisa (un gesto voluntario) y la tristeza (una emoción que responde a otra lógica), insistiendo en la importancia de la apertura para poder pedir ayuda.' },
     ],
   },
   {
@@ -388,8 +388,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El artículo desmonta creencias erróneas sobre la terapia: no se trata solo de desahogarse o recibir consejos, sino de un proceso guiado para modificar patrones de comportamiento que generan malestar. Tampoco es necesario tener un trastorno grave para beneficiarse de ella, ni buscar ayuda es signo de debilidad.' },
+        body: [
+      { type: 'p', text: 'El artículo desmonta cuatro mitos habituales sobre la terapia psicológica: que consiste solo en desahogarse y recibir consejos (en realidad busca modificar el comportamiento con base científica), que es solo para problemas graves, que ir al psicólogo es signo de debilidad, y que la terapia es interminable. Explica que un psicólogo ayuda a acceder a la vía más directa para modificar aquello que genera malestar, sin necesidad de haber vivido personalmente cada situación para poder ayudar a superarla.' },
     ],
   },
   {
@@ -403,8 +403,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'No existe un umbral de gravedad que haya que alcanzar antes de pedir ayuda psicológica: el malestar emocional, los conflictos o las dificultades cotidianas ya son razón suficiente. El artículo insiste en que ir a terapia es un acto de valentía que busca ordenar pensamientos y aprender a gestionar emociones, no un diagnóstico de enfermedad mental.' },
+        body: [
+      { type: 'p', text: 'El artículo insiste en que no hace falta estar «loco» ni esperar a una crisis grave para acudir a terapia: el malestar, las emociones desagradables o los conflictos cotidianos ya son motivo suficiente. Explica que ir al psicólogo no busca un diagnóstico sino ordenar pensamientos y aprender a gestionar emociones desde la objetividad de un profesional, y que dar ese paso es un acto de valentía, un mensaje de querer mejorar y crecer.' },
     ],
   },
   {
@@ -418,8 +418,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'A pesar de los avances en la normalización de la salud mental, muchas personas siguen sin contar a su entorno que acuden al psicólogo por miedo a ser juzgadas o vistas como «débiles». El artículo celebra que las generaciones más jóvenes, apoyadas por podcasts y redes sociales, estén rompiendo poco a poco ese estigma.' },
+        body: [
+      { type: 'p', text: 'A pesar de los avances en la percepción de la salud mental, muchas personas siguen sin contar que van al psicólogo por miedo a ser juzgadas o vistas como incompetentes. El artículo destaca que las generaciones más jóvenes, apoyadas por YouTube, podcasts y blogs de psicólogos, están normalizando hablar de terapia abiertamente, y recuerda que las razones para acudir van desde la ansiedad y el estrés laboral hasta mejorar la comunicación en pareja.' },
     ],
   },
   {
@@ -433,8 +433,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Viajar no siempre es sinónimo de bienestar: el artículo repasa síndromes como el del viajero nostálgico, el síndrome de Ulises (asociado a la emigración prolongada) o el síndrome postvacacional, que dificulta la vuelta a la rutina. Un recorrido curioso por la relación, a veces compleja, entre los viajes y la salud mental.' },
+        body: [
+      { type: 'p', text: 'El artículo repasa varios síndromes psicológicos asociados a los viajes: el trastorno del viajero nostálgico (repetir siempre el mismo itinerario), el síndrome de Ulises (estrés crónico del emigrante), la «crisis del boarding pass» (pánico al viajar solo), la dromomanía (necesidad constante de estar en movimiento) y el síndrome postvacacional, que dificulta volver a la rutina y afecta sobre todo a mayores de 45 años. Menciona también otros menos frecuentes, como el síndrome de Jerusalén o el complejo del turista.' },
     ],
   },
   {
@@ -448,8 +448,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La ergofobia es un miedo extremo al trabajo que puede llegar a impedir presentarse en el puesto, generalmente originado por experiencias laborales traumáticas previas. El artículo señala técnicas de relajación, reestructuración cognitiva y desensibilización sistemática como tratamientos eficaces.' },
+        body: [
+      { type: 'p', text: 'La ergofobia es un miedo extremo al entorno laboral que puede impedir incluso presentarse en el puesto de trabajo, generalmente originado por experiencias traumáticas previas en ese contexto. El artículo señala las técnicas de relajación, la reestructuración cognitiva y la desensibilización sistemática como los tratamientos más eficaces, insistiendo en que reconocer el problema es el primer paso para poder tratarlo.' },
     ],
   },
   {
@@ -462,8 +462,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La pregorexia es la obsesión, durante el embarazo, por evitar el aumento de peso mediante conductas alimentarias muy restrictivas, con riesgos de desnutrición materna y consecuencias para el desarrollo del bebé. El artículo señala la presión estética en redes sociales, con imágenes de embarazos y postpartos «perfectos», como uno de los factores que alimentan este trastorno.' },
+        body: [
+      { type: 'p', text: 'La pregorexia es la obsesión, durante el embarazo, por evitar el aumento de peso mediante conductas alimentarias muy restrictivas, con riesgos serios tanto para la madre (desnutrición, problemas cardiovasculares) como para el bebé (bajo peso al nacer, parto prematuro, en casos extremos muerte fetal). El artículo señala la presión social y mediática sobre el «cuerpo perfecto» durante y después del embarazo como uno de los factores desencadenantes, y defiende la detección temprana como clave para prevenir sus consecuencias más graves.' },
     ],
   },
   {
@@ -476,8 +476,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La soledad no deseada en la vejez suele responder a tres pérdidas: de identidad, de autonomía y de sentido de pertenencia, y no se resuelve solo con medicación. El artículo, que recoge datos sobre la mayor incidencia en mujeres mayores que viven solas, reivindica el acompañamiento y las redes de apoyo social como la respuesta real frente a la medicalización.' },
+        body: [
+      { type: 'p', text: 'A partir de una campaña de la Association Amics de la Gent Gran, el artículo alerta del aumento del consumo de antidepresivos y ansiolíticos entre personas mayores como forma de combatir la soledad no deseada, un problema que según el INE afecta especialmente a las mujeres (41,3% de las mayores de 85 años viven solas, frente al 21,9% de los hombres). Explica que el aislamiento en la vejez responde a tres pérdidas —de identidad, autonomía y sentido de pertenencia— y que la solución no pasa por medicalizar la soledad, sino por redes de apoyo social sólidas.' },
     ],
   },
   {
@@ -490,8 +490,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Recurrir sistemáticamente al móvil o la tablet para calmar el llanto o el enfado de un niño puede reforzar ese comportamiento y privarle de la oportunidad de aprender a tolerar la frustración por sí mismo. El artículo, apoyado en una investigación de la Universidad de Michigan, señala también el riesgo de dependencia tecnológica y aislamiento social a largo plazo.' },
+        body: [
+      { type: 'p', text: 'El psicólogo José Moreno desaconseja usar móviles o tablets para calmar o entretener a los niños, apoyándose en un estudio de la Universidad de Michigan que vincula este hábito con más dificultades socioemocionales. El artículo detalla tres razones: refuerza la ira como estrategia para conseguir lo que se quiere, impide aprender a tolerar la frustración, y puede favorecer dependencia y aislamiento social a largo plazo, defendiendo establecer límites tecnológicos claros desde edades tempranas.' },
     ],
   },
   {
@@ -504,8 +504,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El artículo identifica distintos perfiles de sobreprotección parental —desde los «padres helicóptero» que vigilan cada paso hasta los «padres apisonadora» que eliminan cualquier obstáculo— y explica cómo generan niños más dependientes, con menos herramientas para enfrentar la frustración y mayor riesgo de sufrir acoso escolar. La alternativa pasa por guiar en lugar de sobreproteger.' },
+        body: [
+      { type: 'p', text: 'Citando a la profesora Carmen Velasco, el artículo señala un aumento de la inmadurez y dependencia infantil en los últimos 15 años, vinculado a distintos estilos de sobreprotección: «madres agenda», «padres helicóptero», «padres apisonadora» y «padres guardaespaldas». Explica que los niños sobreprotegidos desarrollan menos recursos para enfrentar la vida, mayor riesgo de ansiedad y de sufrir acoso escolar, y defiende que los padres deben guiar en lugar de sobreproteger, estableciendo límites y aprendiendo a decir «no».' },
     ],
   },
   {
@@ -518,8 +518,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El desarrollo emocional en la primera infancia depende en gran medida de cómo los padres gestionan la frustración de sus hijos: ceder siempre a sus deseos puede convertir una emoción adaptativa en un problema recurrente. El artículo repasa las señales de baja tolerancia a la frustración y cómo fomentar la paciencia y la adaptabilidad desde edades tempranas.' },
+        body: [
+      { type: 'p', text: 'Entre los 3 y los 6 años se sientan las bases de la inteligencia emocional infantil, y aprender a tolerar la frustración es una de las piezas clave de ese desarrollo. El artículo explica que ceder siempre a los deseos de los hijos puede convertir la frustración —una emoción adaptativa— en un problema recurrente, y enumera señales de baja tolerancia en adolescentes (exigencia, necesidad de gratificación inmediata, resistencia al cambio) que aumentan el riesgo de ansiedad, defendiendo un entorno seguro donde experimentarla desde pequeños.' },
     ],
   },
   {
@@ -532,8 +532,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El artículo desmonta la creencia de que los errores de crianza causan siempre daño permanente, o que un buen padre debe saberlo todo. Propone en su lugar una crianza basada en la comunicación abierta, la empatía y los límites claros, entendiendo la educación de los hijos como un aprendizaje compartido y no un camino sin fallos.' },
+        body: [
+      { type: 'p', text: 'El artículo desmonta la idea de que los errores de crianza causan siempre daño permanente, o que los padres deben ser «superhéroes» que lo saben todo y cargan con toda la responsabilidad del desarrollo de sus hijos. Defiende una crianza basada en la comunicación abierta, la empatía y los límites claros, recordando que el entorno, la genética y otras variables también influyen, y que ser buen padre o madre tiene que ver con la dedicación y el aprendizaje conjunto, no con la perfección.' },
     ],
   },
   {
@@ -546,8 +546,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El colecho puede reforzar el vínculo afectivo, facilitar la lactancia y reducir el llanto nocturno, pero también conlleva riesgos como la asfixia accidental o una mayor dependencia para dormir solos. El artículo recuerda que la decisión debe tomarse de forma informada, siguiendo pautas de seguridad y, si hay dudas, consultando con un pediatra.' },
+        body: [
+      { type: 'p', text: 'El artículo pesa los beneficios del colecho —mayor sensación de seguridad, apoyo a la lactancia, más sueño REM, menos llanto nocturno y vínculos más fuertes— frente a sus riesgos, principalmente el de asfixia, la posible dependencia para dormir solos y su compleja relación con la muerte súbita del lactante, mayor si se comparte cama con fumadores o en superficies blandas. Concluye que la decisión debe tomarse de forma informada, siguiendo pautas de seguridad y, ante la duda, consultando con un pediatra.' },
     ],
   },
   {
@@ -560,8 +560,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La actividad física regular en la infancia aporta beneficios físicos, cognitivos, emocionales y sociales, desde un mejor rendimiento académico hasta mayor autoestima. El artículo ofrece consejos prácticos para fomentarla en el día a día: jugar al aire libre, limitar el tiempo de pantalla y convertir el ejercicio en una actividad familiar y divertida, no en una obligación.' },
+        body: [
+      { type: 'p', text: 'La actividad física regular en la infancia aporta beneficios físicos, cognitivos (mejor concentración y rendimiento académico), emocionales (libera endorfinas, mejora autoestima) y sociales (cooperación, empatía). El artículo ofrece siete consejos prácticos para fomentarla: juego activo al aire libre, ser modelo a seguir, limitar el tiempo de pantalla, hacer actividades en familia, variar las propuestas, mantenerlas divertidas y cuidar la seguridad con el equipo de protección adecuado.' },
     ],
   },
   {
@@ -574,8 +574,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Posponer la paternidad tiene desafíos como menos energía o mayor distancia generacional con los hijos, pero también beneficios como mayor estabilidad financiera, madurez emocional y una red de apoyo familiar más amplia. El artículo concluye que, más allá de la edad, lo esencial es el amor y el acompañamiento que se ofrece a lo largo de la crianza.' },
+        body: [
+      { type: 'p', text: 'Posponer la paternidad, cada vez más frecuente, tiene desafíos —menos energía, menos años por delante con los hijos, mayores riesgos de salud, distancia generacional— pero también beneficios claros: mayor estabilidad financiera, madurez emocional, una red de apoyo familiar más amplia y experiencia de vida para transmitir. El artículo concluye que, independientemente de la edad, lo esencial es el amor, el apoyo y el cuidado que se ofrece a lo largo de la crianza.' },
     ],
   },
   {
@@ -588,8 +588,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'A diferencia del arbitraje, en la mediación el mediador no impone decisiones sino que facilita que las partes lleguen a un acuerdo, lo que suele producir soluciones más duraderas y satisfactorias. El artículo destaca el papel de los psicólogos mediadores, gracias a su formación en gestión emocional, y las ventajas de este proceso frente a la vía judicial tradicional.' },
+        body: [
+      { type: 'p', text: 'La mediación es una alternativa a la vía judicial en la que un mediador —que puede venir del derecho, el trabajo social o la psicología— no impone decisiones, sino que facilita que las partes lleguen a un acuerdo voluntario. El artículo destaca la ventaja de los psicólogos mediadores por su formación en gestión emocional, señala que en España la Ley de Mediación Familiar fija un máximo de 3 meses (prorrogables), y resalta su capacidad de ahorrar tiempo, dinero y reducir la ansiedad frente al litigio tradicional.' },
     ],
   },
   {
@@ -602,8 +602,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Más de la mitad de las personas percibe un aumento del estrés y la ansiedad en los días previos a la Navidad, entre la presión de las compras, los compromisos sociales y la nostalgia por quienes ya no están. El artículo propone priorizar el autocuidado, ajustar expectativas y no sobrecargar la agenda como claves para vivir estas fechas de forma más saludable.' },
+        body: [
+      { type: 'p', text: 'Un 52% de las personas percibe un aumento de estrés y ansiedad en los días previos a la Navidad, según recoge el artículo, debido a las compras, la planificación de comidas, la presión social de los regalos, el sedentarismo invernal y la sobrealimentación. Señala también la nostalgia por los seres queridos ausentes como uno de los aspectos más emotivos de estas fechas, y recomienda priorizar el autocuidado, el descanso, el ejercicio y ajustar expectativas para disfrutar de las festividades sin sentirse abrumado.' },
     ],
   },
   {
@@ -616,8 +616,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El término «matrimonio zombie» describe a parejas que evitan sistemáticamente el conflicto y acaban conviviendo con problemas no resueltos bajo una fachada de normalidad. El artículo, apoyado en el trabajo del psicólogo Andrew G. Marshall, defiende que discutir de forma constructiva es señal de que la relación importa, frente al silencio que termina por apagarla.' },
+        body: [
+      { type: 'p', text: 'El psicólogo Andrew G. Marshall acuñó el término «matrimonio zombie» para describir a parejas que evitan sistemáticamente el conflicto y acaban enterrando problemas no resueltos bajo una fachada de normalidad. El artículo explica que evitar discutir no protege la relación sino que impide resolver lo que falla, y que estas parejas suelen pasar tiempo juntas solo en compañía de otros, con una intimidad cada vez más rutinaria, citando el libro de Marshall «Te quiero pero ya no estoy enamorado de ti» como referencia del fenómeno.' },
     ],
   },
   {
@@ -630,8 +630,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Las parejas LAT («Living Apart Together») mantienen una relación estable y comprometida sin compartir vivienda, una decisión de mutuo acuerdo habitual sobre todo entre personas que ya han pasado antes por la convivencia. El artículo señala que este modelo funciona mejor cuando ambas partes están de acuerdo y no hay inseguridad ni celos excesivos de por medio.' },
+        body: [
+      { type: 'p', text: 'Las parejas LAT («Living Apart Together») mantienen una relación estable y comprometida sin vivir juntas, una decisión de mutuo acuerdo habitual entre personas de en torno a 45 años que ya han pasado antes por la convivencia o la crianza. El artículo señala que este modelo no suele darse en parejas que quieren tener hijos, y que su éxito depende de que ambas partes estén de acuerdo y no presenten inseguridad, control excesivo o celos.' },
     ],
   },
   {
@@ -644,8 +644,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La dependencia emocional en pareja suele originarse en la infancia y en la forma en que aprendimos a vincularnos afectivamente, llevándonos a buscar en el otro lo que sentimos que nos falta. El artículo describe señales como la preocupación constante por agradar, la ansiedad o el miedo a la soledad como indicadores de que la relación no está siendo saludable.' },
+        body: [
+      { type: 'p', text: 'La dependencia emocional en pareja suele originarse en las experiencias de apego de la infancia —exceso de protección o carencia afectiva— que llevan a buscar en el otro lo que sentimos que nos falta, replicando patrones observados en nuestros padres. El artículo describe señales como sentirse limitado o anulado, la preocupación constante por agradar o evitar el conflicto, y emociones como ansiedad, desconfianza o miedo a la soledad como indicadores de que la relación no es saludable.' },
     ],
   },
   {
@@ -658,8 +658,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El «síndrome del corazón roto» agrupa el conjunto de síntomas emocionales y físicos que aparecen tras una ruptura, una infidelidad o un amor no correspondido. El artículo aborda cada situación por separado y coincide en un mismo consejo: aceptar lo ocurrido y centrarse en reconstruir la propia vida en lugar de intentar forzar lo que ya no depende de nosotros.' },
+        body: [
+      { type: 'p', text: 'El «síndrome del corazón roto» agrupa el malestar emocional y físico que aparece tras una ruptura, al descubrir una infidelidad o discrepancia con la persona amada, o por un amor no correspondido. El artículo aborda cada situación por separado —la importancia de aceptar el fin de la relación sin forzar un reencuentro, gestionar la disonancia cognitiva ante una traición, o no dejar que un rechazo afecte a la autoestima— y coincide en centrarse en reconstruir la propia vida emocional.' },
     ],
   },
   {
@@ -672,8 +672,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'Quienes sufren filofobia suelen buscar defectos en su pareja, o directamente enamorarse de personas inalcanzables, como forma inconsciente de evitar el compromiso. El artículo repasa el origen de este miedo —normalmente en experiencias emocionales no resueltas— y las terapias, como la cognitiva o la desensibilización, que ayudan a superarlo.' },
+        body: [
+      { type: 'p', text: 'La filofobia es un trastorno del estado de ánimo que dificulta enamorarse o comprometerse, con síntomas de ansiedad que pueden llegar al ataque de pánico. El artículo explica cómo quienes la sufren buscan defectos en su pareja o se enamoran de personas inalcanzables para justificar, sin saberlo, su propio miedo al compromiso, y señala terapias eficaces como la cognitiva, la desensibilización afectiva o la hipnoterapia para tratarla.' },
     ],
   },
   {
@@ -686,8 +686,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El síndrome de Otelo, o delirio de celos monosintomático, lleva a interpretar cualquier detalle mínimo en la pareja como una prueba de infidelidad, al margen de toda evidencia racional. El artículo advierte de su gravedad —puede derivar en violencia de género— y de la importancia de la terapia especializada para abordarlo.' },
+        body: [
+      { type: 'p', text: 'El síndrome de Otelo, o delirio de celos monosintomático —nombrado por la obra de Shakespeare—, lleva a interpretar cualquier detalle mínimo (un cambio de marca, unos minutos de retraso) como prueba de infidelidad, al margen de toda evidencia racional. El artículo advierte de su gravedad, ya que puede desembocar en violencia de género, y señala la psicoterapia especializada, y en casos concretos los fármacos antipsicóticos, como vías de tratamiento.' },
     ],
   },
   {
@@ -700,8 +700,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El artículo describe el desamor como un proceso de duelo con etapas propias, desde la negación inicial y la desesperanza hasta la idealización de la expareja, la aceptación y, finalmente, la superación. Recuerda que avanzar entre fases no siempre es lineal y que buscar ayuda profesional puede ser necesario si la persona siente que se ha quedado bloqueada.' },
+        body: [
+      { type: 'p', text: 'Una ruptura es un proceso de duelo con cinco etapas: asimilación de la pérdida (negación, enfado), desesperanza (riesgo de caer en un estado depresivo), ansiedad (idealización de la expareja, necesidad de cortar el contacto), aceptación (reconstruir la vida sin la otra persona) y superación (hablar de la ruptura sin dolor abrumador). El artículo recuerda que el orden y la duración de estas etapas varían, y que buscar ayuda profesional puede ser necesario si uno siente que se ha quedado estancado.' },
     ],
   },
   {
@@ -714,8 +714,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'La anuptofobia es el miedo intenso a quedarse soltero, que suele tener su origen en carencias afectivas de la infancia y lleva a las personas a tolerar relaciones dañinas antes que enfrentar la soledad. El artículo señala la terapia cognitivo-conductual, y en concreto la desensibilización sistemática, como tratamiento eficaz.' },
+        body: [
+      { type: 'p', text: 'La anuptofobia es el miedo intenso a quedarse soltero, que lleva a quienes la sufren a aferrarse de forma irracional a relaciones traumáticas antes que enfrentar la soledad. El artículo vincula su origen a carencias afectivas o exceso de protección en la infancia, describe síntomas como ansiedad extrema y ataques de pánico, y señala la Terapia Cognitivo Conductual —en particular la desensibilización sistemática— como tratamiento eficaz.' },
     ],
   },
   {
@@ -728,8 +728,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El artículo recuerda que el amor, idealizado durante siglos, también tiene sus límites, y que confundir sufrimiento con amor verdadero puede sostener relaciones insatisfactorias durante años. Reivindica «intelectualizar» el amor —hablarlo, reflexionarlo— como forma de vivirlo de manera saludable en lugar de solo sentirlo.' },
+        body: [
+      { type: 'p', text: 'El artículo recorre la larga historia de la idea de que el amor puede ser una «enfermedad» —desde el Egipto antiguo hasta Galeno— para reflexionar sobre el amor tóxico y la tendencia a trivializar el proceso de enamorarse. Cita a Frank Trullis sobre el amor no correspondido como causa frecuente de suicidio y de celos sexuales en homicidios, y defiende «intelectualizar» el amor —hablarlo, reflexionarlo— para vivirlo de forma saludable en lugar de solo sentirlo.' },
     ],
   },
   {
@@ -742,8 +742,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El Síndrome de Madame Bovary, o bovarismo, describe a quienes solo saben vivir la fase inicial del enamoramiento y necesitan idealizar constantemente a su pareja para no enfrentar la soledad. El artículo lo vincula a carencias afectivas de la infancia y señala que, con ayuda profesional, es posible aprender a vincularse de forma más saludable.' },
+        body: [
+      { type: 'p', text: 'El Síndrome de Madame Bovary, o bovarismo, describe a personas que solo saben vivir la fase inicial del enamoramiento, idealizando a su pareja hasta que aparecen sus defectos, momento en el que la relación se convierte en frustración y suelen buscar otra de inmediato para no enfrentar la soledad. El artículo vincula este patrón a carencias afectivas o de abandono en la infancia, y señala que con ayuda profesional es posible aprender a vincularse de forma más saludable.' },
     ],
   },
   {
@@ -756,8 +756,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'En la dinámica Peter Pan–Wendy, una persona evita asumir responsabilidades adultas mientras la otra se hace cargo de todo, a menudo descuidándose a sí misma por baja autoestima y necesidad de aprobación. El artículo plantea que ambos roles deben trabajarse en terapia para construir una relación más equilibrada y recíproca.' },
+        body: [
+      { type: 'p', text: 'El Síndrome de Peter Pan describe a personas que se resisten a madurar y asumir responsabilidades adultas, mientras que quienes tienen «complejo de Wendy» asumen esas responsabilidades por ellas y se descuidan a sí mismas por baja autoestima. El artículo explica que esta dinámica de pareja puede tener consecuencias negativas para ambas partes, y que la terapia ayuda a que cada una trabaje sus propios desafíos —límites y autoestima en un caso, asunción de responsabilidades en el otro— hacia una relación más recíproca.' },
     ],
   },
   {
@@ -771,8 +771,8 @@ export const posts: BlogPost[] = [
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
     },
-    body: [
-      { type: 'p', text: 'El uso intensivo de redes sociales expone a los más jóvenes a contenidos e imágenes que pueden favorecer comparaciones corporales dañinas y actuar como factor de riesgo en trastornos como la anorexia o la bulimia. El artículo plantea la comunicación abierta en familia y la educación en un consumo crítico de redes como herramientas clave de prevención.' },
+        body: [
+      { type: 'p', text: 'Con motivo del Día de la Lucha contra los TCA, Adriana Esteban explica que el riesgo de desarrollar un trastorno de la conducta alimentaria aumenta en redes sociales, que han crecido un 20% desde la pandemia entre niños y adolescentes, al perseguir un ideal estético inalcanzable y convertir los «me gusta» en medida de autoestima. El artículo recomienda a las familias fomentar el espíritu crítico de los hijos —preguntar en vez de sentenciar, estimular su propio criterio— y reducir el tiempo de exposición como claves de prevención, recordando que a terapia no viene quien tiene problemas, sino quien decide resolverlos.' },
     ],
   },];
 
