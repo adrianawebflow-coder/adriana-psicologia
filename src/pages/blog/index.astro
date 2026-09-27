@@ -1,0 +1,282 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTAFinalSection from '../../components/CTAFinalSection.astro';
+import { posts, categories } from '../../data/blogPosts';
+
+// Repite el único post de ejemplo disponible para poblar el grid y el
+// sidebar, igual que hace el propio diseño de referencia (usa las mismas
+// 2 tarjetas repetidas hasta llenar el layout) mientras no haya contenido
+// real para el resto de posts.
+const gridPosts = Array.from({ length: 6 }, (_, i) => posts[i % posts.length]);
+const sidebarPosts = Array.from({ length: 3 }, (_, i) => posts[i % posts.length]);
+---
+
+<Layout
+  title="Blog"
+  description="Recursos, reflexiones y artículos sobre salud mental, terapia y bienestar emocional para adolescentes, adultos, parejas y familias."
+>
+
+  <section class="blog-hero">
+    <div class="container">
+      <h1 transition:name="hero-title">Artículos y posts donde hablo de psicología</h1>
+      <p class="lede">¡Bienvenid@ a mi blog! Aquí encontrarás artículos informativos y reflexiones en profundidad sobre psicología. Además, encontrarás entrevistas y colaboraciones en medios que amplían tu comprensión de la mente y el bienestar.</p>
+    </div>
+  </section>
+
+  <section class="blog-body">
+    <div class="container blog-layout">
+      <aside class="blog-sidebar">
+        <h2 class="sidebar-title">Artículos más leídos</h2>
+        <ul class="sidebar-list">
+          {sidebarPosts.map((post) => (
+            <li>
+              <a href={`/blog/${post.slug}`}>
+                <span class="sidebar-category">{post.category}</span>
+                <span class="sidebar-post-title">{post.title}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+
+      <div class="blog-main">
+        <div class="tabs" role="tablist" aria-label="Categoría" id="blogTabs">
+          {categories.map((cat) => (
+            <button
+              class:list={['tab', { active: cat === 'Todos' }]}
+              role="tab"
+              aria-selected={cat === 'Todos'}
+              data-category={cat}
+              type="button"
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        <div class="grid">
+          {gridPosts.map((post) => (
+            <a class="card reveal" href={`/blog/${post.slug}`} data-category={post.category}>
+              <img src={post.image} alt={post.title} loading="lazy" />
+              <span class="card-content">
+                <span class="card-badge">{post.category}</span>
+                <span class="card-title">{post.title}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTAFinalSection
+    heading="No esperes a que todo se derrumbe"
+    text="¿List@ para dar el primer paso? Solo es una conversación. Sin compromiso, sin tener que tenerlo todo claro."
+  />
+
+</Layout>
+
+<style>
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ── Hero ── */
+.blog-hero {
+  background: var(--color-bg-soft);
+  padding: 40px 0;
+}
+.blog-hero h1 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin: 0 0 16px;
+}
+.blog-hero .lede {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 56ch;
+}
+
+/* ── Layout ── */
+.blog-body {
+  background: var(--color-bg-base);
+  padding: 40px 0 60px;
+}
+.blog-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ── Sidebar ── */
+.sidebar-title {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-h4);
+  color: var(--color-text-primary);
+  margin: 0 0 20px;
+}
+.sidebar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sidebar-list a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-decoration: none;
+}
+.sidebar-category {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body-sm);
+  color: var(--color-clay);
+}
+.sidebar-post-title {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  transition: color var(--transition-fast);
+}
+.sidebar-list a:hover .sidebar-post-title { color: var(--color-moss); }
+
+/* ── Tabs ── */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 2px solid var(--color-clay-soft);
+  margin-bottom: 24px;
+}
+.tab {
+  padding: 0 0 12px;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  color: var(--color-text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+}
+.tab.active {
+  font-weight: var(--fw-semi);
+  color: var(--color-text-secondary);
+  border-bottom-color: var(--color-text-secondary);
+}
+
+/* ── Grid de artículos ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.card {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  text-decoration: none;
+}
+.card[hidden] { display: none; }
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+.card:hover img { transform: scale(1.04); }
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.15) 55%, transparent 80%);
+}
+.card-content {
+  position: absolute;
+  z-index: 1;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.card-badge {
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(0,0,0,.5);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: var(--fs-meta);
+  font-weight: var(--fw-medium);
+}
+.card-title {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body);
+  line-height: 1.4;
+  color: #fff;
+}
+
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1000px) {
+  .blog-layout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 60px;
+  }
+  .blog-sidebar { order: 2; flex: 0 0 280px; }
+  .blog-main { order: 1; flex: 1 1 0; min-width: 0; }
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const tabsWrap = document.getElementById('blogTabs');
+    if (!tabsWrap) return;
+
+    const tabButtons = Array.from(tabsWrap.querySelectorAll<HTMLButtonElement>('.tab'));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.grid .card'));
+
+    function select(category: string) {
+      tabButtons.forEach((btn) => {
+        const active = btn.dataset.category === category;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-selected', String(active));
+      });
+      cards.forEach((card) => {
+        card.hidden = category !== 'Todos' && card.dataset.category !== category;
+      });
+    }
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.category) select(btn.dataset.category);
+      });
+    });
+  });
+</script>
