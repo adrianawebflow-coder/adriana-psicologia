@@ -3,12 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import CTAFinalSection from '../../components/CTAFinalSection.astro';
 import { posts, categories } from '../../data/blogPosts';
 
-// Repite el único post de ejemplo disponible para poblar el grid y el
-// sidebar, igual que hace el propio diseño de referencia (usa las mismas
-// 2 tarjetas repetidas hasta llenar el layout) mientras no haya contenido
-// real para el resto de posts.
-const gridPosts = Array.from({ length: 6 }, (_, i) => posts[i % posts.length]);
-const sidebarPosts = Array.from({ length: 3 }, (_, i) => posts[i % posts.length]);
+const gridPosts = posts;
+const sidebarPosts = posts.slice(0, 3);
 ---
 
 <Layout
