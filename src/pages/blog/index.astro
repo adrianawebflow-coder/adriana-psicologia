@@ -38,9 +38,8 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
           {sidebarPosts.map((post) => (
             <li>
               <a href={`/blog/${post.slug}`}>
-                <span class="sidebar-category">{post.category}</span>
                 <span class="sidebar-post-title">{post.title}</span>
-                <span class="sidebar-stats">{post.visits} visitas · {post.avgReadSeconds}s de lectura media</span>
+                <span class="sidebar-stats">{post.avgReadSeconds}s de lectura media</span>
               </a>
             </li>
           ))}
@@ -146,12 +145,6 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
   flex-direction: column;
   gap: 4px;
   text-decoration: none;
-}
-.sidebar-category {
-  font-family: var(--font-sans);
-  font-weight: var(--fw-semi);
-  font-size: var(--fs-body-sm);
-  color: var(--color-clay);
 }
 .sidebar-post-title {
   font-family: var(--font-sans);
