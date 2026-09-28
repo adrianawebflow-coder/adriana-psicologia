@@ -170,13 +170,19 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
 /* ── Tabs ── */
 .tabs {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 24px;
   border-bottom: 2px solid var(--color-clay-soft);
   margin-bottom: 24px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
 }
+.tabs::-webkit-scrollbar { display: none; }
 .tab {
+  flex: 0 0 auto;
   padding: 0 0 12px;
   font-family: var(--font-sans);
   font-size: var(--fs-body);
@@ -189,6 +195,8 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
   border-left: none;
   border-right: none;
   cursor: pointer;
+  white-space: nowrap;
+  scroll-snap-align: start;
 }
 .tab.active {
   font-weight: var(--fw-semi);
@@ -295,6 +303,11 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
   .blog-sidebar { order: 2; flex: 0 0 280px; }
   .blog-main { order: 1; flex: 1 1 0; min-width: 0; }
   .grid { grid-template-columns: repeat(3, 1fr); }
+
+  .tabs {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
 }
 </style>
 
