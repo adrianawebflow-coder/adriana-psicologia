@@ -693,25 +693,29 @@ const despachoImages = fs
 }
 
 /* 1280–1919px: todas las secciones (incluida therapy-gallery, cuyo
-   valor por defecto es 1280px) comparten el mismo ancho máximo de
-   contenido: 1010px. A 1280px de viewport, el padding lateral fijo de
-   135px de therapy-info/other-services deja exactamente 1010px libres,
-   así que no hace falta reducirlo aquí. */
+   valor por defecto es 1280px) comparten el mismo ancho fijo de
+   contenido: 1010px (min y max, no solo max). A 1280px de viewport,
+   el padding lateral fijo de 135px de therapy-info/other-services
+   deja exactamente 1010px libres, así que no hace falta reducirlo
+   aquí. */
 @media (min-width: 1280px) and (max-width: 1919px) {
   .therapy-hero-inner,
   .therapy-info-inner,
   .therapy-gallery-inner,
   .other-services-inner {
+    min-width: 1010px;
     max-width: 1010px;
   }
 }
 
-/* A partir de 1920px, las mismas secciones crecen a 1280px. */
+/* A partir de 1920px, las mismas secciones pasan a un ancho fijo de
+   1280px (min y max). */
 @media (min-width: 1920px) {
   .therapy-hero-inner,
   .therapy-info-inner,
   .therapy-gallery-inner,
   .other-services-inner {
+    min-width: 1280px;
     max-width: 1280px;
   }
 }
