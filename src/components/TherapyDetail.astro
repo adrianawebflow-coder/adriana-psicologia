@@ -362,7 +362,6 @@ const despachoImages = fs
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 32px;
 }
 .therapy-gallery-inner {
   width: 100%;
@@ -457,7 +456,7 @@ const despachoImages = fs
 
 .location-panel {
   background: var(--color-bg-base);
-  padding: 0;
+  padding: 24px var(--gutter);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -665,6 +664,7 @@ const despachoImages = fs
   .therapy-hero h1 { font-size: 34px; }
 
   .therapy-info { padding: 60px 135px 100px; }
+  .therapy-gallery { padding: 32px; }
   .info-grid {
     flex-direction: row;
     overflow-x: visible;
