@@ -35,11 +35,20 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
       <aside class="blog-sidebar">
         <h2 class="sidebar-title">Artículos más leídos</h2>
         <ul class="sidebar-list">
-          {sidebarPosts.map((post) => (
+          {sidebarPosts.map((post, i) => (
             <li>
-              <a href={`/blog/${post.slug}`}>
-                <span class="sidebar-post-title">{post.title}</span>
-                <span class="sidebar-stats">{post.avgReadSeconds}s de lectura media</span>
+              <a class="sidebar-card" href={`/blog/${post.slug}`}>
+                <span class="sidebar-thumb">
+                  <img src={post.image} alt="" loading="lazy" />
+                  <span class="sidebar-rank">{i + 1}</span>
+                </span>
+                <span class="sidebar-info">
+                  <span class="sidebar-post-title">{post.title}</span>
+                  <span class="sidebar-stats">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                    {post.avgReadSeconds}s de lectura media
+                  </span>
+                </span>
               </a>
             </li>
           ))}
@@ -138,27 +147,80 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
 }
-.sidebar-list a {
+.sidebar-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+.sidebar-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.sidebar-thumb {
+  position: relative;
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.sidebar-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sidebar-rank {
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-clay);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: 11px;
+  display: grid;
+  place-items: center;
+}
+.sidebar-info {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  text-decoration: none;
+  min-width: 0;
 }
 .sidebar-post-title {
   font-family: var(--font-sans);
-  font-size: var(--fs-body);
-  line-height: 1.5;
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body-sm);
+  line-height: 1.4;
   color: var(--color-text-primary);
   transition: color var(--transition-fast);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-.sidebar-list a:hover .sidebar-post-title { color: var(--color-moss); }
+.sidebar-card:hover .sidebar-post-title { color: var(--color-moss); }
 .sidebar-stats {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-family: var(--font-sans);
   font-size: var(--fs-meta);
   color: var(--color-text-muted);
 }
+.sidebar-stats svg { flex: 0 0 auto; color: var(--color-clay); }
 
 /* ── Tabs ── */
 .tabs {
