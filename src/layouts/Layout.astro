@@ -28,6 +28,20 @@ const {
   <Nav />
   <slot />
   <Footer />
+
+  <button
+    id="backToTop"
+    class="back-to-top"
+    aria-label="Volver arriba"
+    type="button"
+    transition:persist
+    transition:name="back-to-top"
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 19V5" />
+      <path d="m5 12 7-7 7 7" />
+    </svg>
+  </button>
 </body>
 </html>
 
@@ -72,6 +86,41 @@ const {
       animation-duration: 0ms;
     }
   }
+
+  /* ── Botón "volver arriba" (solo mobile) ── */
+  .back-to-top {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 40;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-full);
+    border: none;
+    background: var(--color-moss);
+    color: var(--color-text-inverse);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base);
+  }
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .back-to-top:hover { background: var(--color-moss-hover); }
+
+  @media (min-width: 1000px) {
+    .back-to-top { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .back-to-top { transition: opacity var(--transition-fast); transform: none; }
+  }
 </style>
 
 <script>
@@ -100,4 +149,29 @@ const {
 
     elements.forEach(el => observer.observe(el));
   });
+
+  // Botón "volver arriba": persiste entre navegaciones (transition:persist),
+  // así que el listener se registra una única vez y sigue funcionando.
+  const backToTop = document.getElementById('backToTop');
+  const SHOW_THRESHOLD = 400;
+  let btTicking = false;
+
+  function updateBackToTop() {
+    btTicking = false;
+    backToTop?.classList.toggle('visible', window.scrollY > SHOW_THRESHOLD);
+  }
+
+  window.addEventListener('scroll', () => {
+    if (btTicking) return;
+    btTicking = true;
+    requestAnimationFrame(updateBackToTop);
+  }, { passive: true });
+
+  backToTop?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Recalcula el estado tras cada navegación SPA (la posición de scroll
+  // cambia de página a página).
+  document.addEventListener('astro:page-load', updateBackToTop);
 </script>
