@@ -148,9 +148,7 @@ const despachoImages = fs
     <div class="panel-card">
       <p class="price-label">Precio</p>
       <p class="price-value">{price}</p>
-    </div>
 
-    <div class="panel-card bono-card">
       <p class="bono-title">
         <span class="badge-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -530,7 +528,7 @@ const despachoImages = fs
   color: var(--color-clay);
 }
 
-.bono-card .bono-title {
+.panel-card .bono-title {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -538,9 +536,9 @@ const despachoImages = fs
   font-weight: var(--fw-semi);
   font-size: 18px;
   color: var(--color-text-primary);
-  margin: 0 0 8px;
+  margin: 16px 0 8px;
 }
-.bono-card .bono-desc {
+.panel-card .bono-desc {
   font-family: var(--font-sans);
   font-size: var(--fs-body);
   line-height: 1.6;
