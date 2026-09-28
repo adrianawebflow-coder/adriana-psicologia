@@ -103,6 +103,10 @@ function renderText(text: string): string {
   description={post.excerpt}
 >
 
+  <div class="reading-progress" aria-hidden="true">
+    <div class="reading-progress-bar" id="readingProgressBar"></div>
+  </div>
+
   <section class="post-hero">
     <div class="container post-hero-grid">
       <div class="post-hero-text">
@@ -162,6 +166,26 @@ function renderText(text: string): string {
   max-width: 1010px;
   margin: 0 auto;
   padding: 0 var(--gutter);
+}
+
+/* ── Progreso de lectura ── */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 40;
+  background: transparent;
+}
+.reading-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--color-success);
+  transition: width 100ms linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reading-progress-bar { transition: none; }
 }
 
 /* ── Hero ── */
@@ -278,3 +302,28 @@ function renderText(text: string): string {
   }
 }
 </style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const bar = document.getElementById('readingProgressBar');
+    if (!bar) return;
+
+    function update() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+      bar!.style.width = Math.min(100, Math.max(0, pct)) + '%';
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+    }, { passive: true });
+
+    update();
+  });
+</script>
