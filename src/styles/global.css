@@ -27,6 +27,19 @@ a { color: inherit; text-decoration: none; }
   border-radius: var(--radius-sm);
 }
 
+/* Visible solo para lectores de pantalla (WCAG 1.3.1 / 2.4.6) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
   font-weight: var(--fw-light);

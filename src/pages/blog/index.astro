@@ -4,7 +4,18 @@ import CTAFinalSection from '../../components/CTAFinalSection.astro';
 import { posts, categories } from '../../data/blogPosts';
 
 const gridPosts = posts;
-const sidebarPosts = posts.slice(0, 3);
+
+// Los 3 artículos más leídos según Google Analytics, con sus métricas reales.
+const MOST_READ = [
+  { slug: 'el-sindrome-de-peter-pan-y-wendy-en-la-dinamica-de-pareja', visits: 37, avgReadSeconds: 65 },
+  { slug: 'en-busqueda-del-amor-ideal-el-sindrome-de-madame-bovary', visits: 9, avgReadSeconds: 55 },
+  { slug: 'que-son-los-matrimonios-zombies', visits: 8, avgReadSeconds: 77 },
+];
+const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
+  const post = posts.find((p) => p.slug === slug);
+  if (!post) throw new Error(`Post más leído no encontrado: ${slug}`);
+  return { ...post, visits, avgReadSeconds };
+});
 ---
 
 <Layout
@@ -29,6 +40,7 @@ const sidebarPosts = posts.slice(0, 3);
               <a href={`/blog/${post.slug}`}>
                 <span class="sidebar-category">{post.category}</span>
                 <span class="sidebar-post-title">{post.title}</span>
+                <span class="sidebar-stats">{post.visits} visitas · {post.avgReadSeconds}s de lectura media</span>
               </a>
             </li>
           ))}
@@ -53,7 +65,7 @@ const sidebarPosts = posts.slice(0, 3);
         <div class="grid">
           {gridPosts.map((post) => (
             <a class="card reveal" href={`/blog/${post.slug}`} data-category={post.category}>
-              <img class="card-img" src={post.image} alt={post.title} loading="lazy" />
+              <img class="card-img" src={post.image} alt="" loading="lazy" />
               <div class="card-body">
                 <span class="card-badge">{post.category}</span>
                 <h3 class="card-title">{post.title}</h3>
@@ -149,6 +161,11 @@ const sidebarPosts = posts.slice(0, 3);
   transition: color var(--transition-fast);
 }
 .sidebar-list a:hover .sidebar-post-title { color: var(--color-moss); }
+.sidebar-stats {
+  font-family: var(--font-sans);
+  font-size: var(--fs-meta);
+  color: var(--color-text-muted);
+}
 
 /* ── Tabs ── */
 .tabs {
