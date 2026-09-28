@@ -64,7 +64,7 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
 
         <div class="grid">
           {gridPosts.map((post) => (
-            <a class="card reveal" href={`/blog/${post.slug}`} data-category={post.category}>
+            <a class="card card-in reveal" href={`/blog/${post.slug}`} data-category={post.category}>
               <img class="card-img" src={post.image} alt="" loading="lazy" />
               <div class="card-body">
                 <span class="card-badge">{post.category}</span>
@@ -226,6 +226,25 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
 }
 .card[hidden] { display: none; }
 
+/* Fade-up al cambiar de tab. No basta con :not([hidden]): una card que ya
+   estaba visible bajo "Todos" sigue visible al filtrar por su categoría, así
+   que el atributo hidden nunca cambia para ella y la animación no se
+   reiniciaría sola. Por eso el JS de más abajo quita y vuelve a añadir esta
+   clase (con un reflow forzado) en cada cambio de tab, para todas las cards
+   que queden visibles. */
+@keyframes cardFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card.card-in {
+  animation: cardFadeUp 420ms cubic-bezier(0.25, 0, 0, 1) both;
+}
+.card.card-in:nth-child(2) { animation-delay: 40ms; }
+.card.card-in:nth-child(3) { animation-delay: 80ms; }
+@media (prefers-reduced-motion: reduce) {
+  .card.card-in { animation: none; }
+}
+
 .card-img {
   position: absolute;
   inset: 0;
@@ -325,9 +344,21 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
         btn.classList.toggle('active', active);
         btn.setAttribute('aria-selected', String(active));
       });
+
+      const visible: HTMLElement[] = [];
       cards.forEach((card) => {
-        card.hidden = category !== 'Todos' && card.dataset.category !== category;
+        const show = category === 'Todos' || card.dataset.category === category;
+        card.hidden = !show;
+        if (show) visible.push(card);
       });
+
+      // Reinicia el fade-up en todas las cards visibles, aunque ya lo
+      // estuvieran antes del cambio de tab (quitar y reponer la clase con
+      // un reflow forzado en medio obliga al navegador a relanzar la
+      // animación desde cero).
+      visible.forEach((card) => card.classList.remove('card-in'));
+      void tabsWrap!.offsetWidth;
+      visible.forEach((card) => card.classList.add('card-in'));
     }
 
     tabButtons.forEach((btn) => {
