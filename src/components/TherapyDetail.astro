@@ -721,7 +721,7 @@ const despachoImages = fs
   .info-card { flex: 1 1 auto; scroll-snap-align: none; }
 
   .therapy-gallery-inner { flex-direction: row; align-items: stretch; }
-  .gallery-photo { flex: 0 0 60%; height: 667px; }
+  .gallery-photo { flex: 0 0 60%; height: 592px; }
   .gallery-arrow { display: flex; }
   .location-panel {
     flex: 1 1 0;
@@ -737,29 +737,12 @@ const despachoImages = fs
   .other-card { flex: 1 1 0; }
 }
 
-/* 1280–1399px: therapy-gallery se queda en 1280px (valor por defecto);
-   el resto de secciones mantiene 1010px (también valor por defecto,
-   sin necesidad de override aquí). */
-
-/* 1400–1920px: todas las secciones, incluida therapy-gallery, a 1280px.
-   therapy-info y other-services usan 135px de padding lateral fijo, que
-   por debajo de ~1550px les impide alcanzar 1280px de ancho real; se
-   reduce aquí para que max-width sea lo único que las limite. */
-@media (min-width: 1400px) and (max-width: 1920px) {
-  .therapy-hero-inner,
-  .therapy-info-inner,
-  .other-services-inner {
-    max-width: 1280px;
-  }
-  .therapy-info,
-  .other-services {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-}
-
-/* > 1920px: todas las secciones, incluida therapy-gallery, a 1010px */
-@media (min-width: 1921px) {
+/* A partir de 1280px, todas las secciones (incluida therapy-gallery,
+   cuyo valor por defecto es 1280px) comparten el mismo ancho máximo de
+   contenido: 1010px. A 1280px de viewport, el padding lateral fijo de
+   135px de therapy-info/other-services deja exactamente 1010px libres,
+   así que no hace falta reducirlo aquí. */
+@media (min-width: 1280px) {
   .therapy-hero-inner,
   .therapy-info-inner,
   .therapy-gallery-inner,
