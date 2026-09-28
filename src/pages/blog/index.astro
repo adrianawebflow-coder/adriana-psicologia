@@ -35,12 +35,11 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
       <aside class="blog-sidebar">
         <h2 class="sidebar-title">Artículos más leídos</h2>
         <ul class="sidebar-list">
-          {sidebarPosts.map((post, i) => (
+          {sidebarPosts.map((post) => (
             <li>
               <a class="sidebar-card" href={`/blog/${post.slug}`}>
                 <span class="sidebar-thumb">
                   <img src={post.image} alt="" loading="lazy" />
-                  <span class="sidebar-rank">{i + 1}</span>
                 </span>
                 <span class="sidebar-info">
                   <span class="sidebar-post-title">{post.title}</span>
@@ -176,22 +175,6 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-.sidebar-rank {
-  position: absolute;
-  left: 4px;
-  bottom: 4px;
-  min-width: 20px;
-  height: 20px;
-  padding: 0 4px;
-  border-radius: var(--radius-full);
-  background: var(--color-clay);
-  color: #fff;
-  font-family: var(--font-sans);
-  font-weight: var(--fw-semi);
-  font-size: 11px;
-  display: grid;
-  place-items: center;
 }
 .sidebar-info {
   display: flex;
