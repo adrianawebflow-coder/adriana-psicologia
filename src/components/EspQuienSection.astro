@@ -1,10 +1,25 @@
 ---
 const especialidades = [
-  "Ansiedad y estrés",
-  "Depresión y estado de ánimo",
-  "Autoestima e identidad",
-  "Duelo y pérdida",
-  "Terapia de pareja",
+  {
+    title: "Ansiedad y estrés",
+    desc: "Herramientas para gestionar la preocupación constante, los ataques de pánico y la tensión crónica del día a día.",
+  },
+  {
+    title: "Depresión y estado de ánimo",
+    desc: "Herramientas para gestionar la preocupación constante, los ataques de pánico y la tensión crónica del día a día.",
+  },
+  {
+    title: "Autoestima e identidad",
+    desc: "Herramientas para gestionar la preocupación constante, los ataques de pánico y la tensión crónica del día a día.",
+  },
+  {
+    title: "Duelo y pérdida",
+    desc: "Herramientas para gestionar la preocupación constante, los ataques de pánico y la tensión crónica del día a día.",
+  },
+  {
+    title: "Terapia de pareja",
+    desc: "Herramientas para gestionar la preocupación constante, los ataques de pánico y la tensión crónica del día a día.",
+  },
 ];
 ---
 
@@ -15,20 +30,44 @@ const especialidades = [
       <!-- Especialidades -->
       <div class="esp-col reveal">
         <h2 class="section-title">Especialidades</h2>
-        <div class="esp-row">
+        <div class="esp-row" id="espRow">
           <div class="timeline">
-            <div class="rail"></div>
-            <ul>
+            <div class="rail" aria-hidden="true">
+              <span class="rail-fill"></span>
+              <span class="rail-dot"></span>
+            </div>
+            <ul role="tablist" aria-label="Especialidades" aria-orientation="vertical">
               {especialidades.map((e, i) => (
-                <li class={i === 0 ? 'first' : ''}>{e}</li>
+                <li role="presentation">
+                  <button
+                    type="button"
+                    role="tab"
+                    id={`esp-tab-${i}`}
+                    aria-controls={`esp-panel-${i}`}
+                    aria-selected={i === 0 ? 'true' : 'false'}
+                    tabindex={i === 0 ? 0 : -1}
+                    class:list={['esp-tab', { active: i === 0 }]}
+                  >
+                    {e.title}
+                  </button>
+                </li>
               ))}
             </ul>
           </div>
-          <p class="esp-desc">
-            Herramientas para gestionar la preocupación constante, los ataques
-            de pánico y la tensión crónica del día a día, acompañándote en el
-            proceso de entenderte a ti misma.
-          </p>
+          <div class="esp-desc">
+            {especialidades.map((e, i) => (
+              <div
+                class:list={['esp-panel', { active: i === 0 }]}
+                role="tabpanel"
+                id={`esp-panel-${i}`}
+                aria-labelledby={`esp-tab-${i}`}
+              >
+                <h3>{e.title}</h3>
+                <p>{e.desc}</p>
+              </div>
+            ))}
+            <span class="esp-progress" aria-hidden="true"><span class="esp-progress-bar"></span></span>
+          </div>
         </div>
       </div>
 
@@ -56,7 +95,7 @@ const especialidades = [
 <style>
 .esp {
   background: var(--color-bg-base);
-  padding-top: var(--section-pad-top);
+  padding-top: var(--section-pad- top);
   padding-bottom: var(--section-pad-bottom);
 }
 
@@ -95,24 +134,42 @@ const especialidades = [
   align-items: start;
 }
 
+/* Raíl: pista suave + relleno que crece hasta la especialidad activa y un
+   punto que se desliza hasta ella. JS fija --dot-y (centro del botón activo). */
 .rail {
+  --dot-y: 7px;
   position: relative;
   width: 5px;
   margin-left: 6px;
   border-radius: 3px;
-  background: linear-gradient(var(--color-moss) 0%, var(--color-moss-soft) 100%);
+  background: var(--color-moss-soft);
   align-self: stretch;
 }
-.rail::before {
-  content: '';
+.rail-fill {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--dot-y);
+  border-radius: inherit;
+  background: var(--color-moss);
+  transition: height 520ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.rail-dot {
   position: absolute;
   left: 50%;
   top: 0;
-  transform: translate(-50%, 0);
   width: 14px;
   height: 14px;
   border-radius: 50%;
   background: var(--color-moss);
+  box-shadow: 0 0 0 0 rgba(63, 91, 58, 0.35);
+  transform: translate(-50%, calc(var(--dot-y) - 7px));
+  transition: transform 520ms cubic-bezier(0.65, 0, 0.35, 1);
+  animation: esp-pulse 2.4s ease-out infinite;
+}
+@keyframes esp-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(63, 91, 58, 0.35); }
+  70%  { box-shadow: 0 0 0 9px rgba(63, 91, 58, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(63, 91, 58, 0); }
 }
 
 .timeline ul {
@@ -121,23 +178,41 @@ const especialidades = [
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-2);
 }
-.timeline li {
+.esp-tab {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin-left: -8px;
+  cursor: pointer;
   font-family: var(--font-sans);
   font-size: var(--fs-body);
   font-weight: var(--fw-semi);
-  color: var(--color-text-secondary);
   line-height: 1.3;
+  color: var(--color-text-secondary);
+  opacity: 0.72;
+  transition: color 300ms ease, opacity 300ms ease, transform 300ms ease;
 }
-.timeline li.first {
+.esp-tab:hover { opacity: 1; }
+.esp-tab.active {
   color: var(--color-text-primary);
+  opacity: 1;
+  transform: translateX(4px);
 }
-.timeline li:not(.first) {
-  font-weight: var(--fw-regular);
+.esp-tab:focus-visible {
+  outline: 2px solid var(--color-moss);
+  outline-offset: 2px;
 }
 
 .esp-desc {
+  position: relative;
+  display: grid;
+  overflow: hidden;
   background: #FAF9F5;
   border: 1px solid var(--color-clay-soft);
   border-left: 4px solid var(--color-clay);
@@ -149,6 +224,72 @@ const especialidades = [
   color: var(--color-text-primary);
   box-shadow: var(--shadow-sm);
   flex: 1;
+  touch-action: pan-y;
+}
+
+/* Todos los paneles comparten celda: la tarjeta toma la altura del más alto
+   y no salta al cambiar de especialidad. */
+.esp-panel {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(4px);
+  transition: opacity 420ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1), filter 420ms ease, visibility 0s linear 420ms;
+}
+.esp-panel.active {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  filter: none;
+  transition-delay: 120ms, 120ms, 120ms, 0s;
+}
+.esp-panel.leaving {
+  transform: translateY(-14px);
+}
+.esp-panel h3 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semi);
+  color: var(--color-text-primary);
+  margin: 0 0 var(--space-2);
+}
+.esp-panel p { margin: 0; color: var(--color-text-secondary); }
+
+/* Barra de progreso del autoplay: su animación marca el tiempo y al
+   terminar (animationend) se avanza a la siguiente especialidad. */
+.esp-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: transparent;
+}
+.esp-progress-bar {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--color-clay);
+  opacity: 0.55;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.esp-row.playing .esp-progress-bar {
+  animation: esp-progress 5.5s linear forwards;
+}
+.esp-row.paused .esp-progress-bar {
+  animation-play-state: paused;
+}
+@keyframes esp-progress {
+  to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail-fill, .rail-dot, .esp-tab, .esp-panel { transition: none; }
+  .rail-dot { animation: none; }
+  .esp-panel { filter: none; transform: none; }
+  .esp-progress { display: none; }
 }
 
 /* ── Quién soy ── */
@@ -235,3 +376,112 @@ const especialidades = [
   }
 }
 </style>
+
+<script>
+  // Especialidades: recorre las especialidades en bucle. El punto del raíl
+  // baja hasta la activa y la tarjeta cambia de texto. Se pausa con hover,
+  // foco o fuera de pantalla; clic/teclado/swipe permiten elegir a mano.
+  function initEsp() {
+    const rowEl = document.getElementById('espRow');
+    if (!rowEl || rowEl.dataset.ready) return;
+    rowEl.dataset.ready = '1';
+    const row = rowEl;
+
+    const tabs = Array.from(row.querySelectorAll<HTMLButtonElement>('.esp-tab'));
+    const panels = Array.from(row.querySelectorAll<HTMLElement>('.esp-panel'));
+    const rail = row.querySelector<HTMLElement>('.rail');
+    const card = row.querySelector<HTMLElement>('.esp-desc');
+    const bar = row.querySelector<HTMLElement>('.esp-progress-bar');
+    if (!tabs.length || !rail || !card || !bar) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let idx = 0;
+    let inView = false;
+    let hovering = false;
+    let focused = false;
+
+    function placeDot() {
+      const tab = tabs[idx];
+      const railTop = rail!.getBoundingClientRect().top;
+      const r = tab.getBoundingClientRect();
+      rail!.style.setProperty('--dot-y', `${r.top - railTop + r.height / 2}px`);
+    }
+
+    function restartProgress() {
+      row.classList.remove('playing');
+      void bar!.offsetWidth;
+      if (!reduced) row.classList.add('playing');
+    }
+
+    function syncPause() {
+      row.classList.toggle('paused', !inView || hovering || focused);
+    }
+
+    function go(n: number, focusTab = false) {
+      const next = (n + tabs.length) % tabs.length;
+      if (next !== idx) {
+        const prev = panels[idx];
+        prev.classList.remove('active');
+        prev.classList.add('leaving');
+        window.setTimeout(() => prev.classList.remove('leaving'), 450);
+        panels[next].classList.add('active');
+        tabs[idx].classList.remove('active');
+        tabs[idx].setAttribute('aria-selected', 'false');
+        tabs[idx].tabIndex = -1;
+        tabs[next].classList.add('active');
+        tabs[next].setAttribute('aria-selected', 'true');
+        tabs[next].tabIndex = 0;
+        idx = next;
+      }
+      if (focusTab) tabs[idx].focus();
+      placeDot();
+      restartProgress();
+    }
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => go(i));
+      tab.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); go(idx + 1, true); }
+        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); go(idx - 1, true); }
+        if (e.key === 'Home') { e.preventDefault(); go(0, true); }
+        if (e.key === 'End') { e.preventDefault(); go(tabs.length - 1, true); }
+      });
+    });
+
+    bar.addEventListener('animationend', () => go(idx + 1));
+
+    // Hover solo en dispositivos con ratón: en móvil un tap no debe dejarlo pausado.
+    if (window.matchMedia('(hover: hover)').matches) {
+      row.addEventListener('mouseenter', () => { hovering = true; syncPause(); });
+      row.addEventListener('mouseleave', () => { hovering = false; syncPause(); });
+    }
+    // Solo el foco de teclado pausa; el foco que deja un clic/tap no.
+    row.addEventListener('focusin', (e) => { focused = (e.target as Element).matches(':focus-visible'); syncPause(); });
+    row.addEventListener('focusout', () => { focused = false; syncPause(); });
+
+    // Swipe horizontal sobre la tarjeta (móvil).
+    let startX = 0;
+    let startY = 0;
+    card.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+    card.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? idx + 1 : idx - 1);
+    });
+
+    new IntersectionObserver((entries) => {
+      inView = entries[0].isIntersecting;
+      syncPause();
+    }, { threshold: 0.35 }).observe(row);
+
+    window.addEventListener('resize', placeDot);
+    placeDot();
+    syncPause();
+    restartProgress();
+  }
+
+  document.addEventListener('astro:page-load', initEsp);
+</script>
