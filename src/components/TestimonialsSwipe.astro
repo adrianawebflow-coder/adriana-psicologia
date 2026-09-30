@@ -1,43 +1,51 @@
 ---
 import TestimonialsShapes from './shapes/TestimonialsShapes.astro';
 
-const testimonials = [
-  {
-    quote: "Adriana es ambas cosas para mí: el amigo que te apoya y la luz que te muestra el camino. Es increíble que alguien sea a la vez tan profesional, empática y humana.",
-    name: "Sandra",
-    detail: "Más de 2 años en terapia",
-    initials: "S",
-    avatarColor: "var(--color-clay)",        /* terracota */
-  },
-  {
-    quote: "Sabe acompañarte en cada situación por muy compleja que sea. Entiende lo que quieres decir incluso antes de acabar las frases.",
-    name: "Camila",
-    detail: "Más de 2 años en terapia",
-    initials: "C",
-    avatarColor: "var(--color-moss-hover)",  /* verde oscuro */
-  },
-  {
-    quote: "Ha sido un apoyo clave en mi recuperación. Destaco su escucha, apoyo incondicional, tacto, humanidad, empatía y cariño.",
-    name: "Laura",
-    detail: "Años en terapia",
-    initials: "L",
-    avatarColor: "var(--color-clay-hover)",  /* terracota oscura */
-  },
-  {
-    quote: "Mi pareja y yo empezamos a acudir a terapia con Adriana en mayo, y encontrarla y confiar en ella ha sido la mejor decisión.",
-    name: "Adela Macarro",
-    detail: "Terapia de pareja",
-    initials: "AM",
-    avatarColor: "var(--color-moss)",        /* verde musgo */
-  },
-  {
-    quote: "Voy a terapia con Adriana desde octubre de 2024. Es una gran profesional, con ella volví a confiar en la psicología y en la terapia.",
-    name: "Natalisestas",
-    detail: "Paciente desde 2024",
-    initials: "N",
-    avatarColor: "var(--color-bg-dark)",     /* casi negro */
-  },
+// Reseñas de Google (5,0 / 5, 23 reseñas; extraídas el 30/09/2026), de la
+// más reciente a la más antigua. Son fragmentos literales de cada reseña:
+// lo omitido se marca con […] y solo se han corregido erratas evidentes.
+const GOOGLE_RATING = '5,0';
+
+const reviews = [
+  { name: 'Alba G.', detail: 'Paciente desde 2021', quote: 'Gracias Adriana por estar en mi proceso de recuperación en 2021, sin duda te recuerdo con mucho cariño en una etapa de mi vida bastante complicada. Eres una gran profesional […].' },
+  { name: 'Marina S.', detail: 'En terapia desde 2025', quote: 'Adriana te hace sentir desde el principio como en casa […]. Tiene esa magia que hace de terapia un lugar seguro en el que poder abrirte, llorar o enfadarte. Ella no te juzga, te habla con cariño desde la verdad y te enseña a encontrar tu propio camino.' },
+  { name: 'Blanca S.', detail: '4 años en terapia', quote: 'Desde el primer momento crea un lugar seguro en el que poder refugiarte cuando todo pesa. […] Desde que me guía en mi proceso me siento con la capacidad de poder abordar los distintos obstáculos que vayan surgiendo. Ha hecho posible ver la luz al final del túnel.' },
+  { name: 'Monica J.', detail: 'Paciente', quote: 'Ir a terapia con Adriana ha sido de las mejores decisiones que he tomado en mi vida. […] Gracias a ella he podido trabajar muchos temas personales y entenderme mucho mejor. […] Para mí, conocer a Adriana ha sido un antes y un después.' },
+  { name: 'Julián R.', detail: 'Paciente', quote: 'Adriana es una persona maravillosa y como profesional es la mejor. Destacaría ante todo que tiene muchísima paciencia y sobre todo dedicación. […] Te hace sentir seguro en todo momento ya que crea ese espacio de confianza tan necesario.' },
+  { name: 'Olivia S.', detail: 'Paciente', quote: 'Adri tiene una forma de escuchar muy especial, te hace sentir realmente comprendida sin juzgarte en ningún momento. […] Gracias al proceso terapéutico con Adri siento que he ganado claridad, calma y una mayor comprensión de mí misma.' },
+  { name: 'Marco F.', detail: 'Terapia individual, de pareja y familiar', quote: 'Adriana te hace sentir muy cómodo desde el primer momento. Su dulzura, empatía y sensibilidad hacen que la terapia se sienta como un lugar seguro donde poder mostrarte tal y como eres. Me ha ayudado personalmente, pero también con mi pareja y mi familia.' },
+  { name: 'Marga R.', detail: 'Madre de una paciente', quote: 'Adriana lleva meses tratando a mi hija y le estaré eternamente agradecida porque está siendo un faro de luz en la oscuridad. Gracias a ella mi hija ha vuelto a sonreír […]. Con ella siempre he sentido que mi hija estaba en las mejores manos.' },
+  { name: 'Adela M.', detail: 'Terapia de pareja', quote: 'Mi pareja y yo empezamos a acudir a terapia con Adriana en mayo, y encontrarla y confiar en ella ha sido la mejor decisión. […] Nos ha ayudado (y todavía nos sigue ayudando) a entendernos, a trabajar los aspectos de la comunicación en pareja y a tener las herramientas para poder resolver los conflictos.' },
+  { name: 'Natalisestas', detail: 'Paciente desde 2024', quote: 'Voy a terapia con Adriana desde octubre de 2024. Es una gran profesional, con ella volví a confiar en la psicología y en la terapia […]. Es cercana, no juzga, escucha activamente a sus pacientes y genera de su consulta un entorno seguro en el cual todo fluye.' },
+  { name: 'Alejandro L.', detail: 'Terapia de pareja e individual', quote: 'Mi pareja y yo encontramos inesperadamente a Adriana para poder solventar nuestros problemas de pareja hace más de un año […]. Es muy atenta y se nota que le encanta su profesión. […] Gracias a ella hemos podido asentar pilares fundamentales de nuestra relación y de nuestras vidas.' },
+  { name: 'Ariadna', detail: 'Casi un año en terapia', quote: 'Estoy muy agradecida con Adriana. Gracias a su profesionalidad y empatía, me ha acompañado y ayudado durante casi un año en un proceso muy significativo para mí.' },
+  { name: 'Jesus L.', detail: 'Unos 6 años en terapia', quote: 'Adriana es una profesional increíble, me trata desde hace unos 6 años y me ha ayudado muchísimo a sentirme más seguro en mi vida laboral y personal, soy mucho mejor persona y mucho más feliz desde que voy a sus sesiones.' },
+  { name: 'Elenka V.', detail: '4 años en terapia', quote: 'Empecé terapia con Adri hace 4 años y solo tengo buenas palabras que decir. Desde el primer momento que estuve con ella tuve una conexión que pocas veces tengo con personas. […] Gracias a su escucha, consejos y atención he podido superar innumerables obstáculos.' },
+  { name: 'Camila Y.', detail: 'Paciente desde 2021', quote: '¡Adri es la mejor! […] Con su ayuda, su paciencia y sus conocimientos conseguí salir de ahí. A día de hoy me sigue ayudando con otros temas pendientes que aún tengo. […] ¡La psicóloga que más recomiendo en este mundo!' },
+  { name: 'Laura R.', detail: 'Años en terapia', quote: 'Llevo años en terapia con ella y ha resultado ser uno de los principales apoyos en mi proceso de recuperación y autoaprendizaje. […] Hay muy pocas profesionales con la dedicación y pasión de Adriana por ayudar significativamente a sus pacientes.' },
+  { name: 'Lishuang G.', detail: 'Muchos años en terapia', quote: 'Adri lleva siendo mi psicóloga muchos años, es una gran profesional que te ayuda con todo lo que necesitas y está atenta de ti siempre que la necesites. Muchas gracias por cuidarme tan bien.' },
+  { name: 'Cristina L.', detail: 'Paciente', quote: 'Sensibilidad, empatía y compromiso son las tres palabras con las que definiría a Adriana. Para mí es un regalo ser su paciente […]. Tiene un corazón que vale oro, solo hay que escucharla y dejarse tratar.' },
+  { name: 'Celia C.', detail: 'Paciente desde 2021', quote: 'Adriana es una de esas personas a las que una vez conoces, no quieres olvidar jamás. Empecé en terapia con ella en 2021 y es de las mejores decisiones que he tomado nunca. […] Para mí, no es «mi psicóloga», para mí, es Adri.' },
+  { name: 'Juan C.', detail: 'Padre de una paciente', quote: 'Adriana es una grandísima psicóloga que a mi hija la trató muy bien y la ayudó en poco tiempo a salir de un bache que tuvo en su vida. Es muy profesional y crea un buen ambiente a sus pacientes […].' },
+  { name: 'Sandra B.', detail: 'Casi 3 años en terapia', quote: 'Adriana lleva en mi proceso casi tres años y he de decir que como psicóloga es de las mejores que he tenido. Desde el minuto uno crea un ambiente tranquilo y confortable para que puedas expresarte y abrirte sin miedo a las críticas y al juicio.' },
+  { name: 'Almudena B.', detail: '6 años en terapia', quote: 'Desde el momento que empecé con Adriana hace 6 años, me sentí muy cómoda y encajamos a la perfección. Después de años de intentos fallidos con diferentes psicólogos, por fin he encontrado a alguien que marca la diferencia.' },
+  { name: 'Sandra F.', detail: '2 años y medio en terapia', quote: 'Lleva dos años y medio acompañándome, para mí es la mejor psicóloga del mundo. Tiene muchísima empatía, te lo intenta poner fácil siempre […]. Siempre te va a hacer sentir querida y cuidada.' },
 ];
+
+// El fondo de la card es verde musgo, así que los avatares alternan entre
+// tonos que contrastan con él.
+const AVATAR_COLORS = [
+  'var(--color-clay)',
+  'var(--color-moss-hover)',
+  'var(--color-clay-hover)',
+  'var(--color-bg-dark)',
+];
+
+const testimonials = reviews.map((r, i) => ({
+  ...r,
+  initials: r.name.split(/\s+/).map((w) => w[0]).join('').slice(0, 2),
+  avatarColor: AVATAR_COLORS[i % AVATAR_COLORS.length],
+}));
 ---
 
 <section
@@ -59,6 +67,10 @@ const testimonials = [
 
   <div class="tsw-container">
     <h2 class="tsw-heading reveal">Lo que dicen mis pacientes</h2>
+    <p class="tsw-rating reveal">
+      <span class="tsw-rating-stars" aria-hidden="true">★★★★★</span>
+      <span><strong>{GOOGLE_RATING}</strong> · {testimonials.length} reseñas en Google</span>
+    </p>
 
     <!-- Card stack -->
     <div class="tsw-stack-outer" id="tswOuter">
@@ -128,9 +140,23 @@ const testimonials = [
   font-weight: var(--fw-semi);
   color: var(--color-text-primary);
   letter-spacing: var(--ls-tight);
-  margin: 0 0 var(--space-10);
+  margin: 0 0 var(--space-3);
   text-align: center;
 }
+
+.tsw-rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 var(--space-10);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-secondary);
+}
+.tsw-rating strong { color: var(--color-text-primary); font-weight: var(--fw-semi); }
+.tsw-rating-stars { color: var(--color-gold); letter-spacing: 2px; }
 
 /* ── Stack ── */
 .tsw-stack-outer {
@@ -249,12 +275,23 @@ const testimonials = [
 }
 
 /* ── Dots ── */
+/* 23 puntos: en mobile se reduce el hueco y, si aun así no caben, la fila
+   hace scroll horizontal en vez de desbordar la página. */
 .tsw-dots {
   display: flex;
   justify-content: center;
+  justify-content: safe center;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   margin-top: var(--space-8);
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-block: 4px;
+}
+.tsw-dots::-webkit-scrollbar { display: none; }
+@media (min-width: 880px) {
+  .tsw-dots { gap: 8px; }
 }
 
 .tsw-dot {
@@ -319,7 +356,6 @@ const testimonials = [
 // Home y las tarjetas se quedan sin transformar ni altura calculada.
 document.addEventListener('astro:page-load', () => {
   /* ─── Constants ─────────────────────────────────── */
-  const N                = 5;
   const THRESHOLD_RATIO  = 0.38;
   const VEL_THRESHOLD    = 0.5;     // px/ms
   const AUTOPLAY_MS      = 6000;
@@ -333,6 +369,7 @@ document.addEventListener('astro:page-load', () => {
 
   const cards   = Array.from(stack.querySelectorAll('.tsw-card'));
   const dotBtns = Array.from(document.querySelectorAll('.tsw-dot'));
+  const N       = cards.length;
 
   /* ─── State ─────────────────────────────────────── */
   let activeIdx   = 0;
