@@ -67,13 +67,13 @@ const sections = groupBody(post.body);
 
 // ── Siglas: se desarrollan la primera vez que aparecen (WCAG 3.1.4) ──
 const ACRONYMS: Record<string, string> = {
-  'TCA': 'Trastorno de la Conducta Alimentaria',
-  'DSM-V': 'Manual Diagnóstico y Estadístico de los Trastornos Mentales, 5ª edición',
+  'TCA': 'trastorno de la conducta alimentaria',
+  'DSM-V': 'Manual diagnóstico y estadístico de los trastornos mentales, 5.ª edición',
   'OMS': 'Organización Mundial de la Salud',
   'INE': 'Instituto Nacional de Estadística',
   'UCM': 'Universidad Complutense de Madrid',
-  'TIC': 'Tecnologías de la Información y la Comunicación',
-  'PNL': 'Programación Neurolingüística',
+  'TIC': 'tecnologías de la información y la comunicación',
+  'PNL': 'programación neurolingüística',
 };
 const expandedAcronyms = new Set<string>();
 
@@ -116,7 +116,7 @@ function renderText(text: string): string {
           <img class="author-avatar" src="/images/adriana.png" alt={post.author.name} />
           <div class="author-meta">
             <p class="author-name">{post.author.name}</p>
-            <p class="author-role">{post.author.role} · {readMinutes(post)} min lectura</p>
+            <p class="author-role">{post.author.role} · {readMinutes(post)} min de lectura</p>
           </div>
         </div>
       </div>
