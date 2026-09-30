@@ -23,7 +23,7 @@ export const posts: BlogPost[] = [
     title: 'FOMO, el miedo que crece en verano entre los jóvenes y adolescentes',
     excerpt: 'Un tipo de ansiedad social que provoca miedo a perderse algo, y que se agrava en verano con la exposición constante a la vida "ideal" de los demás en redes sociales.',
     category: 'Adolescentes',
-    image: '/images/Adolescentes/650f146cbecf38efdac2ccfa_Blog - 2(1).png',
+    image: 'Adolescentes/650f146cbecf38efdac2ccfa_Blog - 2(1).png',
     date: '03/09/2021',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -68,7 +68,7 @@ export const posts: BlogPost[] = [
     title: 'Las secuelas invisibles: los miedos, fobias y estragos psicológicos que el coronavirus está dejando como huella permanente',
     excerpt: 'La pandemia dejó un rastro de ansiedad, estrés postraumático y síndrome de la cabaña que los profesionales de la salud mental llevan meses observando.',
     category: 'Adolescentes',
-    image: '/images/Adolescentes/6507427c8898be5169a3fbff_Blog-1.png',
+    image: 'Adolescentes/6507427c8898be5169a3fbff_Blog-1.png',
     date: '03/09/2021',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -98,7 +98,7 @@ export const posts: BlogPost[] = [
     title: '¿Están los algoritmos de Instagram y TikTok reavivando los peores fantasmas de la cultura de la dieta?',
     excerpt: 'Las imágenes corporales «perfectas» que devuelven las redes sociales pueden actuar como factor de riesgo en los trastornos de la conducta alimentaria.',
     category: 'Adolescentes',
-    image: '/images/Adolescentes/650f164f4a76afdca29c47e0_Blog - 3(1).png',
+    image: 'Adolescentes/650f164f4a76afdca29c47e0_Blog - 3(1).png',
     date: '16/06/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -157,7 +157,7 @@ export const posts: BlogPost[] = [
     title: 'Qué es la ortorexia y por qué comerte un donut o helado de vez en cuando no es malo',
     excerpt: 'La preocupación obsesiva por comer «sano» puede convertirse en una dieta rígida y restrictiva con consecuencias físicas y emocionales.',
     category: 'Adolescentes',
-    image: '/images/Adolescentes/650f1a0594ef9ab77583b6c1_Blog - 4(1).png',
+    image: 'Adolescentes/650f1a0594ef9ab77583b6c1_Blog - 4(1).png',
     date: '18/09/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -200,7 +200,7 @@ export const posts: BlogPost[] = [
     title: 'Mis citas no funcionan, ¿qué estoy haciendo mal?',
     excerpt: 'A menudo el problema no está en la falta de habilidades sociales, sino en unas expectativas poco ajustadas a la realidad de conocer a alguien.',
     category: 'Adultos',
-    image: '/images/Adultos/6516a5b658203abfd8e80f2e_Blog - 5(1).png',
+    image: 'Adultos/6516a5b658203abfd8e80f2e_Blog - 5(1).png',
     date: '21/08/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -253,7 +253,7 @@ export const posts: BlogPost[] = [
     title: 'Cómo fortalecer la autoestima de los niños para que se adapten mejor a los problemas de la vida',
     excerpt: 'La familia es la pieza clave para ayudar a los niños a construir una relación sana consigo mismos desde edades tempranas.',
     category: 'Adolescentes',
-    image: '/images/Adolescentes/6516aad14e3fb42aa1a1b2c6_Blog - 6(1).png',
+    image: 'Adolescentes/6516aad14e3fb42aa1a1b2c6_Blog - 6(1).png',
     date: '21/12/2022',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -290,7 +290,7 @@ export const posts: BlogPost[] = [
     title: 'Comida real: ¿realmente es sinónimo de comer saludable?',
     excerpt: 'El movimiento «realfooding» ha popularizado comer sin procesados, pero llevado al extremo puede favorecer problemas con la alimentación.',
     category: 'Adolescentes',
-    image: '/images/Adolescentes/6516acaf1d2c66f7763aaa2b_Blog - 6.1(1).png',
+    image: 'Adolescentes/6516acaf1d2c66f7763aaa2b_Blog - 6.1(1).png',
     date: '22/09/2021',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -334,7 +334,7 @@ export const posts: BlogPost[] = [
     title: 'El ayuno intermitente aumenta el riesgo de sufrir trastornos alimentarios, según advierte una experta',
     excerpt: 'Sostener el ayuno demasiado tiempo, o no poder sostenerlo, son dos caminos que pueden derivar en atracones o en distorsión de la imagen corporal.',
     category: 'Adolescentes',
-    image: '/images/Adolescentes/6516ad901d2c66f7763b6ba0_Blog - 8(1).png',
+    image: 'Adolescentes/6516ad901d2c66f7763b6ba0_Blog - 8(1).png',
     date: '30/11/2020',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -367,7 +367,7 @@ export const posts: BlogPost[] = [
     title: 'El reto al que se enfrentan las personas con un trastorno de alimentación en diciembre y en Navidad: 3 consejos de una psicóloga',
     excerpt: 'Las comidas familiares y los reencuentros navideños son un desafío añadido para quienes están en proceso de recuperación de un TCA.',
     category: 'Familias',
-    image: '/images/Familias/657dd479873eb41f12216f60_blog1-fam.png',
+    image: 'Familias/657dd479873eb41f12216f60_blog1-fam.png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -401,7 +401,7 @@ export const posts: BlogPost[] = [
     title: 'La depresión en jóvenes se asocia cada vez más al uso de redes sociales',
     excerpt: 'Psicólogos y psiquiatras observan un aumento de consultas de jóvenes vinculadas al abuso de redes sociales y la comparación social constante.',
     category: 'Adolescentes',
-    image: '/images/Adultos/652abfa1eca739a172fa1866_Blog---3(1).png',
+    image: 'Adultos/652abfa1eca739a172fa1866_Blog---3(1).png',
     date: '17/03/2022',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -420,7 +420,7 @@ export const posts: BlogPost[] = [
     title: '¿Hay que estar "loco" para ir al psicólogo?',
     excerpt: 'Desmontamos el estigma histórico que asocia la terapia psicológica únicamente a los trastornos mentales graves.',
     category: 'Adolescentes',
-    image: '/images/Adolescentes/652ac163c44250fcf51a2a45_Blog---3(1).png',
+    image: 'Adolescentes/652ac163c44250fcf51a2a45_Blog---3(1).png',
     date: '05/06/2022',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -440,7 +440,7 @@ export const posts: BlogPost[] = [
     title: 'Apuestas online y menores: un juego muy peligroso',
     excerpt: 'El juego «gratuito» sin dinero real actúa como puerta de entrada a la ludopatía entre adolescentes.',
     category: 'Adolescentes',
-    image: '/images/Adolescentes/652ac3c09d35bedf6573cf8a_Blog---3(1).png',
+    image: 'Adolescentes/652ac3c09d35bedf6573cf8a_Blog---3(1).png',
     date: '24/08/2022',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -460,7 +460,7 @@ export const posts: BlogPost[] = [
     title: 'El síndrome de Morris y sus consecuencias emocionales',
     excerpt: 'Una condición genética poco conocida que plantea importantes desafíos de identidad y aceptación social.',
     category: 'Adolescentes',
-    image: '/images/Adolescentes/652ac7bd18743b5da302a1ac_Blog---3(1).png',
+    image: 'Adolescentes/652ac7bd18743b5da302a1ac_Blog---3(1).png',
     date: '12/09/2022',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -481,7 +481,7 @@ export const posts: BlogPost[] = [
     title: '¿Has pasado ya por la crisis de los 25?',
     excerpt: 'Incertidumbre laboral, presión por el éxito y comparación en redes convergen en una crisis vital cada vez más habitual en la veintena.',
     category: 'Adolescentes',
-    image: '/images/Adolescentes/652ac86af3d93c3006a59112_Blog---3(1).png',
+    image: 'Adolescentes/652ac86af3d93c3006a59112_Blog---3(1).png',
     date: '03/11/2022',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -503,7 +503,7 @@ export const posts: BlogPost[] = [
     title: 'Técnicas para gestionar el estrés y la ansiedad',
     excerpt: 'Respiración diafragmática, relajación muscular progresiva y visualización activa, tres herramientas sencillas para el día a día.',
     category: 'Adolescentes',
-    image: '/images/Adolescentes/652ac8cd4a2afe3559f50ff9_Blog---3(1).png',
+    image: 'Adolescentes/652ac8cd4a2afe3559f50ff9_Blog---3(1).png',
     date: '19/12/2022',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -530,7 +530,7 @@ export const posts: BlogPost[] = [
     title: 'La resiliencia: cómo superar las adversidades y crecer como individuo',
     excerpt: 'La resiliencia no es un rasgo innato, sino una capacidad que se entrena a lo largo de la vida.',
     category: 'Adultos',
-    image: '/images/Adultos/652ea51aef00efb8fddcdf03_Blog---3(1).png',
+    image: 'Adultos/652ea51aef00efb8fddcdf03_Blog---3(1).png',
     date: '22/02/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -550,7 +550,7 @@ export const posts: BlogPost[] = [
     title: 'Síndrome PAS: personas altamente sensibles',
     excerpt: 'En torno al 15-20 % de la población procesa los estímulos del entorno de forma mucho más intensa y profunda.',
     category: 'Adultos',
-    image: '/images/Adultos/652ea6782a7bd3d02bcf83bf_Blog---3(1).png',
+    image: 'Adultos/652ea6782a7bd3d02bcf83bf_Blog---3(1).png',
     date: '15/04/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -569,7 +569,7 @@ export const posts: BlogPost[] = [
     title: '¿Por qué tenemos miedo a sentir?',
     excerpt: 'No se nos ha educado para gestionar emociones «negativas» como la tristeza, y las redes sociales no ayudan.',
     category: 'Adultos',
-    image: '/images/Adultos/652ea7470f678188d2e30e7e_Blog---3(1).png',
+    image: 'Adultos/652ea7470f678188d2e30e7e_Blog---3(1).png',
     date: '07/05/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -589,7 +589,7 @@ export const posts: BlogPost[] = [
     title: 'El gran conocido síndrome del impostor',
     excerpt: 'Atribuir los propios logros a la suerte en lugar de al mérito propio es más frecuente de lo que parece, sobre todo entre mujeres y jóvenes.',
     category: 'Adultos',
-    image: '/images/Adultos/652ea7dff8adb24ea0fadfd2_Blog---3(1).png',
+    image: 'Adultos/652ea7dff8adb24ea0fadfd2_Blog---3(1).png',
     date: '02/07/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -608,7 +608,7 @@ export const posts: BlogPost[] = [
     title: '¿Por qué cuesta desconectar del trabajo en vacaciones?',
     excerpt: 'Casi un tercio de los trabajadores no logra desconectar del todo durante las vacaciones, sobre todo los más jóvenes.',
     category: 'Adultos',
-    image: '/images/Adultos/652ea823d40a967479c31b85_Blog---3(1).png',
+    image: 'Adultos/652ea823d40a967479c31b85_Blog---3(1).png',
     date: '26/08/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -628,7 +628,7 @@ export const posts: BlogPost[] = [
     title: 'Taijin Kyofusho: la fobia a molestar a los demás',
     excerpt: 'Un síndrome de origen japonés centrado en el miedo a resultar incómodo u ofensivo para otras personas.',
     category: 'Adultos',
-    image: '/images/Adultos/652ea869de7381add0699fd6_Blog---3(1).png',
+    image: 'Adultos/652ea869de7381add0699fd6_Blog---3(1).png',
     date: '13/10/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -651,7 +651,7 @@ export const posts: BlogPost[] = [
     title: '¿Por qué nos cuesta tanto pedir ayuda?',
     excerpt: 'El miedo al juicio ajeno y la creencia de que pedir ayuda es debilidad frenan a muchos adultos a la hora de buscar apoyo.',
     category: 'Adultos',
-    image: '/images/Adultos/652ea9113af6cccdd7d9c1b0_Blog---3(1).png',
+    image: 'Adultos/652ea9113af6cccdd7d9c1b0_Blog---3(1).png',
     date: '28/11/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -672,7 +672,7 @@ export const posts: BlogPost[] = [
     title: 'Fingir que todo va bien: un síntoma de la "depresión sonriente"',
     excerpt: 'Ocultar el malestar detrás de una sonrisa es más común de lo que parece, especialmente en perfiles percibidos como «fuertes».',
     category: 'Adultos',
-    image: '/images/Adultos/652ea994b1c6979a7b6c2bd1_Blog---3(1).png',
+    image: 'Adultos/652ea994b1c6979a7b6c2bd1_Blog---3(1).png',
     date: '15/01/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -691,7 +691,7 @@ export const posts: BlogPost[] = [
     title: '¿Para qué sirve ir al psicólogo?',
     excerpt: 'Desmontamos algunos de los mitos más habituales sobre qué es y qué no es una terapia psicológica.',
     category: 'Adultos',
-    image: '/images/Adultos/652ea9d176f1f986ba2a22ae_Blog---3(1).png',
+    image: 'Adultos/652ea9d176f1f986ba2a22ae_Blog---3(1).png',
     date: '04/03/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -723,7 +723,7 @@ export const posts: BlogPost[] = [
     title: '¿Cuándo es el momento adecuado para acudir a terapia?',
     excerpt: 'No hace falta esperar a una crisis grave: cualquier malestar que afecte al día a día es motivo suficiente.',
     category: 'Adultos',
-    image: '/images/Adultos/652eab0ed40a967479c7f863_Blog---3(1).png',
+    image: 'Adultos/652eab0ed40a967479c7f863_Blog---3(1).png',
     date: '09/06/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -743,7 +743,7 @@ export const posts: BlogPost[] = [
     title: '¿Por qué evitamos decir que vamos al psicólogo?',
     excerpt: 'El estigma en torno a la salud mental sigue haciendo que muchas personas oculten que están en terapia.',
     category: 'Adultos',
-    image: '/images/Adultos/652eac2b105a03291f4bf5e0_Blog---3(1).png',
+    image: 'Adultos/652eac2b105a03291f4bf5e0_Blog---3(1).png',
     date: '21/07/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -762,7 +762,7 @@ export const posts: BlogPost[] = [
     title: 'Si te consideras viajero, es posible que hayas experimentado alguna de estas crisis',
     excerpt: 'Del síndrome de Ulises a la dromomanía: los trastornos psicológicos menos conocidos asociados a viajar.',
     category: 'Adultos',
-    image: '/images/Adultos/652eac689f372e9babb5dc15_Blog---3(1).png',
+    image: 'Adultos/652eac689f372e9babb5dc15_Blog---3(1).png',
     date: '18/09/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -785,7 +785,7 @@ export const posts: BlogPost[] = [
     title: 'El pánico al trabajo existe y se llama ergofobia',
     excerpt: 'Un miedo intenso al entorno laboral que suele tener su origen en experiencias traumáticas previas.',
     category: 'Adultos',
-    image: '/images/Adultos/652eb43801b729ad7465e5f2_Blog---3(1).png',
+    image: 'Adultos/652eb43801b729ad7465e5f2_Blog---3(1).png',
     date: '19/12/2023',
     author: {
       name: 'Adriana Esteban Labelle',
@@ -803,7 +803,7 @@ export const posts: BlogPost[] = [
     title: 'Pregorexia, la peligrosa obsesión por no coger peso durante el embarazo',
     excerpt: 'La presión estética también alcanza el embarazo, con riesgos serios tanto para la madre como para el bebé.',
     category: 'Familias',
-    image: '/images/Familias/657352eef877db5493806e1a_Blog---3(1).png',
+    image: 'Familias/657352eef877db5493806e1a_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -828,7 +828,7 @@ export const posts: BlogPost[] = [
     title: 'La soledad en las personas mayores: una epidemia silenciosa',
     excerpt: 'El aumento del consumo de ansiolíticos entre mayores esconde, muchas veces, un problema de aislamiento social.',
     category: 'Familias',
-    image: '/images/Familias/657355fdb0b09181f3e2d04d_Blog---3(1).png',
+    image: 'Familias/657355fdb0b09181f3e2d04d_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -850,7 +850,7 @@ export const posts: BlogPost[] = [
     title: '¿Por qué no debemos usar dispositivos móviles para tranquilizar o entretener a nuestros hijos?',
     excerpt: 'Usar la pantalla como «chupete emocional» puede dificultar que los niños aprendan a gestionar sus propias emociones.',
     category: 'Familias',
-    image: '/images/Familias/657356b8bedaef68814c1688_Blog---3(1).png',
+    image: 'Familias/657356b8bedaef68814c1688_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -872,7 +872,7 @@ export const posts: BlogPost[] = [
     title: 'Sobreprotección y parentalidad: madres agenda, padres helicóptero e hijos burbuja',
     excerpt: '«Madres agenda», «padres helicóptero» y «padres apisonadora»: los distintos estilos de sobreprotección y sus consecuencias.',
     category: 'Familias',
-    image: '/images/Familias/657357c9b09a020a48871761_Blog---3(1).png',
+    image: 'Familias/657357c9b09a020a48871761_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -893,7 +893,7 @@ export const posts: BlogPost[] = [
     title: 'El desarrollo emocional en la infancia y la importancia de manejar la frustración',
     excerpt: 'Entre los 3 y los 6 años se sientan las bases de la inteligencia emocional, y aprender a tolerar la frustración es clave.',
     category: 'Familias',
-    image: '/images/Familias/6573585bdef7f86f043f9b72_Blog---3(1).png',
+    image: 'Familias/6573585bdef7f86f043f9b72_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -912,7 +912,7 @@ export const posts: BlogPost[] = [
     title: 'Desmontando los mitos del rol parental en el desarrollo de los hijos',
     excerpt: 'Ser buen padre o madre no significa ser perfecto, ni tener siempre todas las respuestas.',
     category: 'Familias',
-    image: '/images/Familias/657359acbedaef68814daa7e_Blog---3(1).png',
+    image: 'Familias/657359acbedaef68814daa7e_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -932,7 +932,7 @@ export const posts: BlogPost[] = [
     title: 'Colecho: padres que duermen con sus hijos',
     excerpt: 'Compartir cama o habitación con los hijos tiene beneficios para el vínculo, pero también riesgos que conviene conocer.',
     category: 'Familias',
-    image: '/images/Familias/65735a19309e23b6e8f2a7a5_Blog---3(1).png',
+    image: 'Familias/65735a19309e23b6e8f2a7a5_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -959,7 +959,7 @@ export const posts: BlogPost[] = [
     title: 'La importancia de la actividad física en la infancia: beneficios y consejos',
     excerpt: 'El ejercicio en la infancia no solo fortalece el cuerpo: también mejora el estado de ánimo y las habilidades sociales.',
     category: 'Familias',
-    image: '/images/Familias/65735ad1986640b3908d4ef0_Blog---3(1).png',
+    image: 'Familias/65735ad1986640b3908d4ef0_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -989,7 +989,7 @@ export const posts: BlogPost[] = [
     title: 'Los desafíos y beneficios de la paternidad tardía',
     excerpt: 'Tener hijos más tarde implica menos energía física, pero también más madurez emocional y estabilidad.',
     category: 'Familias',
-    image: '/images/Familias/657db25bbc2a732559038ccc_Blog---3(1).png',
+    image: 'Familias/657db25bbc2a732559038ccc_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1017,7 +1017,7 @@ export const posts: BlogPost[] = [
     title: 'La mediación y su relación con la psicología y el derecho',
     excerpt: 'Un proceso de resolución de conflictos que gana terreno como alternativa a los tribunales.',
     category: 'Familias',
-    image: '/images/Familias/657db4696ceef1e1bfae4308_Blog---3(1).png',
+    image: 'Familias/657db4696ceef1e1bfae4308_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1043,7 +1043,7 @@ export const posts: BlogPost[] = [
     title: 'Luces y sombras de la Navidad: ¿cómo nos afecta?',
     excerpt: 'Regalos, comidas familiares y la ausencia de seres queridos hacen de diciembre un mes emocionalmente intenso.',
     category: 'Familias',
-    image: '/images/Familias/657db4d765f702738e52da12_Blog---3(1).png',
+    image: 'Familias/657db4d765f702738e52da12_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1065,7 +1065,7 @@ export const posts: BlogPost[] = [
     title: '¿Qué son los matrimonios zombis?',
     excerpt: 'Parejas que, por evitar el conflicto, terminan enterrando sus problemas hasta perder la conexión emocional.',
     category: 'Parejas',
-    image: '/images/Parejas/657dbb968a67513e871c5a2e_Blog---3(1).png',
+    image: 'Parejas/657dbb968a67513e871c5a2e_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1085,7 +1085,7 @@ export const posts: BlogPost[] = [
     title: '¿Conoces a las "parejas LAT"?',
     excerpt: 'Comprometidas pero sin convivir bajo el mismo techo: una tendencia creciente en parejas ya asentadas.',
     category: 'Parejas',
-    image: '/images/Parejas/657dbc73c049d6cdc16544c5_Blog---3(1).png',
+    image: 'Parejas/657dbc73c049d6cdc16544c5_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1104,7 +1104,7 @@ export const posts: BlogPost[] = [
     title: '¿Cómo saber si existe dependencia en una relación de pareja?',
     excerpt: 'Buscar en el otro lo que nos falta a nosotros mismos suele ser el origen de los vínculos más dependientes.',
     category: 'Parejas',
-    image: '/images/Parejas/657dbd1b7deb1a34cc1689b4_Blog---3(1).png',
+    image: 'Parejas/657dbd1b7deb1a34cc1689b4_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1125,7 +1125,7 @@ export const posts: BlogPost[] = [
     title: '¿Te suena el síndrome del corazón roto?',
     excerpt: 'Rupturas, infidelidades o amores no correspondidos pueden desencadenar un intenso malestar emocional y físico.',
     category: 'Parejas',
-    image: '/images/Parejas/657dbd4bc5d6a9ae6e00fbd4_Blog---3(1).png',
+    image: 'Parejas/657dbd4bc5d6a9ae6e00fbd4_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1143,7 +1143,7 @@ export const posts: BlogPost[] = [
     title: 'La filofobia o miedo a enamorarse',
     excerpt: 'El temor al compromiso puede llevar a sabotear inconscientemente cualquier relación antes de que avance.',
     category: 'Parejas',
-    image: '/images/Parejas/657dbd7dbc4124991c4cebc7_Blog---3(1).png',
+    image: 'Parejas/657dbd7dbc4124991c4cebc7_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1163,7 +1163,7 @@ export const posts: BlogPost[] = [
     title: 'El síndrome de Otelo en las relaciones de pareja',
     excerpt: 'Un delirio de celos que no responde a pruebas ni a la lógica, y que puede tener consecuencias muy graves.',
     category: 'Parejas',
-    image: '/images/Parejas/657dbdad7888a218656aa848_Blog---3(1).png',
+    image: 'Parejas/657dbdad7888a218656aa848_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1183,7 +1183,7 @@ export const posts: BlogPost[] = [
     title: 'Atravesando las etapas del desamor',
     excerpt: 'Una ruptura es un duelo con fases propias: negación, desesperanza, idealización, aceptación y superación.',
     category: 'Parejas',
-    image: '/images/Parejas/657dbde6f03cf9096f76a8e7_Blog---3(1).png',
+    image: 'Parejas/657dbde6f03cf9096f76a8e7_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1204,7 +1204,7 @@ export const posts: BlogPost[] = [
     title: 'Existe un nombre para definir el miedo a quedarse soltero: anuptofobia',
     excerpt: 'El pánico a la soltería puede llevar a aferrarse a relaciones traumáticas solo por miedo a estar solo.',
     category: 'Parejas',
-    image: '/images/Parejas/657dbe7a8bc9567a381fc69e_Blog---3(1).png',
+    image: 'Parejas/657dbe7a8bc9567a381fc69e_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1224,7 +1224,7 @@ export const posts: BlogPost[] = [
     title: 'Enfermos de amor y relaciones tóxicas',
     excerpt: '"Estar enfermo de amor" no es solo una metáfora: el amor también puede volverse dañino si no se cuida.',
     category: 'Parejas',
-    image: '/images/Parejas/657dbf57963417183b45a90f_Blog---3(1).png',
+    image: 'Parejas/657dbf57963417183b45a90f_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1243,7 +1243,7 @@ export const posts: BlogPost[] = [
     title: 'En búsqueda del amor ideal: el síndrome de Madame Bovary',
     excerpt: 'Cuando el enamoramiento inicial nunca es suficiente y cada relación termina en decepción.',
     category: 'Parejas',
-    image: '/images/Parejas/657dbed63f2b4be6c68b8afb_Blog---3(1).png',
+    image: 'Parejas/657dbed63f2b4be6c68b8afb_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1261,7 +1261,7 @@ export const posts: BlogPost[] = [
     title: 'El síndrome de Peter Pan y Wendy en la dinámica de pareja',
     excerpt: 'Cuando uno se resiste a madurar y el otro asume todas las responsabilidades de la relación.',
     category: 'Parejas',
-    image: '/images/Parejas/657dbfbeb742222e40fdbf35_Blog---3(1).png',
+    image: 'Parejas/657dbfbeb742222e40fdbf35_Blog---3(1).png',
     author: {
       name: 'Adriana Esteban Labelle',
       role: 'Psicóloga colegiada M-35913',
@@ -1282,7 +1282,7 @@ export const posts: BlogPost[] = [
     title: 'Así puedes evitar que las redes sociales fomenten la anorexia y la bulimia en tus hijos',
     excerpt: 'Pautas para acompañar a los más jóvenes en un entorno digital que expone constantemente a comparaciones sobre el cuerpo.',
     category: 'Adolescentes',
-    image: '/images/Parejas/647097c60d72f61b1a90a69f_evitar-efectos-negativos-redes-sociales-proteger-ninos-trastornos-alimentarios_98.webp',
+    image: 'Parejas/647097c60d72f61b1a90a69f_evitar-efectos-negativos-redes-sociales-proteger-ninos-trastornos-alimentarios_98.webp',
     date: '11/01/2022',
     author: {
       name: 'Adriana Esteban Labelle',

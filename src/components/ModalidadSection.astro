@@ -2,15 +2,6 @@
 import { Picture } from 'astro:assets';
 import consultaPresencial from '../assets/consulta-presencial.webp';
 import modalidadOnline from '../assets/modalidad-online.png';
-
-const imgProps = {
-  formats: ['avif', 'webp'],
-  fallbackFormat: 'webp',
-  widths: [400, 800, 1200],
-  sizes: '(min-width: 880px) 480px, 100vw',
-  loading: 'lazy',
-  class: 'mod-img',
-} as const;
 ---
 
 <section class="modalidad" id="como">
@@ -20,7 +11,17 @@ const imgProps = {
     <div class="mod-grid">
 
       <div class="mod-card mod-presencial reveal">
-        <Picture src={consultaPresencial} alt="" width={1200} {...imgProps} />
+        <Picture
+          src={consultaPresencial}
+          alt=""
+          width={1200}
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          widths={[400, 800, 1200]}
+          sizes="(min-width: 880px) 480px, 100vw"
+          loading="lazy"
+          class="mod-img"
+        />
         <div class="mod-icon" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/>
@@ -34,7 +35,16 @@ const imgProps = {
       </div>
 
       <div class="mod-card mod-online reveal">
-        <Picture src={modalidadOnline} alt="" {...imgProps} />
+        <Picture
+          src={modalidadOnline}
+          alt=""
+          formats={['avif', 'webp']}
+          fallbackFormat="webp"
+          widths={[400, 800, 1200]}
+          sizes="(min-width: 880px) 480px, 100vw"
+          loading="lazy"
+          class="mod-img"
+        />
         <div class="mod-icon" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2.5" y="4" width="19" height="13" rx="1.5"/>

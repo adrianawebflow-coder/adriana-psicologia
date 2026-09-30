@@ -1,7 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import CTAFinalSection from '../../components/CTAFinalSection.astro';
+import { Image } from 'astro:assets';
 import { posts, categories } from '../../data/blogPosts';
+import { blogImage } from '../../data/blogImages';
+
+// Las tarjetas son 3:4 con object-fit: cover, así que la imagen apaisada se
+// pinta a ~770px de ancho CSS; no se amplía por encima del original.
+const cardWidth = (path: string) => Math.min(blogImage(path).width, 800);
 
 const gridPosts = posts;
 
@@ -39,7 +45,7 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
             <li>
               <a class="sidebar-card" href={`/blog/${post.slug}`}>
                 <span class="sidebar-thumb">
-                  <img src={post.image} alt="" loading="lazy" />
+                  <Image src={blogImage(post.image)} width={220} format="webp" alt="" loading="lazy" />
                 </span>
                 <span class="sidebar-info">
                   <span class="sidebar-post-title">{post.title}</span>
@@ -72,7 +78,7 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
         <div class="grid">
           {gridPosts.map((post) => (
             <a class="card card-in reveal" href={`/blog/${post.slug}`} data-category={post.category}>
-              <img class="card-img" src={post.image} alt="" loading="lazy" />
+              <Image class="card-img" src={blogImage(post.image)} width={cardWidth(post.image)} format="webp" alt="" loading="lazy" />
               <div class="card-body">
                 <span class="card-badge">{post.category}</span>
                 <h3 class="card-title">{post.title}</h3>
