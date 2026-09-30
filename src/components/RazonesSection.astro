@@ -48,14 +48,17 @@ const razones = [
 <style>
 .razones {
   background: var(--color-bg-soft);
-  padding-top: 80px;
-  padding-bottom: 100px;
+  padding-top: 32px;      
+  padding-bottom: 60px;
+}
+@media (max-width: 879px) {
+  .razones { padding-inline: 16px; }
 }
 
 .container {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 0 var(--gutter);
+  padding: 0 ;
 }
 
 .section-eyebrow {
