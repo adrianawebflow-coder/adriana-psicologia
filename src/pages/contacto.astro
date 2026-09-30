@@ -319,9 +319,33 @@ const faqs = [
     }
   }
 
+  // widget.js pesa bastante y no debe competir con la carga inicial: se pide
+  // cuando el bloque entra en pantalla o cuando el navegador queda libre tras
+  // cargar la página, lo que ocurra antes (en mobile el bloque queda justo
+  // bajo el pliegue, así que está listo cuando el usuario baja).
   document.addEventListener('astro:page-load', () => {
-    if (!document.querySelector('.calendly-inline-widget')) return;
+    const el = document.querySelector('.calendly-inline-widget');
+    if (!el) return;
+    let done = false;
+    const start = () => {
+      if (done) return;
+      done = true;
+      io.disconnect();
+      loadCalendly();
+    };
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) start();
+    });
+    io.observe(el);
+    const whenIdle = () => {
+      if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 3000 });
+      else setTimeout(start, 2000);
+    };
+    if (document.readyState === 'complete') whenIdle();
+    else window.addEventListener('load', whenIdle, { once: true });
+  });
 
+  function loadCalendly() {
     if ((window as any).Calendly) {
       initCalendly();
       return;
@@ -344,5 +368,5 @@ const faqs = [
         }
       }, 100);
     }
-  });
+  }
 </script>

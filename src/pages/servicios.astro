@@ -1,5 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import collageIndividual from '../assets/servicios/collage-individual.png';
+import collageParejas from '../assets/servicios/collage-parejas.png';
+import collageFamilias from '../assets/servicios/collage-familias.png';
 
 const tabs = [
   {
@@ -16,7 +20,7 @@ const tabs = [
     price: 'Desde 80 €/sesión',
     bono: '280 € por 4 sesiones',
     href: '/servicios/individual',
-    collage: '/images/Collage-Visual.png',
+    collage: collageIndividual,
   },
   {
     id: 'parejas',
@@ -32,7 +36,7 @@ const tabs = [
     price: 'Desde 90 €/sesión',
     bono: '320 € por 4 sesiones',
     href: '/servicios/parejas',
-    collage: '/images/Collage-Visual-parejas.png',
+    collage: collageParejas,
   },
   {
     id: 'familias',
@@ -48,7 +52,7 @@ const tabs = [
     price: 'Desde 100 €/sesión',
     bono: '360 € por 4 sesiones',
     href: '/servicios/familias',
-    collage: '/images/Collage-Visual-familias.png',
+    collage: collageFamilias,
   },
 ];
 
@@ -73,12 +77,14 @@ const initialCtaExternal = !initialTab.href;
     <div class="services-container">
       <div class="collage" aria-hidden="true">
         {tabs.map((tab) => (
-          <img
+          <Image
             class="collage-photo"
             src={tab.collage}
             alt=""
-            width="1000"
-            height="1000"
+            widths={[474, 948]}
+            sizes="474px"
+            format="webp"
+            loading="lazy"
             data-collage={tab.id}
             hidden={tab.id !== initial}
           />
