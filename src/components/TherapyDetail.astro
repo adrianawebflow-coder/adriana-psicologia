@@ -1,6 +1,6 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 
 interface OtherService {
   tag: string;
@@ -29,12 +29,14 @@ const { title, lede, sectionTitle, sectionDesc, sectionList, price, bono, otherS
 
 const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
 
-const despachoDir = path.join(process.cwd(), 'public/images/despacho');
-const despachoImages = fs
-  .readdirSync(despachoDir)
-  .filter((file) => /\.(webp|jpe?g|png)$/i.test(file))
+// Todas las fotos de src/assets/despacho/, en orden alfabético de archivo.
+const despachoModules = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/despacho/*.{webp,jpg,jpeg,png}',
+  { eager: true },
+);
+const despachoImages = Object.keys(despachoModules)
   .sort()
-  .map((file) => `/images/despacho/${file}`);
+  .map((key) => despachoModules[key].default);
 ---
 
 <section class="therapy-hero">
@@ -112,9 +114,13 @@ const despachoImages = fs
     <div class="gallery-track" id="galleryTrack">
       {despachoImages.map((src, i) => (
         <div class="gallery-slide">
-          <img
+          <Image
             src={src}
             alt={`Despacho de Adriana Psicología ${i + 1}`}
+            width={1200}
+            widths={[400, 800, 1200]}
+            sizes="(min-width: 1000px) 579px, 100vw"
+            format="webp"
             loading={i === 0 ? 'eager' : 'lazy'}
           />
         </div>

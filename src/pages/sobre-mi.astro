@@ -1,5 +1,17 @@
 ---
+import { Image, getImage } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import heroPhoto from '../assets/photo-adriana-sobre-mi.jpg';
+import colab1Img from '../assets/colaboradoras/colab-1.png';
+import colab2Img from '../assets/colaboradoras/colab-2.png';
+import colab3Img from '../assets/colaboradoras/colab-3.png';
+import colab4Img from '../assets/colaboradoras/colab-4.png';
+
+// Los avatares van como background-image porque el script del carrusel copia
+// ese fondo a las tarjetas "fantasma"; getImage() da la URL optimizada.
+const [colab1, colab2, colab3, colab4] = await Promise.all(
+  [colab1Img, colab2Img, colab3Img, colab4Img].map((src) => getImage({ src, width: 240, format: 'webp' })),
+);
 ---
 
 <Layout
@@ -10,7 +22,16 @@ import Layout from '../layouts/Layout.astro';
   <!-- ══ HERO: foto + tarjeta carrusel "Mi historia" ════════ -->
   <section class="hero" id="mi-historia">
     <div class="hero-stage">
-      <img class="hero-photo sm-hero-photo" src="/images/photo-adriana-sobre-mi.jpg" alt="Adriana Esteban Labelle, psicóloga, en su despacho" width="936" height="598" fetchpriority="high" />
+      <Image
+        class="hero-photo sm-hero-photo"
+        src={heroPhoto}
+        alt="Adriana Esteban Labelle, psicóloga, en su despacho"
+        widths={[480, 936]}
+        sizes="(min-width: 880px) 470px, 100vw"
+        format="webp"
+        loading="eager"
+        fetchpriority="high"
+      />
 
       <article class="hero-card sm-hero-card">
         <div class="hero-body" aria-live="polite">
@@ -206,7 +227,7 @@ import Layout from '../layouts/Layout.astro';
           <div class="person-stack">
           <article class="person-card">
             <div class="person-slide active">
-              <div class="person-avatar" role="img" aria-label="Foto de Belén Silveira" style="background-image:url('/images/colab-1.png')"></div>
+              <div class="person-avatar" role="img" aria-label="Foto de Belén Silveira" style={`background-image:url('${colab1.src}')`}></div>
               <div class="person-id">
                 <h3 class="person-name">Belén Silveira</h3>
                 <p class="person-role">Endocrinóloga</p>
@@ -226,7 +247,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
 
             <div class="person-slide">
-              <div class="person-avatar" role="img" aria-label="Foto de Laura Carreño" style="background-image:url('/images/colab-2.png')"></div>
+              <div class="person-avatar" role="img" aria-label="Foto de Laura Carreño" style={`background-image:url('${colab2.src}')`}></div>
               <div class="person-id">
                 <h3 class="person-name">Laura Carreño</h3>
                 <p class="person-role">Entrenadora deportiva</p>
@@ -246,7 +267,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
 
             <div class="person-slide">
-              <div class="person-avatar" role="img" aria-label="Foto de Mireia Elías" style="background-image:url('/images/colab-3.png')"></div>
+              <div class="person-avatar" role="img" aria-label="Foto de Mireia Elías" style={`background-image:url('${colab3.src}')`}></div>
               <div class="person-id">
                 <h3 class="person-name">Mireia Elías</h3>
                 <p class="person-role">Nutricionista</p>
@@ -266,7 +287,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
 
             <div class="person-slide">
-              <div class="person-avatar" role="img" aria-label="Foto de Diana Zambrano" style="background-image:url('/images/colab-4.png')"></div>
+              <div class="person-avatar" role="img" aria-label="Foto de Diana Zambrano" style={`background-image:url('${colab4.src}')`}></div>
               <div class="person-id">
                 <h3 class="person-name">Diana Zambrano</h3>
                 <p class="person-role">Psiquiatra</p>

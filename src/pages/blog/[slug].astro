@@ -4,6 +4,7 @@ import CTAFinalSection from '../../components/CTAFinalSection.astro';
 import { Image } from 'astro:assets';
 import { posts, readMinutes, type BlogPostBlock } from '../../data/blogPosts';
 import { blogImage } from '../../data/blogImages';
+import adrianaImg from '../../assets/adriana.png';
 
 export function getStaticPaths() {
   return posts.map((post) => ({
@@ -116,7 +117,7 @@ function renderText(text: string): string {
         <h1 id="post-title">{post.title}</h1>
         <p class="lede">{post.excerpt}</p>
         <div class="author">
-          <img class="author-avatar" src="/images/adriana.png" alt={post.author.name} />
+          <Image class="author-avatar" src={adrianaImg} width={96} format="webp" alt={post.author.name} />
           <div class="author-meta">
             <p class="author-name">{post.author.name}</p>
             <p class="author-role">{post.author.role} · {readMinutes(post)} min de lectura</p>
