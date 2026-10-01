@@ -88,6 +88,7 @@ const initial = tabs[0].id;
               id={`tab-${tab.id}`}
               aria-controls={`panel-${tab.id}`}
               aria-selected={tab.id === initial}
+              tabindex={tab.id === initial ? 0 : -1}
               data-tab={tab.id}
               type="button"
             >
@@ -101,6 +102,7 @@ const initial = tabs[0].id;
             class="info-cards"
             id={`panel-${tab.id}`}
             role="tabpanel"
+            tabindex="0"
             aria-labelledby={`tab-${tab.id}`}
             data-panel={tab.id}
             hidden={tab.id !== initial}
@@ -479,6 +481,7 @@ const initial = tabs[0].id;
         const active = btn.dataset.tab === id;
         btn.classList.toggle('active', active);
         btn.setAttribute('aria-selected', String(active));
+        btn.tabIndex = active ? 0 : -1;
       });
       panels.forEach((panel) => {
         panel.hidden = panel.dataset.panel !== id;
@@ -488,6 +491,20 @@ const initial = tabs[0].id;
     tabButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
         if (btn.dataset.tab) select(btn.dataset.tab);
+      });
+    });
+
+    // Patrón de pestañas ARIA: flechas, Inicio/Fin y tabindex itinerante.
+    tabButtons.forEach((btn, i) => {
+      btn.addEventListener('keydown', (e) => {
+        const map: Record<string, number> = {
+          ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabButtons.length - 1,
+        };
+        if (!(e.key in map)) return;
+        e.preventDefault();
+        const next = tabButtons[(map[e.key] + tabButtons.length) % tabButtons.length];
+        if (next.dataset.tab) select(next.dataset.tab);
+        next.focus();
       });
     });
   });

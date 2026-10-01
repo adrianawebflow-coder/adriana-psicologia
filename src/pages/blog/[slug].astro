@@ -88,8 +88,21 @@ function escapeHtml(text: string): string {
     .replace(/>/g, '&gt;');
 }
 
+// ── Expresiones en inglés: se marcan con lang="en" para que el lector de
+// pantalla las pronuncie bien (WCAG 3.1.2). «Online» no se incluye: está
+// asentado en el español hablado.
+const ENGLISH = [
+  'fear of missing out', 'Living Apart Together', 'Health Food Junkies',
+  'realfooding', 'realfooder', 'lifestyle', 'likes', 'like', 'reels',
+  'influencer', 'jet-lag', 'boarding pass', 'mindfulness', 'podcasts', 'Millennials',
+];
+const englishRe = new RegExp(
+  `(?<![\\p{L}\\d])(${ENGLISH.map((w) => w.replace(/ /g, '\\s+')).join('|')})(?![\\p{L}\\d])`,
+  'giu',
+);
+
 function renderText(text: string): string {
-  let html = escapeHtml(text);
+  let html = escapeHtml(text).replace(englishRe, '<span lang="en">$1</span>');
   for (const [acronym, expansion] of Object.entries(ACRONYMS)) {
     if (expandedAcronyms.has(acronym)) continue;
     const re = new RegExp(`\\b${acronym.replace('-', '\\-')}\\b`);
@@ -117,14 +130,14 @@ function renderText(text: string): string {
         <h1 id="post-title">{post.title}</h1>
         <p class="lede">{post.excerpt}</p>
         <div class="author">
-          <Image class="author-avatar" src={adrianaImg} width={96} format="webp" alt={post.author.name} />
+          <Image class="author-avatar" src={adrianaImg} width={96} format="webp" alt="" />
           <div class="author-meta">
             <p class="author-name">{post.author.name}</p>
             <p class="author-role">{post.author.role} · {readMinutes(post)} min de lectura</p>
           </div>
         </div>
       </div>
-      <figure class="post-hero-image">
+      <div class="post-hero-image">
         <Image
           src={heroImg}
           widths={[400, Math.min(heroImg.width, 1000)]}
@@ -134,8 +147,7 @@ function renderText(text: string): string {
           loading="eager"
           fetchpriority="high"
         />
-        <figcaption class="sr-only">Fotografía ilustrativa del artículo «{post.title}»</figcaption>
-      </figure>
+      </div>
     </div>
   </section>
 
@@ -280,11 +292,11 @@ function renderText(text: string): string {
   font-size: var(--fs-body);
   line-height: 1.75;
   color: var(--color-text-secondary);
-  margin: 0 0 20px;
+  margin: 0 0 1.6em; /* ≈ 26 px: más aire entre párrafos (WCAG 1.4.8, AAA) */
 }
 .post-body ul,
 .post-body ol {
-  margin: 0 0 20px;
+  margin: 0 0 1.6em; /* ≈ 26 px: más aire entre párrafos (WCAG 1.4.8, AAA) */
   padding-left: 22px;
   color: var(--color-text-secondary);
 }

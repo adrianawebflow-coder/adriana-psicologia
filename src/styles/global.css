@@ -4,7 +4,12 @@
   padding: 0;
 }
 
-html { scroll-behavior: smooth; }
+/* Scroll suave solo si la persona no pide menos movimiento (WCAG 2.3.3), y
+   hueco bajo la cabecera fija al desplazar por foco o ancla (WCAG 2.4.12). */
+html { scroll-padding-top: calc(var(--nav-h) + 24px); }
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 
 body {
   font-family: var(--font-sans);

@@ -27,7 +27,7 @@ const {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
-  <title>{title} | Adriana Psicología</title>
+  <title>{title} • Adriana Esteban Psicología</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
   <!-- Marca que hay JS antes del primer pintado: los .reveal solo se ocultan
@@ -162,6 +162,23 @@ const {
 </style>
 
 <script>
+  // Enlaces que abren pestaña nueva: se avisa en su nombre accesible sin
+  // cambiar el texto visible (WCAG 3.2.5 / G201). Cubre también nav y pie,
+  // que persisten entre navegaciones (de ahí la marca data-newtab).
+  const NEW_TAB = ' (se abre en una pestaña nueva)';
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll<HTMLAnchorElement>('a[target="_blank"]:not([data-newtab])').forEach((a) => {
+      a.dataset.newtab = '';
+      const label = a.getAttribute('aria-label');
+      if (label) { a.setAttribute('aria-label', label + NEW_TAB); return; }
+      if (a.querySelector('.sr-only')) return;
+      const hint = document.createElement('span');
+      hint.className = 'sr-only';
+      hint.textContent = NEW_TAB;
+      a.appendChild(hint);
+    });
+  });
+
   // astro:page-load fires on every navigation (including first load)
   // so the IntersectionObserver is re-created for each page's .reveal elements.
   document.addEventListener('astro:page-load', () => {
@@ -206,7 +223,8 @@ const {
   }, { passive: true });
 
   backToTop?.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
   });
 
   // Recalcula el estado tras cada navegación SPA (la posición de scroll

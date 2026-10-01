@@ -64,9 +64,9 @@ const despachoImages = Object.keys(despachoModules)
     <h2 class="info-heading reveal">Información de la terapia</h2>
     <p class="info-lede reveal"><b>Sesión de evaluación:</b> es la primera sesión, en la que el terapeuta evalúa el motivo de consulta, recoge la historia del paciente y expone las condiciones del tratamiento. Por su parte, el paciente evalúa las habilidades del terapeuta para decidir si encaja con lo que necesita. La evaluación tiene una duración de 40-45 minutos y será gratuita en caso de iniciar el tratamiento.</p>
 
-    <h3 class="info-heading reveal">Normativa terapéutica</h3>
+    <h3 class="info-heading reveal" id="normativa-titulo">Normativa terapéutica</h3>
     <p class="info-lede reveal">El autocuidado comienza con el compromiso con tu salud.</p>
-    <div class="info-grid">
+    <div class="info-grid" role="region" aria-labelledby="normativa-titulo">
       <div class="info-card reveal">
         <h4>Organización</h4>
         <ul class="info-card-list">
@@ -90,8 +90,8 @@ const despachoImages = Object.keys(despachoModules)
       </div>
     </div>
 
-    <h3 class="info-heading reveal">Modalidad</h3>
-    <div class="info-grid">
+    <h3 class="info-heading reveal" id="modalidad-titulo">Modalidad</h3>
+    <div class="info-grid" role="region" aria-labelledby="modalidad-titulo">
       <div class="info-card reveal">
         <h4>Presencial</h4>
         <p>Entorno cómodo y seguro para trabajar cara a cara en el despacho en Madrid.</p>
@@ -127,7 +127,7 @@ const despachoImages = Object.keys(despachoModules)
       ))}
     </div>
 
-    <div class="gallery-dots" id="galleryDots" role="tablist" aria-label="Fotos del despacho"></div>
+    <div class="gallery-dots" id="galleryDots" role="group" aria-label="Fotos del despacho"></div>
     <button class="gallery-arrow prev" id="galleryPrev" type="button" aria-label="Foto anterior">
       <svg width="9" height="16" viewBox="0 0 7 12" fill="none" aria-hidden="true">
         <path d="M6 1L1 6l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -318,6 +318,7 @@ const despachoImages = Object.keys(despachoModules)
   scrollbar-width: none;
 }
 .info-grid::-webkit-scrollbar { display: none; }
+.info-grid:focus-visible { outline-offset: 4px; border-radius: var(--radius-lg); }
 .info-card {
   background: var(--color-bg-base);
   border-radius: var(--radius-lg);
@@ -742,6 +743,18 @@ const despachoImages = Object.keys(despachoModules)
 </style>
 
 <script>
+  // En mobile (y con zoom) los carriles de normativa y modalidad hacen
+  // scroll horizontal: solo entonces se pueden enfocar para moverlos con las
+  // flechas del teclado (WCAG 2.1.1). En desktop no hay scroll ni parada.
+  function syncScrollableRegions() {
+    document.querySelectorAll<HTMLElement>('.info-grid').forEach((el) => {
+      if (el.scrollWidth > el.clientWidth + 1) el.tabIndex = 0;
+      else el.removeAttribute('tabindex');
+    });
+  }
+  window.addEventListener('resize', syncScrollableRegions);
+  document.addEventListener('astro:page-load', syncScrollableRegions);
+
   document.addEventListener('astro:page-load', () => {
     const galleryEl = document.getElementById('gallery');
     const trackEl = document.getElementById('galleryTrack');
@@ -760,8 +773,7 @@ const despachoImages = Object.keys(despachoModules)
     slides.forEach((_, i) => {
       const dot = document.createElement('button');
       dot.type = 'button';
-      dot.setAttribute('role', 'tab');
-      dot.setAttribute('aria-label', `Foto ${i + 1}`);
+      dot.setAttribute('aria-label', `Foto ${i + 1} de ${slides.length}`);
       dot.addEventListener('click', () => go(i));
       dotsWrap.appendChild(dot);
     });

@@ -104,6 +104,7 @@ const initialCtaExternal = !initialTab.href;
                 id={`tab-${tab.id}`}
                 aria-controls={`panel-${tab.id}`}
                 aria-selected={tab.id === initial}
+                tabindex={tab.id === initial ? 0 : -1}
                 data-tab={tab.id}
                 data-cta-href={tab.href ?? CALENDLY_URL}
                 data-cta-external={String(!tab.href)}
@@ -119,6 +120,7 @@ const initialCtaExternal = !initialTab.href;
               class="info-cards"
               id={`panel-${tab.id}`}
               role="tabpanel"
+              tabindex="0"
               aria-labelledby={`tab-${tab.id}`}
               data-panel={tab.id}
               hidden={tab.id !== initial}
@@ -456,6 +458,7 @@ const initialCtaExternal = !initialTab.href;
         const active = btn.dataset.tab === id;
         btn.classList.toggle('active', active);
         btn.setAttribute('aria-selected', String(active));
+        btn.tabIndex = active ? 0 : -1;
         if (active) activeBtn = btn;
       });
       panels.forEach((panel) => {
@@ -483,6 +486,20 @@ const initialCtaExternal = !initialTab.href;
     tabButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
         if (btn.dataset.tab) select(btn.dataset.tab);
+      });
+    });
+
+    // Patrón de pestañas ARIA: flechas, Inicio/Fin y tabindex itinerante.
+    tabButtons.forEach((btn, i) => {
+      btn.addEventListener('keydown', (e) => {
+        const map: Record<string, number> = {
+          ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabButtons.length - 1,
+        };
+        if (!(e.key in map)) return;
+        e.preventDefault();
+        const next = tabButtons[(map[e.key] + tabButtons.length) % tabButtons.length];
+        if (next.dataset.tab) select(next.dataset.tab);
+        next.focus();
       });
     });
 

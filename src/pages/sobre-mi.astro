@@ -34,11 +34,14 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
       />
 
       <article class="hero-card sm-hero-card">
-        <div class="hero-body" aria-live="polite">
-          <h1 id="heroTitle" transition:name="hero-title">Mi historia</h1>
+        <div class="hero-body">
+          <h1 class="sr-only">Sobre mí</h1>
+          <p class="hero-title" id="heroTitle" aria-hidden="true" transition:name="hero-title">Mi historia</p>
+          <p class="sr-only" id="heroStatus" aria-live="polite"></p>
 
           <div class="hero-track" id="heroTrack">
             <div class="hero-slide" data-title="Mi historia">
+              <h2 class="sr-only">Mi historia</h2>
               <p>
                 Soy Adriana Esteban Labelle, psicóloga general sanitaria, terapeuta
                 familiar y de pareja y mediadora acreditada por la Universidad
@@ -47,6 +50,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
               </p>
             </div>
             <div class="hero-slide" data-title="Mi formación">
+              <h2 class="sr-only">Mi formación</h2>
               <p>
                 Cuento con formación especializada en trastornos de la conducta
                 alimentaria y terapia sistémica, áreas en las que he desarrollado
@@ -54,6 +58,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
               </p>
             </div>
             <div class="hero-slide" data-title="Mi trayectoria">
+              <h2 class="sr-only">Mi trayectoria</h2>
               <p>
                 Desde el inicio de mi trayectoria profesional me he especializado
                 en el acompañamiento de adolescentes, adultos, familias y parejas
@@ -63,6 +68,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
               </p>
             </div>
             <div class="hero-slide" data-title="Mi forma de trabajar">
+              <h2 class="sr-only">Mi forma de trabajar</h2>
               <p>
                 Mi forma de trabajar se basa en crear un espacio seguro, cercano
                 y libre de juicios, donde cada persona pueda comprender mejor lo
@@ -71,6 +77,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
               </p>
             </div>
             <div class="hero-slide" data-title="Actualmente">
+              <h2 class="sr-only">Actualmente</h2>
               <p>
                 Actualmente atiendo pacientes de forma presencial en mi consulta
                 privada ubicada en el barrio de Hortaleza (Madrid), así como en
@@ -78,6 +85,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
               </p>
             </div>
             <div class="hero-slide" data-title="Además">
+              <h2 class="sr-only">Además</h2>
               <p>
                 Además de mi labor asistencial, compagino la práctica clínica con
                 la docencia como profesora del Máster de Trastornos de la
@@ -91,7 +99,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
         </div>
 
         <div class="hero-nav">
-          <div class="hero-dots" id="heroDots" role="tablist" aria-label="Fragmentos de mi historia"></div>
+          <div class="hero-dots" id="heroDots" role="group" aria-label="Fragmentos de mi historia"></div>
           <button class="hero-arrow" id="heroNext" type="button" aria-label="Siguiente fragmento">
             <svg width="7" height="12" viewBox="0 0 7 12" fill="none" aria-hidden="true">
               <path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -164,6 +172,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
             >
               <span class="lbl-wide">Consultar currículum</span>
               <span class="lbl-narrow">Ver currículum →</span>
+              <span class="sr-only"> (PDF, se abre en una pestaña nueva)</span>
             </a>
           </div>
         </div>
@@ -307,8 +316,8 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
             </div>
 
             <div class="person-nav">
-              <div class="person-dots" id="colabDots" role="tablist" aria-label="Colaboradores"></div>
-              <button class="person-arrow" id="colabNext" type="button" aria-label="Siguiente colaborador">
+              <div class="person-dots" id="colabDots" role="group" aria-label="Colaboradoras"></div>
+              <button class="person-arrow" id="colabNext" type="button" aria-label="Siguiente colaboradora">
                 <svg width="7" height="12" viewBox="0 0 7 12" fill="none" aria-hidden="true">
                   <path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -431,7 +440,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
   overflow: hidden;
 }
 
-.hero-card h1 {
+.hero-card .hero-title {
   font-family: var(--font-serif);
   font-size: 24px;
   font-weight: var(--fw-semi);
@@ -1064,8 +1073,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
       slides.forEach((_, i) => {
         const dot = document.createElement('button');
         dot.type = 'button';
-        dot.setAttribute('role', 'tab');
-        dot.setAttribute('aria-label', `${label} ${i + 1}`);
+        dot.setAttribute('aria-label', `${label} ${i + 1} de ${slides.length}`);
         dot.addEventListener('click', () => go(i));
         dotsWrap.appendChild(dot);
       });
@@ -1104,8 +1112,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
       slides.forEach((_, i) => {
         const dot = document.createElement('button');
         dot.type = 'button';
-        dot.setAttribute('role', 'tab');
-        dot.setAttribute('aria-label', `Fragmento ${i + 1}`);
+        dot.setAttribute('aria-label', `Fragmento ${i + 1} de ${slides.length}: ${slides[i].dataset.title ?? ''}`);
         dot.addEventListener('click', () => go(i));
         dotsWrap.appendChild(dot);
       });
@@ -1115,10 +1122,16 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
         track.style.transform = `translateX(calc(${-idx * 100}% + ${offset}px))`;
       }
 
-      function go(n: number) {
+      const heroStatus = document.getElementById('heroStatus');
+
+      // El h1 de la página es fijo («Sobre mí»); lo que cambia es el título
+      // visual (decorativo) y un aviso breve para el lector de pantalla.
+      function go(n: number, announce = true) {
         idx = (n + slides.length) % slides.length;
         dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === idx)));
-        if (heroTitle) heroTitle.textContent = slides[idx].dataset.title ?? '';
+        const title = slides[idx].dataset.title ?? '';
+        if (heroTitle) heroTitle.textContent = title;
+        if (heroStatus && announce) heroStatus.textContent = `Fragmento ${idx + 1} de ${slides.length}: ${title}`;
         place(0);
       }
 
@@ -1164,7 +1177,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
 
       window.addEventListener('resize', () => place(0));
 
-      go(0);
+      go(0, false);
     }
 
     // Stack "peek" de Colaboraciones: en desktop, hover abre las ghost en
@@ -1368,7 +1381,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
     }
 
     initHeroCarousel();
-    initCarousel('.person-card .person-slide', 'colabDots', 'colabNext', 'Colaborador', updateGhosts);
+    initCarousel('.person-card .person-slide', 'colabDots', 'colabNext', 'Colaboradora', updateGhosts);
     initColabPeek();
     initColabNav();
     initColabDrag();

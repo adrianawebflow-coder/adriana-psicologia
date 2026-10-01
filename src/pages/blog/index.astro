@@ -61,12 +61,11 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
       </aside>
 
       <div class="blog-main">
-        <div class="tabs" role="tablist" aria-label="Categoría" id="blogTabs">
+        <div class="tabs" role="group" aria-label="Filtrar artículos por categoría" id="blogTabs">
           {categories.map((cat) => (
             <button
               class:list={['tab', { active: cat === 'Todos' }]}
-              role="tab"
-              aria-selected={cat === 'Todos'}
+              aria-pressed={cat === 'Todos' ? 'true' : 'false'}
               data-category={cat}
               type="button"
             >
@@ -75,6 +74,7 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
           ))}
         </div>
 
+        <p class="sr-only" id="blogStatus" aria-live="polite"></p>
         <div class="grid">
           {gridPosts.map((post) => (
             <a class="card card-in reveal" href={`/blog/${post.slug}`} data-category={post.category}>
@@ -195,10 +195,6 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
   line-height: 1.4;
   color: var(--color-text-primary);
   transition: color var(--transition-fast);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 .sidebar-card:hover .sidebar-post-title { color: var(--color-moss); }
 .sidebar-stats {
@@ -336,6 +332,8 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
   color: #fff;
   margin: 0;
   text-shadow: 0 1px 12px rgba(0,0,0,.35);
+  /* Se recorta a 3 líneas por el tamaño fijo de la tarjeta; el título
+     completo está en el nombre accesible del enlace y en el artículo. */
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -386,7 +384,7 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
       tabButtons.forEach((btn) => {
         const active = btn.dataset.category === category;
         btn.classList.toggle('active', active);
-        btn.setAttribute('aria-selected', String(active));
+        btn.setAttribute('aria-pressed', String(active));
       });
 
       const visible: HTMLElement[] = [];
@@ -400,6 +398,11 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
       // estuvieran antes del cambio de tab (quitar y reponer la clase con
       // un reflow forzado en medio obliga al navegador a relanzar la
       // animación desde cero).
+      const status = document.getElementById('blogStatus');
+      if (status) status.textContent = category === 'Todos'
+        ? `Mostrando los ${visible.length} artículos`
+        : `Mostrando ${visible.length} artículos de ${category}`;
+
       visible.forEach((card) => card.classList.remove('card-in'));
       void tabsWrap!.offsetWidth;
       visible.forEach((card) => card.classList.add('card-in'));
