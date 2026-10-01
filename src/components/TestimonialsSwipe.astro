@@ -5,6 +5,7 @@ import TestimonialsShapes from './shapes/TestimonialsShapes.astro';
 // más reciente a la más antigua. Son fragmentos literales de cada reseña:
 // lo omitido se marca con […] y solo se han corregido erratas evidentes.
 const GOOGLE_RATING = '5,0';
+const GOOGLE_REVIEWS_URL = 'https://www.google.com/search?sca_esv=7238945f6dc4c904&rlz=1C5CHFA_enES975ES975&sxsrf=APpeQnu-mzz6tVWmXsvNRayGhG2p7KHTyA:1790843102620&uds=AJ5uw1_a2D0D09lxm8gpKKOTUn4rre-gC33UaB5MLjlQB2nNlDfLZPzVg1GAo2qYrJ7mtHXboTtFG65dGXvD2IEMx2PVrMlQ-lxKkmm0F0_uhKO5HECO9Y7gGS4KrvAtHObcSVD3dxNXg88uOLIkHcYTzAU_oDgPLBbdP6Z1BBM01jHIiJ5RGuc&q=Adriana+Esteban+Psicolog%C3%ADa+Rese%C3%B1as&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_42ckXjYP5ejfw7DULbFReMPazWDD9s11QBDi182kU8rkBDOeZpvPcFVIf36Tg8EAholI5i0QUUEi8AN_g21rfDpX7nAjRJGPt4oCtcJFJ_BDIF5Zg%3D%3D&hl=es-ES&sa=X&ved=2ahUKEwjlguu3spiXAxXxSvEDHdjTKJAQ_4MLegQISBAQ&biw=1440&bih=754&dpr=2#sv=CAESzQEKuQEStgEKd0FKaVQ0dEthVm5wLUhoaTZXRFJiWkxOVXFsOU1ORlZSaEt3Q2ZycmE0QUVSWV9zTFl2S29JMktaUzE5T0VMV1h3dGxrUlN6R0xCMTZDeXhvRmhyWE1jeTVmQ0g4YnFMWlplZmEybnhCYTRFT1hrVnZKajdrb3FjEhc1aGktYXFDYkpaYVh4YzhQN2M2Y29BNBoiQURzcjlmVG9xNjhJcDZneTJLRElwcVk4SkZQWmF6Y1RjURIEODA1MRoBMyoAMAA4AUAAGAAgydTK_ARKAhAB';
 
 const reviews = [
   { name: 'Alba G.', detail: 'Paciente desde 2021', quote: 'Gracias Adriana por estar en mi proceso de recuperación en 2021, sin duda te recuerdo con mucho cariño en una etapa de mi vida bastante complicada. Eres una gran profesional […].' },
@@ -68,8 +69,10 @@ const testimonials = reviews.map((r, i) => ({
   <div class="tsw-container">
     <h2 class="tsw-heading reveal">Lo que dicen mis pacientes</h2>
     <p class="tsw-rating reveal">
-      <span class="tsw-rating-stars" aria-hidden="true">★★★★★</span>
-      <span><strong>{GOOGLE_RATING}</strong> · {testimonials.length} reseñas en Google</span>
+      <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener">
+        <span class="tsw-rating-stars" aria-hidden="true">★★★★★</span>
+        <span><strong>{GOOGLE_RATING}</strong> · {testimonials.length} reseñas en Google</span>
+      </a>
     </p>
 
     <!-- Card stack -->
@@ -93,9 +96,9 @@ const testimonials = reviews.map((r, i) => ({
               </div>
             </footer>
             <div class="tsw-rule" aria-hidden="true"></div>
-            <span class="tsw-google" aria-hidden="true">
+            <a class="tsw-google" href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener" draggable="false" tabindex={i === 0 ? 0 : -1}>
               Reseña verificada de Google →
-            </span>
+            </a>
           </article>
         ))}
       </div>
@@ -155,6 +158,19 @@ const testimonials = reviews.map((r, i) => ({
   font-size: var(--fs-body-sm);
   color: var(--color-text-secondary);
 }
+.tsw-rating a {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.tsw-rating a:hover span:last-child { text-decoration: underline; text-underline-offset: 3px; }
+.tsw-rating a:focus-visible { outline: 2px solid var(--color-moss); outline-offset: 2px; }
 .tsw-rating strong { color: var(--color-text-primary); font-weight: var(--fw-semi); }
 .tsw-rating-stars { color: var(--color-gold); letter-spacing: 2px; }
 
@@ -267,12 +283,16 @@ const testimonials = reviews.map((r, i) => ({
 }
 
 .tsw-google {
+  align-self: flex-start;
+  text-decoration: none;
   font-family: var(--font-sans);
   font-size: 11px;
   color: var(--color-moss-light);
   opacity: 0.7;
   letter-spacing: 0.04em;
 }
+.tsw-google:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+.tsw-google:focus-visible { outline: 2px solid var(--color-moss-light); outline-offset: 2px; border-radius: 4px; }
 
 /* ── Dots ── */
 /* 23 puntos: en mobile se reduce el hueco y, si aun así no caben, la fila
@@ -371,6 +391,31 @@ document.addEventListener('astro:page-load', () => {
   const dotBtns = Array.from(document.querySelectorAll('.tsw-dot'));
   const N       = cards.length;
 
+  // Los enlaces de las cards ocultas no deben recibir foco: se sincroniza su
+  // tabindex con el aria-hidden de la card, cambie como cambie (drag, dots,
+  // teclado, autoplay o modo reduced-motion).
+  const syncLink = (c) => {
+    const a = c.querySelector('.tsw-google');
+    if (a) a.tabIndex = c.getAttribute('aria-hidden') === 'true' ? -1 : 0;
+  };
+  const linkObserver = new MutationObserver((ms) => ms.forEach((m) => syncLink(m.target)));
+  cards.forEach((c) => {
+    syncLink(c);
+    linkObserver.observe(c, { attributes: true, attributeFilter: ['aria-hidden'] });
+  });
+
+  // Si el gesto ha sido un arrastre, el click que lo cierra no debe abrir
+  // el enlace de la card.
+  let didDrag = false;
+  outer.addEventListener('pointerdown', () => { didDrag = false; }, { capture: true, passive: true });
+  outer.addEventListener('pointerup', () => { if (didDrag) setTimeout(() => { didDrag = false; }, 0); }, { capture: true });
+  outer.addEventListener('click', (e) => {
+    if (!didDrag) return;
+    didDrag = false;
+    e.preventDefault();
+    e.stopPropagation();
+  }, true);
+
   /* ─── State ─────────────────────────────────────── */
   let activeIdx   = 0;
   let isAnimating = false;
@@ -380,6 +425,7 @@ document.addEventListener('astro:page-load', () => {
   let dragStartY  = 0;
   let isHoriz     = null;   // null = undecided, true/false
   let velBuf      = [];     // [{x, t}]
+  let ptrId       = null;
   let rafId       = null;
   let autoTimer   = null;
   let resumeTimer = null;
@@ -478,7 +524,10 @@ document.addEventListener('astro:page-load', () => {
     isHoriz     = null;
     velBuf      = [{ x: e.clientX, t: e.timeStamp }];
 
-    fc.setPointerCapture(e.pointerId);
+    // La captura del puntero se pide al confirmar el arrastre horizontal
+    // (onPtrMove): si se pidiera aquí, un simple clic acabaría en la card y
+    // no en el enlace «Reseña verificada de Google».
+    ptrId = e.pointerId;
     document.body.style.cursor = 'grabbing';
     stopAutoplay();
   }
@@ -493,6 +542,10 @@ document.addEventListener('astro:page-load', () => {
     if (isHoriz === null) {
       if (Math.abs(dx) > 4 || Math.abs(dy) > 4) {
         isHoriz = Math.abs(dx) >= Math.abs(dy);
+        if (isHoriz) {
+          didDrag = true;
+          try { cards[activeIdx].setPointerCapture(ptrId); } catch {}
+        }
         if (isHoriz) cards[activeIdx].style.touchAction = 'none';
       }
       return;
