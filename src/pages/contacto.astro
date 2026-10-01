@@ -14,7 +14,7 @@ const pasos = [
     desc: 'Hablamos. Me cuentas qué te trae y yo te explico cómo puedo ayudarte. No hay diagnóstico ni compromiso. Es solo conocernos.',
   },
   {
-    title: 'Decidimos junt@s',
+    title: 'Decidimos en conjunto',
     desc: 'Si conectamos y tiene sentido seguir, acordamos la frecuencia y el enfoque de las sesiones. Si no, sin problema.',
   },
 ];
@@ -76,6 +76,17 @@ const faqs = [
 
       <div class="booking-card reveal">
         <div class="calendly-inline-widget" data-url={CALENDLY_URL}></div>
+        <noscript>
+          <p class="booking-noscript">
+            <a href={CALENDLY_URL}>Abre la agenda de Calendly para reservar tu primera sesión</a>
+          </p>
+        </noscript>
+        <!-- Alternativa si el calendario no carga o no se puede usar -->
+        <p class="booking-fallback">
+          ¿No ves el calendario o te cuesta usarlo?
+          <a href={CALENDLY_URL} target="_blank" rel="noopener">Abre la agenda en Calendly<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+          o escribe a <a href="mailto:a.esteban@adrianapsicologia.com">a.esteban@adrianapsicologia.com</a>.
+        </p>
       </div>
     </div>
   </section>
@@ -104,7 +115,7 @@ const faqs = [
 
   <CTAFinalSection
     heading="No esperes a que todo se derrumbe"
-    text="¿List@ para dar el primer paso? Solo es una conversación. Sin compromiso, sin tener que tenerlo todo claro."
+    text="¿Te animas a dar el primer paso? Solo es una conversación. Sin compromiso, sin tener que tenerlo todo claro."
   />
 
 </Layout>
@@ -223,6 +234,27 @@ const faqs = [
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.booking-card .calendly-inline-widget { flex: 1 1 auto; }
+.booking-fallback,
+.booking-noscript {
+  flex: none;
+  margin: 0;
+  padding: 14px 20px;
+  border-top: 1px solid var(--color-bg-border);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+.booking-fallback a,
+.booking-noscript a {
+  color: var(--color-moss);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
 }
 .calendly-inline-widget {
   min-width: 280px;
@@ -323,9 +355,23 @@ const faqs = [
   // cuando el bloque entra en pantalla o cuando el navegador queda libre tras
   // cargar la página, lo que ocurra antes (en mobile el bloque queda justo
   // bajo el pliegue, así que está listo cuando el usuario baja).
+  // Calendly (su propio widget.js o initInlineWidget) crea el iframe con un
+  // título en inglés: se sustituye por uno en español en cuanto aparece o
+  // cambia (WCAG 3.1.2 / 4.1.2).
+  const IFRAME_TITLE = 'Calendario para reservar la primera sesión';
+  function watchCalendlyTitle(el: Element) {
+    const fix = () => {
+      const f = el.querySelector('iframe');
+      if (f && f.getAttribute('title') !== IFRAME_TITLE) f.setAttribute('title', IFRAME_TITLE);
+    };
+    fix();
+    new MutationObserver(fix).observe(el, { childList: true, subtree: true, attributes: true, attributeFilter: ['title'] });
+  }
+
   document.addEventListener('astro:page-load', () => {
     const el = document.querySelector('.calendly-inline-widget');
     if (!el) return;
+    watchCalendlyTitle(el);
     let done = false;
     const start = () => {
       if (done) return;

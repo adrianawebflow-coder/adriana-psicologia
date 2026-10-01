@@ -24,13 +24,13 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
     </a>
 
     <nav class="nav-menu" aria-label="Principal">
-      <a href="/" class={path === '/' ? 'active' : ''}>Inicio</a>
-      <a href="/sobre-mi" class={isActive('/sobre-mi') ? 'active' : ''}>Sobre mí</a>
-      <a href="/servicios?tipo=individual" class={isActive('/servicios') ? 'active' : ''}>Servicios</a>
-      <a href="/como-funciona" class={isActive('/como-funciona') ? 'active' : ''}>Cómo funciona</a>
-      <a href="/precio" class={isActive('/precio') ? 'active' : ''}>Precio</a>
-      <a href="/contacto" class={isActive('/contacto') ? 'active' : ''}>Contacto</a>
-      <a href="/blog" class={isActive('/blog') ? 'active' : ''}>Blog</a>
+      <a href="/" class={path === '/' ? 'active' : ''} aria-current={path === '/' ? 'page' : undefined}>Inicio</a>
+      <a href="/sobre-mi" class={isActive('/sobre-mi') ? 'active' : ''} aria-current={isActive('/sobre-mi') ? 'page' : undefined}>Sobre mí</a>
+      <a href="/servicios?tipo=individual" class={isActive('/servicios') ? 'active' : ''} aria-current={isActive('/servicios') ? 'page' : undefined}>Servicios</a>
+      <a href="/como-funciona" class={isActive('/como-funciona') ? 'active' : ''} aria-current={isActive('/como-funciona') ? 'page' : undefined}>Cómo funciona</a>
+      <a href="/precio" class={isActive('/precio') ? 'active' : ''} aria-current={isActive('/precio') ? 'page' : undefined}>Precio</a>
+      <a href="/contacto" class={isActive('/contacto') ? 'active' : ''} aria-current={isActive('/contacto') ? 'page' : undefined}>Contacto</a>
+      <a href="/blog" class={isActive('/blog') ? 'active' : ''} aria-current={isActive('/blog') ? 'page' : undefined}>Blog</a>
     </nav>
 
     <div class="nav-cta">
@@ -39,22 +39,24 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
       </a>
     </div>
 
-    <button class="burger" aria-label="Abrir menú" id="navBurger">
+    <button class="burger" type="button" aria-label="Menú" aria-expanded="false" aria-controls="navSheet" id="navBurger">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<div class="sheet" id="navSheet" aria-hidden="true" transition:persist transition:name="site-nav-sheet">
+<div class="sheet" id="navSheet" role="dialog" aria-modal="true" aria-label="Menú principal" transition:persist transition:name="site-nav-sheet">
   <div class="sheet-panel">
-    <button class="sheet-close" id="navSheetClose" aria-label="Cerrar menú">×</button>
-    <a href="/" class={path === '/' ? 'active' : ''}>Inicio</a>
-    <a href="/sobre-mi" class={isActive('/sobre-mi') ? 'active' : ''}>Sobre mí</a>
-    <a href="/servicios?tipo=individual" class={isActive('/servicios') ? 'active' : ''}>Servicios</a>
-    <a href="/como-funciona" class={isActive('/como-funciona') ? 'active' : ''}>Cómo funciona</a>
-    <a href="/precio" class={isActive('/precio') ? 'active' : ''}>Precio</a>
-    <a href="/contacto" class={isActive('/contacto') ? 'active' : ''}>Contacto</a>
-    <a href="/blog" class={isActive('/blog') ? 'active' : ''}>Blog</a>
+    <button class="sheet-close" type="button" id="navSheetClose" aria-label="Cerrar menú">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <a href="/" class={path === '/' ? 'active' : ''} aria-current={path === '/' ? 'page' : undefined}>Inicio</a>
+    <a href="/sobre-mi" class={isActive('/sobre-mi') ? 'active' : ''} aria-current={isActive('/sobre-mi') ? 'page' : undefined}>Sobre mí</a>
+    <a href="/servicios?tipo=individual" class={isActive('/servicios') ? 'active' : ''} aria-current={isActive('/servicios') ? 'page' : undefined}>Servicios</a>
+    <a href="/como-funciona" class={isActive('/como-funciona') ? 'active' : ''} aria-current={isActive('/como-funciona') ? 'page' : undefined}>Cómo funciona</a>
+    <a href="/precio" class={isActive('/precio') ? 'active' : ''} aria-current={isActive('/precio') ? 'page' : undefined}>Precio</a>
+    <a href="/contacto" class={isActive('/contacto') ? 'active' : ''} aria-current={isActive('/contacto') ? 'page' : undefined}>Contacto</a>
+    <a href="/blog" class={isActive('/blog') ? 'active' : ''} aria-current={isActive('/blog') ? 'page' : undefined}>Blog</a>
     <a href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener" class="sheet-cta">
       Contáctame
     </a>
@@ -160,17 +162,18 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
 }
 
 .burger {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  align-items: flex-end;
+  align-items: center;
   background: none;
   border: none;
   cursor: pointer;
   padding: 4px;
+  margin-right: -8px;
 }
 .burger span {
   display: block;
@@ -233,11 +236,11 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
 
 .sheet-close {
   align-self: flex-end;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
   display: grid;
   place-items: center;
-  font-size: 22px;
   color: var(--color-text-primary);
   background: none;
   border: none;
@@ -250,12 +253,55 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
   const burger     = document.getElementById('navBurger');
   const sheet      = document.getElementById('navSheet');
   const sheetClose = document.getElementById('navSheetClose');
-  const open  = () => { sheet?.classList.add('open');    sheet?.setAttribute('aria-hidden','false'); };
-  const close = () => { sheet?.classList.remove('open'); sheet?.setAttribute('aria-hidden','true');  };
+
+  // Mientras el menú está abierto, el resto de la página queda inerte: ni el
+  // teclado ni el lector de pantalla pueden salir del panel (WCAG 2.4.3).
+  const background = () => [
+    document.querySelector('.skip-link'),
+    document.querySelector('header.nav'),
+    document.querySelector('main'),
+    document.querySelector('footer'),
+    document.getElementById('backToTop'),
+  ].filter(Boolean) as HTMLElement[];
+
+  const focusables = () =>
+    Array.from(sheet?.querySelectorAll<HTMLElement>('a[href], button') ?? []);
+
+  function open() {
+    if (!sheet || !burger) return;
+    sheet.classList.add('open');
+    burger.setAttribute('aria-expanded', 'true');
+    background().forEach((el) => el.setAttribute('inert', ''));
+    sheetClose?.focus();
+  }
+
+  function close({ restoreFocus = true } = {}) {
+    if (!sheet || !burger || !sheet.classList.contains('open')) return;
+    sheet.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    background().forEach((el) => el.removeAttribute('inert'));
+    if (restoreFocus) burger.focus();
+  }
+
   burger?.addEventListener('click', open);
-  sheetClose?.addEventListener('click', close);
+  sheetClose?.addEventListener('click', () => close());
   sheet?.addEventListener('click', (e) => { if (e.target === sheet) close(); });
-  sheet?.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  // Al navegar desde el panel el foco lo gestiona la nueva página.
+  sheet?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => close({ restoreFocus: false })));
+
+  sheet?.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+    if (e.key !== 'Tab') return;
+    // El foco da la vuelta dentro del panel.
+    const items = focusables();
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  // Si se pasa a escritorio con el menú abierto, se cierra sin dejar la página inerte.
+  window.matchMedia('(min-width: 1000px)').addEventListener('change', (e) => { if (e.matches) close({ restoreFocus: false }); });
 
   // Oculta el nav al hacer scroll hacia abajo y lo muestra al subir.
   // El header usa transition:persist (misma instancia en todas las
@@ -292,26 +338,22 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
   // recalculamos aquí en cada carga (inicial y las siguientes vía SPA).
   document.addEventListener('astro:page-load', () => {
     const path = window.location.pathname;
-    document.querySelectorAll('a[href="/"]').forEach((a) => {
-      a.classList.toggle('active', path === '/');
-    });
-    document.querySelectorAll('a[href="/sobre-mi"]').forEach((a) => {
-      a.classList.toggle('active', path.startsWith('/sobre-mi'));
-    });
-    document.querySelectorAll('a[href^="/servicios"]').forEach((a) => {
-      a.classList.toggle('active', path.startsWith('/servicios'));
-    });
-    document.querySelectorAll('a[href="/como-funciona"]').forEach((a) => {
-      a.classList.toggle('active', path.startsWith('/como-funciona'));
-    });
-    document.querySelectorAll('a[href="/precio"]').forEach((a) => {
-      a.classList.toggle('active', path.startsWith('/precio'));
-    });
-    document.querySelectorAll('a[href="/contacto"]').forEach((a) => {
-      a.classList.toggle('active', path.startsWith('/contacto'));
-    });
-    document.querySelectorAll('a[href="/blog"]').forEach((a) => {
-      a.classList.toggle('active', path.startsWith('/blog'));
-    });
+    const rules: [string, (p: string) => boolean][] = [
+      ['a[href="/"]', (p) => p === '/'],
+      ['a[href="/sobre-mi"]', (p) => p.startsWith('/sobre-mi')],
+      ['a[href^="/servicios"]', (p) => p.startsWith('/servicios')],
+      ['a[href="/como-funciona"]', (p) => p.startsWith('/como-funciona')],
+      ['a[href="/precio"]', (p) => p.startsWith('/precio')],
+      ['a[href="/contacto"]', (p) => p.startsWith('/contacto')],
+      ['a[href="/blog"]', (p) => p.startsWith('/blog')],
+    ];
+    for (const [selector, test] of rules) {
+      const active = test(path);
+      document.querySelectorAll(`.nav-menu ${selector}, .sheet-panel ${selector}`).forEach((a) => {
+        a.classList.toggle('active', active);
+        if (active) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+    }
   });
 </script>

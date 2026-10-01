@@ -138,7 +138,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
             <div class="rail" aria-hidden="true"><i></i><b></b></div>
             <div class="exp-blocks">
               <div>
-                <h4>Formación</h4>
+                <h3>Formación</h3>
                 <ul>
                   <li>Grado en Psicología — Universidad Complutense de Madrid</li>
                   <li>Máster en Psicología Sanitaria</li>
@@ -146,7 +146,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
                 </ul>
               </div>
               <div>
-                <h4>Trayectoria</h4>
+                <h3>Trayectoria</h3>
                 <ul>
                   <li>Alimentación 3S</li>
                   <li>Instituto Superior de Estudios Psicológicos (ISEP)</li>
@@ -407,6 +407,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
 }
 
 .hero-card {
+  --focus-ring: var(--focus-ring-on-dark);
   background: var(--color-text-secondary);
   color: #fff;
   border-radius: 12px;
@@ -476,25 +477,34 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
 
 .hero-dots {
   display: flex;
-  gap: 8px;
+  gap: 0;
   align-items: center;
   justify-content: center;
   flex: 1 1 auto;
 }
 
+/* Área táctil de 24×24 (WCAG 2.5.8); inactivos en musgo suave sólido
+   (6.3:1 sobre la card) y el activo blanco y alargado. */
 .hero-dots :global(button) {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+  width: 24px;
+  height: 24px;
   padding: 0;
   border: none;
-  background: var(--color-moss-soft);
-  opacity: .5;
+  background: none;
+  display: grid;
+  place-items: center;
   cursor: pointer;
-  transition: background-color 200ms ease, opacity 200ms ease, transform 200ms ease;
 }
-.hero-dots :global(button):hover { opacity: .85; transform: scale(1.15); }
-.hero-dots :global(button[aria-current="true"]) { background: #fff; opacity: 1; }
+.hero-dots :global(button)::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--color-moss-soft);
+  transition: background-color 200ms ease, width 200ms ease;
+}
+.hero-dots :global(button):hover::before { background: #fff; }
+.hero-dots :global(button[aria-current="true"])::before { background: #fff; width: 20px; }
 
 .hero-arrow {
   flex: 0 0 32px;
@@ -644,7 +654,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
   gap: 32px;
 }
 
-.exp-blocks h4 {
+.exp-blocks h3 {
   font-family: var(--font-sans);
   font-size: 18px;
   font-weight: var(--fw-semi);
@@ -979,24 +989,33 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
 }
 .person-dots {
   display: flex;
-  gap: 8px;
+  gap: 0;
   align-items: center;
   justify-content: center;
   flex: 1 1 auto;
 }
+/* Área táctil de 24×24 (WCAG 2.5.8); inactivos en text-muted (≥ 3:1 sobre
+   clay-soft) y el activo en text-secondary y alargado. */
 .person-dots :global(button) {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+  width: 24px;
+  height: 24px;
   padding: 0;
   border: none;
-  background: var(--color-text-secondary);
-  opacity: .28;
+  background: none;
+  display: grid;
+  place-items: center;
   cursor: pointer;
-  transition: opacity 200ms ease, transform 200ms ease;
 }
-.person-dots :global(button):hover { opacity: .6; transform: scale(1.15); }
-.person-dots :global(button[aria-current="true"]) { opacity: 1; }
+.person-dots :global(button)::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--color-text-muted);
+  transition: background-color 200ms ease, width 200ms ease;
+}
+.person-dots :global(button):hover::before { background: var(--color-text-secondary); }
+.person-dots :global(button[aria-current="true"])::before { background: var(--color-text-secondary); width: 18px; }
 
 .person-arrow {
   flex: 0 0 32px;

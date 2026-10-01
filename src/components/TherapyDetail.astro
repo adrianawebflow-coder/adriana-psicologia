@@ -184,7 +184,7 @@ const despachoImages = Object.keys(despachoModules)
         <a class="other-card reveal" href={service.href}>
           <div class="other-card-body">
             <p class="tag">{service.tag}</p>
-            <h4>{service.title}</h4>
+            <h3>{service.title}</h3>
             <p>{service.desc}</p>
           </div>
           <span class="chev" aria-hidden="true">›</span>
@@ -376,6 +376,7 @@ const despachoImages = Object.keys(despachoModules)
   flex-direction: column;
 }
 .gallery-photo {
+  --focus-ring: var(--focus-ring-on-dark);
   position: relative;
   background: var(--color-bg-muted);
   height: 420px;
@@ -413,30 +414,41 @@ const despachoImages = Object.keys(despachoModules)
   z-index: 1;
   max-width: 100%;
   overflow-x: auto;
-  background: rgba(51,51,51,.5);
+  background: rgba(26,33,24,.7);
   backdrop-filter: blur(12px);
   border-radius: 9999px;
-  padding: 10px 12px;
+  padding: 2px 6px;
   display: flex;
-  gap: 6px;
+  gap: 0;
   scrollbar-width: none;
 }
 .gallery-dots::-webkit-scrollbar { display: none; }
+/* Área táctil de 24×24 con el punto visual dentro (WCAG 2.5.8) */
 .gallery-dots :global(button) {
   flex: 0 0 auto;
-  width: 8px;
-  height: 8px;
+  width: 24px;
+  height: 24px;
   padding: 0;
   border: none;
-  border-radius: var(--radius-full);
-  background: rgba(255,255,255,.4);
+  background: none;
+  display: grid;
+  place-items: center;
   cursor: pointer;
+}
+.gallery-dots :global(button)::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: rgba(255,255,255,.65);
   transition: background-color 200ms ease, transform 200ms ease;
 }
-.gallery-dots :global(button:hover) { background: rgba(255,255,255,.7); }
-.gallery-dots :global(button[aria-current="true"]) {
+.gallery-dots :global(button:hover)::before { background: rgba(255,255,255,.9); }
+/* El carril con scroll recorta lo que sale de él: el anillo va por dentro. */
+.gallery-dots :global(button:focus-visible) { outline-offset: -3px; border-radius: 50%; }
+.gallery-dots :global(button[aria-current="true"])::before {
   background: #fff;
-  transform: scale(1.25);
+  transform: scale(1.35);
 }
 .gallery-arrow {
   display: none;
@@ -457,6 +469,8 @@ const despachoImages = Object.keys(despachoModules)
   transition: filter var(--transition-fast);
 }
 .gallery-arrow:hover { filter: brightness(1.15); }
+/* Anillo de dos tonos: visible sobre cualquier foto (claro dentro, oscuro fuera). */
+.gallery-arrow:focus-visible { outline-offset: 2px; box-shadow: 0 0 0 7px var(--color-bg-dark); }
 .gallery-arrow.next { right: 16px; }
 .gallery-arrow.prev { left: 16px; }
 
@@ -634,7 +648,7 @@ const despachoImages = Object.keys(despachoModules)
   color: var(--color-clay-hover);
   margin: 0;
 }
-.other-card h4 {
+.other-card h3 {
   font-family: var(--font-sans);
   font-weight: var(--fw-semi);
   font-size: var(--fs-h4);

@@ -30,11 +30,22 @@ const {
   <title>{title} | Adriana Psicología</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
+  <!-- Marca que hay JS antes del primer pintado: los .reveal solo se ocultan
+       con esta clase, así que sin JS el contenido se ve. El ClientRouter
+       reemplaza los atributos de <html> en cada navegación, de ahí el
+       after-swap. -->
+  <script is:inline>
+    document.documentElement.classList.add('js');
+    document.addEventListener('astro:after-swap', () => document.documentElement.classList.add('js'));
+  </script>
   <ClientRouter />
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
   <Nav />
-  <slot />
+  <main id="contenido" tabindex="-1">
+    <slot />
+  </main>
   <Footer />
 
   <button
@@ -94,6 +105,25 @@ const {
       animation-duration: 0ms;
     }
   }
+
+  /* ── Saltar al contenido (WCAG 2.4.1) ── */
+  .skip-link {
+    position: absolute;
+    left: 16px;
+    top: -200px;
+    z-index: 100;
+    padding: 12px 18px;
+    border-radius: var(--radius-lg);
+    background: var(--color-moss);
+    color: var(--color-text-inverse);
+    font-family: var(--font-sans);
+    font-weight: var(--fw-semi);
+    font-size: var(--fs-body-sm);
+    text-decoration: none;
+    --focus-ring: var(--color-moss);
+  }
+  .skip-link:focus { top: 16px; }
+  #contenido:focus { outline: none; }
 
   /* ── Botón "volver arriba" (solo mobile) ── */
   .back-to-top {

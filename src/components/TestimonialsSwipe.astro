@@ -104,17 +104,32 @@ const testimonials = reviews.map((r, i) => ({
       </div>
     </div>
 
-    <!-- Dot navigation -->
-    <div class="tsw-dots" role="tablist" aria-label="Selector de testimonio">
-      {testimonials.map((_, i) => (
-        <button
-          class={`tsw-dot${i === 0 ? ' active' : ''}`}
-          role="tab"
-          aria-selected={i === 0}
-          aria-label={`Testimonio ${i + 1} de ${testimonials.length}`}
-          data-idx={String(i)}
-        ></button>
-      ))}
+    <!-- Controles: pausa (WCAG 2.2.2) + anterior/siguiente en mobile y
+         puntos de 24px en desktop (WCAG 2.5.8). -->
+    <div class="tsw-controls">
+      <button class="tsw-ctrl tsw-toggle" id="tswToggle" type="button" aria-label="Pausar el paso automático de testimonios" hidden>
+        <svg class="ico-pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+        <svg class="ico-play" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg>
+      </button>
+      <button class="tsw-ctrl tsw-step" id="tswPrev" type="button" aria-label="Testimonio anterior">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <p class="tsw-counter" aria-hidden="true"><span id="tswCount">1</span> / {testimonials.length}</p>
+      <button class="tsw-ctrl tsw-step" id="tswNext" type="button" aria-label="Testimonio siguiente">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+      <div class="tsw-dots" role="tablist" aria-label="Selector de testimonio">
+        {testimonials.map((_, i) => (
+          <button
+            class={`tsw-dot${i === 0 ? ' active' : ''}`}
+            type="button"
+            role="tab"
+            aria-selected={i === 0}
+            aria-label={`Testimonio ${i + 1} de ${testimonials.length}`}
+            data-idx={String(i)}
+          ></button>
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -191,6 +206,7 @@ const testimonials = reviews.map((r, i) => ({
 
 /* ── Card base ── */
 .tsw-card {
+  --focus-ring: var(--focus-ring-on-dark);
   position: absolute;
   bottom: 0;
   left: 0;
@@ -217,7 +233,7 @@ const testimonials = reviews.map((r, i) => ({
 /* ── Card content ── */
 .tsw-stars {
   display: block;
-  color: var(--color-gold);
+  color: #BDA165; /* oro aclarado: 3.0:1 sobre musgo (gráfico, 1.4.11) */
   letter-spacing: 3px;
   font-size: 13px;
   margin-bottom: var(--space-5);
@@ -273,7 +289,7 @@ const testimonials = reviews.map((r, i) => ({
   font-family: var(--font-sans);
   font-weight: 400;
   font-size: 12px;
-  color: rgba(245,242,234,0.45);
+  color: rgba(245,242,234,0.78); /* 4.9:1 sobre musgo */
 }
 
 .tsw-rule {
@@ -286,55 +302,77 @@ const testimonials = reviews.map((r, i) => ({
   align-self: flex-start;
   text-decoration: none;
   font-family: var(--font-sans);
-  font-size: 11px;
-  color: var(--color-moss-light);
-  opacity: 0.7;
+  font-size: 12px;
+  color: var(--color-moss-soft); /* 5.1:1 sobre musgo */
   letter-spacing: 0.04em;
 }
 .tsw-google:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
 .tsw-google:focus-visible { outline: 2px solid var(--color-moss-light); outline-offset: 2px; border-radius: 4px; }
 
-/* ── Dots ── */
-/* 23 puntos: en mobile se reduce el hueco y, si aun así no caben, la fila
-   hace scroll horizontal en vez de desbordar la página. */
-.tsw-dots {
+/* ── Controles ── */
+.tsw-controls {
   display: flex;
   justify-content: center;
-  justify-content: safe center;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   margin-top: var(--space-8);
-  max-width: 100%;
-  overflow-x: auto;
-  scrollbar-width: none;
-  padding-block: 4px;
 }
-.tsw-dots::-webkit-scrollbar { display: none; }
-@media (min-width: 880px) {
-  .tsw-dots { gap: 8px; }
+.tsw-ctrl {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--color-moss);
+  background: var(--color-bg-base);
+  color: var(--color-moss);
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease;
+}
+.tsw-ctrl:hover { background: var(--color-moss); color: var(--color-text-inverse); }
+.tsw-toggle .ico-play { display: none; }
+.tsw-toggle.is-paused .ico-play { display: block; }
+.tsw-toggle.is-paused .ico-pause { display: none; }
+.tsw-counter {
+  min-width: 64px;
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-secondary);
 }
 
+/* Puntos: área táctil de 24×24 con el punto visual dentro (WCAG 2.5.8). En
+   mobile, 23 puntos de 24px no caben: se usan anterior/siguiente. */
+.tsw-dots { display: none; }
 .tsw-dot {
-  height: 6px;
-  width: 6px;
-  border-radius: 3px;
-  background: var(--color-moss-soft);
-  opacity: 0.35;
-  border: none;
-  cursor: pointer;
+  width: 24px;
+  height: 24px;
   padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
   flex-shrink: 0;
-  transition:
-    width   300ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    opacity 200ms ease,
-    background 200ms ease;
 }
-.tsw-dot.active {
-  width: 22px;
-  background: var(--color-moss);
-  opacity: 1;
+.tsw-dot::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--color-text-muted); /* 5.6:1 sobre bg-soft */
+  transition: width 300ms cubic-bezier(0.34, 1.56, 0.64, 1), background 200ms ease;
 }
-.tsw-dot:hover:not(.active) { opacity: 0.6; }
+.tsw-dot:hover::before { background: var(--color-text-secondary); }
+.tsw-dot.active::before { width: 22px; background: var(--color-moss); }
+
+@media (min-width: 880px) {
+  .tsw-step, .tsw-counter { display: none; }
+  .tsw-dots { display: flex; align-items: center; }
+}
 
 /* ── Focus ring ── */
 .tsw-stack-outer:focus-visible {
@@ -362,7 +400,7 @@ const testimonials = reviews.map((r, i) => ({
   .tsw-card:not([data-state="front"]) {
     pointer-events: none;
   }
-  .tsw-dot { transition: none !important; }
+  .tsw-dot::before { transition: none !important; }
 }
 </style>
 
@@ -389,6 +427,10 @@ document.addEventListener('astro:page-load', () => {
 
   const cards   = Array.from(stack.querySelectorAll('.tsw-card'));
   const dotBtns = Array.from(document.querySelectorAll('.tsw-dot'));
+  const toggle  = document.getElementById('tswToggle');
+  const prevBtn = document.getElementById('tswPrev');
+  const nextBtn = document.getElementById('tswNext');
+  const countEl = document.getElementById('tswCount');
   const N       = cards.length;
 
   // Los enlaces de las cards ocultas no deben recibir foco: se sincroniza su
@@ -480,6 +522,7 @@ document.addEventListener('astro:page-load', () => {
   }
 
   function updateDots(idx) {
+    if (countEl) countEl.textContent = String(idx + 1);
     dotBtns.forEach((d, i) => {
       const active = i === idx;
       d.classList.toggle('active', active);
@@ -612,6 +655,7 @@ document.addEventListener('astro:page-load', () => {
     const commit   = Math.abs(dragX) > threshold || velocity > VEL_THRESHOLD;
 
     if (commit && !isAnimating) {
+      pauseByUser();
       commitSwipe(dragX > 0 ? 'right' : 'left');
     } else {
       snapBack();
@@ -807,8 +851,30 @@ document.addEventListener('astro:page-load', () => {
   }
 
   /* ─── Autoplay ───────────────────────────────────── */
+  // userPaused: la persona ha pulsado pausa o ha interactuado con el
+  // carrusel. A partir de ahí el autoplay no vuelve solo (WCAG 2.2.2).
+  let userPaused = reduced;
+
+  function syncToggle() {
+    if (!toggle) return;
+    toggle.classList.toggle('is-paused', userPaused);
+    toggle.setAttribute('aria-label', userPaused
+      ? 'Reanudar el paso automático de testimonios'
+      : 'Pausar el paso automático de testimonios');
+    // Mientras pasa solo, no se anuncia cada cambio (sería una interrupción
+    // cada 6 s); cuando lo controla la persona, sí.
+    liveEl?.setAttribute('aria-live', userPaused ? 'polite' : 'off');
+  }
+
+  function pauseByUser() {
+    userPaused = true;
+    stopAutoplay();
+    syncToggle();
+  }
+
   function startAutoplay(interval = AUTOPLAY_MS) {
     stopAutoplay();
+    if (userPaused) return;
     autoTimer = setInterval(advance, interval);
   }
 
@@ -821,6 +887,7 @@ document.addEventListener('astro:page-load', () => {
 
   function scheduleResume() {
     clearTimeout(resumeTimer);
+    if (userPaused) return;
     resumeTimer = setTimeout(() => startAutoplay(), AUTOPLAY_RESUME_DELAY);
   }
 
@@ -838,24 +905,26 @@ document.addEventListener('astro:page-load', () => {
     updateHeight();
     updateDots(0);
     announce(0);
+    syncToggle();
 
-    startAutoplay(10000);
-
-    dotBtns.forEach((d, i) => {
-      d.addEventListener('click', () => {
-        cards[activeIdx].style.opacity = '0';
-        cards[activeIdx].style.pointerEvents = 'none';
-        cards[activeIdx].style.zIndex = '0';
-        cards[activeIdx].setAttribute('aria-hidden', 'true');
-        activeIdx = i;
-        cards[i].style.opacity = '1';
-        cards[i].style.pointerEvents = 'auto';
-        cards[i].style.zIndex = '3';
-        cards[i].setAttribute('aria-hidden', 'false');
-        updateDots(i);
-        announce(i);
-      });
-    });
+    // Sin autoplay con movimiento reducido: no se muestra el botón de pausa.
+    function show(i) {
+      i = wrap(i);
+      cards[activeIdx].style.opacity = '0';
+      cards[activeIdx].style.pointerEvents = 'none';
+      cards[activeIdx].style.zIndex = '0';
+      cards[activeIdx].setAttribute('aria-hidden', 'true');
+      activeIdx = i;
+      cards[i].style.opacity = '1';
+      cards[i].style.pointerEvents = 'auto';
+      cards[i].style.zIndex = '3';
+      cards[i].setAttribute('aria-hidden', 'false');
+      updateDots(i);
+      announce(i);
+    }
+    dotBtns.forEach((d, i) => d.addEventListener('click', () => show(i)));
+    prevBtn?.addEventListener('click', () => show(activeIdx - 1));
+    nextBtn?.addEventListener('click', () => show(activeIdx + 1));
   }
 
   /* ─── Wire Events ────────────────────────────────── */
@@ -885,17 +954,29 @@ document.addEventListener('astro:page-load', () => {
 
     // Dots
     dotBtns.forEach((d, i) => {
-      d.addEventListener('click', () => { stopAutoplay(); goTo(i); scheduleResume(); });
+      d.addEventListener('click', () => { pauseByUser(); goTo(i); });
     });
+
+    // Anterior / siguiente (mobile)
+    prevBtn?.addEventListener('click', () => { pauseByUser(); retreat(); });
+    nextBtn?.addEventListener('click', () => { pauseByUser(); advance(); });
+
+    // Pausa / reanudar
+    if (toggle) {
+      toggle.hidden = false;
+      toggle.addEventListener('click', () => {
+        if (userPaused) { userPaused = false; syncToggle(); advance(); startAutoplay(); }
+        else pauseByUser();
+      });
+    }
 
     // Keyboard
     outer.setAttribute('tabindex', '0');
     outer.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
         e.preventDefault();
-        stopAutoplay();
+        pauseByUser();
         e.key === 'ArrowRight' ? advance() : retreat();
-        scheduleResume();
       }
       if (e.key === 'Escape') {
         document.querySelector('.tsw-heading')?.focus();
@@ -916,6 +997,7 @@ document.addEventListener('astro:page-load', () => {
   } else {
     initAll();
     wireEvents();
+    syncToggle();
     startAutoplay();
   }
 
