@@ -227,6 +227,14 @@ const testimonials = reviews.map((r, i) => ({
   display: flex;
   flex-direction: column;
 }
+/* En mobile la card ocupa todo el ancho del contenedor (solo el margen de
+   página) y con menos relleno, para que el texto no quede estrecho. */
+@media (max-width: 879px) {
+  .tsw-card {
+    width: 100%;
+    padding: var(--space-6);
+  }
+}
 
 /* ── Card content ── */
 .tsw-stars {
