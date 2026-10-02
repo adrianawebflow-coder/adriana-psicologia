@@ -300,7 +300,9 @@ const sidebarPosts = MOST_READ.map(({ slug, visits, avgReadSeconds }) => {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.55) 42%, rgba(0,0,0,.05) 75%, transparent 100%);
+  /* ≥ 0,6 de opacidad en el 60 % inferior, donde va el texto: texto blanco
+     ≥ 5,7:1 incluso sobre una foto blanca (WCAG 1.4.3). */
+  background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.7) 40%, rgba(0,0,0,.6) 60%, rgba(0,0,0,.1) 85%, transparent 100%);
 }
 
 .card-body {
