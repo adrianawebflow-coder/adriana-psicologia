@@ -179,6 +179,68 @@ const {
     });
   });
 
+  // Desplegables (<details>: preguntas frecuentes, normativa): se abren y
+  // cierran animando la altura y con un fundido del contenido. Con
+  // movimiento reducido se usa el comportamiento nativo, sin animación.
+  const ACC_EASE = 'cubic-bezier(0.33, 1, 0.68, 1)';
+  function setupAccordion(d: HTMLDetailsElement) {
+    const summary = d.querySelector('summary');
+    if (!summary || d.dataset.acc) return;
+    d.dataset.acc = '';
+    let anim: Animation | null = null;
+    let closing = false;
+
+    const content = () => Array.from(d.children).filter((el) => el !== summary) as HTMLElement[];
+    const closedHeight = () => {
+      const cs = getComputedStyle(d);
+      return summary.offsetHeight + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom)
+        + parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
+    };
+    const finish = (open: boolean) => {
+      d.open = open;
+      d.classList.remove('is-closing');
+      d.style.height = '';
+      d.style.overflow = '';
+      anim = null;
+      closing = false;
+    };
+
+    summary.addEventListener('click', (e) => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      e.preventDefault();
+      const from = d.offsetHeight;
+      anim?.cancel();
+      d.style.overflow = 'hidden';
+
+      if (!d.open || closing) {
+        // Abrir (o revertir un cierre a medias)
+        d.classList.remove('is-closing');
+        closing = false;
+        d.open = true;
+        const to = d.scrollHeight + parseFloat(getComputedStyle(d).borderTopWidth) + parseFloat(getComputedStyle(d).borderBottomWidth);
+        anim = d.animate({ height: [`${from}px`, `${to}px`] }, { duration: 420, easing: ACC_EASE });
+        content().forEach((el) => el.animate(
+          { opacity: [0, 1], transform: ['translateY(-6px)', 'translateY(0)'] },
+          { duration: 360, delay: 80, easing: ACC_EASE, fill: 'backwards' },
+        ));
+        anim.onfinish = () => finish(true);
+      } else {
+        // Cerrar: la flecha gira ya al empezar
+        closing = true;
+        d.classList.add('is-closing');
+        anim = d.animate({ height: [`${from}px`, `${closedHeight()}px`] }, { duration: 340, easing: ACC_EASE });
+        content().forEach((el) => el.animate({ opacity: [1, 0] }, { duration: 200, easing: 'ease-out', fill: 'forwards' }));
+        anim.onfinish = () => {
+          content().forEach((el) => el.getAnimations().forEach((a) => a.cancel()));
+          finish(false);
+        };
+      }
+    });
+  }
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll<HTMLDetailsElement>('details').forEach(setupAccordion);
+  });
+
   // astro:page-load fires on every navigation (including first load)
   // so the IntersectionObserver is re-created for each page's .reveal elements.
   document.addEventListener('astro:page-load', () => {
