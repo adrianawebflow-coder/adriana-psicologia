@@ -7,65 +7,51 @@ const tabs = [
   {
     id: 'individual',
     label: 'Individual',
-    price: 'Desde 70 €/sesión',
-    priceNote: 'En bono de 4 sesiones. Citas sueltas: 80 €.',
-    bono: '280 € por 4 sesiones',
+    price: 'Desde 80 €/sesión suelta',
+    bono: '70 €/sesión',
+    bonoTotal: '280 €',
     details: [
       'Duración: 55 minutos',
-      'Frecuencia: semanal o quincenal',
       'Evaluación gratuita en caso de iniciar el tratamiento',
-      'Modalidad: presencial, online o mixta',
     ],
   },
   {
     id: 'parejas',
     label: 'Parejas',
-    price: 'Desde 80 €/sesión',
-    priceNote: 'En bono de 4 sesiones. Citas sueltas: 90 €.',
-    bono: '320 € por 4 sesiones',
+    price: 'Desde 90 €/sesión suelta',
+    bono: '80 €/sesión',
+    bonoTotal: '320 €',
     details: [
       'Duración: 55 minutos',
-      'Frecuencia: semanal o quincenal',
       'Evaluación gratuita en caso de iniciar el tratamiento',
-      'Modalidad: presencial, online o mixta',
     ],
   },
   {
     id: 'familias',
     label: 'Familias',
-    price: 'Desde 90 €/sesión',
-    priceNote: 'En bono de 4 sesiones. Citas sueltas: 100 €.',
-    bono: '360 € por 4 sesiones',
+    price: 'Desde 100 €/sesión suelta',
+    bono: '90 €/sesión',
+    bonoTotal: '360 €',
     details: [
       'Duración: 55 minutos',
-      'Frecuencia: semanal o quincenal',
       'Evaluación gratuita en caso de iniciar el tratamiento',
-      'Modalidad: presencial, online o mixta',
     ],
   },
 ];
 
+// Cada apartado se muestra como un desplegable con su texto.
 const normativa = [
   {
-    title: 'Organización',
-    items: [
-      'Las citas canceladas con menos de 24 h de antelación conllevarán el cobro del 100 % del importe de la sesión.',
-      'El proceso de terapia quedará suspendido en caso de cancelaciones reiteradas por parte del paciente.',
-    ],
+    title: 'Política de cancelación',
+    text: 'Se cobrarán las citas canceladas con menos de 24 h de antelación.',
   },
   {
     title: 'Privacidad',
-    items: [
-      'Se recomienda el uso de auriculares y evitar conexiones de red públicas.',
-      'En caso de que el espacio no asegure el derecho a la intimidad del paciente, el profesional se reserva el derecho a paralizar la sesión y reubicar la cita.',
-    ],
+    text: 'En caso de que el espacio no asegure la privacidad e intimidad del paciente, el profesional se reserva el derecho a paralizar la sesión y reubicar la cita.',
   },
   {
     title: 'Puntualidad',
-    items: [
-      'Se ofrece un margen de flexibilidad de 20 minutos, tras los cuales la sesión quedará cancelada con su correspondiente coste.',
-      'Se requiere flexibilidad para las ocasiones en las que el terapeuta pueda alargarse con un paciente anterior y generar un retraso en las consultas siguientes.',
-    ],
+    text: 'Se requiere flexibilidad para las ocasiones en las que el terapeuta pueda alargarse con un paciente anterior y generar un retraso en las consultas siguientes.',
   },
 ];
 
@@ -74,14 +60,14 @@ const initial = tabs[0].id;
 
 <Layout
   title="Precio"
-  description="La terapia no es un gasto, es tiempo y energía que dedicas a ti misma. Precios de terapia individual, de pareja y familiar."
+  description="Precios de terapia individual, de pareja y familiar: citas sueltas o bonos descuento de 4 sesiones. Sesiones de 55 minutos y evaluación gratuita si inicias el tratamiento."
 >
 
   <section class="precio-section" id="precio">
       <div class="precio-left">
        <div class="precio-left-inner">
         <h1>Invierte en tu salud</h1>
-        <p class="lede">La terapia no es un gasto, es tiempo y energía que dedicas a ti misma.</p>
+        <p class="lede">Existe la posibilidad de escoger citas sueltas o reducir el coste del tratamiento utilizando bonos descuento (paquetes de 4 sesiones que se van consumiendo en el tiempo).</p>
 
         <div class="tabs" role="tablist" aria-label="Tipo de terapia" id="tabs">
           {tabs.map((tab) => (
@@ -113,7 +99,6 @@ const initial = tabs[0].id;
             <div class="card">
               <p class="price-label">Precio</p>
               <p class="price-value">{tab.price}</p>
-              <p class="price-note">{tab.priceNote}</p>
               <ul class="details-list">
                 {tab.details.map((d) => <li>{d}</li>)}
               </ul>
@@ -129,9 +114,9 @@ const initial = tabs[0].id;
                     <path d="M15 15h.01"/>
                   </svg>
                 </span>
-                Bono: {tab.bono}
+                Bono descuento: {tab.bono}
               </p>
-              <p class="bono-desc">Se trata de paquetes de sesiones que se van consumiendo en el tiempo. La mejor inversión en salud y una forma eficaz de reducir el coste del tratamiento.</p>
+              <p class="bono-desc">Paquete de 4 sesiones ({tab.bonoTotal} en total) que se van consumiendo en el tiempo.</p>
             </div>
           </div>
         ))}
@@ -154,17 +139,14 @@ const initial = tabs[0].id;
                     </svg>
                   </span>
                 </summary>
-                <ul class="details-list">
-                  {n.items.map((item) => <li>{item}</li>)}
-                </ul>
+                <p class="accordion-text">{n.text}</p>
               </details>
             ))}
           </div>
         </div>
 
         <div class="precio-cta">
-          <h3>La evaluación se realiza sin compromiso</h3>
-          <p>No necesitas saber exactamente qué te pasa para empezar a hablar de ello.</p>
+          <h3>Tu bienestar también merece ser una prioridad</h3>
           <a class="btn btn-light" href={CALENDLY_URL} target="_blank" rel="noopener">
             Reserva tu cita aquí →
           </a>
@@ -296,13 +278,6 @@ const initial = tabs[0].id;
   font-weight: var(--fw-semi);
   font-size: 22px;
   color: var(--color-text-primary);
-  margin: 0 0 4px;
-}
-.price-note {
-  font-family: var(--font-sans);
-  font-size: var(--fs-body-sm);
-  line-height: 1.5;
-  color: var(--color-text-secondary);
   margin: 0 0 16px;
 }
 .details-list {
@@ -431,7 +406,14 @@ const initial = tabs[0].id;
   transition: transform var(--transition-fast);
 }
 .accordion-item[open] .chevron { transform: rotate(180deg); }
-.accordion-item .details-list { padding-bottom: 20px; }
+.accordion-text {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  margin: 0;
+  padding-bottom: 20px;
+}
 
 /* ── CTA (dentro de la columna derecha, debajo de normativa) ── */
 .precio-cta {
@@ -451,7 +433,8 @@ const initial = tabs[0].id;
   font-weight: var(--fw-semi);
   font-size: 24px;
   color: #fff;
-  margin: 0 0 16px;
+  margin: 0 0 24px;
+  max-width: 22ch;
 }
 .precio-cta p {
   font-family: var(--font-sans);
