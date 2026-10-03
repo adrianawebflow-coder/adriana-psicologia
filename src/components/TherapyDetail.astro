@@ -62,33 +62,7 @@ const despachoImages = Object.keys(despachoModules)
 <section class="therapy-info">
   <div class="therapy-info-inner">
     <h2 class="info-heading reveal">Información de la terapia</h2>
-    <p class="info-lede reveal"><b>Sesión de evaluación:</b> es la primera sesión, en la que el terapeuta evalúa el motivo de consulta, recoge la historia del paciente y expone las condiciones del tratamiento. Por su parte, el paciente evalúa las habilidades del terapeuta para decidir si encaja con lo que necesita. La evaluación dura 40 minutos y cuesta 30 €, y es gratuita si inicias el tratamiento.</p>
-
-    <h3 class="info-heading reveal" id="normativa-titulo">Normativa terapéutica</h3>
-    <p class="info-lede reveal">El autocuidado comienza con el compromiso con tu salud.</p>
-    <div class="info-grid" role="region" aria-labelledby="normativa-titulo">
-      <div class="info-card reveal">
-        <h4>Organización</h4>
-        <ul class="info-card-list">
-          <li>Las citas canceladas con menos de 24 h de antelación conllevarán el cobro del 100 % del importe de la sesión.</li>
-          <li>El proceso de terapia quedará suspendido en caso de cancelaciones reiteradas por parte del paciente.</li>
-        </ul>
-      </div>
-      <div class="info-card reveal">
-        <h4>Privacidad</h4>
-        <ul class="info-card-list">
-          <li>Se recomienda el uso de auriculares y evitar conexiones de red públicas.</li>
-          <li>En caso de que el espacio no asegure el derecho a la intimidad del paciente, el profesional se reserva el derecho a paralizar la sesión y reubicar la cita.</li>
-        </ul>
-      </div>
-      <div class="info-card reveal">
-        <h4>Puntualidad</h4>
-        <ul class="info-card-list">
-          <li>Se ofrece un margen de flexibilidad de 20 minutos, tras los cuales la sesión quedará cancelada con su correspondiente coste.</li>
-          <li>Se requiere flexibilidad para las ocasiones en las que el terapeuta pueda alargarse con un paciente anterior y generar un retraso en las consultas siguientes.</li>
-        </ul>
-      </div>
-    </div>
+    <p class="info-lede reveal"><b>Sesión de evaluación:</b> es la primera sesión, en la que el terapeuta evalúa el motivo de consulta, recoge la historia del paciente y expone las condiciones del tratamiento. Por su parte, el paciente evalúa las habilidades del terapeuta para decidir si encaja con lo que necesita. La evaluación es gratuita en caso de iniciar el tratamiento.</p>
 
     <h3 class="info-heading reveal" id="modalidad-titulo">Modalidad</h3>
     <div class="info-grid" role="region" aria-labelledby="modalidad-titulo">
@@ -276,7 +250,7 @@ const despachoImages = Object.keys(despachoModules)
   color: var(--color-text-primary);
 }
 /* Mobile: carrusel horizontal con scroll-snap para las cards de
-   Normativa terapéutica y Modalidad. A partir de 1000px pasan a ser
+   Modalidad. A partir de 1000px pasan a ser
    una fila de 3 cards de igual ancho (ver media query más abajo). */
 .info-grid {
   display: flex;
@@ -315,28 +289,6 @@ const despachoImages = Object.keys(despachoModules)
   line-height: 1.5;
   color: var(--color-text-secondary);
   margin: 0;
-}
-.info-card-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.info-card-list li {
-  position: relative;
-  padding-left: 16px;
-  font-family: var(--font-sans);
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--color-text-secondary);
-}
-.info-card-list li::before {
-  content: "•";
-  position: absolute;
-  left: 2px;
-  color: var(--color-text-primary);
 }
 
 .therapy-gallery {
@@ -724,8 +676,8 @@ const despachoImages = Object.keys(despachoModules)
 </style>
 
 <script>
-  // En mobile (y con zoom) los carriles de normativa y modalidad hacen
-  // scroll horizontal: solo entonces se pueden enfocar para moverlos con las
+  // En mobile (y con zoom) el carril de modalidad hace
+  // scroll horizontal: solo entonces se puede enfocar para moverlo con las
   // flechas del teclado (WCAG 2.1.1). En desktop no hay scroll ni parada.
   function syncScrollableRegions() {
     document.querySelectorAll<HTMLElement>('.info-grid').forEach((el) => {
