@@ -1,10 +1,18 @@
 ---
+import { CALENDLY_URL } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 import CTAFinalSection from '../components/CTAFinalSection.astro';
-import { pasos } from '../data/pasos';
 import { faqs } from '../data/faqs';
 
-const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
+// Pasos para reservar la cita de evaluación en Calendly.
+const reserva = [
+  { text: 'Accede al calendario virtual.' },
+  { text: 'Escoge el día y la hora según tu disponibilidad.' },
+  { text: 'Introduce tus datos de contacto.' },
+  { text: 'Realiza el pago de la cita.', note: 'El importe será descontado en caso de iniciar el tratamiento.' },
+  { text: 'Recibirás una confirmación por correo electrónico con los datos de la reserva.' },
+];
+
 
 ---
 
@@ -25,14 +33,14 @@ const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
   <section class="booking">
     <div class="container booking-grid">
       <div class="booking-steps">
-        <h2 class="booking-title reveal">¿Cómo es el proceso?</h2>
+        <h2 class="booking-title reveal">¿Cómo puedo reservar la cita de evaluación?</h2>
         <ol class="steps">
-          {pasos.map((paso) => (
+          {reserva.map((paso, i) => (
             <li class="step reveal">
-              <span class="step-num">{pasos.indexOf(paso) + 1}</span>
+              <span class="step-num" aria-hidden="true">{i + 1}</span>
               <div class="step-body">
-                <h3>{paso.title}</h3>
-                <p>{paso.desc}</p>
+                <p class="step-text">{paso.text}</p>
+                {paso.note && <p class="step-note">{paso.note}</p>}
               </div>
             </li>
           ))}
@@ -78,8 +86,8 @@ const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
   </section>
 
   <CTAFinalSection
-    heading="No esperes a que todo se derrumbe"
-    text="¿Te animas a dar el primer paso? Solo es una conversación. Sin compromiso, sin tener que tenerlo todo claro."
+    heading="Cuidar tu salud mental es también cuidar de la vida que construyes alrededor de ella"
+    text=""
   />
 
 </Layout>
@@ -155,7 +163,7 @@ const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
   grid-template-columns: 48px 1fr;
   align-items: flex-start;
   column-gap: 20px;
-  padding-bottom: 44px;
+  padding-bottom: 24px;
   list-style: none;
 }
 .step::marker { content: none; }
@@ -178,19 +186,23 @@ const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
   color: var(--color-text-primary);
 }
 
-.step-body h3 {
-  font-family: var(--font-sans);
-  font-weight: var(--fw-semi);
-  font-size: var(--fs-body);
-  color: var(--color-text-primary);
-  margin: 0 0 8px;
+.step-body {
+  /* Centra la primera línea con el círculo de 48px. */
+  padding-top: 11px;
 }
-.step-body p {
+.step-body .step-text {
   font-family: var(--font-sans);
   font-size: var(--fs-body);
   line-height: 1.6;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   margin: 0;
+}
+.step-body .step-note {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 4px 0 0;
 }
 
 .booking-card {

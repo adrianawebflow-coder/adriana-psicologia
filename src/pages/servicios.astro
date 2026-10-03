@@ -1,4 +1,5 @@
 ---
+import { CALENDLY_URL } from '../data/site';
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import collageIndividual from '../assets/servicios/collage-individual.png';
@@ -59,7 +60,6 @@ const tabs = [
   },
 ];
 
-const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
 const initial = tabs[0].id;
 const initialTab = tabs.find((t) => t.id === initial)!;
 const initialCtaHref = initialTab.href ?? CALENDLY_URL;

@@ -1,4 +1,5 @@
 ---
+import { CALENDLY_URL } from '../data/site';
 ---
 <footer class="footer" aria-labelledby="pie-titulo">
   <h2 id="pie-titulo" class="sr-only">Información del sitio</h2>
@@ -28,7 +29,7 @@
       </ul>
       <h3>Contacto</h3>
       <ul>
-        <li><a href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener">Reserva tu cita aquí</a></li>
+        <li><a href={CALENDLY_URL} target="_blank" rel="noopener">Reserva tu cita aquí</a></li>
         <li><a href="mailto:a.esteban@adrianapsicologia.com">a.esteban@adrianapsicologia.com</a></li>
       </ul>
     </div>
