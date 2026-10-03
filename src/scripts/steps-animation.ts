@@ -1,6 +1,6 @@
 // Animación de entrada de las listas de pasos (.steps-anim): ver
 // src/styles/steps-animation.css para el marcado y los estados.
-const STAGGER = 380; // ms entre pasos; igual que --i * 380ms en el CSS
+const STAGGER = 520; // ms entre pasos; igual que --step-gap en el CSS
 
 function setup(wrap: HTMLElement) {
   const path = wrap.querySelector<SVGPathElement>('.steps-path path');
@@ -49,7 +49,7 @@ function setup(wrap: HTMLElement) {
   function play() {
     wrap.classList.add('is-in');
     void path!.getBoundingClientRect();
-    path!.style.transition = reduced ? 'none' : `stroke-dashoffset ${(count - 1) * STAGGER}ms linear 150ms`;
+    path!.style.transition = reduced ? 'none' : `stroke-dashoffset ${(count - 1) * STAGGER}ms cubic-bezier(0.37, 0, 0.63, 1) 150ms`;
     path!.style.strokeDashoffset = '0';
   }
 

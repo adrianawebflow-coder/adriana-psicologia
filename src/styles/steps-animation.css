@@ -5,7 +5,7 @@
 
    Al entrar en pantalla, una línea se dibuja uniendo los números (la
    calcula el script según el layout) y cada paso aparece a su ritmo: el
-   número con un rebote y una onda, y el texto deslizándose. Sin JS o con
+   número con una onda suave, y el texto subiendo ligeramente. Sin JS o con
    movimiento reducido, todo se ve directamente. */
 .steps-anim {
   position: relative;
@@ -35,41 +35,45 @@
   pointer-events: none;
 }
 
+/* Versión suave: sin rebote, recorridos cortos, curvas de salida lentas y
+   más tiempo entre pasos (--step-gap, igual que STAGGER en el script). */
+.steps-anim { --step-gap: 520ms; --ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1); }
+
 .js .steps-anim .step-num {
   opacity: 0;
-  transform: scale(0.3);
+  transform: scale(0.85);
 }
 .js .steps-anim .step-body {
   opacity: 0;
-  transform: translateX(-20px);
+  transform: translateY(8px);
 }
 .js .steps-anim.is-in .step-num {
   opacity: 1;
   transform: none;
   transition:
-    opacity 300ms ease calc(var(--i) * 380ms),
-    transform 650ms cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--i) * 380ms);
-  animation: step-fill 1100ms ease-out calc(var(--i) * 380ms) both;
+    opacity 700ms var(--ease-soft) calc(var(--i) * var(--step-gap)),
+    transform 900ms var(--ease-soft) calc(var(--i) * var(--step-gap));
+  animation: step-fill 1600ms var(--ease-soft) calc(var(--i) * var(--step-gap)) both;
 }
 .js .steps-anim.is-in .step-num::after {
-  animation: step-ripple 900ms ease-out calc(var(--i) * 380ms + 200ms) both;
+  animation: step-ripple 1400ms var(--ease-soft) calc(var(--i) * var(--step-gap) + 250ms) both;
 }
 .js .steps-anim.is-in .step-body {
   opacity: 1;
   transform: none;
   transition:
-    opacity 500ms ease calc(var(--i) * 380ms + 150ms),
-    transform 650ms cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i) * 380ms + 150ms);
+    opacity 900ms var(--ease-soft) calc(var(--i) * var(--step-gap) + 200ms),
+    transform 1000ms var(--ease-soft) calc(var(--i) * var(--step-gap) + 200ms);
 }
 
-/* El número se enciende en musgo y vuelve a su estado normal. */
+/* El número se tiñe de musgo suave y vuelve poco a poco a su estado normal. */
 @keyframes step-fill {
-  0%, 35% { background: var(--color-moss); color: #fff; border-color: var(--color-moss); }
-  100%    { background: #fff; color: var(--color-text-primary); border-color: var(--color-clay-soft); }
+  0%, 30% { background: var(--color-moss-soft); border-color: var(--color-moss-soft); }
+  100%    { background: #fff; border-color: var(--color-clay-soft); }
 }
 @keyframes step-ripple {
-  0%   { opacity: 0.6; transform: scale(1); }
-  100% { opacity: 0;   transform: scale(1.7); }
+  0%   { opacity: 0.35; transform: scale(1); }
+  100% { opacity: 0;    transform: scale(1.35); }
 }
 
 @media (prefers-reduced-motion: reduce) {
