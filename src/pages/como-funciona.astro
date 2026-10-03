@@ -7,59 +7,59 @@ const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
 const pasos = [
   {
     id: 'reservas',
-    title: 'Reservas tu primera sesión',
-    desc: 'A través del calendario online. Sin formularios, sin esperas. Eliges día y hora tú.',
+    title: 'Reserva la primera consulta',
+    desc: 'A través del calendario virtual podrás acceder a la agenda para reservar una sesión de evaluación de 40 minutos. Online o presencial.',
   },
   {
     id: 'primera-sesion',
-    title: 'Primera sesión (40 minutos)',
-    desc: 'Hablamos. Me cuentas qué te trae y yo te explico cómo puedo ayudarte. No hay diagnóstico ni compromiso. Cuesta 30 € y es gratuita si decides empezar el tratamiento.',
+    title: 'Recibe la primera sesión',
+    desc: 'Exploraremos qué te trae a consulta y qué necesitas. También evaluarás si mi forma de trabajar encaja contigo.',
   },
   {
     id: 'decidimos',
-    title: 'Decidimos en conjunto',
-    desc: 'Si conectamos y tiene sentido seguir, acordamos la frecuencia y el enfoque de las sesiones. Si no, sin problema.',
+    title: 'Propuesta de tratamiento',
+    desc: 'Tras valorar tu situación, te explicaré cómo podemos abordar aquello que te preocupa y acordaremos juntos los objetivos y la forma de trabajo.',
   },
   {
     id: 'iniciamos',
-    title: 'Iniciamos el proceso terapéutico',
-    desc: 'Sesiones semanales o quincenales. El ritmo y la duración del proceso dependen de cada persona. No hay plazos fijos.',
+    title: 'Inicio del proceso terapéutico',
+    desc: 'Si la propuesta tiene sentido para ti, firmaremos la documentación correspondiente y organizaremos la disponibilidad agendando las primeras citas.',
   },
 ];
 
 const faqs = [
   {
-    q: '¿Cómo sé si la terapia me va a funcionar?',
-    a: 'No hay garantías, pero sí una primera sesión pensada para que puedas evaluarlo: ahí conoces mi forma de trabajar y decides si conectamos. Si después de unas sesiones no notas avances, lo hablamos y ajustamos el enfoque.',
+    q: '¿Cuánto dura el proceso?',
+    a: 'Depende de cada persona y de lo que la trae a terapia. Algunos procesos duran unos meses y otros, más tiempo. Lo iremos revisando de forma periódica.',
   },
   {
-    q: '¿Cuánto tiempo dura el proceso?',
-    a: 'Depende de cada persona y de lo que traiga a terapia. Algunos procesos duran unos meses, otros más tiempo. Lo revisamos juntas periódicamente.',
-  },
-  {
-    q: '¿Puedo cambiar de online a presencial?',
-    a: 'Sí, puedes alternar entre modalidad online y presencial cuando lo necesites, avisando con antelación para organizar la sesión.',
+    q: '¿Con qué frecuencia nos vemos?',
+    a: 'Normalmente, una sesión semanal o quincenal de 55 minutos. La frecuencia se acuerda en la propuesta de tratamiento y puede ajustarse a medida que avanza el proceso.',
   },
   {
     q: '¿Es confidencial?',
     a: 'Sí. Todo lo que compartas en sesión está protegido por el secreto profesional, salvo en las excepciones que marca la ley, como un riesgo grave para ti o para terceros.',
   },
   {
-    q: '¿Qué pasa si tengo que cancelar?',
-    a: 'Puedes cancelar o reprogramar sin coste si avisas con al menos 24 horas de antelación.',
+    q: '¿Qué pasa si quiero dejarlo?',
+    a: 'Puedes dejar la terapia cuando lo decidas. Lo ideal es hablarlo en sesión, para cerrar el proceso de forma cuidada y valorar juntos cómo estás.',
+  },
+  {
+    q: '¿Necesito un diagnóstico previo?',
+    a: 'No. No necesitas un diagnóstico ni saber exactamente qué te pasa para empezar. En la sesión de evaluación exploraremos juntos qué te trae a consulta.',
   },
 ];
 ---
 
 <Layout
   title="Cómo funciona"
-  description="Lo desconocido da miedo. Por eso te contamos exactamente qué pasa desde que decides contactar con Adriana Psicología."
+  description="Dar el paso de comenzar terapia puede generar muchas dudas. Así es el proceso con Adriana Psicología desde el primer contacto."
 >
 
   <section class="como-hero">
     <div class="container">
       <h1 transition:name="hero-title">¿Cómo es una sesión con Adriana?</h1>
-      <p class="lede">Lo desconocido da miedo. Por eso te cuento exactamente qué pasa desde que decides contactar.</p>
+      <p class="lede">Dar el paso de comenzar terapia puede generar muchas dudas. Aquí te explico cómo será el proceso desde el primer contacto.</p>
     </div>
   </section>
 
@@ -79,7 +79,7 @@ const faqs = [
       </ol>
 
       <a class="pasos-btn" href={CALENDLY_URL} target="_blank" rel="noopener">
-        Reservar primera sesión →
+        Reserva tu cita aquí →
       </a>
     </div>
   </section>
@@ -107,8 +107,9 @@ const faqs = [
   </section>
 
   <CTAFinalSection
-    heading="¿Todo más claro?"
-    text="La primera sesión no te compromete a nada. Solo es una conversación."
+    heading="La evaluación se realiza sin compromiso"
+    text="No necesitas saber exactamente qué te pasa para empezar a hablar de ello."
+    buttonLabel="Reserva tu cita aquí →"
   />
 
 </Layout>

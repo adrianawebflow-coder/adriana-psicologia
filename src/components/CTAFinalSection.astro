@@ -2,11 +2,13 @@
 interface Props {
   heading?: string;
   text?: string;
+  buttonLabel?: string;
 }
 
 const {
   heading = 'No esperes a que todo se derrumbe',
   text = 'Todos tenemos problemas. A terapia viene quien decide resolverlos.',
+  buttonLabel = 'Reservar primera sesión →',
 } = Astro.props;
 ---
 
@@ -19,7 +21,7 @@ const {
     <h2>{heading}</h2>
     <p>{text}</p>
     <a class="btn" href="https://calendly.com/adrianapsicologia/15-20min" target="_blank" rel="noopener">
-      Reservar primera sesión →
+      {buttonLabel}
     </a>
   </div>
 </section>
