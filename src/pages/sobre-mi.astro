@@ -559,15 +559,13 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
 
 /* Enfoque */
 .enfoque-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-rows: 1fr;
   gap: 24px;
-  align-items: flex-start;
 }
 
 .enfoque-card {
-  width: 100%;
-  max-width: 440px;
+  width: calc(100% - 80px);
   background: #FAF9F5;
   border: 1px solid var(--color-moss-soft);
   border-left: 6px solid var(--color-moss-soft);
@@ -578,9 +576,12 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
   flex-direction: column;
   gap: 8px;
 }
-.enfoque-card:nth-child(2) { margin-left: 60px; }
-.enfoque-card:nth-child(3) { margin-left: 120px; }
+/* Mismo ancho y alto en las tres (grid-auto-rows: 1fr); el escalonado
+   se reparte en los 80px que se restan al ancho. */
+.enfoque-card:nth-child(2) { margin-left: 40px; }
+.enfoque-card:nth-child(3) { margin-left: 80px; }
 @media (max-width: 620px) {
+  .enfoque-card { width: 100%; }
   .enfoque-card:nth-child(2),
   .enfoque-card:nth-child(3) { margin-left: 0; }
 }
@@ -954,7 +955,10 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
 .person-arrow:hover { transform: translateX(2px); filter: brightness(1.04); }
 
 @media (min-width: 880px) {
-  .hero { padding: 40px 0 40px; }
+  /* La tarjeta sobresale ~118px por debajo de .hero-stage (posición
+     absoluta); el padding inferior la mantiene dentro del hero y deja
+     aire antes de «Mi enfoque». */
+  .hero { padding: 40px 0 160px; }
   .twocol { padding: 100px 0; }
   .colab { padding: 80px 0; }
 }
