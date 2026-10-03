@@ -267,6 +267,9 @@ function renderText(text: string): string {
 }
 .post-hero-image img {
   width: 100%;
+  /* <Image> pone el alto original en el atributo height; sin height: auto
+     ese valor gana al aspect-ratio y la foto se estira y recorta. */
+  height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: var(--radius-lg);
