@@ -17,9 +17,9 @@ const tabs = [
       'Evaluación gratuita en caso de iniciar el tratamiento',
       'Modalidad: presencial, online o mixta',
     ],
-    price: 'Desde 70 €/sesión',
-    priceNote: 'En bono de 4 sesiones. Citas sueltas: 80 €.',
-    bono: '280 € por 4 sesiones',
+    price: 'Desde 80 €/sesión suelta',
+    bono: '70 €/sesión',
+    bonoTotal: '280 €',
     href: '/servicios/individual',
     collage: collageIndividual,
   },
@@ -34,9 +34,9 @@ const tabs = [
       'Evaluación gratuita en caso de iniciar el tratamiento',
       'Modalidad: presencial, online o mixta',
     ],
-    price: 'Desde 80 €/sesión',
-    priceNote: 'En bono de 4 sesiones. Citas sueltas: 90 €.',
-    bono: '320 € por 4 sesiones',
+    price: 'Desde 90 €/sesión suelta',
+    bono: '80 €/sesión',
+    bonoTotal: '320 €',
     href: '/servicios/parejas',
     collage: collageParejas,
   },
@@ -51,9 +51,9 @@ const tabs = [
       'Evaluación gratuita en caso de iniciar el tratamiento',
       'Modalidad: presencial, online o mixta',
     ],
-    price: 'Desde 90 €/sesión',
-    priceNote: 'En bono de 4 sesiones. Citas sueltas: 100 €.',
-    bono: '360 € por 4 sesiones',
+    price: 'Desde 100 €/sesión suelta',
+    bono: '90 €/sesión',
+    bonoTotal: '360 €',
     href: '/servicios/familias',
     collage: collageFamilias,
   },
@@ -139,7 +139,6 @@ const initialCtaExternal = !initialTab.href;
               <div class="card reveal">
                 <p class="price-label">Precio</p>
                 <p class="price-value">{tab.price}</p>
-                <p class="price-note">{tab.priceNote}</p>
               </div>
 
               <div class="card reveal bono-card">
@@ -152,9 +151,9 @@ const initialCtaExternal = !initialTab.href;
                       <path d="M15 15h.01"/>
                     </svg>
                   </span>
-                  Bono: {tab.bono}
+                  Bono descuento: {tab.bono}
                 </p>
-                <p class="bono-desc">Se trata de paquetes de sesiones que se van consumiendo en el tiempo. La mejor inversión en salud y una forma eficaz de reducir el coste del tratamiento.</p>
+                <p class="bono-desc">Paquete de 4 sesiones ({tab.bonoTotal} en total) que se van consumiendo en el tiempo.</p>
               </div>
             </div>
           ))}
@@ -338,11 +337,6 @@ const initialCtaExternal = !initialTab.href;
   color: var(--color-text-primary);
   margin: 0;
 }
-.card .price-note {
-  font-size: var(--fs-body-sm);
-  line-height: 1.5;
-  margin: 4px 0 0;
-}
 
 .bono-card { display: flex; flex-direction: column; gap: 8px; }
 .card .bono-title {
@@ -445,7 +439,7 @@ const initialCtaExternal = !initialTab.href;
   }
   .tabs-container { display: flex; flex-direction: column; gap: 20px; }
   .tabs-container .tab { font-size: var(--fs-body); padding-bottom: 12px; }
-  .tabs-container .card p:not(.price-label):not(.price-value):not(.price-note):not(.bono-title) { font-size: 15px; }
+  .tabs-container .card p:not(.price-label):not(.price-value):not(.bono-title) { font-size: 15px; }
   .cta-desktop { display: flex; }
   .cta-mobile { display: none; }
 }

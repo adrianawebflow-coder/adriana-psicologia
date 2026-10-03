@@ -19,12 +19,12 @@ interface Props {
   /** El primero va bajo el h1; el resto, en la columna derecha en desktop. */
   blocks: InfoBlock[];
   price: string;
-  priceNote: string;
   bono: string;
+  bonoTotal: string;
   otherServices: OtherService[];
 }
 
-const { title, blocks, price, priceNote, bono, otherServices } = Astro.props;
+const { title, blocks, price, bono, bonoTotal, otherServices } = Astro.props;
 const [firstBlock, ...restBlocks] = blocks;
 
 const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
@@ -128,7 +128,6 @@ const despachoImages = Object.keys(despachoModules)
     <div class="panel-card">
       <p class="price-label">Precio</p>
       <p class="price-value">{price}</p>
-      <p class="price-note">{priceNote}</p>
 
       <p class="bono-title">
         <span class="badge-icon" aria-hidden="true">
@@ -139,9 +138,9 @@ const despachoImages = Object.keys(despachoModules)
             <path d="M15 15h.01"/>
           </svg>
         </span>
-        Bono: {bono}
+        Bono descuento: {bono}
       </p>
-      <p class="bono-desc">Se trata de paquetes de sesiones que se van consumiendo en el tiempo. La mejor inversión en salud y una forma eficaz de reducir el coste del tratamiento.</p>
+      <p class="bono-desc">Paquete de 4 sesiones ({bonoTotal} en total) que se van consumiendo en el tiempo.</p>
     </div>
 
     <a class="btn btn-green" href={CALENDLY_URL} target="_blank" rel="noopener">
@@ -465,13 +464,6 @@ const despachoImages = Object.keys(despachoModules)
   font-size: 22px;
   color: var(--color-text-primary);
   margin: 0;
-}
-.price-note {
-  font-family: var(--font-sans);
-  font-size: var(--fs-body-sm);
-  line-height: 1.5;
-  color: var(--color-text-secondary);
-  margin: 4px 0 0;
 }
 
 .badge-icon {
