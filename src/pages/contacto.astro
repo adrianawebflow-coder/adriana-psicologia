@@ -1,23 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CTAFinalSection from '../components/CTAFinalSection.astro';
+import { pasos } from '../data/pasos';
 
 const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
-
-const pasos = [
-  {
-    title: 'Reservas tu primera sesión',
-    desc: 'A través del calendario online. Sin formularios, sin esperas. Eliges día y hora tú.',
-  },
-  {
-    title: 'Primera sesión (40 minutos)',
-    desc: 'Hablamos. Me cuentas qué te trae y yo te explico cómo puedo ayudarte. No hay diagnóstico ni compromiso. Cuesta 30 € y es gratuita si decides empezar el tratamiento.',
-  },
-  {
-    title: 'Decidimos en conjunto',
-    desc: 'Si conectamos y tiene sentido seguir, acordamos la frecuencia y el enfoque de las sesiones. Si no, sin problema.',
-  },
-];
 
 const faqs = [
   {
@@ -45,7 +31,7 @@ const faqs = [
 
 <Layout
   title="Contacto"
-  description="Reserva tu primera sesión directamente. Sin formularios largos, sin esperas. Eliges día y hora tú."
+  description="Reserva tu cita directamente. Sin formularios largos, sin esperas. Eliges día y hora tú."
 >
 
   <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
@@ -53,14 +39,14 @@ const faqs = [
   <section class="contacto-hero">
     <div class="container">
       <h1 transition:name="hero-title">Da el primer paso</h1>
-      <p class="lede">Reserva tu primera sesión directamente. Sin formularios largos, sin esperas. Eliges día y hora tú.</p>
+      <p class="lede">Reserva tu cita directamente. Sin formularios largos, sin esperas. Eliges día y hora tú.</p>
     </div>
   </section>
 
   <section class="booking">
     <div class="container booking-grid">
       <div class="booking-steps">
-        <h2 class="booking-title reveal">¿Cómo es la primera sesión?</h2>
+        <h2 class="booking-title reveal">¿Cómo es el proceso?</h2>
         <ol class="steps">
           {pasos.map((paso) => (
             <li class="step reveal">
@@ -78,7 +64,7 @@ const faqs = [
         <div class="calendly-inline-widget" data-url={CALENDLY_URL}></div>
         <noscript>
           <p class="booking-noscript">
-            <a href={CALENDLY_URL}>Abre la agenda de Calendly para reservar tu primera sesión</a>
+            <a href={CALENDLY_URL}>Abre la agenda de Calendly para reservar tu cita</a>
           </p>
         </noscript>
         <!-- Alternativa si el calendario no carga o no se puede usar -->
@@ -357,7 +343,7 @@ const faqs = [
   // Calendly (su propio widget.js o initInlineWidget) crea el iframe con un
   // título en inglés: se sustituye por uno en español en cuanto aparece o
   // cambia (WCAG 3.1.2 / 4.1.2).
-  const IFRAME_TITLE = 'Calendario para reservar la primera sesión';
+  const IFRAME_TITLE = 'Calendario para reservar tu cita';
   function watchCalendlyTitle(el: Element) {
     const fix = () => {
       const f = el.querySelector('iframe');
