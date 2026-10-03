@@ -1,1 +1,10 @@
-{ "name": "adriana-psicologia", "compatibility_date": "2026-10-01", "assets": { "directory": "./dist" } }
+{
+  "name": "adriana-psicologia",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // /contacto/index.html se sirve en /contacto (y /contacto/ redirige ahí),
+    // que es la URL canónica de cada página.
+    "html_handling": "drop-trailing-slash"
+  }
+}

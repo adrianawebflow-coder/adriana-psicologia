@@ -19,6 +19,10 @@ const {
   title,
   description = "Psicóloga colegiada en Madrid. Terapia individual, de pareja y familiar. Online y presencial."
 } = Astro.props;
+
+// URL oficial de la página en adrianapsicologia.com (sin barra final), para
+// que Google no indexe las copias de otros entornos (workers.dev, vercel.app).
+const canonical = new URL(Astro.url.pathname.replace(/\/+$/, '') || '/', Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -28,6 +32,7 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
   <title>{title} • Adriana Esteban Psicología</title>
+  <link rel="canonical" href={canonical} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
   <!-- Marca que hay JS antes del primer pintado: los .reveal solo se ocultan
