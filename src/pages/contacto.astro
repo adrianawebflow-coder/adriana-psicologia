@@ -3,6 +3,7 @@ import { CALENDLY_URL } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 import CTAFinalSection from '../components/CTAFinalSection.astro';
 import { faqs } from '../data/faqs';
+import '../styles/steps-animation.css';
 
 // Pasos para reservar la cita de evaluación en Calendly.
 const reserva = [
@@ -34,9 +35,11 @@ const reserva = [
     <div class="container booking-grid">
       <div class="booking-steps">
         <h2 class="booking-title reveal">¿Cómo puedo reservar la cita de evaluación?</h2>
+        <div class="steps-anim">
+        <svg class="steps-path" aria-hidden="true"><path /></svg>
         <ol class="steps">
           {reserva.map((paso, i) => (
-            <li class="step reveal">
+            <li class="step" style={`--i: ${i}`}>
               <span class="step-num" aria-hidden="true">{i + 1}</span>
               <div class="step-body">
                 <p class="step-text">{paso.text}</p>
@@ -45,6 +48,7 @@ const reserva = [
             </li>
           ))}
         </ol>
+        </div>
       </div>
 
       <div class="booking-card reveal">
@@ -316,6 +320,11 @@ const reserva = [
   .calendly-inline-widget { height: 100%; min-height: 680px; }
 }
 </style>
+
+<script>
+  import { initStepsAnimation } from '../scripts/steps-animation';
+  document.addEventListener('astro:page-load', initStepsAnimation);
+</script>
 
 <script>
   function initCalendly() {

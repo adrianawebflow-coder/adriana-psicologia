@@ -3,6 +3,7 @@ import { CALENDLY_URL } from '../data/site';
 import Layout from '../layouts/Layout.astro';
 import CTAFinalSection from '../components/CTAFinalSection.astro';
 import { pasos } from '../data/pasos';
+import '../styles/steps-animation.css';
 import { faqs } from '../data/faqs';
 
 
@@ -23,7 +24,7 @@ import { faqs } from '../data/faqs';
   <section class="pasos">
     <div class="container">
       <h2 class="section-title reveal">Pasos</h2>
-      <div class="steps-wrap" id="stepsWrap">
+      <div class="steps-wrap steps-anim">
       <svg class="steps-path" aria-hidden="true"><path /></svg>
       <ol class="steps">
         {pasos.map((paso, i) => (
@@ -132,87 +133,9 @@ import { faqs } from '../data/faqs';
   position: relative;
 }
 
-/* ── Animación de entrada de los pasos ──
-   Al entrar en pantalla, una línea se dibuja uniendo los números (la
-   calcula el script según el layout) y cada paso aparece a su ritmo: el
-   número con un rebote y una onda, y el texto deslizándose. Sin JS o con
-   movimiento reducido, todo se ve directamente. */
 .steps-wrap {
-  position: relative;
   max-width: 640px;
   margin: 0 auto;
-}
-.steps-path {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-.steps-path path {
-  fill: none;
-  stroke: var(--color-clay-soft);
-  stroke-width: 2;
-  stroke-linecap: round;
-}
-
-.step-num::after {
-  content: '';
-  position: absolute;
-  inset: -1.5px;
-  border-radius: 50%;
-  border: 2px solid var(--color-moss);
-  opacity: 0;
-  pointer-events: none;
-}
-
-.js .steps-wrap .step-num {
-  opacity: 0;
-  transform: scale(0.3);
-}
-.js .steps-wrap .step-body {
-  opacity: 0;
-  transform: translateX(-20px);
-}
-.js .steps-wrap.is-in .step-num {
-  opacity: 1;
-  transform: none;
-  transition:
-    opacity 300ms ease calc(var(--i) * 380ms),
-    transform 650ms cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--i) * 380ms);
-  animation: step-fill 1100ms ease-out calc(var(--i) * 380ms) both;
-}
-.js .steps-wrap.is-in .step-num::after {
-  animation: step-ripple 900ms ease-out calc(var(--i) * 380ms + 200ms) both;
-}
-.js .steps-wrap.is-in .step-body {
-  opacity: 1;
-  transform: none;
-  transition:
-    opacity 500ms ease calc(var(--i) * 380ms + 150ms),
-    transform 650ms cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i) * 380ms + 150ms);
-}
-
-/* El número se enciende en musgo y vuelve a su estado normal. */
-@keyframes step-fill {
-  0%, 35% { background: var(--color-moss); color: #fff; border-color: var(--color-moss); }
-  100%    { background: #fff; color: var(--color-text-primary); border-color: var(--color-clay-soft); }
-}
-@keyframes step-ripple {
-  0%   { opacity: 0.6; transform: scale(1); }
-  100% { opacity: 0;   transform: scale(1.7); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .js .steps-wrap .step-num,
-  .js .steps-wrap .step-body {
-    opacity: 1;
-    transform: none;
-    transition: none;
-    animation: none;
-  }
-  .js .steps-wrap .step-num::after { animation: none; }
 }
 
 .pasos-btn {
@@ -360,71 +283,6 @@ import { faqs } from '../data/faqs';
 </style>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
-    const wrapEl = document.getElementById('stepsWrap');
-    const pathEl = wrapEl?.querySelector<SVGPathElement>('.steps-path path');
-    if (!wrapEl || !pathEl) return;
-    const wrap = wrapEl;
-    const path = pathEl;
-    const STAGGER = 380; // ms entre pasos; igual que --i * 380ms en el CSS
-
-    // Trazado que une los números: baja por la columna del número, cruza en
-    // horizontal por el hueco entre pasos (sin pisar el texto) y baja hasta
-    // el siguiente. En mobile los números están alineados: es una recta.
-    function draw() {
-      const box = wrap.getBoundingClientRect();
-      const steps = Array.from(wrap.querySelectorAll<HTMLElement>('.step'));
-      const pts = steps.map((step) => {
-        const n = step.querySelector('.step-num')!.getBoundingClientRect();
-        const body = step.querySelector('.step-body')!.getBoundingClientRect();
-        return {
-          x: n.left - box.left + n.width / 2,
-          y: n.top - box.top + n.height / 2,
-          top: step.getBoundingClientRect().top - box.top,
-          bottom: Math.max(n.bottom, body.bottom) - box.top,
-        };
-      });
-      if (pts.length < 2) return;
-      const R = 16;
-      let d = `M ${pts[0].x} ${pts[0].y}`;
-      for (let i = 1; i < pts.length; i++) {
-        const a = pts[i - 1];
-        const b = pts[i];
-        if (Math.abs(a.x - b.x) < 1) { d += ` V ${b.y}`; continue; }
-        const midY = (a.bottom + b.top) / 2;
-        const dir = Math.sign(b.x - a.x);
-        d += ` V ${midY - R} Q ${a.x} ${midY} ${a.x + dir * R} ${midY}`;
-        d += ` H ${b.x - dir * R} Q ${b.x} ${midY} ${b.x} ${midY + R} V ${b.y}`;
-      }
-      path.setAttribute('d', d);
-      const len = path.getTotalLength();
-      path.style.transition = 'none';
-      path.style.strokeDasharray = String(len);
-      path.style.strokeDashoffset = wrap.classList.contains('is-in') ? '0' : String(len);
-      return pts.length;
-    }
-
-    const count = draw() ?? 0;
-    new ResizeObserver(() => draw()).observe(wrap);
-
-    function play() {
-      wrap.classList.add('is-in');
-      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      void path.getBoundingClientRect();
-      path.style.transition = reduced ? 'none' : `stroke-dashoffset ${(count - 1) * STAGGER}ms linear 150ms`;
-      path.style.strokeDashoffset = '0';
-    }
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      play();
-      return;
-    }
-    const io = new IntersectionObserver((entries) => {
-      if (entries.some((e) => e.isIntersecting)) {
-        io.disconnect();
-        play();
-      }
-    }, { threshold: 0.25 });
-    io.observe(wrap);
-  });
+  import { initStepsAnimation } from '../scripts/steps-animation';
+  document.addEventListener('astro:page-load', initStepsAnimation);
 </script>
