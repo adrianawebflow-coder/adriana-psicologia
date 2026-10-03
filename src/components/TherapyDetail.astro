@@ -9,23 +9,23 @@ interface OtherService {
   href: string;
 }
 
-interface SectionListItem {
-  label: string;
+interface InfoBlock {
+  title: string;
   text: string;
 }
 
 interface Props {
   title: string;
-  lede: string;
-  sectionTitle: string;
-  sectionDesc: string;
-  sectionList?: SectionListItem[];
+  /** El primero va bajo el h1; el resto, en la columna derecha en desktop. */
+  blocks: InfoBlock[];
   price: string;
+  priceNote: string;
   bono: string;
   otherServices: OtherService[];
 }
 
-const { title, lede, sectionTitle, sectionDesc, sectionList, price, bono, otherServices } = Astro.props;
+const { title, blocks, price, priceNote, bono, otherServices } = Astro.props;
+const [firstBlock, ...restBlocks] = blocks;
 
 const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
 
@@ -41,20 +41,20 @@ const despachoImages = Object.keys(despachoModules)
 
 <section class="therapy-hero">
   <div class="therapy-hero-inner">
-    <div>
+    <div class="hero-col">
       <h1 transition:name="hero-title">{title}</h1>
-      <p class="lede">{lede}</p>
+      <div class="hero-block">
+        <h2>{firstBlock.title}</h2>
+        <p class="desc">{firstBlock.text}</p>
+      </div>
     </div>
-    <div>
-      <h2>{sectionTitle}</h2>
-      <p class="desc">{sectionDesc}</p>
-      {sectionList && (
-        <ul class="section-list">
-          {sectionList.map((item) => (
-            <li><b>{item.label}</b>: {item.text}</li>
-          ))}
-        </ul>
-      )}
+    <div class="hero-col">
+      {restBlocks.map((b) => (
+        <div class="hero-block">
+          <h2>{b.title}</h2>
+          <p class="desc">{b.text}</p>
+        </div>
+      ))}
     </div>
   </div>
 </section>
@@ -154,6 +154,7 @@ const despachoImages = Object.keys(despachoModules)
     <div class="panel-card">
       <p class="price-label">Precio</p>
       <p class="price-value">{price}</p>
+      <p class="price-note">{priceNote}</p>
 
       <p class="bono-title">
         <span class="badge-icon" aria-hidden="true">
@@ -218,12 +219,10 @@ const despachoImages = Object.keys(despachoModules)
   color: var(--color-text-primary);
   margin: 0;
 }
-.therapy-hero .lede {
-  font-family: var(--font-sans);
-  font-size: var(--fs-body);
-  line-height: 1.5;
-  color: var(--color-text-secondary);
-  margin: 8px 0 0;
+.hero-col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 .therapy-hero h2 {
   font-family: var(--font-serif);
@@ -236,35 +235,10 @@ const despachoImages = Object.keys(despachoModules)
 .therapy-hero .desc {
   font-family: var(--font-sans);
   font-size: var(--fs-body);
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--color-text-secondary);
   margin: 8px 0 0;
-}
-.section-list {
-  list-style: none;
-  margin: 16px 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.section-list li {
-  position: relative;
-  padding-left: 20px;
-  font-family: var(--font-sans);
-  font-size: var(--fs-body);
-  line-height: 1.5;
-  color: var(--color-text-secondary);
-}
-.section-list li::before {
-  content: "•";
-  position: absolute;
-  left: 2px;
-  color: var(--color-text-primary);
-}
-.section-list b {
-  font-weight: var(--fw-semi);
-  color: var(--color-text-primary);
+  max-width: 62ch;
 }
 
 .therapy-info {
@@ -539,6 +513,13 @@ const despachoImages = Object.keys(despachoModules)
   font-size: 22px;
   color: var(--color-text-primary);
   margin: 0;
+}
+.price-note {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 4px 0 0;
 }
 
 .badge-icon {

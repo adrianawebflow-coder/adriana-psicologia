@@ -8,11 +8,12 @@ const tabs = [
     id: 'individual',
     label: 'Individual',
     price: 'Desde 70 €/sesión',
+    priceNote: 'En bono de 4 sesiones. Citas sueltas: 80 €.',
     bono: '280 € por 4 sesiones',
     details: [
       'Duración: 55 minutos',
       'Frecuencia: semanal o quincenal',
-      'Primera sesión: 40 minutos, 30 € (gratuita si inicias el tratamiento)',
+      'Evaluación gratuita en caso de iniciar el tratamiento',
       'Modalidad: presencial, online o mixta',
     ],
   },
@@ -20,11 +21,12 @@ const tabs = [
     id: 'parejas',
     label: 'Parejas',
     price: 'Desde 80 €/sesión',
+    priceNote: 'En bono de 4 sesiones. Citas sueltas: 90 €.',
     bono: '320 € por 4 sesiones',
     details: [
       'Duración: 55 minutos',
       'Frecuencia: semanal o quincenal',
-      'Primera sesión: 40 minutos, 30 € (gratuita si inicias el tratamiento)',
+      'Evaluación gratuita en caso de iniciar el tratamiento',
       'Modalidad: presencial, online o mixta',
     ],
   },
@@ -32,11 +34,12 @@ const tabs = [
     id: 'familias',
     label: 'Familias',
     price: 'Desde 90 €/sesión',
+    priceNote: 'En bono de 4 sesiones. Citas sueltas: 100 €.',
     bono: '360 € por 4 sesiones',
     details: [
       'Duración: 55 minutos',
       'Frecuencia: semanal o quincenal',
-      'Primera sesión: 40 minutos, 30 € (gratuita si inicias el tratamiento)',
+      'Evaluación gratuita en caso de iniciar el tratamiento',
       'Modalidad: presencial, online o mixta',
     ],
   },
@@ -110,6 +113,7 @@ const initial = tabs[0].id;
             <div class="card">
               <p class="price-label">Precio</p>
               <p class="price-value">{tab.price}</p>
+              <p class="price-note">{tab.priceNote}</p>
               <ul class="details-list">
                 {tab.details.map((d) => <li>{d}</li>)}
               </ul>
@@ -292,6 +296,13 @@ const initial = tabs[0].id;
   font-weight: var(--fw-semi);
   font-size: 22px;
   color: var(--color-text-primary);
+  margin: 0 0 4px;
+}
+.price-note {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
   margin: 0 0 16px;
 }
 .details-list {

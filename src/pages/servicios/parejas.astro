@@ -5,19 +5,26 @@ import TherapyDetail from '../../components/TherapyDetail.astro';
 
 <Layout
   title="Terapia de parejas"
-  description="Las parejas y sus diferentes configuraciones pueden conllevar problemas de relación, comunicación y conflictos conyugales. La terapia ofrece un espacio de diálogo donde aprender a resolverlos."
+  description="Un espacio para comprender qué está ocurriendo en la relación, identificar los patrones que se producen entre vosotros y encontrar nuevas formas de comunicación."
 >
   <TherapyDetail
     title="Terapia de parejas"
-    lede="Las parejas y sus diferentes configuraciones pueden conllevar problemas de relación, comunicación y conflictos conyugales. La terapia ofrece un espacio de diálogo donde aprender a resolverlos."
-    sectionTitle="Áreas de trabajo en pareja"
-    sectionDesc="Muchas parejas atraviesan crisis y las resuelven con éxito gracias a herramientas de comunicación afectiva y asertiva. La terapia ofrece el espacio para desarrollarlas."
-    sectionList={[
-      { label: 'Conyugalidad', text: 'crisis, comunicación, acuerdos y desacuerdos en el ámbito de la pareja como unidad.' },
-      { label: 'Ciclo vital', text: 'los hitos que atravesamos juntos: matrimonio, paternidad, separación, duelos, cambios.' },
-      { label: 'Sexualidad', text: 'dificultades en el deseo, la intimidad o las disfunciones sexuales dentro de la relación.' },
+    blocks={[
+      {
+        title: '¿En qué consiste la terapia de pareja?',
+        text: 'Es un espacio en el que comprender qué está ocurriendo en la relación y qué dinámicas están contribuyendo al malestar, para ayudaros a identificar los patrones que se producen entre vosotros, comprender las necesidades de cada miembro y encontrar nuevas formas de comunicación.',
+      },
+      {
+        title: '¿Qué puedes esperar?',
+        text: 'Exploraremos vuestra historia, el momento actual, las principales dificultades y las expectativas de cada uno. Trabajaremos especialmente sobre la dinámica relacional, favoreciendo la comunicación, la comprensión mutua y encontrando formas más satisfactorias de vinculación. En algunos casos también puede ayudar a tomar decisiones o acompañar hacia una separación de una manera más consciente y respetuosa.',
+      },
+      {
+        title: '¿En qué puede ayudar?',
+        text: 'Ante conflictos recurrentes, dificultades de comunicación, distanciamiento emocional, problemas de confianza, diferencias en las necesidades afectivas, cambios importantes en la relación, crisis de pareja o dificultades para tomar decisiones sobre su continuidad.',
+      },
     ]}
     price="Desde 80 €/sesión"
+    priceNote="En bono de 4 sesiones. Citas sueltas: 90 €."
     bono="320 € por 4 sesiones"
     otherServices={[
       { tag: 'Individual', title: 'Busco ayuda para sentirme mejor', desc: 'Sientes que algo no va bien, pero no sabes explicarlo.', href: '/servicios/individual' },

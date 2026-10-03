@@ -14,10 +14,11 @@ const tabs = [
     details: [
       'Duración: 55 minutos',
       'Frecuencia: semanal o quincenal',
-      'Primera sesión: 40 minutos, 30 € (gratuita si inicias el tratamiento)',
+      'Evaluación gratuita en caso de iniciar el tratamiento',
       'Modalidad: presencial, online o mixta',
     ],
     price: 'Desde 70 €/sesión',
+    priceNote: 'En bono de 4 sesiones. Citas sueltas: 80 €.',
     bono: '280 € por 4 sesiones',
     href: '/servicios/individual',
     collage: collageIndividual,
@@ -30,10 +31,11 @@ const tabs = [
     details: [
       'Duración: 55 minutos',
       'Frecuencia: semanal o quincenal',
-      'Primera sesión: 40 minutos, 30 € (gratuita si inicias el tratamiento)',
+      'Evaluación gratuita en caso de iniciar el tratamiento',
       'Modalidad: presencial, online o mixta',
     ],
     price: 'Desde 80 €/sesión',
+    priceNote: 'En bono de 4 sesiones. Citas sueltas: 90 €.',
     bono: '320 € por 4 sesiones',
     href: '/servicios/parejas',
     collage: collageParejas,
@@ -46,10 +48,11 @@ const tabs = [
     details: [
       'Duración: 55 minutos',
       'Frecuencia: semanal o quincenal',
-      'Primera sesión: 40 minutos, 30 € (gratuita si inicias el tratamiento)',
+      'Evaluación gratuita en caso de iniciar el tratamiento',
       'Modalidad: presencial, online o mixta',
     ],
     price: 'Desde 90 €/sesión',
+    priceNote: 'En bono de 4 sesiones. Citas sueltas: 100 €.',
     bono: '360 € por 4 sesiones',
     href: '/servicios/familias',
     collage: collageFamilias,
@@ -136,6 +139,7 @@ const initialCtaExternal = !initialTab.href;
               <div class="card reveal">
                 <p class="price-label">Precio</p>
                 <p class="price-value">{tab.price}</p>
+                <p class="price-note">{tab.priceNote}</p>
               </div>
 
               <div class="card reveal bono-card">
@@ -334,6 +338,11 @@ const initialCtaExternal = !initialTab.href;
   color: var(--color-text-primary);
   margin: 0;
 }
+.card .price-note {
+  font-size: var(--fs-body-sm);
+  line-height: 1.5;
+  margin: 4px 0 0;
+}
 
 .bono-card { display: flex; flex-direction: column; gap: 8px; }
 .card .bono-title {
@@ -436,7 +445,7 @@ const initialCtaExternal = !initialTab.href;
   }
   .tabs-container { display: flex; flex-direction: column; gap: 20px; }
   .tabs-container .tab { font-size: var(--fs-body); padding-bottom: 12px; }
-  .tabs-container .card p:not(.price-label):not(.price-value):not(.bono-title) { font-size: 15px; }
+  .tabs-container .card p:not(.price-label):not(.price-value):not(.price-note):not(.bono-title) { font-size: 15px; }
   .cta-desktop { display: flex; }
   .cta-mobile { display: none; }
 }

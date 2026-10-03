@@ -5,19 +5,26 @@ import TherapyDetail from '../../components/TherapyDetail.astro';
 
 <Layout
   title="Terapia de familia"
-  description="Se refiere al restablecimiento del equilibrio del sistema cuando surgen tensiones en las relaciones entre los familiares."
+  description="Terapia para observar las dinámicas, los roles y los patrones de comunicación que contribuyen al malestar familiar, y construir nuevas formas de relacionarse."
 >
   <TherapyDetail
     title="Terapia de familia"
-    lede="Se refiere al restablecimiento del equilibrio del sistema cuando surgen tensiones en las relaciones entre los familiares."
-    sectionTitle="Áreas de trabajo familiar"
-    sectionDesc="Todas las familias tienen conflictos. La diferencia está en contar con las herramientas para resolverlos y promover actitudes de autocuidado en el vínculo."
-    sectionList={[
-      { label: 'Conflictos', text: 'herencias, divorcios, infidelidades, duelos, migraciones. La terapia ofrece herramientas para resolverlos.' },
-      { label: 'Roles disfuncionales', text: 'hijos que actúan como padres, bandos enfrentados. Roles que no encajan generan distanciamientos no deseados.' },
-      { label: 'Parentalidad', text: 'desacuerdos en criterios de educación, dificultad para poner límites, diferencias en el cuidado de los hijos.' },
+    blocks={[
+      {
+        title: '¿En qué consiste la terapia familiar?',
+        text: 'El trabajo terapéutico permite observar las dinámicas familiares, los roles, los patrones de comunicación y las formas de relacionarse que pueden estar contribuyendo al malestar de uno o varios miembros de la familia.',
+      },
+      {
+        title: '¿Qué puedes esperar?',
+        text: 'Se trabaja para lograr una mayor comprensión entre los miembros de la familia, mejorar la comunicación, flexibilizar dinámicas que generan conflicto y construir nuevas formas de relacionarse. Según las necesidades del proceso, pueden realizarse sesiones con toda la familia o con alguno de sus miembros.',
+      },
+      {
+        title: '¿En qué puede ayudar?',
+        text: 'Puede ser especialmente útil ante conflictos familiares, dificultades de comunicación, problemas de convivencia, etapas de cambio, separaciones, dificultades relacionadas con hijos adolescentes o cuando el malestar de uno de los miembros está afectando al conjunto de la familia.',
+      },
     ]}
     price="Desde 90 €/sesión"
+    priceNote="En bono de 4 sesiones. Citas sueltas: 100 €."
     bono="360 € por 4 sesiones"
     otherServices={[
       { tag: 'Individual', title: 'Busco ayuda para sentirme mejor', desc: 'Sientes que algo no va bien, pero no sabes explicarlo.', href: '/servicios/individual' },
