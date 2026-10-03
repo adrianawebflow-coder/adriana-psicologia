@@ -337,6 +337,10 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
+/* En mobile, mismo margen lateral (16px) que la tarjeta del hero. */
+@media (max-width: 620px) {
+  .container { padding: 0 16px; }
+}
 
 .section-title {
   font-family: var(--font-serif);
@@ -368,7 +372,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
 /* ── Hero ── */
 .hero {
   background: var(--color-bg-base);
-  padding: 0 0 40px;
+  padding: 0 0 80px;
 }
 
 .hero-stage {
@@ -560,7 +564,6 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
 /* Enfoque */
 .enfoque-list {
   display: grid;
-  grid-auto-rows: 1fr;
   gap: 24px;
 }
 
@@ -576,7 +579,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
   flex-direction: column;
   gap: 8px;
 }
-/* Mismo ancho y alto en las tres (grid-auto-rows: 1fr); el escalonado
+/* Mismo ancho en las tres y alto según su contenido; el escalonado
    se reparte en los 80px que se restan al ancho. */
 .enfoque-card:nth-child(2) { margin-left: 40px; }
 .enfoque-card:nth-child(3) { margin-left: 80px; }

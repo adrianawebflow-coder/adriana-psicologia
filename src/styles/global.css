@@ -22,6 +22,14 @@ body {
   max-width: 100%;
 }
 
+/* iOS Safari puede seguir permitiendo arrastrar en horizontal con solo
+   overflow-x: hidden en body. clip recorta sin crear contenedor de scroll
+   (no rompe position: sticky); va en ambos para que body no se convierta
+   en contenedor de scroll al dejar de propagar su overflow al viewport. */
+@supports (overflow: clip) {
+  html, body { overflow-x: clip; }
+}
+
 img, video { max-width: 100%; display: block; }
 
 a { color: inherit; text-decoration: none; }
