@@ -141,7 +141,7 @@ function renderText(text: string): string {
         <Image
           src={heroImg}
           widths={[400, Math.min(heroImg.width, 1000)]}
-          sizes="(min-width: 900px) 50vw, 100vw"
+          sizes="(min-width: 1010px) 443px, (min-width: 900px) calc(50vw - 62px), calc(100vw - 40px)"
           format="webp"
           alt=""
           loading="eager"
@@ -265,10 +265,11 @@ function renderText(text: string): string {
 .post-hero-image {
   margin: 0;
 }
+/* Cada imagen en su proporción real (casi todas son apaisadas, ~1,69):
+   forzarlas a 4:3 las ampliaba y recortaba los lados. */
 .post-hero-image img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
   border-radius: var(--radius-lg);
   display: block;
 }
