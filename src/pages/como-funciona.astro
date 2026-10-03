@@ -2,31 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import CTAFinalSection from '../components/CTAFinalSection.astro';
 import { pasos } from '../data/pasos';
+import { faqs } from '../data/faqs';
 
 const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
 
-const faqs = [
-  {
-    q: '¿Cuánto dura el proceso?',
-    a: 'Depende de cada persona y de lo que la trae a terapia. Algunos procesos duran unos meses y otros, más tiempo. Lo iremos revisando de forma periódica.',
-  },
-  {
-    q: '¿Con qué frecuencia nos vemos?',
-    a: 'Normalmente, una sesión semanal o quincenal de 55 minutos. La frecuencia se acuerda en la propuesta de tratamiento y puede ajustarse a medida que avanza el proceso.',
-  },
-  {
-    q: '¿Es confidencial?',
-    a: 'Sí. Todo lo que compartas en sesión está protegido por el secreto profesional, salvo en las excepciones que marca la ley, como un riesgo grave para ti o para terceros.',
-  },
-  {
-    q: '¿Qué pasa si quiero dejarlo?',
-    a: 'Puedes dejar la terapia cuando lo decidas. Lo ideal es hablarlo en sesión, para cerrar el proceso de forma cuidada y valorar juntos cómo estás.',
-  },
-  {
-    q: '¿Necesito un diagnóstico previo?',
-    a: 'No. No necesitas un diagnóstico ni saber exactamente qué te pasa para empezar. En la sesión de evaluación exploraremos juntos qué te trae a consulta.',
-  },
-];
 ---
 
 <Layout

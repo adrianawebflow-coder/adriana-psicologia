@@ -2,31 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import CTAFinalSection from '../components/CTAFinalSection.astro';
 import { pasos } from '../data/pasos';
+import { faqs } from '../data/faqs';
 
 const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/15-20min';
 
-const faqs = [
-  {
-    q: '¿Cómo sé si la terapia me va a funcionar?',
-    a: 'No hay garantías, pero sí una primera sesión pensada para que puedas evaluarlo: ahí conoces mi forma de trabajar y decides si conectamos. Si después de unas sesiones no notas avances, lo hablamos y ajustamos el enfoque.',
-  },
-  {
-    q: '¿Cuánto tiempo dura el proceso?',
-    a: 'Depende de cada persona y de lo que traiga a terapia. Algunos procesos duran unos meses, otros más tiempo. Lo revisamos juntas periódicamente.',
-  },
-  {
-    q: '¿Puedo cambiar de online a presencial?',
-    a: 'Sí, puedes alternar entre modalidad online y presencial cuando lo necesites, avisando con antelación para organizar la sesión.',
-  },
-  {
-    q: '¿Es confidencial?',
-    a: 'Sí. Todo lo que compartas en sesión está protegido por el secreto profesional, salvo en las excepciones que marca la ley, como un riesgo grave para ti o para terceros.',
-  },
-  {
-    q: '¿Qué pasa si tengo que cancelar?',
-    a: 'Puedes cancelar o reprogramar sin coste si avisas con al menos 24 horas de antelación.',
-  },
-];
 ---
 
 <Layout
