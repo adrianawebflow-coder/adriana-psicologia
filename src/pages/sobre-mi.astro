@@ -16,7 +16,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
 
 <Layout
   title="Sobre mí"
-  description="Conoce a Adriana Esteban Labelle, psicóloga colegiada en Madrid. Su historia, enfoque terapéutico y experiencia."
+  description="Conoce a Adriana Esteban Labelle, psicóloga colegiada en Madrid. Su formación, enfoque terapéutico y colaboraciones."
 >
 
   <!-- ══ HERO: foto + tarjeta carrusel "Mi historia" ════════ -->
@@ -36,25 +36,18 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
       <article class="hero-card sm-hero-card">
         <div class="hero-body">
           <h1 class="sr-only">Sobre mí</h1>
-          <p class="hero-title" id="heroTitle" aria-hidden="true" transition:name="hero-title">Mi historia</p>
+          <p class="hero-title" id="heroTitle" aria-hidden="true" transition:name="hero-title">Mi formación profesional</p>
           <p class="sr-only" id="heroStatus" aria-live="polite"></p>
 
           <div class="hero-track" id="heroTrack">
-            <div class="hero-slide" data-title="Mi historia">
-              <h2 class="sr-only">Mi historia</h2>
+            <div class="hero-slide" data-title="Mi formación profesional">
+              <h2 class="sr-only">Mi formación profesional</h2>
               <p>
-                Soy Adriana Esteban Labelle, psicóloga general sanitaria, terapeuta
-                familiar y de pareja y mediadora acreditada por la Universidad
-                Francisco de Vitoria y el Instituto de Psicoterapia Familiar
-                Sistémica y Adicciones.
-              </p>
-            </div>
-            <div class="hero-slide" data-title="Mi formación">
-              <h2 class="sr-only">Mi formación</h2>
-              <p>
-                Cuento con formación especializada en trastornos de la conducta
-                alimentaria y terapia sistémica, áreas en las que he desarrollado
-                gran parte de mi experiencia clínica.
+                Soy psicóloga general sanitaria, mediadora, terapeuta familiar y
+                de pareja y experta en trastornos de la conducta alimentaria
+                (TCA), acreditada por la Universidad Francisco de Vitoria (UFV)
+                y el Instituto de Psicoterapia Familiar Sistémica y Adicciones
+                (ITAD).
               </p>
             </div>
             <div class="hero-slide" data-title="Mi trayectoria">
@@ -110,71 +103,49 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
     </div>
   </section>
 
-  <!-- ══ MI ENFOQUE + MI EXPERIENCIA ══════════════════════════════ -->
+  <!-- ══ MI ENFOQUE ══════════════════════════════════════════════ -->
+  <!-- Desktop: título, intro y LinkedIn a la izquierda; cards a la derecha.
+       Mobile: título, intro, cards y LinkedIn al final. -->
   <section class="twocol" id="enfoque">
     <div class="container">
       <div class="twocol-grid">
 
-        <!-- Enfoque -->
-        <div>
+        <div class="enfoque-head">
           <h2 class="section-title reveal">Mi enfoque</h2>
           <p class="twocol-intro reveal">
-            No hay dos procesos iguales. Escucho, respeto tus tiempos y trabajo con lo que tiene respaldo científico.
-
-
+            Entiendo la terapia desde una mirada integradora. Cada persona,
+            historia y momento requieren una forma diferente de acompañar,
+            razón por la cual adapto el proceso terapéutico a las necesidades
+            de cada individuo.
           </p>
-          <div class="enfoque-list">
-            <article class="enfoque-card reveal">
-              <h3>Sin juicios</h3>
-              <p>Tu historia es tuya. Yo solo te ayudo a mirarla desde otro ángulo.</p>
-            </article>
-            <article class="enfoque-card reveal">
-              <h3>A tu ritmo</h3>
-              <p>Cada proceso terapéutico es diferente. No hay prisa ni plazos fijos.</p>
-            </article>
-            <article class="enfoque-card reveal">
-              <h3>Basado en evidencia</h3>
-              <p>Terapia cognitivo-conductual y otras técnicas con respaldo científico.</p>
-            </article>
-          </div>
         </div>
 
-        <!-- Experiencia -->
-        <div class="exp-col">
-          <h2 class="section-title reveal">Mi experiencia</h2>
-          <div class="exp-timeline reveal">
-            <div class="rail" aria-hidden="true"><i></i><b></b></div>
-            <div class="exp-blocks">
-              <div>
-                <h3>Formación</h3>
-                <ul>
-                  <li>Grado en Psicología — Universidad Complutense de Madrid</li>
-                  <li>Máster en Psicología Sanitaria</li>
-                  <li>Formación especializada en TCA</li>
-                </ul>
-              </div>
-              <div>
-                <h3>Trayectoria</h3>
-                <ul>
-                  <li>Alimentación 3S</li>
-                  <li>Instituto Superior de Estudios Psicológicos (ISEP)</li>
-                  <li>Despacho privado en el barrio de Hortaleza, Madrid</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="exp-cta reveal">
-            <a
-              class="btn btn-primary"
-              href="https://www.linkedin.com/in/adriana-esteban-labelle/"
-              target="_blank"
-              rel="noopener"
-            >
-              <span class="lbl-wide">Ver mi perfil en LinkedIn</span>
-              <span class="lbl-narrow">Ver LinkedIn →</span>
-              <span class="sr-only"> (se abre en una pestaña nueva)</span>
-            </a>
-          </div>
+        <div class="enfoque-list">
+          <article class="enfoque-card reveal">
+            <h3>Comprender más allá del síntoma</h3>
+            <p>No trabajo únicamente sobre aquello que genera malestar. Buscamos comprender qué función tiene, cómo se ha construido y qué papel desempeñan tu historia, vínculos y contexto en lo que estás viviendo.</p>
+          </article>
+          <article class="enfoque-card reveal">
+            <h3>Espacio seguro libre de juicio</h3>
+            <p>La terapia es el lugar en el que poder expresarte con libertad, sentirte escuchado y explorar incluso aquello que resulta difícil nombrar, desde el cariño, el respeto y la confianza.</p>
+          </article>
+          <article class="enfoque-card reveal">
+            <h3>Adaptado al ritmo que necesites</h3>
+            <p>Iremos ajustando los objetivos, las herramientas y el ritmo de la terapia a tus necesidades.</p>
+          </article>
+        </div>
+
+        <div class="exp-cta reveal">
+          <a
+            class="btn btn-primary"
+            href="https://www.linkedin.com/in/adriana-esteban-labelle/"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="lbl-wide">Ver mi perfil en LinkedIn</span>
+            <span class="lbl-narrow">Ver LinkedIn →</span>
+            <span class="sr-only"> (se abre en una pestaña nueva)</span>
+          </a>
         </div>
 
       </div>
@@ -190,7 +161,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
       <div class="colab-inner">
         <h2 class="section-title reveal">Colaboraciones</h2>
         <p class="reveal">
-          Hay procesos donde es recomendable el abordaje multidisciplinar. Cuando hace falta, trabajo coordinada con otros profesionales.
+          En ocasiones existe la necesidad de realizar un abordaje multidisciplinar, incluyendo en el proceso la coordinación con otros profesionales de la salud.
         </p>
 
         <div class="colab-carousel reveal">
@@ -561,7 +532,7 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
   }
 }
 
-/* ── Mi enfoque + Mi experiencia ── */
+/* ── Mi enfoque ── */
 .twocol {
   background: var(--color-bg-soft);
   padding: 40px 0;
@@ -570,15 +541,19 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
 .twocol-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 40px;
+  grid-template-areas: "head" "list" "cta";
+  gap: 32px;
 }
+.enfoque-head { grid-area: head; }
+.enfoque-list { grid-area: list; }
+.exp-cta      { grid-area: cta; }
 
 .twocol-intro {
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 26px;
   color: var(--color-text-secondary);
-  margin: 0 0 32px;
+  margin: 0;
   max-width: 44ch;
 }
 
@@ -627,81 +602,18 @@ const [colab1, colab2, colab3, colab4] = await Promise.all(
   margin: 0;
 }
 
-/* Experiencia timeline */
-.exp-timeline {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0 8px;
-  align-items: stretch;
-}
-
-.rail {
-  position: relative;
-  width: 28px;
-}
-.rail i {
-  position: absolute;
-  left: 5px;
-  top: 8px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--color-moss);
-}
-.rail b {
-  position: absolute;
-  left: 11px;
-  top: 25px;
-  bottom: 0;
-  width: 6px;
-  background: linear-gradient(180deg, var(--color-moss) 0%, var(--color-moss-soft) 100%);
-}
-
-.exp-blocks {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.exp-blocks h3 {
-  font-family: var(--font-sans);
-  font-size: 18px;
-  font-weight: var(--fw-semi);
-  color: var(--color-text-primary);
-  margin: 0 0 12px;
-  line-height: 30px;
-}
-
-.exp-blocks ul {
-  list-style: disc;
-  padding-left: 20px;
-  margin: 0;
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 26px;
-  color: var(--color-text-secondary);
-}
-.exp-blocks li::marker {
-  color: var(--color-moss);
-}
-
-.exp-cta {
-  margin-top: 32px;
-}
 .exp-cta .lbl-wide { display: none; }
 
 @media (min-width: 960px) {
   .twocol-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
+    grid-template-columns: 5fr 7fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "head list" "cta list";
+    gap: 32px 64px;
     max-width: 1160px;
     margin: 0 auto;
   }
-  .enfoque-list { max-width: 460px; }
-  .exp-cta {
-    display: flex;
-    justify-content: center;
-  }
+  .exp-cta { align-self: start; }
   .exp-cta .lbl-wide { display: inline; }
   .exp-cta .lbl-narrow { display: none; }
 }
