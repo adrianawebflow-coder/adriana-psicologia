@@ -1,0 +1,295 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { CALENDLY_URL } from '../data/site';
+
+// Se muestra para cualquier dirección que no exista (Cloudflare la sirve con
+// estado 404: ver not_found_handling en wrangler.jsonc).
+const atajos = [
+  { href: '/servicios', label: 'Servicios', desc: 'Terapia individual, de pareja y familiar' },
+  { href: '/como-funciona', label: 'Cómo funciona', desc: 'El proceso desde el primer contacto' },
+  { href: '/precio', label: 'Precio', desc: 'Citas sueltas y bonos descuento' },
+  { href: '/sobre-mi', label: 'Sobre mí', desc: 'Mi formación y mi enfoque' },
+  { href: '/blog', label: 'Blog', desc: 'Artículos sobre salud mental' },
+  { href: '/contacto', label: 'Contacto', desc: 'Reserva tu cita de evaluación' },
+];
+---
+
+<Layout
+  title="Página no encontrada"
+  description="La página que buscas no existe o ha cambiado de dirección."
+  noindex
+>
+  <section class="nf">
+    <span class="blob b1" aria-hidden="true"></span>
+    <span class="blob b2" aria-hidden="true"></span>
+
+    <div class="nf-inner">
+      <div class="nf-art" aria-hidden="true">
+        <svg class="nf-sea" viewBox="0 -96 320 216" fill="none">
+          <text class="nf-code" x="160" y="44" text-anchor="middle">404</text>
+          <g class="boat">
+            <path d="M118 62 L202 62 L188 80 L132 80 Z" fill="var(--color-clay)" />
+            <path d="M160 18 L160 62 L128 62 Z" fill="var(--color-clay-soft)" />
+            <path d="M160 26 L160 62 L188 62 Z" fill="#fff" stroke="var(--color-clay-soft)" stroke-width="1.5" stroke-linejoin="round" />
+            <path d="M160 14 L160 64" stroke="var(--color-clay-text)" stroke-width="2" stroke-linecap="round" />
+          </g>
+          <g class="waves">
+            <path class="wave w1" d="M-80 84 q20 -10 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" stroke="var(--color-moss)" stroke-width="3" stroke-linecap="round" />
+            <path class="wave w2" d="M-80 98 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" stroke="var(--color-moss-light)" stroke-width="3" stroke-linecap="round" />
+            <path class="wave w3" d="M-80 110 q20 -6 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" stroke="var(--color-moss-soft)" stroke-width="3" stroke-linecap="round" />
+          </g>
+        </svg>
+      </div>
+
+      <p class="nf-eyebrow">Error 404 · Página no encontrada</p>
+      <h1 transition:name="hero-title">Parece que nos hemos desviado del rumbo</h1>
+      <p class="nf-lede">
+        La página que buscas no existe o ha cambiado de dirección.
+        No pasa nada: desde aquí puedes retomar el camino.
+      </p>
+
+      <div class="nf-ctas">
+        <a class="btn btn-primary" href="/">Volver al inicio</a>
+        <a class="btn btn-secondary" href={CALENDLY_URL} target="_blank" rel="noopener">Reserva tu cita aquí</a>
+      </div>
+
+      <nav class="nf-links" aria-labelledby="nf-links-title">
+        <h2 id="nf-links-title">Quizá buscabas…</h2>
+        <ul role="list">
+          {atajos.map((a) => (
+            <li>
+              <a href={a.href}>
+                <span class="nf-link-body">
+                  <span class="nf-link-label">{a.label}</span>
+                  <span class="nf-link-desc">{a.desc}</span>
+                </span>
+                <span class="chev" aria-hidden="true">
+                  <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+                    <path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </section>
+</Layout>
+
+<style>
+.nf {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg-base);
+  padding: 40px 16px 72px;
+}
+
+/* Manchas decorativas, como en el resto de secciones de la web. */
+.blob {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+}
+.b1 {
+  width: 420px;
+  height: 640px;
+  left: -180px;
+  top: -120px;
+  background: radial-gradient(closest-side, rgba(200, 217, 194, 0.45), transparent 72%);
+  transform: rotate(-18deg);
+}
+.b2 {
+  width: 360px;
+  height: 520px;
+  right: -160px;
+  bottom: -80px;
+  background: radial-gradient(closest-side, rgba(232, 213, 200, 0.55), transparent 72%);
+  transform: rotate(32deg);
+}
+
+.nf-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ── Ilustración ── */
+.nf-art {
+  position: relative;
+  width: min(100%, 360px);
+  margin: 0 auto 24px;
+}
+.nf-code {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 138px;
+  letter-spacing: -0.04em;
+  fill: var(--color-clay-soft);
+  user-select: none;
+}
+.nf-sea {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.boat {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: bob 4.2s ease-in-out infinite;
+}
+.wave { animation: drift 6s linear infinite; }
+.w2 { animation-duration: 8s; animation-direction: reverse; }
+.w3 { animation-duration: 10s; }
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50%      { transform: translateY(5px) rotate(4deg); }
+}
+/* Cada ola se repite cada 80px: desplazarla ese tramo hace el bucle continuo. */
+@keyframes drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(80px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boat, .wave { animation: none; }
+}
+
+/* ── Texto ── */
+.nf-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-clay-text);
+  margin: 0 0 12px;
+}
+.nf h1 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: clamp(28px, 7vw, 44px);
+  line-height: 1.15;
+  letter-spacing: var(--ls-tight);
+  color: var(--color-text-primary);
+  margin: 0 auto 16px;
+  max-width: 18ch;
+}
+.nf-lede {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-lg);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 auto 32px;
+  max-width: 46ch;
+}
+
+/* ── Botones (mismos que el hero de la portada) ── */
+.nf-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 56px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semi);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 120ms ease, background var(--transition-fast);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--color-moss); color: var(--color-text-inverse); }
+.btn-primary:hover { background: var(--color-moss-hover); color: var(--color-text-inverse); }
+.btn-secondary { background: var(--color-clay-text); color: var(--color-text-inverse); }
+.btn-secondary:hover { background: var(--color-clay-hover); color: var(--color-text-inverse); }
+@media (max-width: 480px) {
+  .nf-ctas { flex-direction: column; align-items: stretch; }
+}
+
+/* ── Atajos ── */
+.nf-links h2 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-h3);
+  color: var(--color-text-primary);
+  margin: 0 0 20px;
+}
+.nf-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  text-align: left;
+}
+@media (min-width: 640px) {
+  .nf-links ul { grid-template-columns: 1fr 1fr; }
+}
+.nf-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 100%;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid var(--color-moss-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+.nf-links a:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-moss);
+  box-shadow: var(--shadow-md);
+}
+.nf-link-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.nf-link-label {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body);
+  color: var(--color-text-primary);
+}
+.nf-link-desc {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+}
+.chev {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-moss-soft);
+  color: var(--color-moss);
+  display: grid;
+  place-items: center;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.nf-links a:hover .chev { background: var(--color-moss); color: #fff; }
+
+@media (min-width: 900px) {
+  .nf { padding: 64px 32px 100px; }
+}
+</style>

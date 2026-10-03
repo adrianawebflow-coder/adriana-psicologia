@@ -5,6 +5,8 @@
     "directory": "./dist",
     // /contacto/index.html se sirve en /contacto (y /contacto/ redirige ahí),
     // que es la URL canónica de cada página.
-    "html_handling": "drop-trailing-slash"
+    "html_handling": "drop-trailing-slash",
+    // Cualquier ruta inexistente muestra dist/404.html con estado 404.
+    "not_found_handling": "404-page"
   }
 }
