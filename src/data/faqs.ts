@@ -3,7 +3,7 @@
 export const faqs = [
   {
     q: '¿Cuánto tiempo necesitaré en terapia?',
-    a: 'No existe una duración determinada. Dependerá de aquello que vayamos a trabajar, de su complejidad y de cómo evolucione el proceso. Revisaremos periódicamente tus objetivos y avances para valorar junt@s qué necesitas.',
+    a: 'No existe una duración determinada. Dependerá de aquello que vayamos a trabajar, de su complejidad y de cómo evolucione el proceso. Revisaremos periódicamente tus objetivos y avances para valorar qué necesitas.',
   },
   {
     q: '¿Cada cuánto tiempo tendremos sesión?',
@@ -19,10 +19,10 @@ export const faqs = [
   },
   {
     q: '¿Puedo dejar la terapia cuando quiera?',
-    a: 'Por supuesto. La decisión de continuar o finalizar el tratamiento es tuya. Siempre que sea posible, es recomendable dedicar una sesión a hablar sobre la decisión y realizar un cierre adecuado al proceso, especialmente si llevamos tiempo trabajando junt@s.',
+    a: 'Por supuesto. La decisión de continuar o finalizar el tratamiento es tuya. Siempre que sea posible, es recomendable dedicar una sesión a hablar sobre la decisión y realizar un cierre adecuado al proceso, especialmente si llevamos tiempo trabajando en terapia.',
   },
   {
     q: '¿Y si no estoy de acuerdo contigo?',
-    a: 'Dímelo. Puedes cuestionarme, discrepar o expresarme aquello que sientes que no te está ayudando. No espero que estemos de acuerdo en todo. Hablar de lo que ocurre entre nosotr@s forma parte también del proceso.',
+    a: 'Dímelo. Puedes cuestionarme, discrepar o expresarme aquello que sientes que no te está ayudando. No espero que estemos de acuerdo en todo. Hablar de lo que ocurre en nuestra relación terapéutica forma parte también del proceso.',
   },
 ];
