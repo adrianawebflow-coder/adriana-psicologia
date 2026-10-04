@@ -300,4 +300,52 @@ const canonical = new URL(Astro.url.pathname.replace(/\/+$/, '') || '/', Astro.s
   // Recalcula el estado tras cada navegación SPA (la posición de scroll
   // cambia de página a página).
   document.addEventListener('astro:page-load', updateBackToTop);
+
+  // ── Volver atrás según la jerarquía del sitio ──────────────────────
+  // Desde una página de detalle, el «atrás» del navegador (incluido el
+  // gesto de deslizar desde el borde en el móvil) debe llevar a su sección:
+  // terapia → Servicios (con su pestaña) y artículo → Blog. Si se llega a
+  // la página de detalle desde otro sitio, se coloca la sección justo
+  // detrás en el historial.
+  function parentOf(path: string): string | null {
+    const terapia = path.match(/^\/servicios\/(individual|parejas|familias)\/?$/);
+    if (terapia) return `/servicios?tipo=${terapia[1]}`;
+    if (/^\/blog\/[^/]+\/?$/.test(path)) return '/blog';
+    return null;
+  }
+
+  let lastNav: { type: string; from: string } | null = null;
+  document.addEventListener('astro:before-preparation', (e) => {
+    lastNav = { type: e.navigationType, from: e.from.pathname };
+  });
+
+  document.addEventListener('astro:page-load', () => {
+    const nav = lastNav;
+    lastNav = null;
+    const parent = parentOf(location.pathname);
+    if (!parent) return;
+
+    let type: string;
+    let from: string | null;
+    if (nav) {
+      type = nav.type;
+      from = nav.from;
+    } else {
+      // Carga completa: enlace externo, URL escrita, recarga o historial.
+      const entry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+      type = entry?.type === 'navigate' ? 'push' : 'traverse';
+      const ref = document.referrer ? new URL(document.referrer) : null;
+      from = ref && ref.origin === location.origin ? ref.pathname : null;
+    }
+    // Solo al entrar de nuevo (no al volver/avanzar ni al recargar), y si
+    // la página anterior no es ya la sección.
+    if (type !== 'push') return;
+    if (from === new URL(parent, location.origin).pathname) return;
+
+    // Mismo formato de estado que usa el ClientRouter de Astro.
+    const index = (history.state?.index as number | undefined) ?? 0;
+    const here = location.href;
+    history.replaceState({ index, scrollX: 0, scrollY: 0 }, '', parent);
+    history.pushState({ index: index + 1, scrollX: 0, scrollY: 0 }, '', here);
+  });
 </script>
