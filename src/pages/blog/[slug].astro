@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import CTAFinalSection from '../../components/CTAFinalSection.astro';
 import { Image } from 'astro:assets';
 import { posts, readMinutes, type BlogPostBlock } from '../../data/blogPosts';
@@ -125,6 +126,9 @@ function renderText(text: string): string {
   </div>
 
   <section class="post-hero">
+    <div class="container post-hero-crumb">
+      <Breadcrumb items={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
+    </div>
     <div class="container post-hero-grid">
       <div class="post-hero-text">
         <h1 id="post-title">{post.title}</h1>
@@ -217,6 +221,7 @@ function renderText(text: string): string {
   background: var(--color-bg-soft);
   padding: 40px 0;
 }
+.post-hero-crumb { margin-bottom: 20px; }
 .post-hero-grid {
   display: flex;
   flex-direction: column-reverse;

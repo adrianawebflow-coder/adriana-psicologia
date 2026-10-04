@@ -1,0 +1,103 @@
+---
+// Migas de pan según el mapa del sitio:
+//   Inicio › Sección (nivel 1) › Página de detalle (nivel 2)
+// El último elemento es la página actual (sin enlace). Incluye también los
+// datos estructurados BreadcrumbList para que Google muestre la ruta.
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+const trail: Crumb[] = [{ label: 'Inicio', href: '/' }, ...items];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: trail.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.label,
+    item: new URL(c.href ?? Astro.url.pathname, Astro.site).href,
+  })),
+};
+---
+
+<nav class="breadcrumb" aria-label="Ruta de navegación">
+  <ol>
+    {trail.map((c, i) => (
+      <li>
+        {i < trail.length - 1 && c.href ? (
+          <a href={c.href}>{c.label}</a>
+        ) : (
+          <span aria-current="page">{c.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+<style>
+.breadcrumb ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+.breadcrumb li {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+/* La página actual ocupa el espacio que queda y se recorta si no cabe. */
+.breadcrumb li:last-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+/* Separador decorativo: el lector de pantalla ya anuncia la lista. */
+.breadcrumb li + li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin: 0 10px 0 6px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  flex: 0 0 auto;
+  opacity: 0.7;
+}
+.breadcrumb a {
+  /* Área de toque de 24px de alto (WCAG 2.5.8). */
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+.breadcrumb a:hover {
+  color: var(--color-moss);
+  text-decoration-color: currentColor;
+}
+.breadcrumb [aria-current="page"] {
+  color: var(--color-text-primary);
+  font-weight: var(--fw-medium);
+  /* Títulos largos (artículos del blog): una sola línea con puntos suspensivos. */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+</style>

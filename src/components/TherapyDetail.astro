@@ -2,6 +2,7 @@
 import { CALENDLY_URL } from '../data/site';
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
+import Breadcrumb from './Breadcrumb.astro';
 
 interface OtherService {
   tag: string;
@@ -27,6 +28,8 @@ interface Props {
 
 const { title, blocks, price, bono, bonoTotal, otherServices } = Astro.props;
 const [firstBlock, ...restBlocks] = blocks;
+// /servicios/parejas → vuelve a Servicios con la pestaña Parejas abierta.
+const tipo = Astro.url.pathname.split('/').filter(Boolean).pop();
 
 
 // Todas las fotos de src/assets/despacho/, en orden alfabético de archivo.
@@ -42,7 +45,10 @@ const despachoImages = Object.keys(despachoModules)
 <section class="therapy-hero">
   <div class="therapy-hero-inner">
     <div class="hero-col">
-      <h1 transition:name="hero-title">{title}</h1>
+      <div class="hero-heading">
+        <Breadcrumb items={[{ label: 'Servicios', href: `/servicios?tipo=${tipo}` }, { label: title }]} />
+        <h1 transition:name="hero-title">{title}</h1>
+      </div>
       <div class="hero-block">
         <h2>{firstBlock.title}</h2>
         <p class="desc">{firstBlock.text}</p>
@@ -182,6 +188,11 @@ const despachoImages = Object.keys(despachoModules)
   line-height: 1.1;
   color: var(--color-text-primary);
   margin: 0;
+}
+.hero-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 .hero-col {
   display: flex;

@@ -486,9 +486,20 @@ const initialCtaExternal = !initialTab.href;
       }
     }
 
+    // La pestaña elegida se guarda en la URL (?tipo=…) sin crear entradas
+    // nuevas en el historial: al entrar en una terapia y volver atrás, la
+    // página se abre en la misma pestaña.
+    function remember(id: string) {
+      const url = new URL(location.href);
+      url.searchParams.set('tipo', id);
+      history.replaceState(history.state, '', url);
+    }
+
     tabButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
-        if (btn.dataset.tab) select(btn.dataset.tab);
+        if (!btn.dataset.tab) return;
+        select(btn.dataset.tab);
+        remember(btn.dataset.tab);
       });
     });
 
@@ -501,7 +512,7 @@ const initialCtaExternal = !initialTab.href;
         if (!(e.key in map)) return;
         e.preventDefault();
         const next = tabButtons[(map[e.key] + tabButtons.length) % tabButtons.length];
-        if (next.dataset.tab) select(next.dataset.tab);
+        if (next.dataset.tab) { select(next.dataset.tab); remember(next.dataset.tab); }
         next.focus();
       });
     });
