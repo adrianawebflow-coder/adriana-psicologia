@@ -96,22 +96,13 @@ const despachoImages = Object.keys(despachoModules)
             sizes="(min-width: 1000px) 579px, 100vw"
             format="webp"
             loading={i === 0 ? 'eager' : 'lazy'}
+            draggable="false"
           />
         </div>
       ))}
     </div>
 
     <div class="gallery-dots" id="galleryDots" role="group" aria-label="Fotos del despacho"></div>
-    <button class="gallery-arrow prev" id="galleryPrev" type="button" aria-label="Foto anterior">
-      <svg width="9" height="16" viewBox="0 0 7 12" fill="none" aria-hidden="true">
-        <path d="M6 1L1 6l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
-    <button class="gallery-arrow next" id="galleryNext" type="button" aria-label="Siguiente foto">
-      <svg width="9" height="16" viewBox="0 0 7 12" fill="none" aria-hidden="true">
-        <path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
   </div>
 
   <div class="location-panel reveal">
@@ -318,9 +309,11 @@ const despachoImages = Object.keys(despachoModules)
   inset: 0;
   display: flex;
   height: 100%;
-  transition: transform 280ms ease;
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
   touch-action: pan-y;
+  cursor: grab;
 }
+.gallery-track.dragging { cursor: grabbing; }
 .gallery-track.dragging { transition: none; }
 .gallery-slide {
   flex: 0 0 100%;
@@ -376,30 +369,6 @@ const despachoImages = Object.keys(despachoModules)
   background: #fff;
   transform: scale(1.35);
 }
-.gallery-arrow {
-  display: flex;
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-full);
-  background: rgba(51,51,51,.8);
-  backdrop-filter: blur(12px);
-  border: none;
-  color: #fff;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: filter var(--transition-fast);
-}
-.gallery-arrow:hover { filter: brightness(1.15); }
-/* Anillo de dos tonos: visible sobre cualquier foto (claro dentro, oscuro fuera). */
-.gallery-arrow:focus-visible { outline-offset: 2px; box-shadow: 0 0 0 7px var(--color-bg-dark); }
-.gallery-arrow.next { right: 16px; }
-.gallery-arrow.prev { left: 16px; }
-
 .location-panel {
   background: var(--color-bg-base);
   padding: 24px var(--gutter);
@@ -707,52 +676,80 @@ const despachoImages = Object.keys(despachoModules)
       track.style.transform = `translateX(calc(${-idx * 100}% + ${offset}px))`;
     }
 
+    // Las fotos van con carga diferida; al llegar a una se piden ya la
+    // anterior y las dos siguientes, para que al pasar no aparezca un hueco
+    // vacío mientras se descargan (pasaba en la primera visita).
+    function preload(around: number) {
+      [-1, 1, 2].forEach((d) => {
+        const img = slides[(around + d + slides.length) % slides.length].querySelector('img');
+        if (img && img.loading !== 'eager') img.loading = 'eager';
+      });
+    }
+
+    let warm = false; // se activa cuando la galería se acerca a la pantalla
+
     function go(n: number) {
       idx = (n + slides.length) % slides.length;
       dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === idx)));
       place(0);
+      if (warm) preload(idx);
     }
 
-    document.getElementById('galleryNext')?.addEventListener('click', () => go(idx + 1));
-    document.getElementById('galleryPrev')?.addEventListener('click', () => go(idx - 1));
+    const io = new IntersectionObserver((entries) => {
+      if (!entries.some((e) => e.isIntersecting)) return;
+      io.disconnect();
+      warm = true;
+      preload(idx);
+    }, { rootMargin: '400px 0px' });
+    io.observe(gallery);
 
+    // Arrastre con el dedo o con el ratón (Pointer Events). El eje se fija
+    // en el primer movimiento: si es vertical, se deja hacer scroll a la página.
     const DRAG_THRESHOLD = 60;
     let startX = 0;
     let startY = 0;
-    let dragging = false;
+    let pointerId: number | null = null;
     let axisLocked: 'x' | 'y' | null = null;
 
-    gallery.addEventListener('touchstart', (e) => {
-      const t = e.touches[0];
-      startX = t.clientX;
-      startY = t.clientY;
+    gallery.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      if ((e.target as HTMLElement).closest('.gallery-dots')) return;
+      pointerId = e.pointerId;
+      startX = e.clientX;
+      startY = e.clientY;
       dx = 0;
-      dragging = true;
       axisLocked = null;
-      track.classList.add('dragging');
-    }, { passive: true });
+    });
 
-    gallery.addEventListener('touchmove', (e) => {
-      if (!dragging) return;
-      const t = e.touches[0];
-      dx = t.clientX - startX;
-      const dy = t.clientY - startY;
-      if (!axisLocked) axisLocked = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+    gallery.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== pointerId) return;
+      dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (!axisLocked && Math.hypot(dx, dy) > 6) {
+        axisLocked = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+        if (axisLocked === 'x') {
+          gallery.setPointerCapture(e.pointerId);
+          track.classList.add('dragging');
+        } else {
+          pointerId = null;
+        }
+      }
       if (axisLocked === 'x') place(dx);
-    }, { passive: true });
+    });
 
-    function release() {
-      if (!dragging) return;
-      dragging = false;
+    function release(e: PointerEvent) {
+      if (e.pointerId !== pointerId) return;
+      pointerId = null;
       track.classList.remove('dragging');
       if (axisLocked === 'x' && Math.abs(dx) >= DRAG_THRESHOLD) {
         go(dx < 0 ? idx + 1 : idx - 1);
       } else {
         place(0);
       }
+      axisLocked = null;
     }
-    gallery.addEventListener('touchend', release);
-    gallery.addEventListener('touchcancel', release);
+    gallery.addEventListener('pointerup', release);
+    gallery.addEventListener('pointercancel', release);
 
     window.addEventListener('resize', () => place(0));
 
