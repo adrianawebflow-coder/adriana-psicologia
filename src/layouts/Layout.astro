@@ -36,7 +36,14 @@ const canonical = new URL(Astro.url.pathname.replace(/\/+$/, '') || '/', Astro.s
   <meta name="description" content={description} />
   <title>{title} • Adriana Esteban Psicología</title>
   {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+  <!-- Favicon: símbolo del logo en crema sobre musgo. SVG para navegadores
+       modernos, .ico (16/32/48) de respaldo, icono de iPhone y manifiesto
+       para Android. -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#FAF7EF" />
   <link rel="preload" href={frauncesLatin} as="font" type="font/woff2" crossorigin />
   <!-- Marca que hay JS antes del primer pintado: los .reveal solo se ocultan
        con esta clase, así que sin JS el contenido se ve. El ClientRouter
