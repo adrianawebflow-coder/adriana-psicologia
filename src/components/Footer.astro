@@ -69,6 +69,10 @@ import { CALENDLY_URL } from '../data/site';
 
   <div class="footer-bottom">
     <span>© 2025 Adriana Psicología · Todos los derechos reservados</span>
+    <div class="footer-bottom-links">
+      <a href="/cookies">Política de cookies</a>
+      <button type="button" data-cookie-settings>Configurar cookies</button>
+    </div>
   </div>
 </footer>
 
@@ -197,6 +201,27 @@ import { CALENDLY_URL } from '../data/site';
   font-size: var(--fs-meta);
   color: var(--color-text-inverse-subtle);
 }
+
+.footer-bottom-links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-6); }
+.footer-bottom-links a,
+.footer-bottom-links button {
+  /* Área táctil de 24px de alto (WCAG 2.5.8). */
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  line-height: inherit;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: var(--color-text-inverse-subtle);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color var(--transition-base);
+}
+.footer-bottom-links a:hover,
+.footer-bottom-links button:hover { color: var(--color-text-inverse); }
 
 @media (min-width: 720px) {
   .footer-inner { grid-template-columns: 1fr 1fr 1fr; gap: 16px 40px; }

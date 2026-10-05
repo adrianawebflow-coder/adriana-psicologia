@@ -1,0 +1,291 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+const UPDATED = '5 de octubre de 2026';
+
+const cookies = [
+  {
+    name: 'cookie-consent',
+    owner: 'Adriana Psicología (propia)',
+    purpose: 'Guarda tu decisión sobre las cookies de analítica para no volver a preguntarte en cada visita.',
+    duration: '12 meses',
+    type: 'Técnica (necesaria). Se guarda como almacenamiento local del navegador.',
+  },
+  {
+    name: '_ga',
+    owner: 'Google (Google Analytics)',
+    purpose: 'Distingue a los visitantes de forma anónima para elaborar estadísticas de uso de la web.',
+    duration: '2 años',
+    type: 'Analítica. Solo si la aceptas.',
+  },
+  {
+    name: '_ga_<ID>',
+    owner: 'Google (Google Analytics)',
+    purpose: 'Mantiene el estado de la sesión para las estadísticas.',
+    duration: '2 años',
+    type: 'Analítica. Solo si la aceptas.',
+  },
+];
+---
+
+<Layout
+  title="Política de cookies"
+  description="Qué cookies usa la web de Adriana Esteban Psicología, para qué sirven y cómo puedes aceptarlas, rechazarlas o cambiar tu decisión."
+>
+  <section class="legal">
+    <div class="legal-inner">
+      <Breadcrumb items={[{ label: 'Política de cookies' }]} />
+      <h1>Política de cookies</h1>
+      <p class="updated">Última actualización: {UPDATED}</p>
+
+      <div class="consent-status" aria-live="polite">
+        <p>
+          <span class="status-label">Tu elección actual:</span>
+          <strong id="consentStatus">—</strong>
+        </p>
+        <button type="button" class="btn" data-cookie-settings>Cambiar mis preferencias</button>
+      </div>
+
+      <h2>¿Qué son las cookies?</h2>
+      <p>
+        Las cookies son pequeños archivos que una web guarda en tu navegador
+        cuando la visitas. Sirven, por ejemplo, para recordar tus preferencias
+        o para saber cómo se usa la web. Algunas son necesarias para que la web
+        funcione y otras, como las de analítica, solo se pueden usar si das tu
+        consentimiento.
+      </p>
+
+      <h2>¿Quién es responsable?</h2>
+      <p>
+        Esta web es de Adriana Esteban Labelle (Adriana Psicología). Si tienes
+        cualquier duda sobre esta política, puedes escribir a
+        <a href="mailto:a.esteban@adrianapsicologia.com">a.esteban@adrianapsicologia.com</a>.
+      </p>
+
+      <h2>¿Qué cookies usa esta web?</h2>
+      <p>
+        La web solo usa una cookie técnica propia y, si las aceptas, las cookies
+        de analítica de Google Analytics. No usamos cookies publicitarias ni de
+        redes sociales, y las fuentes tipográficas se cargan desde la propia web.
+      </p>
+
+      <div class="table-wrap" role="region" aria-labelledby="tablaCookies" tabindex="0">
+        <table>
+          <caption id="tablaCookies">Cookies de adrianapsicologia.com</caption>
+          <thead>
+            <tr>
+              <th scope="col">Cookie</th>
+              <th scope="col">Titular</th>
+              <th scope="col">Finalidad</th>
+              <th scope="col">Duración</th>
+              <th scope="col">Tipo</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cookies.map((c) => (
+              <tr>
+                <th scope="row"><code>{c.name}</code></th>
+                <td>{c.owner}</td>
+                <td>{c.purpose}</td>
+                <td>{c.duration}</td>
+                <td>{c.type}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Google Analytics</h3>
+      <p>
+        Usamos Google Analytics, un servicio de Google Ireland Limited, para
+        saber cuántas personas visitan la web, qué páginas consultan y desde
+        qué tipo de dispositivo. Con esa información mejoramos los contenidos.
+        Google puede tratar estos datos fuera del Espacio Económico Europeo, con
+        las garantías del Marco de Privacidad de Datos UE-EE. UU. Más
+        información en la
+        <a href="https://policies.google.com/technologies/cookies?hl=es" target="_blank" rel="noopener">política de cookies de Google</a>.
+        También puedes instalar el
+        <a href="https://tools.google.com/dlpage/gaoptout?hl=es" target="_blank" rel="noopener">complemento de inhabilitación de Google Analytics</a>.
+      </p>
+
+      <h3>Calendario de reservas (Calendly)</h3>
+      <p>
+        En la página de <a href="/contacto">Contacto</a> el calendario para
+        reservar tu cita lo ofrece Calendly LLC. Al cargarlo, Calendly puede
+        instalar sus propias cookies para que la reserva funcione. Estas
+        cookies dependen de Calendly; puedes consultarlas en su
+        <a href="https://calendly.com/legal/privacy-notice" target="_blank" rel="noopener">aviso de privacidad</a>.
+      </p>
+
+      <h2>¿Cómo puedes aceptarlas, rechazarlas o cambiar tu decisión?</h2>
+      <p>
+        La primera vez que entras en la web te preguntamos si aceptas las
+        cookies de analítica. Rechazarlas no afecta al funcionamiento de la web.
+        Puedes cambiar tu decisión en cualquier momento con el botón
+        «Cambiar mis preferencias» de esta página o con el enlace «Configurar
+        cookies» del pie de página. Si retiras tu consentimiento, borramos las
+        cookies de Google Analytics de tu navegador. Tu decisión se guarda
+        durante 12 meses; pasado ese tiempo te volveremos a preguntar.
+      </p>
+      <p>También puedes bloquear o borrar las cookies desde la configuración de tu navegador:</p>
+      <ul>
+        <li><a href="https://support.google.com/chrome/answer/95647?hl=es" target="_blank" rel="noopener">Google Chrome</a></li>
+        <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a></li>
+        <li><a href="https://support.mozilla.org/es/kb/Borrar%20cookies" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+        <li><a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a></li>
+      </ul>
+
+      <h2>Cambios en esta política</h2>
+      <p>
+        Si cambian las cookies que usa la web, actualizaremos esta política y
+        te volveremos a pedir el consentimiento cuando sea necesario.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+.legal {
+  background: var(--color-bg-base);
+  padding: 32px 16px 80px;
+}
+.legal-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.legal h1 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: clamp(30px, 6vw, 40px);
+  line-height: 1.15;
+  color: var(--color-text-primary);
+  margin: 16px 0 8px;
+}
+.updated {
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+  margin: 0 0 24px;
+}
+.legal h2 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-h3);
+  color: var(--color-text-primary);
+  margin: 40px 0 12px;
+}
+.legal h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semi);
+  font-size: var(--fs-body);
+  color: var(--color-text-primary);
+  margin: 28px 0 8px;
+}
+.legal p,
+.legal li {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+}
+.legal p { margin: 0 0 1.2em; }
+.legal ul { margin: 0 0 1.2em; padding-left: 22px; }
+.legal a {
+  color: var(--color-moss);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.legal a:hover { color: var(--color-moss-hover); }
+
+/* Estado del consentimiento + botón para cambiarlo */
+.consent-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  padding: 16px 20px;
+  background: var(--color-bg-soft);
+  border-radius: var(--radius-lg);
+}
+.consent-status p { margin: 0; }
+.status-label { margin-right: 6px; }
+.consent-status strong { color: var(--color-text-primary); font-weight: var(--fw-semi); }
+.btn {
+  height: 44px;
+  padding: 0 20px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: var(--color-moss);
+  color: var(--color-text-inverse);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semi);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.btn:hover { background: var(--color-moss-hover); }
+
+/* Tabla: en pantallas estrechas se desplaza en horizontal dentro de su
+   caja (enfocable con teclado), sin desbordar la página. */
+.table-wrap {
+  overflow-x: auto;
+  margin: 8px 0 24px;
+  border: 1px solid var(--color-bg-border);
+  border-radius: var(--radius-lg);
+}
+.table-wrap:focus-visible { outline-offset: 2px; }
+table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+caption {
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: var(--fw-semi);
+  color: var(--color-text-primary);
+  background: var(--color-bg-soft);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 12px 16px;
+  border-top: 1px solid var(--color-bg-border);
+}
+thead th {
+  font-weight: var(--fw-semi);
+  color: var(--color-text-primary);
+  background: var(--color-bg-soft);
+}
+tbody th { font-weight: var(--fw-regular); }
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.92em;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  .legal { padding: 48px 32px 100px; }
+}
+</style>
+
+<script>
+  import { getConsent, onConsentChange, type Consent } from '../scripts/consent';
+
+  const LABEL: Record<Consent, string> = {
+    granted: 'has aceptado las cookies de analítica',
+    denied: 'has rechazado las cookies de analítica',
+  };
+  function render(c: Consent | null) {
+    const el = document.getElementById('consentStatus');
+    if (el) el.textContent = c ? LABEL[c] : 'todavía no has decidido';
+  }
+  document.addEventListener('astro:page-load', () => render(getConsent()));
+  onConsentChange(render);
+</script>

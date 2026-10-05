@@ -4,19 +4,78 @@
 // una sola vez, así que los listeners globales se registran una vez y lo que
 // depende de la página se lanza en cada astro:page-load. Por lo mismo, el
 // page_view se envía a mano (config con send_page_view: false).
+//
+// GA4 solo se carga si la persona acepta las cookies de analítica (banner
+// de CookieBanner.astro). Sin consentimiento no se carga el script de
+// Google ni se envía ningún dato.
+
+import { GA_ID } from '../data/site';
+import { getConsent, onConsentChange, clearAnalyticsCookies } from './consent';
 
 type Params = Record<string, string | number | boolean | undefined>;
 
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
+    [key: `ga-disable-${string}`]: boolean | undefined;
   }
 }
 
+// true solo con consentimiento; al retirarlo se deja de enviar.
+let enabled = false;
+
 export function track(name: string, params: Params = {}) {
-  if (typeof window.gtag === 'function') window.gtag('event', name, params);
+  if (enabled && typeof window.gtag === 'function') window.gtag('event', name, params);
   if (import.meta.env.DEV) console.debug('[GA4]', name, params);
 }
+
+function pageView() {
+  track('page_view', {
+    page_location: location.href,
+    page_path: location.pathname + location.search,
+    page_title: document.title,
+  });
+}
+
+/** Carga gtag.js y configura GA4 (una sola vez). */
+function enableAnalytics() {
+  if (!GA_ID) return;
+  enabled = true;
+  window[`ga-disable-${GA_ID}`] = false;
+  if (typeof window.gtag === 'function') return; // ya cargado: solo se reanuda
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function gtag() {
+    // gtag necesita el objeto arguments, no un array.
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer!.push(arguments);
+  };
+  const config: Params = { send_page_view: false };
+  if (new URLSearchParams(location.search).has('debug_mode')) config.debug_mode = true;
+  window.gtag('js', new Date());
+  window.gtag('config', GA_ID, config);
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+  document.head.appendChild(script);
+}
+
+/** Retirada del consentimiento: deja de medir y borra las cookies de GA. */
+function disableAnalytics() {
+  enabled = false;
+  if (GA_ID) window[`ga-disable-${GA_ID}`] = true;
+  clearAnalyticsCookies();
+}
+
+if (getConsent() === 'granted') enableAnalytics();
+onConsentChange((c) => {
+  if (c === 'granted') {
+    enableAnalytics();
+    pageView(); // la visita a la página actual, que se había quedado sin medir
+  } else {
+    disableAnalytics();
+  }
+});
 
 // ── Utilidades ──────────────────────────────────────────────────────────
 
@@ -137,11 +196,7 @@ document.addEventListener('astro:page-load', () => {
   stopScrollDepth?.();
   stopScrollDepth = null;
 
-  track('page_view', {
-    page_location: location.href,
-    page_path: location.pathname + location.search,
-    page_title: document.title,
-  });
+  pageView();
 
   const path = location.pathname.replace(/\/+$/, '') || '/';
 

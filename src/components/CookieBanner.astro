@@ -1,0 +1,153 @@
+---
+// Aviso de cookies. Aparece mientras no haya una decisión guardada y se
+// puede volver a abrir desde cualquier elemento con [data-cookie-settings]
+// (pie de página y política de cookies). «Rechazar» tiene el mismo peso
+// visual que «Aceptar» (guía de cookies de la AEPD).
+//
+// No es un diálogo modal: no bloquea la página ni atrapa el foco. Va al
+// principio del <body> para que el teclado y el lector de pantalla lo
+// encuentren primero, aunque se vea abajo.
+---
+
+<section
+  class="cookie-banner"
+  id="cookieBanner"
+  aria-labelledby="cookieBannerTitle"
+  hidden
+  transition:persist
+  transition:name="cookie-banner"
+>
+  <h2 id="cookieBannerTitle">Tu privacidad</h2>
+  <p>
+    Usamos cookies de analítica (Google Analytics) para saber cómo se usa la
+    web y mejorarla. Solo se activan si las aceptas, y puedes cambiar de
+    opinión cuando quieras. <a href="/cookies">Más información en la política de cookies</a>.
+  </p>
+  <div class="cookie-actions">
+    <button type="button" class="cookie-btn" data-consent="denied">Rechazar</button>
+    <button type="button" class="cookie-btn" data-consent="granted">Aceptar</button>
+  </div>
+</section>
+
+<style>
+.cookie-banner {
+  position: fixed;
+  z-index: 60;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 20px;
+  background: var(--color-bg-base);
+  border: 1px solid var(--color-bg-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 18px 48px rgba(26, 33, 24, 0.22);
+  animation: cookie-in 420ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+.cookie-banner[hidden] { display: none; }
+
+@keyframes cookie-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cookie-banner { animation: none; }
+}
+
+.cookie-banner h2 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-semi);
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin: 0 0 8px;
+}
+.cookie-banner p {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 0 16px;
+}
+.cookie-banner a {
+  color: var(--color-moss);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.cookie-banner a:hover { color: var(--color-moss-hover); }
+
+/* Mismo tamaño, mismo peso tipográfico y mismo contraste para las dos
+   opciones: ninguna se destaca sobre la otra. */
+.cookie-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.cookie-btn {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-moss);
+  background: var(--color-moss);
+  color: var(--color-text-inverse);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-semi);
+  cursor: pointer;
+  transition: background var(--transition-fast), transform 120ms ease;
+}
+.cookie-btn:hover { background: var(--color-moss-hover); transform: translateY(-1px); }
+
+@media (min-width: 720px) {
+  .cookie-banner {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    margin: 0;
+  }
+}
+</style>
+
+<script>
+  import { getConsent, setConsent, type Consent } from '../scripts/consent';
+
+  // El banner usa transition:persist: este script corre una sola vez y el
+  // mismo elemento sigue vivo entre páginas.
+  const banner = document.getElementById('cookieBanner');
+  if (banner) {
+    let opener: HTMLElement | null = null;
+
+    const show = (from: HTMLElement | null = null) => {
+      opener = from;
+      banner.hidden = false;
+      // Si se abre a petición (pie o política), el foco va al banner.
+      if (from) banner.querySelector<HTMLButtonElement>('[data-consent]')?.focus();
+    };
+    const hide = () => {
+      banner.hidden = true;
+      opener?.focus();
+      opener = null;
+    };
+
+    if (getConsent() === null) show();
+
+    banner.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setConsent(btn.dataset.consent as Consent);
+        hide();
+      });
+    });
+
+    banner.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && opener) hide();
+    });
+
+    document.addEventListener('click', (e) => {
+      const trigger = (e.target as Element | null)?.closest?.<HTMLElement>('[data-cookie-settings]');
+      if (!trigger) return;
+      e.preventDefault();
+      show(trigger);
+    });
+  }
+</script>
