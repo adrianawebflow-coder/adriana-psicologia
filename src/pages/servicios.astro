@@ -446,6 +446,8 @@ const initialCtaExternal = !initialTab.href;
 </style>
 
 <script>
+  import { trackServicesTab } from '../scripts/analytics';
+
   document.addEventListener('astro:page-load', () => {
     const tabsWrap = document.getElementById('tabs');
     if (!tabsWrap) return;
@@ -490,6 +492,7 @@ const initialCtaExternal = !initialTab.href;
     // nuevas en el historial: al entrar en una terapia y volver atrás, la
     // página se abre en la misma pestaña.
     function remember(id: string) {
+      trackServicesTab(id);
       const url = new URL(location.href);
       url.searchParams.set('tipo', id);
       history.replaceState(history.state, '', url);
