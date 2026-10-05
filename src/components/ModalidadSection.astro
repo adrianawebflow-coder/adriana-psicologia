@@ -2,6 +2,7 @@
 import { Picture } from 'astro:assets';
 import consultaPresencial from '../assets/despacho/consulta-presencial.webp';
 import modalidadOnline from '../assets/modalidad-online.png';
+import { CALENDLY_URL } from '../data/site';
 ---
 
 <section class="modalidad" id="como">
@@ -10,7 +11,7 @@ import modalidadOnline from '../assets/modalidad-online.png';
 
     <div class="mod-grid">
 
-      <div class="mod-card mod-presencial reveal">
+      <a class="mod-card mod-presencial reveal" href={CALENDLY_URL} target="_blank" rel="noopener">
         <Picture
           src={consultaPresencial}
           alt=""
@@ -29,12 +30,12 @@ import modalidadOnline from '../assets/modalidad-online.png';
           </svg>
         </div>
         <div class="mod-label">
-          <h3>Presencial · Madrid</h3>
+          <h3><span class="sr-only">Reserva tu cita: </span>Presencial · Madrid</h3>
           <p>Despacho ubicado en el barrio de Hortaleza/Manoteras.</p>
         </div>
-      </div>
+      </a>
 
-      <div class="mod-card mod-online reveal">
+      <a class="mod-card mod-online reveal" href={CALENDLY_URL} target="_blank" rel="noopener">
         <Picture
           src={modalidadOnline}
           alt=""
@@ -52,10 +53,10 @@ import modalidadOnline from '../assets/modalidad-online.png';
           </svg>
         </div>
         <div class="mod-label">
-          <h3>Online · Cualquier parte del mundo</h3>
+          <h3><span class="sr-only">Reserva tu cita: </span>Online · Cualquier parte del mundo</h3>
           <p>Videollamada segura desde cualquier lugar.</p>
         </div>
-      </div>
+      </a>
 
     </div>
   </div>
@@ -99,7 +100,11 @@ import modalidadOnline from '../assets/modalidad-online.png';
 }
 
 /* ── Card base ── */
+/* Toda la tarjeta es un enlace a la agenda de Calendly. */
 .mod-card {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
   position: relative;
   min-height: 420px;
   border-radius: 0;
@@ -124,6 +129,18 @@ import modalidadOnline from '../assets/modalidad-online.png';
   place-items: center;
   color: var(--color-moss);
   box-shadow: 0 4px 16px rgba(0,0,0,.15);
+  transition: transform 200ms ease, background 200ms ease, color 200ms ease;
+}
+.mod-card:hover .mod-icon,
+.mod-card:focus-visible .mod-icon {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: var(--color-moss);
+  color: #fff;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mod-card, .mod-icon { transition: none; }
+  .mod-card:hover .mod-icon,
+  .mod-card:focus-visible .mod-icon { transform: translate(-50%, -50%); }
 }
 
 /* ── Glass label at bottom ── */
