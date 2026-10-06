@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 
-const UPDATED = '5 de octubre de 2026';
+const UPDATED = '6 de octubre de 2026';
 
 const cookies = [
   {
@@ -24,6 +24,20 @@ const cookies = [
     owner: 'Google (Google Analytics)',
     purpose: 'Mantiene el estado de la sesión para las estadísticas.',
     duration: '2 años',
+    type: 'Analítica. Solo si la aceptas.',
+  },
+  {
+    name: '_hjSessionUser_<ID>',
+    owner: 'Hotjar',
+    purpose: 'Identifica de forma anónima tu navegador para relacionar las visitas de una misma persona.',
+    duration: '1 año',
+    type: 'Analítica. Solo si la aceptas.',
+  },
+  {
+    name: '_hjSession_<ID> y otras _hj…',
+    owner: 'Hotjar',
+    purpose: 'Mantienen los datos de la visita en curso (por ejemplo, si se incluye en la muestra de grabaciones).',
+    duration: 'De la sesión a 30 minutos',
     type: 'Analítica. Solo si la aceptas.',
   },
 ];
@@ -66,7 +80,7 @@ const cookies = [
       <h2>¿Qué cookies usa esta web?</h2>
       <p>
         La web solo usa una cookie técnica propia y, si las aceptas, las cookies
-        de analítica de Google Analytics. No usamos cookies publicitarias ni de
+        de analítica de Google Analytics y Hotjar. No usamos cookies publicitarias ni de
         redes sociales, y las fuentes tipográficas se cargan desde la propia web.
       </p>
 
@@ -109,6 +123,16 @@ const cookies = [
         <a href="https://tools.google.com/dlpage/gaoptout?hl=es" target="_blank" rel="noopener">complemento de inhabilitación de Google Analytics</a>.
       </p>
 
+      <h3>Hotjar</h3>
+      <p>
+        Usamos Hotjar, un servicio de Hotjar Ltd (Malta, Unión Europea), para
+        entender cómo se navega por la web: mapas de calor de dónde se hace
+        clic y grabaciones anónimas de las visitas. Hotjar oculta
+        automáticamente lo que se escribe en los campos de texto. Más
+        información en la
+        <a href="https://www.hotjar.com/legal/policies/privacy/" target="_blank" rel="noopener">política de privacidad de Hotjar</a>.
+      </p>
+
       <h3>Calendario de reservas (Calendly)</h3>
       <p>
         En la página de <a href="/contacto">Contacto</a> el calendario para
@@ -125,7 +149,7 @@ const cookies = [
         Puedes cambiar tu decisión en cualquier momento con el botón
         «Cambiar mis preferencias» de esta página o con el enlace «Configurar
         cookies» del pie de página. Si retiras tu consentimiento, borramos las
-        cookies de Google Analytics de tu navegador. Tu decisión se guarda
+        cookies de Google Analytics y Hotjar de tu navegador. Tu decisión se guarda
         durante 12 meses; pasado ese tiempo te volveremos a preguntar.
       </p>
       <p>También puedes bloquear o borrar las cookies desde la configuración de tu navegador:</p>

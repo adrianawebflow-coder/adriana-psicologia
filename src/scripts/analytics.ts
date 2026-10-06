@@ -9,7 +9,7 @@
 // de CookieBanner.astro). Sin consentimiento no se carga el script de
 // Google ni se envía ningún dato.
 
-import { GA_ID } from '../data/site';
+import { GA_ID, HOTJAR_ID } from '../data/site';
 import { getConsent, onConsentChange, clearAnalyticsCookies } from './consent';
 
 type Params = Record<string, string | number | boolean | undefined>;
@@ -60,17 +60,45 @@ function enableAnalytics() {
   document.head.appendChild(script);
 }
 
-/** Retirada del consentimiento: deja de medir y borra las cookies de GA. */
+/** Hotjar: el código oficial de seguimiento, cargado una sola vez. Detecta
+ *  por sí mismo los cambios de página de la navegación sin recarga. */
+// Marca propia: la etiqueta <script> no sirve para saberlo, porque el
+// ClientRouter la retira de <head> al cambiar de página (aunque siga activo).
+let hotjarLoaded = false;
+
+function enableHotjar() {
+  if (!HOTJAR_ID || hotjarLoaded) return;
+  hotjarLoaded = true;
+  const w = window as unknown as { hj?: unknown; _hjSettings?: unknown };
+  w.hj = w.hj || function hj() {
+    // eslint-disable-next-line prefer-rest-params
+    ((w.hj as { q?: unknown[] }).q = (w.hj as { q?: unknown[] }).q || []).push(arguments);
+  };
+  w._hjSettings = { hjid: HOTJAR_ID, hjsv: 6 };
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://static.hotjar.com/c/hotjar-${HOTJAR_ID}.js?sv=6`;
+  document.head.appendChild(script);
+}
+
+/** Retirada del consentimiento: deja de medir y borra las cookies. Hotjar
+ *  no se puede detener una vez cargado, así que en ese caso se recarga la
+ *  página (ya sin él). */
 function disableAnalytics() {
   enabled = false;
   if (GA_ID) window[`ga-disable-${GA_ID}`] = true;
   clearAnalyticsCookies();
+  if (hotjarLoaded) location.reload();
 }
 
-if (getConsent() === 'granted') enableAnalytics();
+if (getConsent() === 'granted') {
+  enableAnalytics();
+  enableHotjar();
+}
 onConsentChange((c) => {
   if (c === 'granted') {
     enableAnalytics();
+    enableHotjar();
     pageView(); // la visita a la página actual, que se había quedado sin medir
   } else {
     disableAnalytics();

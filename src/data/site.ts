@@ -7,3 +7,7 @@ export const CALENDLY_URL = 'https://calendly.com/adrianapsicologia/evaluacion-t
 // eventos se siguen generando y, en local, se muestran en la consola.
 // Con ID, GA4 solo se carga si la persona acepta las cookies de analítica.
 export const GA_ID = 'G-FBP8KE506Q';
+
+// Hotjar (mapas de calor y grabaciones de sesión). Como GA4, solo se carga
+// si la persona acepta las cookies de analítica.
+export const HOTJAR_ID = 3697765;

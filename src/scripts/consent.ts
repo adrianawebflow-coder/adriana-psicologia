@@ -6,7 +6,7 @@
 export type Consent = 'granted' | 'denied';
 
 const KEY = 'cookie-consent';
-const VERSION = 1; // subir si cambian las cookies, para volver a preguntar
+const VERSION = 2; // subir si cambian las cookies, para volver a preguntar (2: Hotjar)
 const MAX_AGE_MS = 365 * 24 * 60 * 60 * 1000;
 
 type Stored = { value: Consent; date: number; version: number };
@@ -38,13 +38,13 @@ export function setConsent(value: Consent) {
   listeners.forEach((fn) => fn(value));
 }
 
-/** Borra las cookies de Google Analytics (_ga, _ga_XXXX) de este dominio. */
+/** Borra las cookies de analítica (Google Analytics y Hotjar) de este dominio. */
 export function clearAnalyticsCookies() {
   const host = location.hostname;
   const domains = ['', host, `.${host}`, `.${host.split('.').slice(-2).join('.')}`];
   document.cookie.split(';').forEach((c) => {
     const name = c.split('=')[0].trim();
-    if (!/^_ga(_|$)|^_gid$|^_gat/.test(name)) return;
+    if (!/^_ga(_|$)|^_gid$|^_gat|^_hj/.test(name)) return;
     domains.forEach((d) => {
       document.cookie = `${name}=; Max-Age=0; path=/${d ? `; domain=${d}` : ''}`;
     });
